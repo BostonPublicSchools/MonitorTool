@@ -1,0 +1,105 @@
+@Master['ui_master']
+
+@Section['Content']
+	<div class="container" role="main">	
+		<h1>Recent Activity <small>Powered by <a href="http://signalr.net/">SignalR</a></small></h1>		
+
+		<div id="activityList" data-bind="foreach: notifications">
+			<div class="" style="margin-bottom: 20px; padding-top: 15px; min-height: 96px; height: 96px; height: auto !important; ">
+				<img data-bind="attr: { src: resultImage }" style="float: left; margin-right: 10px"/>
+				<div style="margin-right: 10px; float: left; font-size:90px; line-height: normal" data-bind="visible: resultValue != null, text: resultValue"></div>
+				<span style="margin-bottom: 5px; display: block; font-size:20px;" data-bind="text: when"></span>
+				<strong style="font-size: 30px;" data-bind="text: identity"></strong>
+				<div data-bind="text: alert.message"></div>
+			</div>
+		</div>
+	</div>
+@EndSection
+
+
+@Section['PageScript']
+	<script type="text/javascript" src="/Scripts/knockout-3.1.0.js"></script>
+	<script  type="text/javascript" src="/Scripts/moment-min.js"></script>
+	<!--<script  type="text/javascript" src="/content/js/developr.message.js"></script>-->
+	<script type="text/javascript" src="/Scripts/jquery.signalR-2.0.2.min.js"></script>
+	<script type="text/javascript" src="http://localhost:803/signalr/hubs"></script>
+
+	<script type="text/javascript">
+		function Notification(alert) {
+			var self = this;
+			self.alert = alert;
+			self.when = moment(alert.generatedOnUtc).format('MMMM Do YYYY, h:mm:ss a');
+			
+			self.resultImage = ko.computed(function () {
+				var image = 'agent.png';
+				if (self.alert.criticalFailure)
+					image = 'alert.png';
+				else if (self.alert.result === true)
+					image = 'resulttrue.png';
+				else if (self.alert.result === false)
+					image = 'resultfalse.png';
+				return '/content/img/' + image;
+			}, this);
+
+			self.resultValue = ko.computed(function () {
+				if (self.alert.displayUnit == null)
+					return null;
+
+				// resultCount is nullable!
+				if(!self.alert.resultCount)
+					return self.alert.displayUnit;
+
+				return self.alert.resultCount.toString() + self.alert.displayUnit;
+			}, this);
+
+			self.identity = ko.computed(function () {
+				return self.alert.checkId + ' (' + self.alert.siteId + '/' + self.alert.agentId + ')'
+			}, this);
+		};
+		
+		function ViewModel(url) {
+			var self = this;
+			self.notifications = ko.observableArray();
+
+			self.loadTracker = function () {
+			    $.getJSON('/api/notification/list', function (data) {
+			        console.log('tracker notifications loaded');
+			        console.log(data);
+
+					self.notifications.removeAll();
+			        $.each(data, function (index, notification) {
+			            self.notifications.push(new Notification(notification));
+			        });
+			    });
+			};
+
+			self.startMonitoring = function () {
+				$.connection.hub.url = url;
+				var notifications = $.connection.notifications;
+				notifications.client.notify = function(data) {
+					console.log(data);
+
+					self.notifications.unshift(new Notification(data));
+
+					if (self.notifications().length > 20) {
+						self.notifications.pop();
+					}
+				}
+
+				$.connection.hub.start();
+				console.log("connection started!");
+			};
+		};
+
+		$(document).ready(function () {
+			setActiveTab('Activity');
+
+		    var signalrhost = 'http://' + document.domain + ':803/signalr';
+		    var model = new ViewModel(signalrhost);
+			ko.applyBindings(model);
+
+			model.loadTracker();
+			model.startMonitoring();
+		});
+	</script>
+@EndSection

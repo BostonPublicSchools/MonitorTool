@@ -107,7 +107,8 @@ namespace Wolfpack.Core.Notification
                            State = coreEvent.State,
                            Tags = coreEvent.Tags,
                            Version = coreEvent.Version,
-                           Data = Serialiser.ToJson(coreEvent)
+                           Data = Serialiser.ToJson(coreEvent),
+                           TypeId = request.Notification.TypeId
                        };
         }
 

@@ -1,0 +1,229 @@
+﻿@Master['ui_master']
+
+@Section['Content']
+
+<div class="container" role="main">
+    <h1 data-bind="text: connected"></h1>
+    <table id="tblJobs" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Result</th>
+                <th>Server Name</th>
+                <th>Message</th>
+                <th>Last Ran</th>
+                <th>Notifier Name</th>
+                <th>Wiki Path</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: notifications">
+            <tr data-bind="css: {'bg-warning': isBottom(), 'alert alert-danger': (isError() && !isBottom()), 'alert-success': (!isError() && !isBottom())}">
+                <td>
+                    <span class="glyphicon" data-bind="css: {'glyphicon-exclamation-sign': isError(), 'glyphicon-ok': !isError()}"></span>
+                </td>
+                <td data-bind="text: alert.properties.server"></td>
+                <td data-bind="text: alert.properties.message"></td>
+                <td data-bind="text: alert.properties.runDateTime"></td>
+                <td data-bind="text: identity"></td>
+                <td><a data-bind="attr: { href: alert.properties.wikiPath, title: alert.properties.wikiPath}" target="_blank"><div data-bind="text: alert.properties.wikiPath"></div></a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+@EndSection
+
+
+@Section['PageScript']
+<script type="text/javascript" src="/Scripts/knockout-3.1.0.js"></script>
+<script type="text/javascript" src="/Scripts/moment-min.js"></script>
+<!--<script  type="text/javascript" src="/content/js/developr.message.js"></script>-->
+<script type="text/javascript" src="/Scripts/jquery.signalR-2.0.2.min.js"></script>
+
+<script type="text/javascript">
+var src = 'http://' + document.domain + ':803/signalr/hubs'
+var fileTag = "<script src=" + src + "><\/script>";
+document.write(fileTag);
+</script>
+
+<script type="text/javascript">
+    function Notification(alert) {
+        var self = this;
+        self.alert = alert;
+        self.when = moment(alert.generatedOnUtc).format('MMMM Do YYYY, h:mm:ss a');
+
+        self.resultImage = ko.computed(function () {
+            var image = 'agent.png';
+            if (self.alert.criticalFailure)
+                image = 'alert.png';
+            else if (self.alert.result === true)
+                image = 'resulttrue.png';
+            else if (self.alert.result === false)
+                image = 'resultfalse.png';
+            return '/content/img/' + image;
+        }, this);
+
+        self.isError = ko.computed(function () {
+            return !self.alert.result
+        }, this);
+
+        self.resultValue = ko.computed(function () {
+            if (self.alert.displayUnit == null)
+                return null;
+
+            // resultCount is nullable!
+            if (!self.alert.resultCount)
+                return self.alert.displayUnit;
+
+            return self.alert.resultCount.toString() + self.alert.displayUnit;
+        }, this);
+
+        self.rowCount = ko.computed(function () {
+            return self.alert.resultCount;
+        }, this);
+
+        self.isBottom = ko.computed(function() {
+            if (!!self.alert.properties.subType && self.alert.properties.subType === 'bottom')
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }, this);
+
+        self.identity = ko.computed(function () {
+            return self.alert.checkId
+        }, this);
+    };
+
+    function ViewModel(url) {
+        var self = this;
+        self.notifications = ko.observableArray();
+        self.connected = ko.observable("");
+
+        self.loadTracker = function () {
+            $.getJSON('/api/notification/list/93605A80-B28C-4CE0-8E15-04CF6CFC684F', function (data) {
+                //Debug;
+				console.log('tracker notifications loaded');
+                console.log(data);
+
+                self.notifications.removeAll();
+                $.each(data, function (index, notification) {
+                    // Todo: handle if checkID is null in case of exectption etc.
+                    // First remove this item from the array if the same checkid item is there
+
+                    var notificationProps = (JSON.parse(notification.data)).properties;
+                    //alert(notificationProps);
+                    if(typeof notificationProps !== "undefined")
+                        {
+                            //alert((JSON.parse(notification.data)).Properties);
+                            notification.properties = notificationProps;
+                        }
+                    var objData = new Notification(notification);
+                    self.notifications.remove(ko.utils.arrayFirst(self.notifications(), function (item) { return objData.alert.checkId === item.alert.checkId }));
+                    self.notifications.push(objData);
+                });
+
+                self.notifications.sort(function (left, right) {
+                     if (left.alert.properties.subType && left.alert.properties.subType === 'bottom' )
+                    {
+                        //console.log('Sub - got subType === bottom');
+                        //console.log(left.alert.properties.subType);
+                        //console.log(left.alert.checkId);
+                        return 1;
+                    }
+                    else if (right.alert.properties.subType && right.alert.properties.subType === 'bottom' )
+                    {
+                        //console.log('Sub - got subType === bottom');
+                        //console.log(left.alert.properties.subType);
+                        //console.log(left.alert.checkId);
+                        return -1;
+                    }
+                    else
+                    {
+                        return left.alert.checkId == right.alert.checkId ? 0 : (left.alert.checkId < right.alert.checkId ? -1 : 1)
+                    }
+                });
+            });
+        };
+
+        self.startMonitoring = function () {
+            $.connection.hub.url = url;
+            var notifications = $.connection.notifications;
+            notifications.client.notify = function (data) {
+                console.log(data);
+                if(data.typeId !== "93605A80-B28C-4CE0-8E15-04CF6CFC684F")
+				{
+					return;
+				}
+
+                var objData = new Notification(data);
+
+                // First remove this item from the array if the same checkid item is there
+                self.notifications.remove(ko.utils.arrayFirst(self.notifications(), function (item) { return objData.alert.checkId === item.alert.checkId }));
+                self.notifications.unshift(objData);
+
+                self.notifications.sort(function (left, right) {
+                    if (left.alert.properties.subType && left.alert.properties.subType === 'bottom' )
+                    {
+                        //console.log('Sub - got subType === bottom');
+                        //console.log(left.alert.properties.subType);
+                        //console.log(left.alert.checkId);
+                        return 1;
+                    }
+                    else if (right.alert.properties.subType && right.alert.properties.subType === 'bottom' )
+                    {
+                        //console.log('Sub - got subType === bottom');
+                        //console.log(left.alert.properties.subType);
+                        //console.log(left.alert.checkId);
+                        return -1;
+                    }
+                    else
+                    {
+                        return left.alert.checkId == right.alert.checkId ? 0 : (left.alert.checkId < right.alert.checkId ? -1 : 1)
+                    }
+                });
+
+                //if (self.notifications().length > 20) {
+                //    self.notifications.pop();
+                //}
+            }
+
+            $.connection.hub.start().done(function () {
+                self.connected("SQL Queries Monitor. The Server is Started.");
+                console.log('Connection started.');
+            });
+
+            //console.log("connection started!");
+
+            $.connection.hub.stateChanged(connectionStateChanged);
+
+            function connectionStateChanged(change) {
+                if (change.newState === $.signalR.connectionState.reconnecting) {
+                    console.log('Re-connecting');
+                    self.connected("SQL Jobs Monitor. Some issue with server. Trying to re-connect.");
+                }
+                else if (change.newState === $.signalR.connectionState.connected) {
+                    console.log('SQL Jobs Monitor. The server is online');
+                    self.connected("Connected to server.");
+                }
+            }
+
+            $.connection.hub.disconnected(function () {
+                console.log('The server is disconnected');
+                self.connected("Server disconnected. Please contact administrator and/or try to refresh after some time.");
+            });
+        };
+    };
+
+    $(document).ready(function () {
+
+        var signalrhost = 'http://' + document.domain + ':803/signalr';
+        var model = new ViewModel(signalrhost);
+        ko.applyBindings(model);
+
+        model.loadTracker();
+        model.startMonitoring();
+    });
+</script>
+@EndSection

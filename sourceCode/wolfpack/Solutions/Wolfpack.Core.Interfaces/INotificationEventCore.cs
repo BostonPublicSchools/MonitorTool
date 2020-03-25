@@ -25,6 +25,7 @@ namespace Wolfpack.Core.Interfaces
         string Longitude { get; set; }
         Properties Properties { get; set; }
 
+        Guid TypeId { get; set; }
         // v3 new 
         bool CriticalFailure { get; set; }
         CriticalFailureDetails CriticalFailureDetails { get; set; }

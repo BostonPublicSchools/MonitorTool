@@ -16,7 +16,7 @@ namespace Wolfpack.Core.WebServices.Modules
         private readonly ActivityTracker _tracker;
 
         public NotificationModule(IWebServiceReceiverStrategy receiverStrategy,
-            ActivityTracker tracker) 
+            ActivityTracker tracker)
             : base(BaseUrl)
         {
             _tracker = tracker;
@@ -52,6 +52,19 @@ namespace Wolfpack.Core.WebServices.Modules
             });
 
             Get["/list"] = _ => Response.AsJson(_tracker.Notifications.ToList());
+
+            Get["/list/{TypeId}"] = _ =>
+            {
+                var restRequest = this.Bind<typeArtifact>();
+                var returnData = _tracker.Notifications.Where(n => n.TypeId == restRequest.TypeId);
+                var res = Response.AsJson(returnData.ToList());
+                return res;
+            };
         }
+    }
+
+    public class typeArtifact
+    {
+        public Guid TypeId { get; set; }
     }
 }

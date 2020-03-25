@@ -38,6 +38,8 @@ namespace Wolfpack.Core.Interfaces.Entities
         public DateTime? NextCheckExpected { get; set; }
         public Properties Properties { get; set; }
 
+        public Guid TypeId { get; set; }
+
         /// <summary>
         /// Default ctor
         /// </summary>

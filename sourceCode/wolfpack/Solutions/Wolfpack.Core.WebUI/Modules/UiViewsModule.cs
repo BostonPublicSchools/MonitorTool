@@ -19,6 +19,7 @@ namespace Wolfpack.Core.WebUI.Modules
         {
             _tracker = tracker;
             Get["/"] = _ => View["views/status.sshtml"];
+            Get["/odaqueries"] = _ => View["views/odaqueries.sshtml"];
             Get["/status"] = _ => View["views/status.sshtml"];
             Get["/activity"] = _ => View["views/activity.sshtml"];
             Get["/gallery"] = _ => View["views/gallery.sshtml"];

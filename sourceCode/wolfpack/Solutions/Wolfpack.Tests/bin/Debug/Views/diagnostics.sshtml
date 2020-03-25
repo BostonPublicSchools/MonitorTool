@@ -1,0 +1,14 @@
+﻿@Master['ui_master']
+
+@Section['Content']
+	<div class="container" role="main">
+		<h1>Diagnostics</small></h1>
+		<p>Coming soon - a diagnostics page with useful realtime internal Wolfpack logs/stats..</p>
+	</div>
+@EndSection
+
+@Section['PageScript']
+<script type="">
+	setActiveTab('Tools');
+</script>
+@EndSection

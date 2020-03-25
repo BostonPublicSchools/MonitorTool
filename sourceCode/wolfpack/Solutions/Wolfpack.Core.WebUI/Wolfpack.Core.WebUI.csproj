@@ -170,6 +170,9 @@
     <Content Include="Content\img\ResultTrue.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Views\odaqueries.sshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Content\wolfpack.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

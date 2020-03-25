@@ -1,0 +1,14 @@
+C:\Developement\wolfpack\sourceCode\wolfpack\Solutions\Wolfpack.Core.WebServices.Client\bin\Debug\Wolfpack.Core.WebServices.Client.dll
+C:\Developement\wolfpack\sourceCode\wolfpack\Solutions\Wolfpack.Core.WebServices.Client\bin\Debug\Wolfpack.Core.WebServices.Client.pdb
+C:\Developement\wolfpack\sourceCode\wolfpack\Solutions\Wolfpack.Core.WebServices.Client\bin\Debug\RestSharp.dll
+C:\Developement\wolfpack\sourceCode\wolfpack\Solutions\Wolfpack.Core.WebServices.Client\bin\Debug\Wolfpack.Core.Interfaces.dll
+C:\Developement\wolfpack\sourceCode\wolfpack\Solutions\Wolfpack.Core.WebServices.Client\bin\Debug\Wolfpack.Core.WebServices.Interfaces.dll
+C:\Developement\wolfpack\sourceCode\wolfpack\Solutions\Wolfpack.Core.WebServices.Client\bin\Debug\Nancy.dll
+C:\Developement\wolfpack\sourceCode\wolfpack\Solutions\Wolfpack.Core.WebServices.Client\bin\Debug\Wolfpack.Core.Interfaces.pdb
+C:\Developement\wolfpack\sourceCode\wolfpack\Solutions\Wolfpack.Core.WebServices.Client\bin\Debug\Wolfpack.Core.WebServices.Interfaces.pdb
+C:\Developement\wolfpack\sourceCode\wolfpack\Solutions\Wolfpack.Core.WebServices.Client\bin\Debug\RestSharp.xml
+C:\Developement\wolfpack\sourceCode\wolfpack\Solutions\Wolfpack.Core.WebServices.Client\bin\Debug\Nancy.xml
+C:\Developement\wolfpack\sourceCode\wolfpack\Solutions\Wolfpack.Core.WebServices.Client\obj\Debug\Wolfpack.Core.WebServices.Client.csprojResolveAssemblyReference.cache
+C:\Developement\wolfpack\sourceCode\wolfpack\Solutions\Wolfpack.Core.WebServices.Client\obj\Debug\Wolfpack.Core.WebServices.Client.csproj.CoreCompileInputs.cache
+C:\Developement\wolfpack\sourceCode\wolfpack\Solutions\Wolfpack.Core.WebServices.Client\obj\Debug\Wolfpack.Core.WebServices.Client.dll
+C:\Developement\wolfpack\sourceCode\wolfpack\Solutions\Wolfpack.Core.WebServices.Client\obj\Debug\Wolfpack.Core.WebServices.Client.pdb

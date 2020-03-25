@@ -121,6 +121,7 @@
     <Compile Include="Checks\OracleQueryCheck.cs" />
     <Compile Include="Checks\QueryCheckBase.cs" />
     <Compile Include="Checks\QueryCheckConfigBase.cs" />
+    <Compile Include="Checks\SqlODAQueryCheck.cs" />
     <Compile Include="Checks\SqlQueryCheck.cs" />
     <Compile Include="Checks\ThresholdCheckBase.cs" />
     <Compile Include="Checks\UrlPingCheck.cs" />

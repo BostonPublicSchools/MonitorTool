@@ -30,6 +30,8 @@ namespace Wolfpack.Core.Interfaces.Entities
         public Properties Properties { get; set; }
         public MessageStateTypes State { get; set; }
 
+        public Guid TypeId { get; set; }
+
         public NotificationEvent()
         {
             Id = Guid.NewGuid();

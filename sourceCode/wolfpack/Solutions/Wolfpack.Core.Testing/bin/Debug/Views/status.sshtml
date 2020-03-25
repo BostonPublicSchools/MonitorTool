@@ -1,0 +1,96 @@
+﻿@Master['ui_master']
+
+@Section['Content']
+	<div class="container" role="main" style="font-size: 16px;">
+		<h1>Agent Status</h1>
+		  
+		<div style="height: 130px; background-image: url('/content/img/megaphone.png'); background-repeat: no-repeat;">
+			<p>        
+				<strong>Site</strong>
+				<span data-bind="text: info().siteId"></span>
+			</p>
+			<p>        
+				<strong>Agent</strong>
+				<span data-bind="text: info().agentId"></span>
+			</p>
+			<p>        
+				<strong>State</strong>
+				<span data-bind="text: status"></span>
+			</p>
+			<p>
+				<strong>Started</strong>
+				<span data-bind="text: moment(info().discoveryStarted).format('MMMM Do YYYY, h:mm:ss a')"></span>
+			</p>
+		</div>
+
+		<div data-bind="foreach: sections">
+			<div data-bind="visible: items().length > 0">
+				<h2 data-bind="text: title"></h2>
+				<div data-bind="attr: { style: bgImageStyle}">
+					<div data-bind="foreach: items">
+						<div>
+							<strong data-bind="text: name"></strong>&nbsp;<em data-bind="text: description"></em>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+@EndSection
+
+
+@Section['PageScript']
+    <script type="text/javascript" src="/Scripts/knockout-3.1.0.js"></script>
+    <script type="text/javascript" src="/Scripts/moment-min.js"></script>
+
+    <script type="text/javascript">
+		var viewModel = (function () {			
+			var model = {				
+				status: ko.observable(),
+				info: ko.observable(),
+				sections: ko.observableArray([]),
+
+				addSection: function (title, image, items) {
+					if (!items){
+						console.log(title + '=undefined!');
+					}
+
+					var section = {
+						items: ko.observableArray(items),
+						bgImageStyle: "margin-top: 25px; margin-bottom: 10px; min-height: 130px; height: 130px; height: auto !important; background-image: url('/content/img/" + image + ".png'); background-repeat: no-repeat;",
+						title: title
+					};
+					this.sections.push(section);
+				}
+			};
+
+			return {				
+				initialise : function () {
+					$.ajax({
+						type: 'GET',
+						url: '/api/notification/start',
+						contentType: 'application/json; charset=utf-8',
+						dataType: 'json'
+					}).done(function (data, status, jqXhr) {
+						
+						model.info(data.info);
+						model.status(data.status);
+						model.addSection('Unhealthy Activities', 'warning', data.info.unhealthyActivities);
+						model.addSection('Unhealthy Checks', 'warning', data.info.unhealthyChecks);
+						model.addSection('Activities', 'warning', data.info.activities);
+						model.addSection('Checks', 'warning', data.info.checks);
+
+						ko.applyBindings(model);
+												
+					}).fail(function (jqXhr, status, err) {
+						console.log(err);
+					});
+				}
+			};
+		}());
+
+        $(document).ready(function () {
+            viewModel.initialise();			
+        });
+    </script>
+@EndSection

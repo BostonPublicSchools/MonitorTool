@@ -40,7 +40,8 @@ namespace Wolfpack.Core.Notification
                 Result = message.Result,
                 ResultCount = message.ResultCount,
                 DisplayUnit = message.DisplayUnit,
-                Tags = message.Tags
+                Tags = message.Tags,
+                TypeId = message.Identity.TypeId
             };
 
             var builder = For(notificationMode, alert);

@@ -46,6 +46,8 @@ namespace Wolfpack.Core.Interfaces.Entities
         public List<PluginDescriptor> Activities { get; set; }
         public List<PluginDescriptor> UnhealthyActivities { get; set; }
 
+        public Guid TypeId { get; set; }
+
         /// <summary>
         /// default ctor
         /// </summary>

@@ -141,8 +141,8 @@
     <None Include="Config\Activities\WolfpackWebService.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Config\Checks\EveryMinute\Notepad-Running.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <None Include="Config\Checks\EveryMinute\BPSDATA-03 BPSInterface SP - BPSGetStudentSchoolOutOfSync.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Config\configuration.castle.config">
       <SubType>Designer</SubType>
@@ -158,7 +158,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Config\Publishers\ConsolePublisherConfiguration.config" />
-    <None Include="Config\Publishers\SqlPublisherConfiguration.config" />
     <None Include="Config\role.castle.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>

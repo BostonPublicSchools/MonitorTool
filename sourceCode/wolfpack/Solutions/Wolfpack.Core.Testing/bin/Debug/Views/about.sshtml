@@ -1,0 +1,22 @@
+﻿@Master['ui_master']
+
+@Section['Content']
+	<div class="container" role="main">
+		<div style="background-image: url('/content/img/heart_large.png'); background-repeat: no-repeat; min-height:300px;">
+			<h1>Thanks!</h1>
+			<p class="lead">
+				Wolfpack project needs to thank these people...
+			</p>
+			<dl class="dl-horizontal">
+				<dt>JetBrains</dt>
+				<dd>JetBrains support Open Source Projects like Wolfpack with free licenses for their awesome development tools like ReSharper and dotTrace</dd>
+			</dl>
+		</div>
+	</div>
+@EndSection
+
+@Section['PageScript']
+<script type="text/javascript">
+	setActiveTab('Help');
+</script>
+@EndSection
