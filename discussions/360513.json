@@ -1,0 +1,74 @@
+[
+  {
+    "Id": "852244",
+    "ThreadId": "360513",
+    "Html": "\r\n<p><span>An alert when a status changes from bad to good. &nbsp;Right now, I have email notifications set to only send failures (which would be common). &nbsp;A service starts failing, I get emails. &nbsp;When it starts working again, I'd like a single email\r\n that &quot;hey, I'm back up&quot;, and then quiet again.</span></p>\r\n",
+    "PostedDate": "2012-06-21T10:45:20.88-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "852445",
+    "ThreadId": "360513",
+    "Html": "\r\n<p>I understand a constant stream of alerts could be a bad thing - if something starts failing, continually sending failure messages can get annoying and is counter-productive. Conversely, if something starts working again you don't want a persistent stream\r\n of alerts telling you everything is ok!</p>\r\n<p>So - my thoughts are this. Presently there is a flag, found on some but not all healthchecks called &quot;PublishOnlyIfFailure&quot; - its a boolean and the idea was to help shape when a check issued alerts. I propose to make an enum, &quot;AlertMode&quot; that will allow the\r\n Wolfpack infrastructure to take care of alert shaping for each check, all the check would have do is tell Wolfpack what mode it is configured for - eg: &quot;OnlyFailures&quot;, &quot;OnlySuccess&quot;.</p>\r\n<p>I would also introduce some new modes to support this...</p>\r\n<ul>\r\n<li>&quot;Default&quot; - sends an alert everytime the check runs regardless of result </li><li>&quot;FailureOnly&quot; - sends an alert for every result failure </li><li>&quot;SuccessOnly&quot; - sends an alert for every result success </li><li>&quot;StateChange&quot; - only raise an alert when a check flips its result state, eg: failed -&gt; success, success -&gt; failure.\r\n</li><li>&quot;StateChangeFailureNag&quot; - as per &quot;StateChange&quot; but it will continue to send failure alerts if it remain in that state.\r\n</li></ul>\r\n<p>Final thought is to make this infrastructure plugin based/customisable, so if you had some whacky alert shaping logic you could roll your own and drop it in. My initial thoughts are that the existing\r\n<a href=\"http://wolfpack.codeplex.com/wikipage?title=Result%20Publisher%20Filters\" target=\"_self\">\r\nResult Publisher Filters</a> feature could be used as a base for this.</p>\r\n<p>Ok, so I'll open this one up - any thoughts on how this should work?</p>\r\n",
+    "PostedDate": "2012-06-21T23:30:48.19-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "852720",
+    "ThreadId": "360513",
+    "Html": "<p>This is something I have been wanting but have not had time to&nbsp;relay&nbsp;give attention to. I like all the states you have listed and the ability to do a custom plugin when you got something&nbsp;weird&nbsp;is perfect.&nbsp;<br /><br />It would also be nice to have a delay state meaning that once the state changes it would be nice to maybe change the check to a different schedule. That way you still get some feedback over time but you&nbsp;don't&nbsp;get crushed by some check that is running every minute or worse. Then it would go back to normal schedule once the check was good again. &nbsp;<br /><br />I like this&nbsp;approach&nbsp;because you will know if say a site starts to waver and then bang your server drops. If you just have it only give you alerts on state change you may not know that its not just down but its on fire. &nbsp;</p>",
+    "PostedDate": "2012-06-22T11:48:15.01-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "853173",
+    "ThreadId": "360513",
+    "Html": "<p>Ok, I like the \"change schedule\" thing too - like you say once something fails there is no need for a torrent of failures to come storming in from a high frequency failing check.</p>\r\n<p>So - my approach is to modify the Agent class - currently it acts as a message hub - health check messages are received by the Agent, then it augments the data (with agent metadata) then forwards the messages onto the publishers.</p>\r\n<p>My idea is to formalise the role and make a proper \"Message Hub\" component that will track the alert history of each component and shape the alerts based on each checks \"mode\".</p>\r\n<p>Work has started - should have something up and running soon.</p>",
+    "PostedDate": "2012-06-25T05:01:05.433-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "853425",
+    "ThreadId": "360513",
+    "Html": "<p>Very cool, looking forward to using the new feature.</p>",
+    "PostedDate": "2012-06-25T15:07:38.167-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "854629",
+    "ThreadId": "360513",
+    "Html": "<p>ok, all done and code checked into repo. I have modified one check \"WmiProcessRunningCheck\" so far, its config has a new property \"NotificationMode\", values are,</p>\r\n<p>\r\n<div><span style=\"font-family: verdana, sans-serif;\">SuccessOnly</span></div>\r\n<div><span style=\"font-family: verdana, sans-serif;\">FailureOnly</span></div>\r\n<div><span style=\"font-family: verdana, sans-serif;\">StateChange</span></div>\r\n<div><span style=\"font-family: verdana, sans-serif;\">StateChangeNagFail</span></div>\r\n</p>\r\n<p><br />Have a play - the&nbsp;<span>StateChangeNagFail one also supports slowing down of failure alerts as more alerts are generated. I'll release it soon once it's had some decent testing.</span></p>\r\n<p>Cheers,</p>\r\n<p>James</p>",
+    "PostedDate": "2012-06-27T15:26:38.737-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "854636",
+    "ThreadId": "360513",
+    "Html": "<p>...and if you want to trace how it works then stick a breakpoint in the new Core\\NotificationHub component - this will take you to the action!</p>",
+    "PostedDate": "2012-06-27T15:38:16.753-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "855162",
+    "ThreadId": "360513",
+    "Html": "<p>James, I pulled the code and compiled. Now I am looking at the Filters.Notifications. Also looked at the class and Config for the wmiProcessRunningCheck. I see that there is a new config setting and that the value would be one of the 4 above. I don't really have the time now to work out the details of setting this up from the code. Can you give me a specific config that shows how this could be used to produce a check that would have an adjusted interval once it has entered the failed state.</p>\r\n<p>Thanks, John</p>",
+    "PostedDate": "2012-06-28T13:34:35.84-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "855173",
+    "ThreadId": "360513",
+    "Html": "\r\n<p>ok, so the filter that fits this best is &quot;StateChangeNagFail&quot; - its characteristics are....</p>\r\n<ul>\r\n<li>It will sent an alert if it flips state (fail -&gt; success, success -&gt; fail)\r\n</li><li>If it remains in a failed state the filter will start to retard the frequency of the alerts based on the increasing number of failures generated....\r\n</li></ul>\r\n<p>Core\\Filters\\Notification\\StateChangeNagFailNotificationFilter.cs...</p>\r\n<p>Look at the constructor...</p>\r\n<pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>public</span>&nbsp;StateChangeNagFailNotificationFilter()\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<span>this</span>(<span>new</span>&nbsp;<span>KeyValuePair</span>&lt;<span>int</span>,&nbsp;<span>int</span>&gt;(0,&nbsp;1),\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>new</span>&nbsp;<span>KeyValuePair</span>&lt;<span>int</span>,&nbsp;<span>int</span>&gt;(3,&nbsp;3),\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>new</span>&nbsp;<span>KeyValuePair</span>&lt;<span>int</span>,&nbsp;<span>int</span>&gt;(5,&nbsp;10),\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>new</span>&nbsp;<span>KeyValuePair</span>&lt;<span>int</span>,&nbsp;<span>int</span>&gt;(10,&nbsp;60))\n</pre>\r\n<p>The list of KeyValuePairs represents the attempt band/minutes separation....so the above is...</p>\r\n<p>0 - 2 attempts =&gt; alert every 1 minute</p>\r\n<p>3 - 4 attempts -&gt; alert every 3 minutes</p>\r\n<p>5 - 9 attempts =&gt; ...every 10 mins</p>\r\n<p>10&#43; attempts =&gt; ...every 60 mins</p>\r\n<p>So for example on the 11th attempt, which could be 1 minute after the 10th attempt no alert would occur as the last one was not &gt; 60 mins ago.</p>\r\n<p>To change the schedule, inherit from&nbsp;StateChangeNagFailNotificationFilter and pass a different set of KeyValuePairs on the ctor. Just return a unique &quot;Mode&quot; and set the &quot;NotificationMode&quot; property on the check to the same...bingo your custom filter\r\n is running with the bespoke schedule.</p>\r\n<p>I'm keen to get feedback on the default schedule (KeyValuePairs) &nbsp;I have set up - is it the right shape for a &quot;default&quot;?</p>\r\n",
+    "PostedDate": "2012-06-28T13:53:46.933-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

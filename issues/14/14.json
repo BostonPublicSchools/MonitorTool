@@ -1,0 +1,75 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": "2014-07-03T06:19:48.983-07:00",
+    "CommentCount": 7,
+    "Custom": null,
+    "Description": "FolderLocation property of FolderCheckInfo doesn't get validated after altering the initial \"CHANGEME!\" string. Instead the value becomes \"null\".",
+    "LastUpdatedDate": "2014-07-03T06:19:48.983-07:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "wolfpack",
+    "ReportedDate": "2014-04-30T04:54:36.977-07:00",
+    "Status": {
+      "Name": "Closed",
+      "Id": 4
+    },
+    "ReasonClosed": {
+      "Name": "Fixed"
+    },
+    "Summary": "FolderLocation on FolderInfoCheck error (v3)",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 1,
+    "Id": 14
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "\nThe config editor is a generic javascript object editor and has no custom validation for any specific field.\n\nI think the reason it defaulted to \"null\" is that the FolderLocation field is a string and requires double quotes around the value eg: \"c:\\somefolder\" for the editor to recognise it as a string. If you don't have the quotes it just puts \"null\" as the value when you change focus from the textbox. \n\nIn the future there may be scope for the check to provide additional metadata to help the UI provide helpers (like a folder picker) but right now you are fairly unprotected from entering any value into the config - however this is a pretty big improvement from just editing xml/json files directly!",
+      "PostedDate": "2014-04-30T05:52:18.65-07:00",
+      "Id": 145191
+    },
+    {
+      "Message": "PS: also if you are entering string values with backslash in then you need to escape it and double it up...\n\neg: for folder c:\\temp you need to enter \"c:\\\\temp\"",
+      "PostedDate": "2014-04-30T06:27:53.87-07:00",
+      "Id": 145199
+    },
+    {
+      "Message": "You are right, it is indeed way better than editing XMLs. Idea is that I actually had the double quotes around the value. \n\nI just played some more with it and it seems like when you type the value it works fine. However, when you paste the folder path from explorer and add the double quotes afterwards (or the other way around), it puts \"null\" when you change the focus.\n\nLet me know if you are able to replicate.\n",
+      "PostedDate": "2014-04-30T06:35:11.343-07:00",
+      "Id": 145202
+    },
+    {
+      "Message": "ok, I'll try to replicate with copy & paste....\n\n...also in my previous comment the example I gave was wrong.... should be,\n\neg: for folder c:\\temp you need to enter \"c:\\\\\\temp\" <-- double backslash",
+      "PostedDate": "2014-04-30T06:50:40.457-07:00",
+      "Id": 145206
+    },
+    {
+      "Message": "ok I can replicate....but it is as I thought...it's the backslashes. If you escape the backslashes before you leave the textbox it's ok.\n\nHTH",
+      "PostedDate": "2014-04-30T06:53:06.487-07:00",
+      "Id": 145207
+    },
+    {
+      "Message": "Yep, it works with the double backslash indeed! Thanks!",
+      "PostedDate": "2014-04-30T06:54:41.243-07:00",
+      "Id": 145208
+    },
+    {
+      "Message": "PS: I have also fixed a bug in this check - the \"message\" property of the notification was not being set correctly - it contained the \"notification state\" - should contain the name of the folder being monitored! \n\nWill do a release tonight",
+      "PostedDate": "2014-05-01T07:34:54.917-07:00",
+      "Id": 145331
+    }
+  ]
+}

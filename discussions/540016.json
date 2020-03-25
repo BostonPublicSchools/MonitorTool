@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "1226217",
+    "ThreadId": "540016",
+    "Html": "Hi,\r<br />\n<br />\nI was able to get MSMQ checks to run fine when running wolfpack on the same machine as the MSMQ. \r<br />\n<br />\nHowever, if i tried to connect to a private queue on a remote machine, it always failed. This was due to the code in the MSMQ Check always first checking for &quot;exists&quot; on the queue. For private remote queues, this will always throw an exception. \r<br />\n<br />\nI mashed together a quick plugin, based on the original MSMQ Health Check packaged in CORE. \r<br />\n<br />\nA couple things.....<br />\n<ol>\n<li>\nAbstract out the exact message queue path format, so a user only needs to supply MACHINE NAME, QUEUE NAME, and a bool for &quot;IsPrivateQueue&quot;. <br />\n</li>\n<li>\nOnly checks for existence on Public Queues. <br />\n</li>\n<li>\nDoes not check age of messages. I commented all that out, just to get a working check running. Can easily be reintegrated with the previous functionality. <br />\n</li>\n</ol>\nThe code and sample config can be found here: \r<br />\n<br />\n<a href=\"https://docs.google.com/document/d/110kGtAW9bnBznrpeNVK9lOcDEPywvhRyZ3PTj_5dOWY/edit?usp=sharing\" rel=\"nofollow\">https://docs.google.com/document/d/110kGtAW9bnBznrpeNVK9lOcDEPywvhRyZ3PTj_5dOWY/edit?usp=sharing</a><br />\n",
+    "PostedDate": "2014-03-24T14:41:38.06-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1226283",
+    "ThreadId": "540016",
+    "Html": "Hey Mike,\r<br />\n<br />\nGreat stuff - I've just uploaded the latest v3 source and will try to merge this into the MSMQ check.\r<br />\n<br />\nCheers,\r<br />\nJames<br />\n",
+    "PostedDate": "2014-03-24T19:23:36.463-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

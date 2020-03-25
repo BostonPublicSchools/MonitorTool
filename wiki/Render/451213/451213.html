@@ -1,0 +1,97 @@
+<div class="wikidoc"><h1>AppStats</h1>
+<br />   <div style="clear:both;height:0;">&nbsp;</div><img style="float:left;padding-right:.5em;" src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=wolfpack&DownloadId=242359" alt="line_chart.png" title="line_chart.png" /><br /><br />Inspired by this <a href="http://codeascraft.etsy.com/2011/02/15/measure-anything-measure-everything/">post by Etsy</a> and from my personal experience with large enterprise systems, application metrics are an important aspect of understanding your system and what it&#39;s up to....I love this quote from the Etsy article...&quot;<i>If it moves, we track it. Sometimes we’ll draw a graph of something that isn’t moving yet, just in case it decides to make a run for it</i>&quot;! I also agree with their approach of making it ridiculously easy for any developer to measure something and this is what really motivated me to add this feature to Wolfpack.<br /><br />The AppStats feature allows you to count or time any operation you think is worth knowing about.<br /><br />It&#39;s easy to add to any .Net application, console, web, WPF<br /><br />The data is available for easy visualisation/graphing in <a href="http://www.geckoboard.com/">Geckoboard</a> via the <a href="https://wolfpack.codeplex.com/wikipage?title=Geckoboard%20Data%20Service&referringTitle=AppStats">Geckoboard Data Service</a> that ships with Wolfpack so you can instantly stay in touch with trends and spikes as they happen. <br /><br /><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=wolfpack&DownloadId=242358" alt="geckoboard-intro&#32;-&#32;small.png" title="geckoboard-intro&#32;-&#32;small.png" /><br />(image taken from geckoboard site - hope you don&#39;t mind Paul?!)<br />
+<h2>How does it work?</h2>AppStats uses existing Wolfpack infrastructure to do the heavy lifting - NServiceBus is used to publish the data from your .Net application to a Wolfpack instance where it is stored in the Wolfpack database and made available to Geckoboard via the Data Service. NServiceBus was selected as it provides a high performance, robust mechanism to transfer the data without impacting local application performance, however AppStats is fully pluggable so if you wanted to use a different transport then it would be simple enough to provide an implementation and plug it in.<br />So as it stands...
+<ul><li>NServiceBus transport (using MSMQ)</li>
+<li>SqlServer, SQLite databases/providers for Geckoboard Data Service (MongoDb Data Service database/provider coming soon).</li>
+<li>Count anything as a double datatype</li>
+<li>Time anything and capture the duration in milliseconds</li>
+<li>Pluggable client design</li>
+<li>Fluent interface for client component - easy set up and extendible via extension methods</li></ul>
+
+<h2>Ok, it measures things...example please!</h2>Right, let&#39;s create some real world scenarios to put AppStats to use in.<br />
+<h3>Scenario 1 - web application, login analytics</h3>You have a login page on your website that a user can log in to and let&#39;s suppose you wanted to know more about the behaviour of this page, understanding more about why people fail to login could help you redesign your page to make it easier to use, improve login rate and therefore customer satisfaction; so you would like to track how many users entered an incorrect userid and how many get their password wrong. Now you could make your application capture this information and save it to some data store but it is unlikely that you would have initially designed your application to do this as it has no (apparent) value - the code is there to get you logged in after all. Let&#39;s see how easy it is to add AppStats to help solve this. Here is the server side psuedo code for login...<br /><br /><div style="color:Black;background-color:White;"><pre>
+<span style="color:Blue;">private</span> <span style="color:Blue;">bool</span> AuthenticateUser(<span style="color:Blue;">string</span> userid, <span style="color:Blue;">string</span> password)
+{
+    <span style="color:Green;">// userSvc is the user service and is injected into this component</span>
+    <span style="color:Blue;">var</span> user = userSvc.Load(userid);
+    <span style="color:Blue;">if</span> (user == <span style="color:Blue;">null</span>)
+        <span style="color:Blue;">return</span> <span style="color:Blue;">false</span>;
+    <span style="color:Blue;">if</span> (<span style="color:Blue;">string</span>.Compare(password, user.Password) != 0)
+        <span style="color:Blue;">return</span> <span style="color:Blue;">false</span>;
+    <span style="color:Blue;">return</span> <span style="color:Blue;">true</span>;
+}
+</pre></div><br />Let&#39;s get AppStats in there...
+<ol><li>You will need the Wolfpack assemblies to add a reference to. Download Wolfpack and add a reference to the Wolfpack.Core and Wolfpack.Core.Interfaces assemblies.
+<ol><li>I am in the process of re-organising the codebase, existing nuget packages to make developing your own plug-ins and including AppStats in your app even easier...I&#39;ve even got a plan for a self-updating wolfpack with embedded NuGet!</li></ol></li>
+<li>Add in AppStats calls to track the events</li></ol>
+<br /><div style="color:Black;background-color:White;"><pre>
+<span style="color:Blue;">private</span> <span style="color:Blue;">bool</span> AuthenticateUser(<span style="color:Blue;">string</span> userid, <span style="color:Blue;">string</span> password)
+{
+    <span style="color:Green;">// userSvc is the user service and is injected into this component</span>
+    <span style="color:Blue;">var</span> user = userSvc.Load(userid);
+    <span style="color:Blue;">if</span> (user == <span style="color:Blue;">null</span>)
+    {
+        AppStatsEngine.Publish(<span style="color:Blue;">new</span> AppStatsEvent().PieChart(<span style="color:#A31515;">&quot;LoginFailures&quot;</span>).Segment(<span style="color:#A31515;">&quot;Unknown User&quot;</span>).One());
+        <span style="color:Blue;">return</span> <span style="color:Blue;">false</span>;
+    }
+    <span style="color:Blue;">if</span> (<span style="color:Blue;">string</span>.Compare(password, user.Password) != 0)
+    {
+        AppStatsEngine.Publish(<span style="color:Blue;">new</span> AppStatsEvent().PieChart(<span style="color:#A31515;">&quot;LoginFailures&quot;</span>).Segment(<span style="color:#A31515;">&quot;Incorrect Password&quot;</span>).One());
+        <span style="color:Blue;">return</span> <span style="color:Blue;">false</span>;
+    }
+    <span style="color:Blue;">return</span> <span style="color:Blue;">true</span>;
+}
+</pre></div><br />All that remains is to bootstrap AppStats in your application startup - this initialises the sub-system and allows you to connect AppStats to your existing NServiceBus if your application already uses it. Inside your Global.asax Startup() place...<br /><br /><div style="color:Black;background-color:White;"><pre>
+<span style="color:Green;">// if you already have a NServiceBus instance</span>
+AppStatsEngine.Initialise(AppStatsConfigBuilder.For(<span style="color:#A31515;">&quot;AppStatsDemo&quot;</span>).PublishWith(myBus).Build());
+</pre></div>If you don&#39;t use NServiceBus in your application, AppStats can create it for you...<br /><div style="color:Black;background-color:White;"><pre>
+AppStatsEngine.Initialise(AppStatsConfigBuilder.For(<span style="color:#A31515;">&quot;AppStatsDemo&quot;</span>)
+    .PublishWith(BusBuilder.ForApplication()
+            <span style="color:Green;">// use this if you already have an IoC container </span>
+            <span style="color:Green;">// (otherwise the default NSB container is used)</span>
+            <span style="color:Green;">//.UseContainer(myContainer)</span>
+                                                           
+            <span style="color:Green;">// if you want to customise the msmq settings</span>
+            <span style="color:Green;">// then use this method to do it otherwise the</span>
+            <span style="color:Green;">// default queues are used</span>
+            <span style="color:Green;">//.Msmq(&quot;AlternateInput&quot;, &quot;AlternateError&quot;)</span>
+
+            <span style="color:Green;">// that&#39;s it - start it!</span>
+            .FireItUp(),
+        <span style="color:Green;">// Optionally specify the destination queue for messages</span>
+        <span style="color:Green;">// here otherwise AppStats will assume you </span>
+        <span style="color:Green;">// have configured this routing in external</span>
+        <span style="color:Green;">// configuration for the Send() method</span>
+        ConfigurationManager.AppSettings[<span style="color:#A31515;">&quot;queue&quot;</span>])
+    .Build());
+</pre></div><br />Finally you will need a Wolfpack instance running to receive and process the AppStats messages.<br />
+<h4>Configuring Wolfpack</h4>In order for Wolfpack to be able to process AppStat messages there is some configuration to do. The NServiceBus bridge requires enabling to pick up the messages then one of the database publishers should be selected to persist the data. Finally the Geckoboard Data Service must be enabled to expose the AppStats data.<br />
+<ol><li>In activity.castle.config....
+<ol><li>GeckoboardDataServiceActivityConfig component &quot;Enabled&quot; property is &quot;true&quot;</li>
+<li>GeckoboardDataServiceConfig component &quot;DataProvider&quot; property is set to the right supported database (SqlServer or SQLite)</li></ol></li>
+<li>In publisher.castle.config....
+<ol><li>SQLiteConfiguration or SqlServerConfiguration component &quot;Enabled&quot; property is &quot;true&quot;</li></ol></li>
+<li>In startup.castle.config....
+<ol><li>BusBridgeConfig component &quot;Enabled&quot; property is &quot;true&quot;</li></ol></li></ol>
+
+<h4>Testing</h4>A demo client is provided in the separate AppStatsDemo binaries zip file. Unzip this and run the &quot;Wolfpack.AppStats.Demo.exe&quot; application - this provides a simple winform app that will send AppStat messages over NServiceBus to Wolfpack.<br /><br /><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=wolfpack&DownloadId=242360" alt="AppStatDemoClient.png" title="AppStatDemoClient.png" /><br />
+<h4>Geckoboard</h4>To visualise your AppStat data in Geckoboard you will need to add some widgets to your Geckoboard. AppStat data is particularly suited to the Line and Pie chart widgets and these are the urls you will need when you add these widgets. This <a href="https://wolfpack.codeplex.com/wikipage?title=Geckoboard%20Data%20Service&referringTitle=AppStats">page</a> is dedicated to setting up Wolfpack with Geckoboard, please refer to this for more information.<br /><br />To display the Wolfpack Voting example data from the demo app in a piechart use this url with a Geckoboard Piechart widget,<br />http://yourhost/geckoboard/piechart/WolfpackPoll/any/count<br /><br />To display the &quot;TestCounterKpi&quot; AppStat from the Count example use this url,<br />http://yourhost/geckoboard/linechart/TestCounterKpi/any/sum/per/minute<br />
+<h4>Under the hood</h4>So what is actually going on when we make an AppStats call?<br /><br /><div style="color:Black;background-color:White;"><pre>
+AppStatsEngine.Publish(<span style="color:Blue;">new</span> AppStatsEvent().PieChart(<span style="color:#A31515;">&quot;LoginFailures&quot;</span>).Segment(<span style="color:#A31515;">&quot;Unknown User&quot;</span>).One());
+</pre></div><br />It creates a standard Wolfpack HealthCheck result message and publishes it with the NServiceBus (NSB) publisher.
+<ul><li><b>.Piechart(&quot;LoginFailures&quot;)</b> just sets the &quot;CheckId&quot; property</li>
+<li><b>.Segment(&quot;Unknown User&quot;)</b> just sets the Tags property</li>
+<li><b>.One()</b> just sets the ResultCount property to 1</li></ul>
+The Wolfpack instance that receives this NSB message should be configured to republish it via one of its database publishers (SQLite, SqlServer, MongoDb) - this just saves the message to the AgentData table where it is accessible to other Wolfpack plugins like the <a href="https://wolfpack.codeplex.com/wikipage?title=Geckoboard%20Data%20Service&referringTitle=AppStats">Geckoboard Data Service</a>....our next port of call.<br /><br />Other ways of invoking AppStats include...<br /><br />Creating a timer to record the number of milliseconds it took for an operation to run. The result is automatically published when the timer is disposed<br /><div style="color:Black;background-color:White;"><pre>
+<span style="color:Green;">// create a timer to wrap an operation</span>
+<span style="color:Blue;">using</span> (<span style="color:Blue;">var</span> timer = AppStatsEngine.Time(<span style="color:#A31515;">&quot;SomeOperation&quot;</span>))
+{
+    <span style="color:Green;">// do some operation to time here</span>
+    <span style="color:Green;">// the appstat is automatically published</span>
+    <span style="color:Green;">// when it is disposed</span>
+}
+</pre></div><br />Count <i>N</i> of something. Use this to record the value of something, in the example below we are recording the cost of a new order - this could then be plotted on a linegraph across your entire system or displayed on a geck-0-meter to show max, min and average order cost. Again the information is automatically published for you with this call.<br /><div style="color:Black;background-color:White;"><pre>
+AppStatsEngine.Count(9.99, <span style="color:#A31515;">&quot;OrderCost&quot;</span>);
+<span style="color:Green;">// or to record just one of something...</span>
+AppStatsEngine.One(<span style="color:#A31515;">&quot;Orders&quot;</span>);
+</pre></div></div><div class="ClearBoth"></div>

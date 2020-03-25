@@ -1,0 +1,50 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "HealthChecks",
+      "DisplayName": "HealthChecks"
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 2,
+    "Custom": null,
+    "Description": "Need to be able to validate the file is recent — LastWriteTime is less than N days/hours/minutes/seconds.\r\n\r\nAlso probably worth checking if length is more/less/equal to N.",
+    "LastUpdatedDate": "2017-12-08T09:48:17.57-08:00",
+    "PlannedForRelease": "Wolfpack v3",
+    "ReleaseVisibleToPublic": true,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "wolfpack",
+    "ReportedDate": "2012-10-01T12:57:55.087-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Criteria for FileInfoCheck",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 9
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "Yup, sure I can add these parameters into the check.\n\nWhat unit works best for length and age? I'll roll with bytes and seconds unless there is a good reason not to.\n\nJ",
+      "PostedDate": "2012-10-02T05:52:39.703-07:00",
+      "Id": 78271
+    },
+    {
+      "Message": "Perfect.",
+      "PostedDate": "2012-10-02T06:18:50.403-07:00",
+      "Id": 78274
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "1059999",
+    "ThreadId": "447918",
+    "Html": "I have an instance of Wolfpack running as a listener for WCF connections. my various agents connect to it and push results over, then this instance saves them to a sql database.\r<br />\nIs there anything to prevent me from running local checks in instance that has the WCF listener enabled? I wanted to do some URL pings from this server as a central test location, but they don't seem to be firing. The url ping test works fine on other agents, just not the one listening/hosting WCF<br />\n",
+    "PostedDate": "2013-06-23T02:46:58.763-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1060185",
+    "ThreadId": "447918",
+    "Html": "Hi Josh,\r<br />\n<br />\nYep you should be able to do what you describe - the local checks should be configured to publish direct to the sql database - no need to route them via WCF.\r<br />\n<br />\nI would double check your config/setup for the pings - maybe copy a ping config from an agent that is working, replicate that setup on the &quot;listener&quot; agent - sounds like something screwy with the check/scheduler binding. Are you running any publisher filters on the listener?\r<br />\n<br />\nLemme know how you get on and if you are still having a problem with it we can drill into the issue further - eg send me your (sanitised) config and I can repo/debug.\r<br />\n<br />\nJ<br />\n",
+    "PostedDate": "2013-06-23T14:38:19.657-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1060209",
+    "ThreadId": "447918",
+    "Html": "\r\n<div>Thanks for the reply!</div>\r\n<div><br>\r\n</div>\r\n<div>I was actually able I figure it out. I had the config for that check in my every 15 min folder and it wasn't working. I moved it over to every minute and it worked. Turns out I had a duplicate Id for the check in every hour, so when I straightened that\r\n out it worked in every 15 mins. I'm guessing maybe every hour was being loaded first? Regardless I'm good now!<br>\r\n<br>\r\nSent from my iPhone</div>\r\n<div><br>\r\n</div>\r\n",
+    "PostedDate": "2013-06-23T16:33:37.777-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

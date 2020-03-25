@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Wolfpack.Publisher</id>
+    <version>1.0.0.0</version>
+    <title>Wolfpack.Publisher</title>
+    <authors>jimbobdog, Rob Gibbens</authors>
+    <owners>James Simmonds</owners>
+    <licenseUrl>http://wolfpack.codeplex.com/license</licenseUrl>
+    <projectUrl>http://wolfpack.codeplex.com/</projectUrl>
+    <iconUrl>http://download.codeplex.com/Project/Download/FileDownload.aspx?ProjectName=Wolfpack&amp;DownloadId=140622&amp;Build=17672</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Wolfpack.Publishers adds the necessary interfaces and base classes to create your own custom Publishers.</description>
+    <summary>Wolfpack.Publishers adds the necessary classes to create your own custom Publishers.</summary>
+    <language>en-GB</language>
+    <tags>Wolfpack Monitoring</tags>
+  </metadata>
+</package>

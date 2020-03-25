@@ -1,0 +1,30 @@
+<div class="wikidoc"><h1>Getting Started</h1>This provides information on installation and configuration of Wolfpack.<br />
+<h2>Installing via Chocolatey</h2>1. Install <a href="http://chocolatey.org/">Chocolatey</a> if you haven&#39;t got it already (!)<br />2. Install the Wolfpack package with command below....<br /><div style="color:Black;background-color:White;"><pre>
+cinst wolfpack
+</pre></div>3. Once installed either open a new command prompt &quot;Run as administrator&quot; or add the url reservation mentioned below.<br />4. At the command prompt, type...<br /><div style="color:Black;background-color:White;"><pre>
+wolfpack.agent.bat
+</pre></div>5. open a browser and enter location http://localhost:802/ui - you should see the Wolfpack web UI....<br />6. Have a play with the new UI - any issues/feedback/requests then start a thread in Discussions/Issues!<br />
+<h2>Install via zip</h2>Download the binaries zip. Remember to either add the url reservation mentioned below.<br />
+<h2>Download the Source</h2>You can clone the sourcecode repository and run the solution - however you will either need to add the url reservation below or run Visual Studio &quot;as Administrator&quot;. <br />
+<h2>Plugins</h2>To download contrib plugins see the notes <a href="https://wolfpack.codeplex.com/wikipage?title=AddingPluginsv3&referringTitle=Installationv3">here</a>.<br />
+<h2>Notes</h2><h3>Url Reservation</h3><ul><li>The source has the web interface and signalr plugins enabled. These are self-hosted in Wolfpack at <b>http://localhost:802/ui</b> and <b>http://localhost:803/signalr</b> respectively. If you get an &quot;Access Denied&quot; type messages you might need to put a Url reservation in place (or just run wolfpack.agent.exe as Administrator). 
+<ul><li>A url reservation ensures an application has rights to access a url (eg: listen on it). <a href="http://www.hanselman.com/blog/WorkingWithSSLAtDevelopmentTimeIsEasierWithIISExpress.aspx">This article</a> from Mr Hanselman is pretty good for general web setup/permissions and there are some instructions on using netsh to set a url reservation but the command you need is...(remember to run cmd.exe as Admin).</li>
+<li>Additional help and information about self hosting can be found <a href="https://katanaproject.codeplex.com/wikipage?title=Selfhosting">here</a>.</li></ul></li></ul>
+<div style="color:Black;background-color:White;"><pre>
+<span style="color:#A31515;">&quot;netsh http add urlacl url=http://localhost:802/ user=Everyone&quot;</span>
+</pre></div>
+<h2>Command Line</h2>Wolfpack is based on the TopShelf windows service framework. This means you can run it as either a console application (recommended whilst you evaluate) or install it as an unattended windows service (recommended for real use). All exceptions are logged to the <b>Wolfpack.log</b> file in the application folder using Log4Net - check this if you have trouble starting Wolfpack.<br /><br />To run it as a console application, open a command prompt and type,<br /><div style="color:Black;background-color:White;"><pre>
+wolfpack.agent.exe
+</pre></div>To install and execute it as a windows service running under the <b>Local System</b> account, open a command prompt and type,<br /><div style="color:Black;background-color:White;"><pre>
+wolfpack.agent.exe <span style="color:Gray;">/</span>install
+</pre></div>To install and execute it as a windows service running under the custom account, open a command prompt and type,<br /><div style="color:Black;background-color:White;"><pre>
+wolfpack.agent.exe <span style="color:Gray;">/</span>install <span style="color:Gray;">/</span>username:<span style="color:Gray;">[</span><span style="color:Teal;">DOMAIN\Account</span><span style="color:Gray;">]</span> <span style="color:Gray;">/</span>password:<span style="color:Gray;">[</span><span style="color:Teal;">Password</span><span style="color:Gray;">]</span>
+</pre></div><b>Remember</b> the account you run Wolfpack under as a service must have permissions to perform the checks you have configured it for. For instance, if you are using the MSMQ checks the service account must have the correct permissions on the MSMQ in question.<br /><br />To uninstall it as a windows service, open a command prompt and type,<br /><div style="color:Black;background-color:White;"><pre>
+wolfpack.agent.exe <span style="color:Gray;">/</span>uninstall
+</pre></div>There are several &quot;profiles&quot; that alter the behaviour of Wolfpack. Supported profile names are,
+<ul><li><b>FastStartAgentProfile</b> - this will asynchronously startup the agent so that control is quickly returned to the Windows Service Control Manager - this stops timeouts occurring when you have a large number of plugins configured and enabled. Access these additional profiles with,</li></ul>
+<div style="color:Black;background-color:White;"><pre>
+wolfpack.agent.exe <span style="color:Gray;">/</span>profile:<span style="color:Gray;">[</span><span style="color:Teal;">profile name</span><span style="color:Gray;">]</span>
+</pre></div>
+<h2>Configuring Wolfpack</h2>Once installed and you have the http/url reservation in place then fire up a browser and point it to,
+<h4>http://localhost:802/ui</h4>This is the <a href="https://wolfpack.codeplex.com/wikipage?title=Wolfpackv3WebUI&referringTitle=Installationv3">Wolfpack Web UI</a> and the &quot;Configuration&quot; page will allow you to configure the checks, publishers and activity plugins you have installed<br /><br /><br /><br /></div><div class="ClearBoth"></div>

@@ -1,0 +1,298 @@
+2011-09-16 15:52:27,500 [10] ERROR Wolfpack [(null)] - Wolfpack Component Failure. IncidentId:=0c34b62f-1953-4154-8305-135bc2fffa68; Name:=WolfpackDatabaseHasResults; Details:=System.ServiceModel.EndpointNotFoundException: There was no endpoint listening at http://192.168.2.121:802/Wolfpack that could accept the message. This is often caused by an incorrect address or SOAP action. See InnerException, if present, for more details. ---> System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: No connection could be made because the target machine actively refused it 192.168.2.121:802
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Int32 timeout, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   at System.ServiceModel.Channels.HttpOutput.Send(TimeSpan timeout)
+   at System.ServiceModel.Channels.HttpChannelFactory.HttpRequestChannel.HttpChannelRequest.SendRequest(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Dispatcher.RequestChannelBinder.Send(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at Wolfpack.Core.Wcf.IWolfpack.CaptureResult(HealthCheckResult result)
+   at Wolfpack.Core.Wcf.WcfResultPublisher.Publish(HealthCheckResult message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Wcf\WcfPublishers.cs:line 89
+   at Wolfpack.Core.Wcf.WcfResultPublisher.Consume(HealthCheckResult message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Wcf\WcfPublishers.cs:line 95
+   at Castle.Proxies.Invocations.IConsumer`1_Consume.InvokeMethodOnTarget()
+   at Castle.DynamicProxy.AbstractInvocation.Proceed() in e:\OSS.Code\Castle.Core\src\Castle.Core\DynamicProxy\AbstractInvocation.cs:line 144
+   at Wolfpack.Core.Filters.ResultFilterBase.HandleIntercept(IInvocation invocation) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Filters\ResultFilterBase.cs:line 35
+   at Wolfpack.Core.Containers.InterceptorBase.Intercept(IInvocation invocation) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Containers\InterceptorBase.cs:line 25
+   at Castle.DynamicProxy.AbstractInvocation.Proceed() in e:\OSS.Code\Castle.Core\src\Castle.Core\DynamicProxy\AbstractInvocation.cs:line 166
+   at Castle.Proxies.IHealthCheckResultPublisherProxy_5.Consume(HealthCheckResult message)
+   at Magnum.Pipeline.Segments.MessageConsumerSegment`1.<>c__DisplayClassd`1.<Accept>b__c(T x) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\MessageConsumerSegment.cs:line 61
+   at Magnum.Pipeline.Segments.PipeSegment.<>c__DisplayClass1`1.<Send>b__0(MessageConsumer`1 consumer) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\PipeSegment.cs:line 31
+   at Magnum.Extensions.ExtensionsToEnumerable.Each[T](IEnumerable`1 collection, Action`1 callback) in d:\Home\Magnum\src\Magnum\Extensions\ExtensionsToEnumerable.cs:line 32
+   at Magnum.Pipeline.Segments.PipeSegment.Send[T](T message) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\PipeSegment.cs:line 31
+   at Wolfpack.Core.MagnumMessenger.Wolfpack.Core.Interfaces.IMessenger.Publish(HealthCheckResult message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Messenger.cs:line 76
+   at Wolfpack.Core.Messenger.Publish(HealthCheckResult message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Messenger.cs:line 33
+   at Wolfpack.Agent.Roles.Agent.Consume(HealthCheckData message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Agent\Roles\Agent.cs:line 170
+   at Magnum.Pipeline.Segments.MessageConsumerSegment`1.<>c__DisplayClassd`1.<Accept>b__c(T x) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\MessageConsumerSegment.cs:line 61
+   at Magnum.Pipeline.Segments.PipeSegment.<>c__DisplayClass1`1.<Send>b__0(MessageConsumer`1 consumer) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\PipeSegment.cs:line 31
+   at Magnum.Extensions.ExtensionsToEnumerable.Each[T](IEnumerable`1 collection, Action`1 callback) in d:\Home\Magnum\src\Magnum\Extensions\ExtensionsToEnumerable.cs:line 32
+   at Magnum.Pipeline.Segments.PipeSegment.Send[T](T message) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\PipeSegment.cs:line 31
+   at Wolfpack.Core.MagnumMessenger.Wolfpack.Core.Interfaces.IMessenger.Publish(HealthCheckData message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Messenger.cs:line 82
+   at Wolfpack.Core.Messenger.Publish(HealthCheckData message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Messenger.cs:line 38
+   at Wolfpack.Core.Checks.ScalarCheckBase.OnPublish(Boolean result, Int32 rowcount, TimeSpan duration) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Checks\ScalarCheckBase.cs:line 130
+   at Wolfpack.Core.Checks.ScalarCheckBase.Execute() in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Checks\ScalarCheckBase.cs:line 83
+   at Wolfpack.Core.Schedulers.HealthCheckIntervalScheduler.Execute() in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Schedulers\HealthCheckIntervalScheduler.cs:line 51
+2011-09-16 15:52:29,171 [17] ERROR Wolfpack [(null)] - Wolfpack Component Failure. IncidentId:=1afc4b7d-2efa-45e9-8419-c94c11c77802; Name:=FileSysBridgeCheck; Details:=System.ServiceModel.EndpointNotFoundException: There was no endpoint listening at http://192.168.2.121:802/Wolfpack that could accept the message. This is often caused by an incorrect address or SOAP action. See InnerException, if present, for more details. ---> System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: No connection could be made because the target machine actively refused it 192.168.2.121:802
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Int32 timeout, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   at System.ServiceModel.Channels.HttpOutput.Send(TimeSpan timeout)
+   at System.ServiceModel.Channels.HttpChannelFactory.HttpRequestChannel.HttpChannelRequest.SendRequest(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Dispatcher.RequestChannelBinder.Send(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at Wolfpack.Core.Wcf.IWolfpack.CaptureResult(HealthCheckResult result)
+   at Wolfpack.Core.Wcf.WcfResultPublisher.Publish(HealthCheckResult message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Wcf\WcfPublishers.cs:line 89
+   at Wolfpack.Core.Wcf.WcfResultPublisher.Consume(HealthCheckResult message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Wcf\WcfPublishers.cs:line 95
+   at Castle.Proxies.Invocations.IConsumer`1_Consume.InvokeMethodOnTarget()
+   at Castle.DynamicProxy.AbstractInvocation.Proceed() in e:\OSS.Code\Castle.Core\src\Castle.Core\DynamicProxy\AbstractInvocation.cs:line 144
+   at Wolfpack.Core.Filters.ResultFilterBase.HandleIntercept(IInvocation invocation) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Filters\ResultFilterBase.cs:line 35
+   at Wolfpack.Core.Containers.InterceptorBase.Intercept(IInvocation invocation) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Containers\InterceptorBase.cs:line 25
+   at Castle.DynamicProxy.AbstractInvocation.Proceed() in e:\OSS.Code\Castle.Core\src\Castle.Core\DynamicProxy\AbstractInvocation.cs:line 166
+   at Castle.Proxies.IHealthCheckResultPublisherProxy_5.Consume(HealthCheckResult message)
+   at Magnum.Pipeline.Segments.MessageConsumerSegment`1.<>c__DisplayClassd`1.<Accept>b__c(T x) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\MessageConsumerSegment.cs:line 61
+   at Magnum.Pipeline.Segments.PipeSegment.<>c__DisplayClass1`1.<Send>b__0(MessageConsumer`1 consumer) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\PipeSegment.cs:line 31
+   at Magnum.Extensions.ExtensionsToEnumerable.Each[T](IEnumerable`1 collection, Action`1 callback) in d:\Home\Magnum\src\Magnum\Extensions\ExtensionsToEnumerable.cs:line 32
+   at Magnum.Pipeline.Segments.PipeSegment.Send[T](T message) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\PipeSegment.cs:line 31
+   at Wolfpack.Core.MagnumMessenger.Wolfpack.Core.Interfaces.IMessenger.Publish(HealthCheckResult message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Messenger.cs:line 76
+   at Wolfpack.Core.Messenger.Publish(HealthCheckResult message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Messenger.cs:line 33
+   at Wolfpack.Core.Bridge.FileSystem.FileSystemBridgeCheck.<Execute>b__0(String filename) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Bridge\FileSystem\FileSystemBridgeCheck.cs:line 44
+   at Castle.Core.CollectionExtensions.ForEach[T](IEnumerable`1 items, Action`1 action) in e:\OSS.Code\Castle.Core\src\Castle.Core\Core\CollectionExtensions.cs:line 28
+   at Wolfpack.Core.Bridge.FileSystem.FileSystemBridgeCheck.Execute() in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Bridge\FileSystem\FileSystemBridgeCheck.cs:line 27
+   at Wolfpack.Core.Schedulers.HealthCheckIntervalScheduler.Execute() in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Schedulers\HealthCheckIntervalScheduler.cs:line 51
+2011-09-16 15:52:29,343 [10] FATAL Topshelf.Model.ServiceCoordinator [(null)] - An unhandled exception occurred within the service: Wolfpack.Agent.exe
+System.ServiceModel.EndpointNotFoundException: There was no endpoint listening at http://192.168.2.121:802/Wolfpack that could accept the message. This is often caused by an incorrect address or SOAP action. See InnerException, if present, for more details. ---> System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: No connection could be made because the target machine actively refused it 192.168.2.121:802
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Int32 timeout, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   at System.ServiceModel.Channels.HttpOutput.Send(TimeSpan timeout)
+   at System.ServiceModel.Channels.HttpChannelFactory.HttpRequestChannel.HttpChannelRequest.SendRequest(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Dispatcher.RequestChannelBinder.Send(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at Wolfpack.Core.Wcf.IWolfpack.CaptureResult(HealthCheckResult result)
+   at Wolfpack.Core.Wcf.WcfResultPublisher.Publish(HealthCheckResult message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Wcf\WcfPublishers.cs:line 89
+   at Wolfpack.Core.Wcf.WcfResultPublisher.Consume(HealthCheckResult message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Wcf\WcfPublishers.cs:line 95
+   at Castle.Proxies.Invocations.IConsumer`1_Consume.InvokeMethodOnTarget()
+   at Castle.DynamicProxy.AbstractInvocation.Proceed() in e:\OSS.Code\Castle.Core\src\Castle.Core\DynamicProxy\AbstractInvocation.cs:line 144
+   at Wolfpack.Core.Filters.ResultFilterBase.HandleIntercept(IInvocation invocation) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Filters\ResultFilterBase.cs:line 35
+   at Wolfpack.Core.Containers.InterceptorBase.Intercept(IInvocation invocation) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Containers\InterceptorBase.cs:line 25
+   at Castle.DynamicProxy.AbstractInvocation.Proceed() in e:\OSS.Code\Castle.Core\src\Castle.Core\DynamicProxy\AbstractInvocation.cs:line 166
+   at Castle.Proxies.IHealthCheckResultPublisherProxy_5.Consume(HealthCheckResult message)
+   at Magnum.Pipeline.Segments.MessageConsumerSegment`1.<>c__DisplayClassd`1.<Accept>b__c(T x) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\MessageConsumerSegment.cs:line 61
+   at Magnum.Pipeline.Segments.PipeSegment.<>c__DisplayClass1`1.<Send>b__0(MessageConsumer`1 consumer) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\PipeSegment.cs:line 31
+   at Magnum.Extensions.ExtensionsToEnumerable.Each[T](IEnumerable`1 collection, Action`1 callback) in d:\Home\Magnum\src\Magnum\Extensions\ExtensionsToEnumerable.cs:line 32
+   at Magnum.Pipeline.Segments.PipeSegment.Send[T](T message) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\PipeSegment.cs:line 31
+   at Wolfpack.Core.MagnumMessenger.Wolfpack.Core.Interfaces.IMessenger.Publish(HealthCheckResult message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Messenger.cs:line 76
+   at Wolfpack.Core.Messenger.Publish(HealthCheckResult message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Messenger.cs:line 33
+   at Wolfpack.Agent.Roles.Agent.Consume(HealthCheckData message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Agent\Roles\Agent.cs:line 170
+   at Magnum.Pipeline.Segments.MessageConsumerSegment`1.<>c__DisplayClassd`1.<Accept>b__c(T x) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\MessageConsumerSegment.cs:line 61
+   at Magnum.Pipeline.Segments.PipeSegment.<>c__DisplayClass1`1.<Send>b__0(MessageConsumer`1 consumer) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\PipeSegment.cs:line 31
+   at Magnum.Extensions.ExtensionsToEnumerable.Each[T](IEnumerable`1 collection, Action`1 callback) in d:\Home\Magnum\src\Magnum\Extensions\ExtensionsToEnumerable.cs:line 32
+   at Magnum.Pipeline.Segments.PipeSegment.Send[T](T message) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\PipeSegment.cs:line 31
+   at Wolfpack.Core.MagnumMessenger.Wolfpack.Core.Interfaces.IMessenger.Publish(HealthCheckData message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Messenger.cs:line 82
+   at Wolfpack.Core.Messenger.Publish(HealthCheckData message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Messenger.cs:line 38
+   at Wolfpack.Core.Schedulers.HealthCheckIntervalScheduler.Execute() in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Schedulers\HealthCheckIntervalScheduler.cs:line 64
+   at Wolfpack.Core.Schedulers.IntervalSchedulerBase.StartIntervalTask() in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Schedulers\IntervalSchedulerBase.cs:line 56
+   at System.Threading.ThreadHelper.ThreadStart_Context(Object state)
+   at System.Threading.ExecutionContext.runTryCode(Object userData)
+   at System.Runtime.CompilerServices.RuntimeHelpers.ExecuteCodeWithGuaranteedCleanup(TryCode code, CleanupCode backoutCode, Object userData)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean ignoreSyncCtx)
+   at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.ThreadHelper.ThreadStart()
+2011-09-16 15:52:29,406 [112] ERROR Topshelf.Model.ServiceCoordinator [(null)] - Fault on Wolfpack.Agent.exe: Topshelf.Exceptions.TopshelfException
+An unhandled exception occurred within the service: Wolfpack.Agent.exe
+There was no endpoint listening at http://192.168.2.121:802/Wolfpack that could accept the message. This is often caused by an incorrect address or SOAP action. See InnerException, if present, for more details.
+Server stack trace: 
+   at System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   at System.ServiceModel.Channels.HttpOutput.Send(TimeSpan timeout)
+   at System.ServiceModel.Channels.HttpChannelFactory.HttpRequestChannel.HttpChannelRequest.SendRequest(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Dispatcher.RequestChannelBinder.Send(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at Wolfpack.Core.Wcf.IWolfpack.CaptureResult(HealthCheckResult result)
+   at Wolfpack.Core.Wcf.WcfResultPublisher.Publish(HealthCheckResult message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Wcf\WcfPublishers.cs:line 89
+   at Wolfpack.Core.Wcf.WcfResultPublisher.Consume(HealthCheckResult message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Wcf\WcfPublishers.cs:line 95
+   at Castle.Proxies.Invocations.IConsumer`1_Consume.InvokeMethodOnTarget()
+   at Castle.DynamicProxy.AbstractInvocation.Proceed() in e:\OSS.Code\Castle.Core\src\Castle.Core\DynamicProxy\AbstractInvocation.cs:line 144
+   at Wolfpack.Core.Filters.ResultFilterBase.HandleIntercept(IInvocation invocation) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Filters\ResultFilterBase.cs:line 35
+   at Wolfpack.Core.Containers.InterceptorBase.Intercept(IInvocation invocation) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Containers\InterceptorBase.cs:line 25
+   at Castle.DynamicProxy.AbstractInvocation.Proceed() in e:\OSS.Code\Castle.Core\src\Castle.Core\DynamicProxy\AbstractInvocation.cs:line 166
+   at Castle.Proxies.IHealthCheckResultPublisherProxy_5.Consume(HealthCheckResult message)
+   at Magnum.Pipeline.Segments.MessageConsumerSegment`1.<>c__DisplayClassd`1.<Accept>b__c(T x) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\MessageConsumerSegment.cs:line 61
+   at Magnum.Pipeline.Segments.PipeSegment.<>c__DisplayClass1`1.<Send>b__0(MessageConsumer`1 consumer) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\PipeSegment.cs:line 31
+   at Magnum.Extensions.ExtensionsToEnumerable.Each[T](IEnumerable`1 collection, Action`1 callback) in d:\Home\Magnum\src\Magnum\Extensions\ExtensionsToEnumerable.cs:line 32
+   at Magnum.Pipeline.Segments.PipeSegment.Send[T](T message) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\PipeSegment.cs:line 31
+   at Wolfpack.Core.MagnumMessenger.Wolfpack.Core.Interfaces.IMessenger.Publish(HealthCheckResult message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Messenger.cs:line 76
+   at Wolfpack.Core.Messenger.Publish(HealthCheckResult message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Messenger.cs:line 33
+   at Wolfpack.Agent.Roles.Agent.Consume(HealthCheckData message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Agent\Roles\Agent.cs:line 170
+   at Magnum.Pipeline.Segments.MessageConsumerSegment`1.<>c__DisplayClassd`1.<Accept>b__c(T x) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\MessageConsumerSegment.cs:line 61
+   at Magnum.Pipeline.Segments.PipeSegment.<>c__DisplayClass1`1.<Send>b__0(MessageConsumer`1 consumer) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\PipeSegment.cs:line 31
+   at Magnum.Extensions.ExtensionsToEnumerable.Each[T](IEnumerable`1 collection, Action`1 callback) in d:\Home\Magnum\src\Magnum\Extensions\ExtensionsToEnumerable.cs:line 32
+   at Magnum.Pipeline.Segments.PipeSegment.Send[T](T message) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\PipeSegment.cs:line 31
+   at Wolfpack.Core.MagnumMessenger.Wolfpack.Core.Interfaces.IMessenger.Publish(HealthCheckData message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Messenger.cs:line 82
+   at Wolfpack.Core.Messenger.Publish(HealthCheckData message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Messenger.cs:line 38
+   at Wolfpack.Core.Schedulers.HealthCheckIntervalScheduler.Execute() in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Schedulers\HealthCheckIntervalScheduler.cs:line 64
+   at Wolfpack.Core.Schedulers.IntervalSchedulerBase.StartIntervalTask() in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Schedulers\IntervalSchedulerBase.cs:line 56
+   at System.Threading.ThreadHelper.ThreadStart_Context(Object state)
+   at System.Threading.ExecutionContext.runTryCode(Object userData)
+   at System.Runtime.CompilerServices.RuntimeHelpers.ExecuteCodeWithGuaranteedCleanup(TryCode code, CleanupCode backoutCode, Object userData)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean ignoreSyncCtx)
+   at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.ThreadHelper.ThreadStart()
+
+HelpLink: 
+
+
+2011-09-16 15:52:30,812 [17] FATAL Topshelf.Model.ServiceCoordinator [(null)] - An unhandled exception occurred within the service: Wolfpack.Agent.exe
+System.ServiceModel.EndpointNotFoundException: There was no endpoint listening at http://192.168.2.121:802/Wolfpack that could accept the message. This is often caused by an incorrect address or SOAP action. See InnerException, if present, for more details. ---> System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: No connection could be made because the target machine actively refused it 192.168.2.121:802
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Int32 timeout, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   at System.ServiceModel.Channels.HttpOutput.Send(TimeSpan timeout)
+   at System.ServiceModel.Channels.HttpChannelFactory.HttpRequestChannel.HttpChannelRequest.SendRequest(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Dispatcher.RequestChannelBinder.Send(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at Wolfpack.Core.Wcf.IWolfpack.CaptureResult(HealthCheckResult result)
+   at Wolfpack.Core.Wcf.WcfResultPublisher.Publish(HealthCheckResult message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Wcf\WcfPublishers.cs:line 89
+   at Wolfpack.Core.Wcf.WcfResultPublisher.Consume(HealthCheckResult message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Wcf\WcfPublishers.cs:line 95
+   at Castle.Proxies.Invocations.IConsumer`1_Consume.InvokeMethodOnTarget()
+   at Castle.DynamicProxy.AbstractInvocation.Proceed() in e:\OSS.Code\Castle.Core\src\Castle.Core\DynamicProxy\AbstractInvocation.cs:line 144
+   at Wolfpack.Core.Filters.ResultFilterBase.HandleIntercept(IInvocation invocation) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Filters\ResultFilterBase.cs:line 35
+   at Wolfpack.Core.Containers.InterceptorBase.Intercept(IInvocation invocation) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Containers\InterceptorBase.cs:line 25
+   at Castle.DynamicProxy.AbstractInvocation.Proceed() in e:\OSS.Code\Castle.Core\src\Castle.Core\DynamicProxy\AbstractInvocation.cs:line 166
+   at Castle.Proxies.IHealthCheckResultPublisherProxy_5.Consume(HealthCheckResult message)
+   at Magnum.Pipeline.Segments.MessageConsumerSegment`1.<>c__DisplayClassd`1.<Accept>b__c(T x) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\MessageConsumerSegment.cs:line 61
+   at Magnum.Pipeline.Segments.PipeSegment.<>c__DisplayClass1`1.<Send>b__0(MessageConsumer`1 consumer) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\PipeSegment.cs:line 31
+   at Magnum.Extensions.ExtensionsToEnumerable.Each[T](IEnumerable`1 collection, Action`1 callback) in d:\Home\Magnum\src\Magnum\Extensions\ExtensionsToEnumerable.cs:line 32
+   at Magnum.Pipeline.Segments.PipeSegment.Send[T](T message) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\PipeSegment.cs:line 31
+   at Wolfpack.Core.MagnumMessenger.Wolfpack.Core.Interfaces.IMessenger.Publish(HealthCheckResult message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Messenger.cs:line 76
+   at Wolfpack.Core.Messenger.Publish(HealthCheckResult message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Messenger.cs:line 33
+   at Wolfpack.Agent.Roles.Agent.Consume(HealthCheckData message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Agent\Roles\Agent.cs:line 170
+   at Magnum.Pipeline.Segments.MessageConsumerSegment`1.<>c__DisplayClassd`1.<Accept>b__c(T x) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\MessageConsumerSegment.cs:line 61
+   at Magnum.Pipeline.Segments.PipeSegment.<>c__DisplayClass1`1.<Send>b__0(MessageConsumer`1 consumer) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\PipeSegment.cs:line 31
+   at Magnum.Extensions.ExtensionsToEnumerable.Each[T](IEnumerable`1 collection, Action`1 callback) in d:\Home\Magnum\src\Magnum\Extensions\ExtensionsToEnumerable.cs:line 32
+   at Magnum.Pipeline.Segments.PipeSegment.Send[T](T message) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\PipeSegment.cs:line 31
+   at Wolfpack.Core.MagnumMessenger.Wolfpack.Core.Interfaces.IMessenger.Publish(HealthCheckData message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Messenger.cs:line 82
+   at Wolfpack.Core.Messenger.Publish(HealthCheckData message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Messenger.cs:line 38
+   at Wolfpack.Core.Schedulers.HealthCheckIntervalScheduler.Execute() in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Schedulers\HealthCheckIntervalScheduler.cs:line 64
+   at Wolfpack.Core.Schedulers.IntervalSchedulerBase.StartIntervalTask() in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Schedulers\IntervalSchedulerBase.cs:line 56
+   at System.Threading.ThreadHelper.ThreadStart_Context(Object state)
+   at System.Threading.ExecutionContext.runTryCode(Object userData)
+   at System.Runtime.CompilerServices.RuntimeHelpers.ExecuteCodeWithGuaranteedCleanup(TryCode code, CleanupCode backoutCode, Object userData)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean ignoreSyncCtx)
+   at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.ThreadHelper.ThreadStart()
+2011-09-16 15:52:30,875 [113] ERROR Topshelf.Model.ServiceCoordinator [(null)] - Fault on Wolfpack.Agent.exe: Topshelf.Exceptions.TopshelfException
+An unhandled exception occurred within the service: Wolfpack.Agent.exe
+There was no endpoint listening at http://192.168.2.121:802/Wolfpack that could accept the message. This is often caused by an incorrect address or SOAP action. See InnerException, if present, for more details.
+Server stack trace: 
+   at System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   at System.ServiceModel.Channels.HttpOutput.Send(TimeSpan timeout)
+   at System.ServiceModel.Channels.HttpChannelFactory.HttpRequestChannel.HttpChannelRequest.SendRequest(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Dispatcher.RequestChannelBinder.Send(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at Wolfpack.Core.Wcf.IWolfpack.CaptureResult(HealthCheckResult result)
+   at Wolfpack.Core.Wcf.WcfResultPublisher.Publish(HealthCheckResult message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Wcf\WcfPublishers.cs:line 89
+   at Wolfpack.Core.Wcf.WcfResultPublisher.Consume(HealthCheckResult message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Wcf\WcfPublishers.cs:line 95
+   at Castle.Proxies.Invocations.IConsumer`1_Consume.InvokeMethodOnTarget()
+   at Castle.DynamicProxy.AbstractInvocation.Proceed() in e:\OSS.Code\Castle.Core\src\Castle.Core\DynamicProxy\AbstractInvocation.cs:line 144
+   at Wolfpack.Core.Filters.ResultFilterBase.HandleIntercept(IInvocation invocation) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Filters\ResultFilterBase.cs:line 35
+   at Wolfpack.Core.Containers.InterceptorBase.Intercept(IInvocation invocation) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Containers\InterceptorBase.cs:line 25
+   at Castle.DynamicProxy.AbstractInvocation.Proceed() in e:\OSS.Code\Castle.Core\src\Castle.Core\DynamicProxy\AbstractInvocation.cs:line 166
+   at Castle.Proxies.IHealthCheckResultPublisherProxy_5.Consume(HealthCheckResult message)
+   at Magnum.Pipeline.Segments.MessageConsumerSegment`1.<>c__DisplayClassd`1.<Accept>b__c(T x) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\MessageConsumerSegment.cs:line 61
+   at Magnum.Pipeline.Segments.PipeSegment.<>c__DisplayClass1`1.<Send>b__0(MessageConsumer`1 consumer) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\PipeSegment.cs:line 31
+   at Magnum.Extensions.ExtensionsToEnumerable.Each[T](IEnumerable`1 collection, Action`1 callback) in d:\Home\Magnum\src\Magnum\Extensions\ExtensionsToEnumerable.cs:line 32
+   at Magnum.Pipeline.Segments.PipeSegment.Send[T](T message) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\PipeSegment.cs:line 31
+   at Wolfpack.Core.MagnumMessenger.Wolfpack.Core.Interfaces.IMessenger.Publish(HealthCheckResult message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Messenger.cs:line 76
+   at Wolfpack.Core.Messenger.Publish(HealthCheckResult message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Messenger.cs:line 33
+   at Wolfpack.Agent.Roles.Agent.Consume(HealthCheckData message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Agent\Roles\Agent.cs:line 170
+   at Magnum.Pipeline.Segments.MessageConsumerSegment`1.<>c__DisplayClassd`1.<Accept>b__c(T x) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\MessageConsumerSegment.cs:line 61
+   at Magnum.Pipeline.Segments.PipeSegment.<>c__DisplayClass1`1.<Send>b__0(MessageConsumer`1 consumer) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\PipeSegment.cs:line 31
+   at Magnum.Extensions.ExtensionsToEnumerable.Each[T](IEnumerable`1 collection, Action`1 callback) in d:\Home\Magnum\src\Magnum\Extensions\ExtensionsToEnumerable.cs:line 32
+   at Magnum.Pipeline.Segments.PipeSegment.Send[T](T message) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\PipeSegment.cs:line 31
+   at Wolfpack.Core.MagnumMessenger.Wolfpack.Core.Interfaces.IMessenger.Publish(HealthCheckData message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Messenger.cs:line 82
+   at Wolfpack.Core.Messenger.Publish(HealthCheckData message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Messenger.cs:line 38
+   at Wolfpack.Core.Schedulers.HealthCheckIntervalScheduler.Execute() in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Schedulers\HealthCheckIntervalScheduler.cs:line 64
+   at Wolfpack.Core.Schedulers.IntervalSchedulerBase.StartIntervalTask() in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Schedulers\IntervalSchedulerBase.cs:line 56
+   at System.Threading.ThreadHelper.ThreadStart_Context(Object state)
+   at System.Threading.ExecutionContext.runTryCode(Object userData)
+   at System.Runtime.CompilerServices.RuntimeHelpers.ExecuteCodeWithGuaranteedCleanup(TryCode code, CleanupCode backoutCode, Object userData)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean ignoreSyncCtx)
+   at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.ThreadHelper.ThreadStart()
+
+HelpLink: 
+
+

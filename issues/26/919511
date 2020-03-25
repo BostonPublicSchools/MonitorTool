@@ -1,0 +1,19 @@
+{
+  "Name": "HeartbeatSender",
+  "Description": "This check will ping a set of urls (including data apis; use Headers property to control Accept type) and raise notifications if the ping fails or is too slow. You can control the failure threshold using the 'NotificationThreshold' property of the configuration; set it to the number of milliseconds that the endpoint must respond by.",
+  "InterfaceType": null,
+  "PluginType": "Wolfpack.Core.Checks.UrlPingCheck, Wolfpack.Core",
+  "ConfigurationType": "Wolfpack.Core.Checks.UrlPingCheckConfig, Wolfpack.Core",
+  "Data": "{\"ContentRegex\":\"Content Regex or blank\",\"IsAjaxCall\":false,\"UseDefaultCredentials\":true,\"Urls\":[\"http://localhost:200\"],\"UserAgentString\":\"CHANGEME or leave blank\",\"Headers\":{\"Accept\":\"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\"},\"PostData\":\"HeartBeat: NumMachine\",\"NotificationThreshold\":5000,\"NotificationMode\":\"StateChange\",\"FriendlyId\":\"HeartbeatSender\",\"DelayFirstCheck\":\"5\",\"Enabled\":true}",
+  "Tags": [
+    "HealthCheck",
+    "Url",
+    "Ping",
+    "Threshold"
+  ],
+  "Link": null,
+  "RequiredProperties": {
+    "Name": "HeartbeatSender",
+    "Scheduler": "EveryMinute"
+  }
+}

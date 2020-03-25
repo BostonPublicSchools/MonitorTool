@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "1235271",
+    "ThreadId": "542591",
+    "Html": "I notice this configuration in some of your components, so I tried to use it in one of mine.  Is that a parameter I have to handle in my own components, or is that something that is read/implemented by the wolfpack framework?\r<br />\n<br />\nI added it and set it to true in my check component and it still seems to send out an email every hour, no matter what.\r<br />\n<br />\nThanks,\r<br />\n<br />\nRon<br />\n",
+    "PostedDate": "2014-04-17T18:18:48.923-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1235638",
+    "ThreadId": "542591",
+    "Html": "Hi,\r<br />\n<br />\nIn v2.x this is a feature that was added to individual checks as required so it's not something in the framework. However there is a feature called <a href=\"https://wolfpack.codeplex.com/wikipage?title=Result%20Publisher\" rel=\"nofollow\">Result Publisher Filters</a> that could help you out. You can put a filter in front of a publisher (eg your email publisher) and set it to only publish if the result is failed. The config\\filter.castle.config file has a couple of example filters installed - just customise these to target your email publisher and the friendly name of the check (or * for all) that you want to only receive emails for if it fails.\r<br />\n<br />\nIn v3 (and after a lot of feedback about how notifications work) I have added formal support for controlling and shaping notifications via the new <a href=\"https://wolfpack.codeplex.com/wikipage?title=Wolfpackv3FeaturesNotification\" rel=\"nofollow\">Notification Hub</a> feature. All v3 checks that come built into Wolfpack core support Notification Hub and I have exposed framework interfaces to allow your custom checks to hook into this and also create additional &quot;Notification Filters&quot;...plug-ins to the hub that can contain any logic you wish to control the flow of notifications to the publishers....eg: mute notifications on Christmas day! When you configure a v3 check in the UI you just set the NotificationMode property to the style of notification you want, simple as that.\r<br />\n<br />\nv3 will go live in the next week so hopefully you can start to evaluate and leverage these new features!\r<br />\n<br />\nJ<br />\n",
+    "PostedDate": "2014-04-19T01:06:23.443-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1236189",
+    "ThreadId": "542591",
+    "Html": "Thank you J!  I appreciate the thorough response.<br />\n\r<br />\nI'm looking forward to v3 next week, it really sounds like it's gonna a nice big step forward!<br />\n",
+    "PostedDate": "2014-04-21T08:36:54.49-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

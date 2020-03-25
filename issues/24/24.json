@@ -1,0 +1,60 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": "2014-08-01T07:07:39.823-07:00",
+    "CommentCount": 4,
+    "Custom": null,
+    "Description": "I set up an URL check for some of my sites, saved it and restarted Wolfpack. The service logged an exception for the \"Accept\" header as follows:\r\n\r\n```\r\n2014-07-24 11:37:02,937 [       11] ERROR                  Wolfpack - Wolfpack Component Failure. IncidentId:=1c5389ec-bd9e-41d8-a243-92463de56db6; Name:=grossweber.com Web; Details:=System.ArgumentException: The 'Accept' header must be modified using the appropriate property or method.\r\nParameter name: name\r\n   at System.Net.WebHeaderCollection.ThrowOnRestrictedHeader(String headerName)\r\n   at System.Net.WebHeaderCollection.Add(String name, String value)\r\n   at Wolfpack.Core.Checks.UrlPingCheck.<Execute>b__2(String url) in c:\\Projects\\Wolfpack\\Releases\\v3.0.25\\Source\\Wolfpack.Core\\Checks\\UrlPingCheck.cs:line 154\r\n   at System.Collections.Generic.List`1.ForEach(Action`1 action)\r\n   at Wolfpack.Core.Checks.UrlPingCheck.Execute() in c:\\Projects\\Wolfpack\\Releases\\v3.0.25\\Source\\Wolfpack.Core\\Checks\\UrlPingCheck.cs:line 136\r\n   at Wolfpack.Core.Schedulers.HealthCheckIntervalScheduler.Execute() in c:\\Projects\\Wolfpack\\Releases\\v3.0.25\\Source\\Wolfpack.Core\\Schedulers\\HealthCheckIntervalScheduler.cs:line 55\r\n```\r\n\r\nHere's the config (I didn't touch the headers part):\r\n\r\n```\r\n{\r\n  \"Name\": \"grossweber.com Web\",\r\n  \"Description\": \"This check will ping a set of urls (including data apis; use Headers property to control Accept type) and raise notifications if the ping fails or is too slow. You can control the failure threshold using the 'NotificationThreshold' property of the configuration; set it to the number of milliseconds that the endpoint must respond by.\",\r\n  \"InterfaceType\": null,\r\n  \"PluginType\": \"Wolfpack.Core.Checks.UrlPingCheck, Wolfpack.Core\",\r\n  \"ConfigurationType\": \"Wolfpack.Core.Checks.UrlPingCheckConfig, Wolfpack.Core\",\r\n  \"Data\": \"{\\\"ContentRegex\\\":\\\"GROSSWEBER\\\",\\\"IsAjaxCall\\\":false,\\\"UseDefaultCredentials\\\":false,\\\"Urls\\\":[\\\"http://grossweber.com\\\"],\\\"UserAgentString\\\":\\\"\\\",\\\"Headers\\\":{\\\"Accept\\\":\\\"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\\\"},\\\"PostData\\\":\\\"\\\",\\\"NotificationThreshold\\\":5000,\\\"NotificationMode\\\":\\\"StateChange\\\",\\\"FriendlyId\\\":\\\"grossweber.com Web\\\",\\\"Enabled\\\":true}\",\r\n  \"Tags\": [\r\n    \"HealthCheck\",\r\n    \"Url\",\r\n    \"Ping\",\r\n    \"Threshold\"\r\n  ],\r\n  \"Link\": null,\r\n  \"RequiredProperties\": {\r\n    \"Name\": \"grossweber.com Web\",\r\n    \"Scheduler\": \"EveryMinute\"\r\n  }\r\n}\r\n```",
+    "LastUpdatedDate": "2014-08-01T07:07:39.823-07:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "wolfpack",
+    "ReportedDate": "2014-07-24T02:40:41.03-07:00",
+    "Status": {
+      "Name": "Closed",
+      "Id": 4
+    },
+    "ReasonClosed": {
+      "Name": "Fixed"
+    },
+    "Summary": "URL Check logs exceptions w/ Accept header",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 1,
+    "Id": 24
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "Ok thanks for letting me know, will take a look",
+      "PostedDate": "2014-07-24T03:45:02.653-07:00",
+      "Id": 153363
+    },
+    {
+      "Message": "If you remove the Accept header (added by default to demonstrate a non-html request) it should work.\n\nThe problem is that certain headers are protected and must be set via dedicated methods (http://msdn.microsoft.com/en-us/library/system.net.httpwebrequest.headers.aspx, I will fix tonight). \n\nHTH",
+      "PostedDate": "2014-07-24T04:15:02.79-07:00",
+      "Id": 153365
+    },
+    {
+      "Message": "Fix now in source control - will release binaries later today\n\nJ",
+      "PostedDate": "2014-07-24T05:30:49.997-07:00",
+      "Id": 153370
+    },
+    {
+      "Message": "Thanks!",
+      "PostedDate": "2014-07-24T06:27:37.67-07:00",
+      "Id": 153376
+    }
+  ]
+}

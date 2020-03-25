@@ -1,0 +1,66 @@
+[
+  {
+    "Id": "1083775",
+    "ThreadId": "454250",
+    "Html": "I got latest from the source but I am wondering if you have some documentations to help me get started, specifically, I am looking for SQL check. I can use the current release version but I want to get familiar myself with this release so I may help out a bit. <br />\n",
+    "PostedDate": "2013-08-22T11:11:00.523-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1084082",
+    "ThreadId": "454250",
+    "Html": "Hi,\r<br />\n<br />\nI really need to make a big push with v3 and get this to release - including the documentation!\r<br />\n<br />\nv3 SqlCheck exists but having just looked at the code it doesn't implement the UI discovery interface so this makes it difficult to configure from the UI. \r<br />\n<br />\nThe main change with v3 SqlCheck is that it allows you to capture the SELECT output used as an &quot;artifact&quot; and associate it with the alert - eg: a CSV file - this file can be downloaded from the API if you want to inspect the data that tripped the alert.\r<br />\n<br />\nI'll patch the SqlCheck to include the configuration discovery interface - this at least allows you to simply configure the check from the Wolfpack web UI. I'll also put a help section in on the &quot;artifacts&quot; feature plus create a help page as for this check - I'll eventually add one for each check.\r<br />\n<br />\nCheers,\r<br />\n<br />\nJames<br />\n",
+    "PostedDate": "2013-08-23T03:34:58.893-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1084083",
+    "ThreadId": "454250",
+    "Html": "I've started the docs for this check here - will complete this later today\r<br />\n<br />\n<a href=\"https://wolfpack.codeplex.com/wikipage?title=HealthCheckSqlServer-v3\" rel=\"nofollow\">Sql Check - v3</a>\r<br />\n<br />\nJ<br />\n",
+    "PostedDate": "2013-08-23T03:41:38.3-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1084091",
+    "ThreadId": "454250",
+    "Html": "I have a chance to play with this yesterday.  I learned it by downloaded the current version to see the configuration of other type of checks.  I think it's very straight forward but the auto discovery of castle make it difficult.\r<br />\n<br />\nFirst suggestion I have is to include the email publisher as the default instead of growl.  Most enterprise teams use email system as a form of notification.  Most people don't have growl and they have to install it to see the notifications in action.\r<br />\n<br />\nSecond suggestion is the project depending on too many third party packages, therefore the download is huge.  It's a simple task of monitor why depend on so many?  Can we just streamline and bring that into the core instead?  Any option features would be in the contrib package.  This suggestion is not critical but I thought it would be nice.<br />\n",
+    "PostedDate": "2013-08-23T03:58:22.113-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1084344",
+    "ThreadId": "454250",
+    "Html": "I was trying to add the sqlserver.castle.config file to the Checks folder by copying the config file from the old version of wolfpack.  However, it doesn't work.  Can you please comments on this?\r<br />\n<br />\nAlso, in the new version you use json format for the config file.  Can you make some sample config files available in this format?  Thank you.<br />\n",
+    "PostedDate": "2013-08-23T14:45:37.803-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1227587",
+    "ThreadId": "454250",
+    "Html": "First ... thanks James you rock. I've downloaded v3 and can't wait to kick the tires ... esp, periscope.\r<br />\n<br />\nI've used graylog2 and kibana and both are nice ... but a I ran across this open source dashboard that looks so cool, and I am going to try and hook it up: \r<br />\n<br />\n<a href=\"https://github.com/Anephenix/dashku\" rel=\"nofollow\">https://github.com/Anephenix/dashku</a> <br />\n",
+    "PostedDate": "2014-03-27T15:23:07.437-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1227595",
+    "ThreadId": "454250",
+    "Html": "@packetstorm - thanks dude! and thanks for the tip off around dashku - I'm trying hard not to reinvent the dashboard wheel and periscope is a pet project to put some .Net skin in the OSS dashboard game - contrib projects hooking into cool stuff like dashku always welcome! :)<br />\n<br />\nJ<br />\n",
+    "PostedDate": "2014-03-27T15:51:18.207-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1227800",
+    "ThreadId": "454250",
+    "Html": "@packetstorm - I'm just about to create a new contrib project called Wolfpack.Contrib.DashboardAdapters that will contain the Wolfpack/Periscope adapters to post Wolfpack Notifications to Periscope....It can also serve as project home for other adapters like Kibana and Dashku.\r<br />\n<br />\nI'm in the process of cleaning up the contrib project and bringing it up to v3 spec and will check this and the new DashboardAdapters project in ASAP.\r<br />\n<br />\nJ<br />\n",
+    "PostedDate": "2014-03-28T06:32:23.47-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

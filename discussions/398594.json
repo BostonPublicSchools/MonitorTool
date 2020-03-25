@@ -1,0 +1,130 @@
+[
+  {
+    "Id": "923796",
+    "ThreadId": "398594",
+    "Html": "\r\n<p>This discussion is designed to help shape the next major release of Wolfpack and I would love to hear your ideas, gripes, thoughts on what it should consist of.</p>\r\n<p>I have some core thoughts on it and will detail them here over the next few weeks, suffice to say the main thinking behind this release is &quot;back to basics&quot;. I want to fragment the &quot;core&quot; and slim it down, making some of the components optional installs,\r\n some of them will be culled or replaced with enhanced versions. The Geckoboard Activity and the communications components (WCF and NServiceBus) will get the majority of the attention.</p>\r\n<p>Moving out of core (becoming optional installs via contrib project)</p>\r\n<ul>\r\n<li>Bus (NServiceBus) (possibly remove altogether) </li><li>Growl </li><li>Geckoboard </li><li>LogParser </li><li>Owl </li><li>HomeAutomation </li><li>BuildAnalytics </li><li>AppStats </li></ul>\r\n<p>Replacing</p>\r\n<ul>\r\n<li>WCF Publisher -&gt; replace with ServiceStack api to support offline mode and security and razor mvc pages to show configuration and recent alerts etc\r\n</li></ul>\r\n<p>Including in Core (as dependent NuGet packages when installed via chocolatey)</p>\r\n<ul>\r\n<li>Contrib.Console </li><li>Contrib.Email </li></ul>\r\n<p>Over to you...thoughts, ideas on what you would like to see in v3?</p>\r\n<p>Cheers,</p>\r\n<p>James</p>\r\n",
+    "PostedDate": "2012-10-08T22:42:53.903-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "924252",
+    "ThreadId": "398594",
+    "Html": "<p>A big issue I am trying to deal with is log management. Not just monitoring for certain criteria, but&nbsp;consolidating&nbsp;and making logs available to other departments. I think a Log Tail Activity (Event Logs, text file, etc) paired with a Publish (SQL, Loggly, HTTP Post) would facilitate that.</p>\r\n<p>I think one feature that's lacking attention in the current version is Alert management. I currently have Wolfpack watching about 100 web URLs every 90 seconds. If the host running those tests loses connectivity or something and all those alert every 90 seconds, my inbox is going to explode. Most monitoring solutions have some escalation functionality and at&nbsp;minimum&nbsp;an option to notify on change of status only, not every failure. It might be possible to work something like that into 2.x, but I think it would be nearly impossible to manage.</p>\r\n<p>Finally, this may be a&nbsp;separate&nbsp;project, but I've been thinking of employing the PowerShell DSL solution Doug Finke (<a href=\"http://blogs.technet.com/b/heyscriptingguy/archive/2011/02/17/use-powershell-to-simplify-working-with-xml-data.aspx\">http://blogs.technet.com/b/heyscriptingguy/archive/2011/02/17/use-powershell-to-simplify-working-with-xml-data.aspx</a>)&nbsp;has described for building and maintaining the Wolfpack XML config files.</p>",
+    "PostedDate": "2012-10-09T13:00:59.32-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "924273",
+    "ThreadId": "398594",
+    "Html": "<p>Hi, thanks for the feedback and these are very good points.</p>\r\n<p>1) Alert management - yup, this is a serious problem in the current version. There is a new feature called \"Notification Modes\" that is code complete and already committed to the source repo and it will be released in v2.5 next. Essentially this allows you to inject logic into the alert path and is extensible so you can drop in your own logic in to control things too. I am in the process of replacing the old \"PublishOnlyIfFailure\" config switch (bool) that many checks have with \"NotificationMode\" (string) and this setting connects you to the associated NotificationMode plugin. Check out Core\\Filters\\Notification in the source - there are plugins for \"FailureOnly\", \"SuccessOnly\", \"StateChange\", \"StateChangeNag\". StateChange will only generate an alert when the state flips from one to another, even if it remains in a failed state, the \"Nag\" version will continue to send alerts if the state remains failed and even allows you to define the interval they appear. At the moment I have converted only one check to use NotificationMode, WmiProcessRunningCheck but am busy doing the rest as we speak.</p>\r\n<p>2) Config...yes, always a pain and on the drawing board are plans for some sort of configuration UI app. I am also thinking of making the configuration independent of the IoC container (it's castle config xml) so it can be make much simpler. I think this would be a vital step so that alternative configuration mechanisms could be used. I'll take a look at the link as I am keen to improve this area and this could be a quick win.</p>\r\n<p>Cheers, appreciate your input!</p>\r\n<p>James</p>",
+    "PostedDate": "2012-10-09T13:33:07.2-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "924520",
+    "ThreadId": "398594",
+    "Html": "<p>Regarding the consolidated/tail log feature - so it periodically runs&nbsp;a logparser query capturing aggregated data over some range (last&nbsp;n/timespan) and pushes an alert if any rows are returned - this alert&nbsp;also contains some identifier/link to allow you to reconnect with the&nbsp;data later. The actual data captured by the query is stored and&nbsp;referenced by the identifier embedded in the alert.</p>\r\n<p><span>To view the data it could accessed as a stream via a web api method or&nbsp;</span><span>a simple html viewer page. Finally I guess there would need to be some&nbsp;</span><span>management api to allow deletion of stored data or some periodic&nbsp;</span><span>cleanup plugin executing a retention policy.</span><br /><br /><span>Is that getting close to what you need?</span></p>",
+    "PostedDate": "2012-10-10T00:34:27.263-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "924645",
+    "ThreadId": "398594",
+    "Html": "<p>I guess to be more clear I should have just said I would love to have LogStash like functionality in Wolfpack.</p>\r\n<p>What you described is pretty much it, but having a&nbsp;dependency&nbsp;on LogParser limits what log formats you can deal with. For example, it's impossible to consume a Log4Net multi-line log entry with a stack-trace. I guess if there was a LogReader base class that you could build on and use LogParser where it works, that could work.</p>\r\n<p>It might make this overly complicated, but Check plugins that watch this stream could help Woflpack not double-dip into the source logs to read the rows and do a scalar check.</p>\r\n<p>I think a cleanup plugin would be sufficient for managing the data growth, but personally, I would probably pump the data into some log management application like Loggly.com that would deal with the data for me. I've just found that most log collection applications/plugins suck for Windows hosts because they're usually ported from some *nix platform.</p>\r\n<p>In the end, what I'm looking for is an easy way to aggregate logs from different machines into an archive that I could mine for business&nbsp;intelligence.&nbsp;</p>",
+    "PostedDate": "2012-10-10T05:57:14.667-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "929496",
+    "ThreadId": "398594",
+    "Html": "<p>So, I think this is a pretty cool project.&nbsp; It has a lot of interesting capabilities.&nbsp; The current release, to me, has something of an identity crisis.&nbsp; When I think of an agent, I think of something that specializes in local knowledge, i.e. running processes, file systems information, local performance metrics.&nbsp;&nbsp; Wolfpack does this, but many of its health checks can allow an agent to know things about its environment that definitely aren't local.&nbsp; I could use the database check to monitor a local SQL table, but I can also use it to monitor a remote SQL table.&nbsp; &nbsp;That's not a capability I typically associate with an agent.&nbsp; Agents typically report in to a \"home base\" that provides things like aggregation, administration, and the larger system or enterprise knowledge that an agent lacks.&nbsp;&nbsp;&nbsp; As I read Wolfpack it really doesn't structure itself heirarchically, but in a more peer to peer fashion.&nbsp;&nbsp; Again, that flexibility is appealing, but its going to be hard to grow in both those directions at once.</p>\r\n<p>One of the most intriguing things about the solution to me is that the generic nature of the health checks makes it possible to extend the monitoring concepts to business \"health\" as well as IT \"health\".&nbsp; Particularly for smaller organization with SQL based ERP systems (or larger organizations with relatively inflexible SQL based ERP systems) Wolfpack can detect problematic business conditions and surface them for proactive attention.&nbsp; For example, \"did we just receive an invoice for a service that exceeded our estimate on the price?\"&nbsp; Or if you have legacy application that creates data integrity issues (i.e orphan headers or orphan lines), you could detect those issues and address them before they screw up your end of month processing.&nbsp;&nbsp;</p>\r\n<p>To be useful in this regard, Wolfpack would need to be much \"smarter\" in terms of how it lets you process events.&nbsp; The Growl interface is very nice, but it assumes a one to one relationship between Agents and Growl Instances.&nbsp; It would be nice if I could set it up so that multiple instances could be alerted.&nbsp; But that's just the tip of the iceberg.&nbsp; If we're going to create a rich landscape of alerts, we probably want a way to set up subscriptions and maybe even rules to help further define what gets fully surfaced and what just happens.</p>\r\n<p>Of course, it's perfectly legitimate to say that this is a good idea, but not the scope of the product, but rather the scope of some other related product.&nbsp; If that's the case, I'd keep the publishers pretty simple.&nbsp; This would define the role of the agent as something that aggregates and standardizes information from different sources, but is really unconcerned with if or how the information is surfaced, beyond providing some hooks into mechanisms (dbs, buses, etc.) that are commonly used to preserve information.</p>\r\n<p>Thanks for the opportunity to chime in....</p>",
+    "PostedDate": "2012-10-19T09:19:57.05-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "931998",
+    "ThreadId": "398594",
+    "Html": "<p>@<a class=\"UserProfileLink\" href=\"http://www.codeplex.com/site/users/view/rgarch\">rgarch</a>&nbsp;- firstly, thanks for the input...really appreciated...and there is a lot to digest here with some very valid points. To address the identity crisis (of which I agree it has to a degree) I want to strip Wolfpack back and provide plugins that better delineate the roles that Wolfpack can play.</p>\r\n<p>There will certainly be better support for configuration (GUI and an API) and an extensible web api to interact with instances and for data exchange - this would also support visualisation plugins. I already have a demo SignalR plugin that broadcasts alerts/messages and this will become the default message distribution mechanism - this offers a lot of rich possibilities for visualisation and communication.</p>\r\n<p>I will also be making a much better effort with the \"AppStats\" feature - this is the feature that currently allows you to monitor \"<em>business health</em>\"&nbsp;</p>\r\n<p>BTW: Regarding the growl interface \"<em>It would be nice if I could set it up so that multiple instances could be alerted</em>\" - you can forward growl notifications onto as many (LAN) connected PC's (also running growl) as you like and set up rules for which message types go where...you can also forward to your (or others!) smartphones too.</p>\r\n<p>Thanks,</p>\r\n<p>James</p>",
+    "PostedDate": "2012-10-24T13:59:24.957-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "934308",
+    "ThreadId": "398594",
+    "Html": "<p>How about <a href=\"https://ifttt.com/wtf\" target=\"_blank\">IFTTT</a> integration? Basically Wolfpack would need to publish alerts via Dropbox or RSS - these act as triggers to IFTTT actions - eg: Wolfpack Dropbox publisher uploads the alert (serialised as JSON/XML/Text whatever) and you then create a recipe to do something with it!</p>\r\n<p>Just a thought....!</p>",
+    "PostedDate": "2012-10-30T10:09:21.967-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "960727",
+    "ThreadId": "398594",
+    "Html": "\r\n<p>Ok - an update on v3...it's going well!</p>\r\n<p>I hadn't intended for this to be such a big change internally but alas the best laid plans etc....so far I have....</p>\r\n<ul>\r\n<li>Revamped the publishing system.&nbsp;\r\n<ul>\r\n<li>On the publisher side I have consolidated the message type into a universal format &quot;NotificationEvent&quot; - this means you only need to implement a single publisher type (as opposed to the existing AgentStart and HealthCheckResult).&nbsp;\r\n</li><li>Information to be published is strongly typed and is interchangeable with a NotificationEvent (via an INotificationEventCoreProperties interface). This means that NoSql stores like Mongo/Raven can simply store the message itself.\r\n</li><li>Messaging is now extensible - you can easily publish ANY type of message via the same publishers.\r\n</li></ul>\r\n</li><li>New NotificationHub component provides an extensible/plug-in based &quot;hub&quot; that all HealthCheck alerts are routed through.&nbsp;\r\n<ul>\r\n<li>The plug-in system allows for rich logic to be injected to decide whether a healthcheck alert should be published.\r\n</li><li>There are plug-ins to cover the main filtering use-cases - eg: only publish alerts from a healthcheck based on its result.\r\n</li><li>Sophisticated plug-ins to shape and control a HealthChecks alert output\r\n<ul>\r\n<li>Alerts can be set to publish only on a state change </li><li>Alerts rate can be throttled (so you don't flood your publishers with the same alert). Custom throttle maps also possible by implementing your own plug-in.\r\n</li></ul>\r\n</li></ul>\r\n</li><li>Simplified the growl publisher\r\n<ul>\r\n<li>Replaced Growl &quot;Finalisers&quot; with a simplified &quot;Formatters&quot; implementation. </li><li>Fully separated the formatting logic from the publisher into the new formatters.\r\n</li></ul>\r\n</li><li>New Artifacts feature - support for large datasets to be associated to a notification.\r\n<ul>\r\n<li>HealthChecks can now generate large datasets that support the Notification and this data can be persisted independently - eg: LogParser check can now create an artifact out of the actual report data that it created to generate the notification.\r\n</li><li>The notification can contain link to download the artifact (via new WebService API call, below)\r\n</li><li>Plug-in architecture allows you to provide custom artifact repositories eg: database)\r\n<ul>\r\n<li>Currently supported is a &quot;FileSystem&quot; artifact repository - artifacts are saved to disk file and indexed by Notification Id (guid).\r\n</li><li>Plug-ins to serialise/deserialise the data to/from CSV and JSON format exist.&nbsp;\r\n</li></ul>\r\n</li></ul>\r\n</li><li>New WebService API (based on ServiceStack)\r\n<ul>\r\n<li>Core Wolfpack API provides methods to...\r\n<ul>\r\n<li>Get Wolfpack Status (see what plug-ins are loaded, unhealthy, when it started etc)\r\n</li><li>Publish NotificationEvents to (when agent is acting a server in a distributed layout)\r\n</li><li>Download Artifacts (just provide the Notification Id) </li><li>ATOM feed of alerts (work in progress) </li></ul>\r\n</li><li>Razor views supported </li><li>Can be secured using HTTPS (and credentials) </li><li>Receive Notification method has an extensible plug-in pipeline architecture\r\n<ul>\r\n<li>Plug-ins for de-duplicating messages and handling message staleness </li><li>You can create custom plug-ins to enrich this &quot;message received&quot; pipeline </li><li>Client component to publish to the webservice is also plug-in based &amp; robust - handles &quot;no connection&quot; to server and the entire &quot;strategy&quot; of how messages are delivered to the server agent can be customised.\r\n</li></ul>\r\n</li><li>Extensible - you can create your own ServiceStack service plug-ins and Razor views and these will operate alongside the core Wolfpack API.\r\n<ul>\r\n<li>eg: Build custom dashboards in HTML :) </li></ul>\r\n</li></ul>\r\n</li><li>Removed several projects and features from &quot;Core&quot; Wolfpack solution.\r\n<ul>\r\n<li>LogParser project relocated to wolfpackcontrib (optional download). </li><li>Geckoboard project relocated to wolfpackcontrib (optional download). </li><li>AppStats project (possible relocation to wolfpackcontrib) </li><li>BuildAnalytics project relocated to wolfpackcontrib (optional download). </li><li>HomeAutomation and Owl projects relocated to wolfpackcontrib (optional download).\r\n</li><li>WCF Publisher/Bridge dropped&nbsp;(in favour of the new WebService api/publisher)\r\n</li><li>NServiceBus support has been dropped as a publisher (in favour of the new WebService api/publisher).\r\n<ul>\r\n<li>Support for NServiceBus orientated checks remains in the wolfpackcontrib project\r\n</li></ul>\r\n</li></ul>\r\n</li><li>I've also started work on a project to extract all the Geckoboard related code into a new project that will provide a general purpose .Net api to Geckoboard and I'll be creating a new Wolfpack contrib project to host all the Geckoboard Wolfpack functionality.\r\n<ul>\r\n<li>Support for Geckoboard data push will be included </li></ul>\r\n</li></ul>\r\n<p>&nbsp;</p>\r\n<p>As this is a pretty huge change to the internal workings I am going through a stabilisation period - then it will be on to fixing up all the contrib plug-ins (and associated documentation) - a priority is also completing the (alpha) SignalR plug-in to broadcast\r\n notifications to all connected clients.</p>\r\n<p>More updates soon...!</p>\r\n",
+    "PostedDate": "2012-12-20T02:43:32.133-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "962109",
+    "ThreadId": "398594",
+    "Html": "\r\n<p><span style=\"font-size:10pt\">Fantastic stuff. </span></p>\r\n<p>Given the expansion in customization, did you make any progress on config management? How much customization can be manipulated through config files versus writing compiled plug-ins?</p>\r\n<p><span style=\"font-size:10pt\">Do you feel like you're nearing a beta stage? I'd like to start getting my head around this new architecture.</span></p>\r\n",
+    "PostedDate": "2012-12-20T07:51:59.513-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "962512",
+    "ThreadId": "398594",
+    "Html": "\r\n<p>One of the items on the todo list (https://trello.com/b/8gto1kYr) is to diagram the internal architecture - this should clearly illustrate the internal flow and extension/interception/customisation points available.</p>\r\n<p>Should have a stable build in the next day or two and would welcome some additional testing.</p>\r\n<p>On the config front I have some ideas but nothing concrete yet - I'm split between static configuration (eg: UI to change config files, restart the app) and dynamic - building in a mechanism to push config to a live running service (no restart required)\r\n - pro's and con's on both sides....and no obviously better approach so opinions/options welcome on this!</p>\r\n",
+    "PostedDate": "2012-12-20T09:22:31.05-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "983077",
+    "ThreadId": "398594",
+    "Html": "\r\n<p>Another quick update,</p>\r\n<p>The core notification/messaging changes are complete and running well. Further simplifications have been possible so that ALL notifications (health checks, agent start) are routed via the NotificationHub component - this ensures a consistent route from creating\r\n a notification to its actual delivery to the publisher plug-ins and means you can attach custom plugins to intercept the message and run any logic you like to determine whether the message should actually be published.</p>\r\n<p>I have also started work on a configuration feature. Highlights are...</p>\r\n<ul>\r\n<li>Abstraction of the configuration definition - a plugin/repository pattern is used to load configuration definitions (currently file-system supported)...but this means you can store your configuration in any format with any persistence mechanism (eg: DB,\r\n spreadsheet). </li><li>Web API to interact/control the configuration - create, modify, remove configuration via JSON/REST calls.\r\n</li><li>Configuration Catalogue - plugins can advertise their configuration, these allow you to create new instances from these &quot;template&quot; configurations.\r\n</li></ul>\r\n<p>More to follow....</p>\r\n",
+    "PostedDate": "2013-01-04T08:11:21.187-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "993632",
+    "ThreadId": "398594",
+    "Html": "\r\n<p>I've got most of the major new features working now - there is a lot of tidy up to do on the config side of things - essentially porting all the existing checks/publishers etc.</p>\r\n<p>One major new feature is a SignalR activity - alerts are &quot;realtime&quot; broadcast to all connected clients...here is a screenshot of how a notification looks via the Activity tab in the new Wolfpack Web Interface (displayed on an iPhone)</p>\r\n<p><a href=\"https://twitter.com/followjimbobdog/status/296000538946961408/photo/1\" target=\"_self\">https://twitter.com/followjimbobdog/status/296000538946961408/photo/1</a></p>\r\n<p>...and one of the Status screen...</p>\r\n<p><a href=\"https://twitter.com/followjimbobdog/status/294920434288312320/photo/1\" target=\"_self\">https://twitter.com/followjimbobdog/status/294920434288312320/photo/1</a></p>\r\n<p>I hope to get this into a decent enough shape for checking into the repository this weekend.</p>\r\n",
+    "PostedDate": "2013-01-29T06:12:45.963-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "993856",
+    "ThreadId": "398594",
+    "Html": "\r\n<p>Images look great, I really welcome another way to interact with the agent / alerts. Using Growl works out OK and enables one to pull things together and even forward to another system, but it also requires that you have a user logged in to that system weather\r\n you are there in front of the term or not. Not an optimal setup.</p>\r\n<p>Also I am really looking forward to revamping my monitoring setup using the new features around alert throttling and logic.</p>\r\n<p>The config interface/UI sounds really promising. I am hoping I am reading it as you intended. Sounds like the UI will be able to take the plugin that I build and understand the UI elements needed to configure it. Of course my plugin has to do a good job\r\n of offering up the definitions as well. This will put the pressure on the plugin developer to define the config well.</p>\r\n<p>Your efforts are much appreciated, Keep sloc-in away.</p>\r\n",
+    "PostedDate": "2013-01-29T13:33:49.433-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "993874",
+    "ThreadId": "398594",
+    "Html": "\r\n<p>Hi,</p>\r\n<p>Yeh - the new NotificationHub addresses a long term weakness of Wolfpack - it allows for all messages to be intercepted and plugins can decide whether the message should actually be published or not - the built in ones should take care of most scenarios\r\n but you can roll-you own to customise the logic exactly.</p>\r\n<p>The config/ui is built on top of a ServiceStack api - the idea being that others can provide alternative implementations or you can even extend the api or web pages (think dashboard, graphs etc). It sounds like you have the right end of the stick though\r\n - you can provide an implementation of ISupportConfigurationDiscovery that provides a descriptor entity that effectively &quot;advertises&quot; your plugin configuration and makes it visible to the UI/api. The bit I am actually working on at the moment is the UI for\r\n creating and editing new plugin instances.</p>\r\n<p>The biggest challenge will be refreshing all the docs!</p>\r\n<p>Cheers,</p>\r\n<p>James</p>\r\n",
+    "PostedDate": "2013-01-29T14:15:12.823-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1006516",
+    "ThreadId": "398594",
+    "Html": "A first cut of the new core source has been uploaded to the repository and I've started to put some documentation together here: <a href=\"http://wolfpack.codeplex.com/wikipage?title=Wolfpackv3Docs\" rel=\"nofollow\">http://wolfpack.codeplex.com/wikipage?title=Wolfpackv3Docs</a>\r<br />\n<br />\nAs I progress further with it I'll create more &quot;Alpha Release Notes&quot; so you can experiment with the source.<br />\n",
+    "PostedDate": "2013-02-25T12:51:56.683-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

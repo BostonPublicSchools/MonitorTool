@@ -1,0 +1,110 @@
+[
+  {
+    "Id": 3,
+    "Title": "Loading Agent profiles could be moved to MEF"
+  },
+  {
+    "Id": 5,
+    "Title": "Access to the path '\\\\tsclient\\v\\wolfpackdata' is denied."
+  },
+  {
+    "Id": 6,
+    "Title": "Publisher Agent Crash when WCF Service Host is not present"
+  },
+  {
+    "Id": 7,
+    "Title": "userAgent String needed in URLping"
+  },
+  {
+    "Id": 8,
+    "Title": "Support for calculated value in MinDateMod of IISLogParserCheckConfig"
+  },
+  {
+    "Id": 9,
+    "Title": "Criteria for FileInfoCheck"
+  },
+  {
+    "Id": 10,
+    "Title": "Exception on Starting Agent on Windows Server 2008"
+  },
+  {
+    "Id": 11,
+    "Title": "SQL Azure Table create failure"
+  },
+  {
+    "Id": 12,
+    "Title": "Sql schema for notification database"
+  },
+  {
+    "Id": 13,
+    "Title": "Restart function not working (v3)"
+  },
+  {
+    "Id": 14,
+    "Title": "FolderLocation on FolderInfoCheck error (v3)"
+  },
+  {
+    "Id": 15,
+    "Title": "Support queue names with backslashes and system queues (v3)"
+  },
+  {
+    "Id": 16,
+    "Title": "SSL check does not take threshold into account"
+  },
+  {
+    "Id": 17,
+    "Title": "Wolfpack.Contrib.Publishers.Email installs Omu.ValueInjecter 2.3.0, needs 2.3.3"
+  },
+  {
+    "Id": 18,
+    "Title": "Support HTML + text-only emails with Gmail"
+  },
+  {
+    "Id": 19,
+    "Title": "Support SSL/TLS email hosts"
+  },
+  {
+    "Id": 20,
+    "Title": "SSL certificates check does not honor config name in e-mails"
+  },
+  {
+    "Id": 21,
+    "Title": "Make it possible to access a notification's Data in e-mail templates"
+  },
+  {
+    "Id": 22,
+    "Title": "Publish DiskSpaceCheck to SQL Server"
+  },
+  {
+    "Id": 23,
+    "Title": "ServiceStateCheck fails when agent runs as a service"
+  },
+  {
+    "Id": 24,
+    "Title": "URL Check logs exceptions w/ Accept header"
+  },
+  {
+    "Id": 25,
+    "Title": "CpuCheck occasionally throws an \"Instance does not exist in the specified Category\" exception"
+  },
+  {
+    "Id": 26,
+    "Title": "Property Can't Be Set After Writing - URL Ping"
+  },
+  {
+    "Id": 27,
+    "Title": "System.Data.Entity.Infrastructure.DbUpdateException because of duplicate Notifications (PK cosntraint violated)"
+  },
+  {
+    "Id": 28,
+    "Title": "Stale messages lead to endless retry-loop"
+  },
+  {
+    "Id": 29,
+    "Title": "SqlPublisher unstable"
+  },
+  {
+    "Id": 30,
+    "Title": "Missing wiki page: v3HowToCreateHealthCheck"
+  }
+]

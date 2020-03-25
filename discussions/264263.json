@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "638767",
+    "ThreadId": "264263",
+    "Html": "\r\n<p>I can see you have a number of assemblies, for example&nbsp;Wolfpack.Core.Interfaces.Castle, which appear to break out individual interfaces so they can be swapped with alternative implementations.&nbsp; However, on the otherhand Wolfpack.Core has direct\r\n dependencies on various libraries, such as Castle.Core and Magnum. I am wondering which way your direction is going?&nbsp; The assemblies Wolfpack.Core.Interfaces.Magnum and Wolfpack.Core.Interfaces.Castle are really small and could be merged with Wolfpack.Core.\r\n Or the direct uses of Magnum and Castle in the Core library should migrated into separate assemblies.</p>\r\n<p>My personal preference would to decouple the use of NServiceBus, Geckoboard, Growl etc from the main core assemblies.&nbsp; If I am not using these components, it would be nice not having to deploy the dependent assemblies.&nbsp; However, all of the assemblies\r\n together are relatively small (less than 10MB).</p>\r\n",
+    "PostedDate": "2011-07-07T07:51:15.127-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "638776",
+    "ThreadId": "264263",
+    "Html": "<p>Hi - It was originally all in into two assemblies - core &amp; core.interfaces.</p>\r\n<p>However when I tried to write a contrib module as a test (prior to NuGet) it was apparent that if you wanted to develop a HealthCheck you would need to cart everything along - even Magnum when it wasn't required to write a custom HealthCheck.</p>\r\n<p>The interfaces.magnum split was required to allow you to grab a minimum codebase to write a HealthCheck.</p>\r\n<p>Interfaces.Magnum &amp; Castle are extensions to allow you to write Publishers, only publishers have dependencies on Castle (interception) and Magnum (message consumer) - one of the ideas was to merge these into Interfaces.Publisher as it would make more sense (functional grouping rather than technology) - however the advent of NuGet allows you to package in functional groupings so have left it as is - hence Wolfpack.HealthCheck &amp; Publisher packages. To be honest to only reason for Interface.Castle is that I've been a bit lazy and exposed a castle member in an interface class - if that was wrapped it could disappear - the idea was the Container was agnostic and you could provide your own....interception screwed that up a bit but it is fixable.</p>\r\n<p>Re further splitting - I've been toying with splitting out the the bits you mention - create new NuGet packages for bus, geckoboard etc. (I'm working on a GUI that will allow you to pull down wolfpack packages directly into the app so this might be the way to go).</p>\r\n<p>Cheers for the feedback - keep it coming!</p>\r\n<p>James</p>",
+    "PostedDate": "2011-07-07T08:09:33.117-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

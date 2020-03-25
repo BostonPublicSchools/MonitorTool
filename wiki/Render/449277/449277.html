@@ -1,0 +1,19 @@
+<div class="wikidoc"><h1>Map</h1>Displays pushpins for each stat that matches the selection criteria.<br /><br /><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=wolfpack&DownloadId=257915" alt="geckoboard-map.png" title="geckoboard-map.png" /> 
+<h2>Widget Url</h2><ul><li>http://<i>hostname</i>/geckoboard/map/<i>checkid</i>/<i>outcome</i> 
+<ul><li>where...
+<ul><li><i>checkid</i> is the <b>FriendlyId</b> of a HealthCheck</li>
+<li><i>outcome</i> is the result. Valid values are &quot;success&quot;, &quot;failure&quot;, &quot;any&quot;</li></ul></li>
+<li>optional querystring params....
+<ul><li>site= your site id (in role.castle.config)</li>
+<li>agent = the name of the agent (machine name)</li>
+<li>tag = any tag value you added as part of the check</li></ul></li></ul></li></ul>
+<h2>Uses...</h2>This feature can be used in two ways....
+<ol><li>You can provide static longitude/latitude coordinates to each Wolfpack Agent instance; this means you can plot on the map where HealthCheck results have originated from. To do this just set the &lt;Longitude&gt; &amp; &lt;Latitude&gt; elements in the role.castle.config file.</li>
+<li>Using the <a href="https://wolfpack.codeplex.com/wikipage?title=AppStats&referringTitle=Geckoboard%20Map">AppStats</a> feature you can set the longitude &amp; latitude on an AppStat - so whatever your AppStat represents (an order, a login etc) you can now geo tag it too...eg: put geo coords on your &quot;order&quot; AppStat to plot them on your Geckoboard map.
+<ul><li>There is a new Geo() extension to the AppStatsEvent object.</li></ul></li></ol>
+<div style="color:Black;background-color:White;"><pre>
+            AppStatsEngine.Publish(new AppStatsEvent()
+                                       .PieChart(&quot;WolfpackPoll&quot;)
+                                       .Segment(segmentId)
+                                       .One().Geo().Point(&quot;51.5017741&quot;, &quot;-0.1406510&quot;));
+</pre></div></div><div class="ClearBoth"></div>

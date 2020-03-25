@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "629505",
+    "ThreadId": "261845",
+    "Html": "\r\n<p>Problem: We have a TeamCity CI Build Server and it runs a series of test/metrics as part of the build - I want to display the stats from the Build, NCover &amp; SpecFlow in Geckoboard.</p>\r\n<p>I've already created a new contrib project &quot;BuildAnalytics&quot; and have a TeamCity HealthCheck (using the nice Sharp2City REST client with a few tweaks) that detects new build states. I've also written parsers for NCover Html, Specflow Html and StoryQ Xml reports\r\n to extract the metrics from each and publish these as new Health Check results and have got a way of invoking these parsers based in the Build Health Check output.</p>\r\n<p>I'm just working out the best way of visualising this in Geckoboard - the Geckoboard Data Service might need a few tweaks but it's pretty much there.</p>\r\n<p>Are there any other build tools you run (eg: NDepends) that have stats you would like to see in your Geckoboard?</p>\r\n",
+    "PostedDate": "2011-06-18T01:36:18.347-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "634278",
+    "ThreadId": "261845",
+    "Html": "<p>Ok, Build Analytics has landed in v2.1 - enjoy!</p>\n<p>http://wolfpack.codeplex.com/releases/view/69132</p>",
+    "PostedDate": "2011-06-28T10:44:30.99-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

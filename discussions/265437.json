@@ -1,0 +1,42 @@
+[
+  {
+    "Id": "643393",
+    "ThreadId": "265437",
+    "Html": "\r\n<p>Wolfpack contain Url Ping check, but not contain Host (server) ping check. Host ping is simply to implement (standard class System.Net.NetworkInformation.Ping), and very useful to monitor enterprise network infrastructure.</p>\r\n<p>Can you add Host Ping check to Wolfpack base functional?</p>\r\n",
+    "PostedDate": "2011-07-17T01:51:29.563-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "643570",
+    "ThreadId": "265437",
+    "Html": "<p>Yup - no problem....I'll get it out in the next release. If you need it sooner I can give you a private build ahead of this - just let me know (@followjimbobdog or via this page/people links)</p>",
+    "PostedDate": "2011-07-17T23:38:51.273-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "644244",
+    "ThreadId": "265437",
+    "Html": "<p>Great! When next release planned?</p>",
+    "PostedDate": "2011-07-19T03:40:39.893-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "645908",
+    "ThreadId": "265437",
+    "Html": "<p>The next release should land by the end of July - it will include this check and also a new mechanism for booting up checks directly from the IoC container (so checks can have anything injected into them). I'm also looking at restructuring the NuGet packages to make to the app self-updatable from NuGet - save you having to pull down a new release each time.</p>",
+    "PostedDate": "2011-07-21T21:58:51.347-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "674394",
+    "ThreadId": "265437",
+    "Html": "<p>Well better late than never! - v2.3 is released and with it a HostPing check. The interesting thing about this check is that it is the first that is registered directly with the IoC container rather than a \"config\" component being registered and Wolfpack inferring the HealthCheck component from it.</p>\r\n<p>Docs for it here:&nbsp;<a href=\"http://wolfpack.codeplex.com/wikipage?title=HealthCheckHostPing&amp;referringTitle=Health%20Checks\">http://wolfpack.codeplex.com/wikipage?title=HealthCheckHostPing&amp;referringTitle=Health%20Checks</a></p>\r\n<p>Cheers,</p>\r\n<p>James</p>",
+    "PostedDate": "2011-09-20T13:45:24.097-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

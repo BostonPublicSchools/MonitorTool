@@ -1,0 +1,70 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": "2014-04-30T23:56:53.173-07:00",
+    "CommentCount": 6,
+    "Custom": null,
+    "Description": "I have successfully used Wolfpack on a Windows 7 machine.  But when I start Wolfpack on a Windows Server 2008 SP2 (Web server edition), the following exception is thrown:\r\n\r\n2013-03-05 10:38:37,768 [1] ERROR Wolfpack [(null)] - Wolfpack System Failure. IncidentId:=9f500bb9-ffbb-44e4-98cf-cb0539c3e8ff; Details:=System.TypeInitializationException: The type initializer for 'Wolfpack.Core.TypeDiscovery' threw an exception. ---> System.TypeInitializationException: The type initializer for 'Wolfpack.Core.Container' threw an exception. ---> System.ArgumentException: An item with the same key has already been added.\r\n   at System.ThrowHelper.ThrowArgumentException(ExceptionResource resource)\r\n   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)\r\n   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)\r\n   at Castle.MicroKernel.ModelBuilder.Inspectors.ConfigurationParametersInspector.ProcessModel(IKernel kernel, ComponentModel model) in e:\\OSS.Code\\Castle.Windsor\\src\\Castle.Windsor\\MicroKernel\\ModelBuilder\\Inspectors\\ConfigurationParametersInspector.cs:line 58\r\n   at Castle.MicroKernel.ModelBuilder.DefaultComponentModelBuilder.BuildModel(String key, Type service, Type classType, IDictionary extendedProperties) in e:\\OSS.Code\\Castle.Windsor\\src\\Castle.Windsor\\MicroKernel\\ModelBuilder\\DefaultComponentModelBuilder.cs:line 67\r\n   at Castle.MicroKernel.Registration.ComponentRegistration`1.Castle.MicroKernel.Registration.IRegistration.Register(IKernel kernel) in e:\\OSS.Code\\Castle.Windsor\\src\\Castle.Windsor\\MicroKernel\\Registration\\ComponentRegistration.cs:line 903\r\n   at Castle.MicroKernel.DefaultKernel.Register(IRegistration[] registrations) in e:\\OSS.Code\\Castle.Windsor\\src\\Castle.Windsor\\MicroKernel\\DefaultKernel.cs:line 600\r\n   at Castle.Windsor.WindsorContainer.Register(IRegistration[] registrations) in e:\\OSS.Code\\Castle.Windsor\\src\\Castle.Windsor\\Windsor\\WindsorContainer.cs:line 689\r\n   at Castle.Windsor.Installer.DefaultComponentInstaller.SetUpComponents(IConfiguration[] configurations, IWindsorContainer container, IConversionManager converter) in e:\\OSS.Code\\Castle.Windsor\\src\\Castle.Windsor\\Windsor\\Installer\\DefaultComponentInstaller.cs:line 210\r\n   at Castle.Windsor.Installer.DefaultComponentInstaller.SetUp(IWindsorContainer container, IConfigurationStore store) in e:\\OSS.Code\\Castle.Windsor\\src\\Castle.Windsor\\Windsor\\Installer\\DefaultComponentInstaller.cs:line 52\r\n   at Castle.Windsor.WindsorContainer.RunInstaller() in e:\\OSS.Code\\Castle.Windsor\\src\\Castle.Windsor\\Windsor\\WindsorContainer.cs:line 314\r\n   at Castle.Windsor.WindsorContainer..ctor(IConfigurationInterpreter interpreter) in e:\\OSS.Code\\Castle.Windsor\\src\\Castle.Windsor\\Windsor\\WindsorContainer.cs:line 87\r\n   at Wolfpack.Core.Containers.WindsorContainer..ctor() in c:\\Projects\\Wolfpack\\Trunk\\Releases\\v2.4.0\\Source\\Wolfpack.Core\\Containers\\WindsorContainer.cs:line 13\r\n   at Wolfpack.Core.Container..cctor() in c:\\Projects\\Wolfpack\\Trunk\\Releases\\v2.4.0\\Source\\Wolfpack.Core\\Container.cs:line 10\r\n   --- End of inner exception stack trace ---\r\n   at Wolfpack.Core.Container.Resolve[T]()\r\n   at Wolfpack.Core.TypeDiscovery..cctor() in c:\\Projects\\Wolfpack\\Trunk\\Releases\\v2.4.0\\Source\\Wolfpack.Core\\TypeDiscovery.cs:line 25\r\n   --- End of inner exception stack trace ---\r\n   at Wolfpack.Core.TypeDiscovery.Discover[T](Type[]& matchingTypes)\r\n   at Wolfpack.Core.Loaders.ProfileLoader.Load(String name, IRoleProfile& profile) in c:\\Projects\\Wolfpack\\Trunk\\Releases\\v2.4.0\\Source\\Wolfpack.Core\\Loaders\\ProfileLoader.cs:line 35\r\n   at Wolfpack.Core.Loaders.ProfileLoader.Find(String name, IRoleProfile& profile) in c:\\Projects\\Wolfpack\\Trunk\\Releases\\v2.4.0\\Source\\Wolfpack.Core\\Loaders\\ProfileLoader.cs:line 21\r\n   at Wolfpack.Agent.Startup.LoadProfile() in c:\\Projects\\Wolfpack\\Trunk\\Releases\\v2.4.0\\Source\\Wolfpack.Agent\\Startup.cs:line 118\r\n   at Wolfpack.Agent.Startup.Main(String[] args) in c:\\Projects\\Wolfpack\\Trunk\\Releases\\v2.4.0\\Source\\Wolfpack.Agent\\Startup.cs:line 60\r\n\r\nThe error is thrown regardless of whether Wolfpack is run as an executable or as a service.    I am using version Wolfpack v2.4.0 (NuPut) binaries.",
+    "LastUpdatedDate": "2014-04-30T23:56:53.39-07:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "wolfpack",
+    "ReportedDate": "2013-03-05T03:01:03.053-08:00",
+    "Status": {
+      "Name": "Closed",
+      "Id": 4
+    },
+    "ReasonClosed": {
+      "Name": "Fixed"
+    },
+    "Summary": "Exception on Starting Agent on Windows Server 2008",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 10
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "How did you install Wolfpack? If it was downloading the zip file then make sure you right click the zip and in properties click the \"Unlock\" button - this stops it working with odd errors like this.\n\nOnce you unzip it should fire up ok.\n\nIf you installed via another method (chocolatey) then I will need some more info to help you out.\n\ncheers,\n\nJames",
+      "PostedDate": "2013-03-05T03:50:05.117-08:00",
+      "Id": 92295
+    },
+    {
+      "Message": "Hi James,\n\nThanks for the quick response.  I had unblocked the .zip file prior to  unzipping the contents, so I don't believe this is the issue.  To confirm, I have ran the Streams executable against all the extracted files, as per these [instructions](http://superuser.com/questions/38476/this-file-came-from-another-computer-how-can-i-unblock-all-the-files-in-a/38483#38483), and the error is still occurring.  \n\nWhat additional diagnostic information do you require for any further debugging?  \n\nRegards,\nAndy",
+      "PostedDate": "2013-03-05T08:03:37.08-08:00",
+      "Id": 92311
+    },
+    {
+      "Message": "Hi James,\n\nJust to confirm, I have used the same zip file to create an install on another server (Windows Server 2008, SP2, Standard Edition) that works successfully.  Could there be a prerequisite that Wolfpack requires that is installed on the Standard edition, but not on the web edition of Windows Server 2008?\n\nRegards,\nAndy",
+      "PostedDate": "2013-03-05T08:14:50.383-08:00",
+      "Id": 92313
+    },
+    {
+      "Message": "Same version of .Net framework on both?\n\nHas the config been altered (I guess so)? From the look of the stack trace it looks like a duplicate named component being added to the castle container. Need to strip it back to basics and add config changes a file at a time to see which one breaks it.\n\n1. Can you check the role.castle.config for the TypeDiscovery, this config contains a list of dlls to ignore scanning for components, possible duplicate here?\n2. Could you xcopy the working deployment to the broken server and fire that up - see if the works ok?\n3. Same install location? Just wondering if there is some UAC type poblem - can you run a cmd prompt as admin see if that makes a difference.\n\nLet me know how you get on,\n\nJ",
+      "PostedDate": "2013-03-05T09:31:45.737-08:00",
+      "Id": 92321
+    },
+    {
+      "Message": "James,\r\n\r\nYes, an invalid configuration file was the cause - I had added a second <drive> tag to the SystemDriveFreeSpace check, and this was the cause of the problem.  Thanks for your hep with this.\r\n\r\nRegards,\r\nAndy",
+      "PostedDate": "2013-03-06T08:34:45.163-08:00",
+      "Id": 92426
+    },
+    {
+      "Message": "Great to hear you have it up and running - v3 has a configuration editor built into the web interface so will hopefully make changing config much easier - this could be extended to validate the config as well....hmmm, that's an interesting thought - allow custom plugins to validate configuration changes...I'll take a look at providing that hook.\n\nJ",
+      "PostedDate": "2013-03-07T05:07:09.35-08:00",
+      "Id": 92522
+    }
+  ]
+}

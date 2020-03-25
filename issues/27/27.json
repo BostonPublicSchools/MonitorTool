@@ -1,0 +1,45 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "Agent",
+      "DisplayName": "Agent"
+    },
+    "ClosedComment": "",
+    "ClosedDate": "2015-02-17T04:54:24.663-08:00",
+    "CommentCount": 1,
+    "Custom": null,
+    "Description": "When adding the \"SqlPublisherConfiguration\", we get the following error:\r\n2015-01-21 10:29:46,525 [15] ERROR Wolfpack [(null)] - IncidentId:f5929b03-be65-495b-9a5c-5d052f1e1802; Encountered 'ApplicationException' during 'WebService Call: http://web02.intercom.at:802/api/notification/notify'; Message:=System.ApplicationException: Step failure ---> System.Data.Entity.Infrastructure.DbUpdateException: An error occurred while updating the entries. See the inner exception for details. ---> System.Data.Entity.Core.UpdateException: An error occurred while updating the entries. See the inner exception for details. ---> System.Data.SqlClient.SqlException: Verletzung der PRIMARY KEY-Einschränkung 'PK_dbo.NotificationEvents'. Ein doppelter Schlüssel kann in das dbo.NotificationEvents-Objekt nicht eingefügt werden. Der doppelte Schlüsselwert ist (005a8cd6-4959-4ffd-beff-d777f721038b).\r\n\r\nDie Anweisung wurde beendet.\r\n\r\n   bei System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)\r\n\r\n   bei System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n\r\n   bei System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)\r\n\r\n   bei System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)\r\n\r\n   bei System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)\r\n\r\n   bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)\r\n\r\n   bei System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)\r\n\r\n   bei System.Data.SqlClient.SqlCommand.ExecuteNonQuery()\r\n\r\n   bei System.Data.Entity.Infrastructure.Interception.InternalDispatcher`1.Dispatch[TTarget,TInterceptionContext,TResult](TTarget target, Func`3 operation, TInterceptionContext interceptionContext, Action`3 executing, Action`3 executed)\r\n\r\n   bei System.Data.Entity.Infrastructure.Interception.DbCommandDispatcher.NonQuery(DbCommand command, DbCommandInterceptionContext interceptionContext)\r\n\r\n   bei System.Data.Entity.Core.Mapping.Update.Internal.DynamicUpdateCommand.Execute(Dictionary`2 identifierValues, List`1 generatedValues)\r\n\r\n   bei System.Data.Entity.Core.Mapping.Update.Internal.UpdateTranslator.Update()\r\n\r\n   --- Ende der internen Ausnahmestapelüberwachung ---\r\n\r\n   bei System.Data.Entity.Core.Mapping.Update.Internal.UpdateTranslator.Update()\r\n\r\n\r\n   bei System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)\r\n   bei System.Data.Entity.Core.Objects.ObjectContext.SaveChangesToStore(SaveOptions options, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction)\r\n\r\n   bei System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)\r\n\r\n   bei System.Data.Entity.Core.Objects.ObjectContext.SaveChangesInternal(SaveOptions options, Boolean executeInExistingTransaction)\r\n\r\n   bei System.Data.Entity.Internal.InternalContext.SaveChanges()\r\n\r\n   --- Ende der internen Ausnahmestapelüberwachung ---\r\n\r\n   bei System.Data.Entity.Internal.InternalContext.SaveChanges()\r\n\r\n   bei Wolfpack.Core.Repositories.Sql.SqlDbContext.SaveChanges() in c:\\Projects\\Wolfpack\\Releases\\v3.0.26\\Source\\Wolfpack.Core\\Repositories\\Sql\\SqlDbContext.cs:Zeile 21.\r\n\r\n   bei Wolfpack.Core.Repositories.Sql.SqlRepository.Add(NotificationEvent notification) in c:\\Projects\\Wolfpack\\Releases\\v3.0.26\\Source\\Wolfpack.Core\\Repositories\\Sql\\SqlRepository.cs:Zeile 49.\r\n\r\n   bei Wolfpack.Core.Publishers.Sql.SqlPublisher.Consume(NotificationEvent message) in c:\\Projects\\Wolfpack\\Releases\\v3.0.26\\Source\\Wolfpack.Core\\Publishers\\Sql\\SqlPublisher.cs:Zeile 28.\r\n\r\n   bei Magnum.Extensions.ExtensionsToEnumerable.Each[T](IEnumerable`1 collection, Action`1 callback)\r\n\r\n   bei Wolfpack.Core.MagnumMessenger.Wolfpack.Core.Interfaces.IMessenger.Publish(NotificationEvent message) in c:\\Projects\\Wolfpack\\Releases\\v3.0.26\\Source\\Wolfpack.Core\\Messenger.cs:Zeile 88.\r\n\r\n   bei Wolfpack.Core.Messenger.Publish(NotificationEvent message) in c:\\Projects\\Wolfpack\\Releases\\v3.0.26\\Source\\Wolfpack.Core\\Messenger.cs:Zeile 45.\r\n\r\n   bei Wolfpack.Core.WebServices.Strategies.Steps.RepublishMessageStep.Execute(WebServiceReceiverContext context) in c:\\Projects\\Wolfpack\\Releases\\v3.0.26\\Source\\Wolfpack.Core.WebServices\\Strategies\\Steps\\RepublishMessageStep.cs:Zeile 10.\r\n\r\n   bei Wolfpack.Core.Pipeline.DefaultPipeline`1.Execute(T context) in c:\\Projects\\Wolfpack\\Releases\\v3.0.26\\Source\\Wolfpack.Core\\Pipeline\\DefaultPipeline.cs:Zeile 37.\r\n\r\n   --- Ende der internen Ausnahmestapelüberwachung ---\r\n\r\n   bei Wolfpack.Core.WebServices.Strategies.WebServiceReceiverStrategy.Execute(NotificationEvent notification) in c:\\Projects\\Wolfpack\\Releases\\v3.0.26\\Source\\Wolfpack.Core.WebServices\\Strategies\\WebServiceReceiverStrategy.cs:Zeile 35.\r\n\r\n   bei Wolfpack.Core.WebServices.Modules.NotificationModule.<.ctor>b__1(Object request) in c:\\Projects\\Wolfpack\\Releases\\v3.0.26\\Source\\Wolfpack.Core.WebServices\\Modules\\NotificationModule.cs:Zeile 33.\r\n\r\n   bei CallSite.Target(Closure , CallSite , Func`2 , Object )\r\n\r\n   bei Nancy.Routing.Route.<>c__DisplayClass4.<Wrap>b__3(Object parameters, CancellationToken context)\r\n\r\nthis basically means that a notification is added to our SQLRepository, albeit it already exists.\r\nThe error lies in the \"CheckForDuplicateStep\" which only checks for duplicates in a single repository. However it has to take __all existing repositories__ into account! (fix coming soon)",
+    "LastUpdatedDate": "2017-12-08T09:48:17.33-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "High",
+      "Severity": 150,
+      "Id": 3
+    },
+    "ProjectName": "wolfpack",
+    "ReportedDate": "2015-01-27T01:29:46.14-08:00",
+    "Status": {
+      "Name": "Closed",
+      "Id": 4
+    },
+    "ReasonClosed": {
+      "Name": "Fixed"
+    },
+    "Summary": "System.Data.Entity.Infrastructure.DbUpdateException because of duplicate Notifications (PK cosntraint violated)",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 27
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "Ok, sure that makes sense and thanks in advance for any fix!\n\nRegards,\nJames",
+      "PostedDate": "2015-01-27T02:13:14.503-08:00",
+      "Id": 170887
+    }
+  ]
+}

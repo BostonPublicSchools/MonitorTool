@@ -1,0 +1,5 @@
+<div class="wikidoc"><h1>Sql Query HealthCheck</h1>This check allows you use a Sql SELECT query as the driver for a notification. Wolfpack will execute the Sql SELECT and raises a notification based on the number of rows returned - the check can be configured to interpret the number of rows returned as success or failure.
+<h2>Pre-requisites</h2>The account identity that Wolfpack runs under will need to have the appropriate Sql LOGIN and SELECT permissions to the Sql entities.
+<h2>Configuration</h2> <b>TODO</b>
+<ul><li><b>InterpretZeroRowsAsAFailure</b> controls how the row count is interpretted as a result. Set this to true and the check result will indicate a failure if the query returns no rows. Set it to false to make a non zero rowcount a failure.</li></ul>
+<br /></div><div class="ClearBoth"></div>

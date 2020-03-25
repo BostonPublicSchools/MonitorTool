@@ -1,0 +1,42 @@
+[
+  {
+    "Id": "982503",
+    "ThreadId": "428320",
+    "Html": "\r\n<p>Hi,&nbsp;</p>\r\n<p>I've just started working with Wolfpack and i am trying to figure out the Geckoboard functionality. I've managed to show a websites response time as a geckometer item. Works Great!</p>\r\n<p>I am having trouble getting the linechart working as i am not familiar the expected JSON format. I can't seem to figure out the {outcome} parameter.</p>\r\n<p>What do i need to provide here?</p>\r\n<p><span style=\"font-size:10pt\">Are there sample urls available for the various geckoboard widgets? &nbsp;&nbsp;</span></p>\r\n<p>&nbsp;Many thanks.</p>\r\n<p>Andy.</p>\r\n",
+    "PostedDate": "2013-01-02T16:29:03.277-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "982957",
+    "ThreadId": "428320",
+    "Html": "\r\n<p>Hi Andy,</p>\r\n<p>Sorry for the delay in responding - I should be getting email alerts when anyone posts here but they seem to be a bit slow.</p>\r\n<p>1. The documentation for the Geckoboard functionality is a bit stale and I apologise for this - a huge Wolfpack update is underway and a brand new Geckoboard feature will be included and this will have proper docs (and support Geckoboard push too).</p>\r\n<p>2. Linechart url formats are...</p>\r\n<p><span>http://</span><em>hostname</em><span>/geckoboard/<span>linechart/{check}/{outcome} - this provides a chart of the raw ResultCount value of the alerts for the matching check/outcome</span></span></p>\r\n<p><span><span><span>http://<em>hostname</em>/geckoboard/linechart/{check}/{outcome}/{operation}/per/{rate} - this provides a numeric value (based on the alert ResultCount value)</span></span></span></p>\r\n<p>...where&nbsp;</p>\r\n<ul>\r\n<li>{check} is the FriendlyName/Id of the check you want to display data for </li><li>{outcome} is the one of..&quot;Any&quot;, &quot;Failure&quot; or &quot;Success&quot;. This represents the Result state (null, false, true) of an alert\r\n</li><li>{operation} is one of...&quot;Count&quot;, &quot;Sum&quot;, &quot;Average&quot;, &quot;Min&quot;, &quot;Max&quot; </li><li>{rate} is one of...&quot;day&quot;, &quot;hour&quot; or &quot;minute&quot;&nbsp; </li></ul>\r\n<p>ie...</p>\r\n<p>http://<em>hostname</em>/geckoboard/linechart/somecheck/failure</p>\r\n<p>http://<em>hostname</em>/geckoboard/linechart/anothercheck/success/sum/per/hour</p>\r\n<p>Hope that helps! I'll upate the Linechart doc page with the above information and will try to refresh the other too. If you have any more specific troubles then drop me a message here and I should be able to fix you up ASAP.</p>\r\n<p>Cheers,</p>\r\n<p>James</p>\r\n",
+    "PostedDate": "2013-01-04T01:33:15.59-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "983252",
+    "ThreadId": "428320",
+    "Html": "\r\n<p>Hi James,</p>\r\n<p>Thank you, this makes it very clear. I will be looking forward for the wolfpack update as well.</p>\r\n<p>What i am trying to accomplish exactly is to create a line chart on the geckboard displaying a websites' response time. Will i be able to get this working with the current release?</p>\r\n<p>&nbsp;</p>\r\n<p>Thanks,</p>\r\n<p>Andy</p>\r\n",
+    "PostedDate": "2013-01-04T19:24:14.973-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "983311",
+    "ThreadId": "428320",
+    "Html": "\r\n<p>Hi, I have amended the answer I gave above - the description of the first example (<span>http://</span><em>hostname</em><span>/geckoboard/<span>linechart/{check}/{outcome}</span></span>) was wrong - it charts the ResultCount value, not the Count (ie number\r\n of instances).</p>\r\n<p>So...to answer your question - yes - the current release will be able to line graph your website response times. The url template above is the one you need to chart the response times - as you are logging the HealthCheck data to the database this will simply\r\n chart the response time that is stored in the ResultCount of each message. I would also put &quot;success&quot; in the outcome to ensure you only graph pings that worked.</p>\r\n<p>ie: http://<em>hostname</em>/geckoboard/linechart/<em>name of check reporting website response times</em>/success</p>\r\n<p>Cheers,</p>\r\n<p>James</p>\r\n",
+    "PostedDate": "2013-01-05T04:31:14.38-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "983906",
+    "ThreadId": "428320",
+    "Html": "\r\n<p>Hi James,</p>\r\n<p>Got it working, works great!</p>\r\n<p>Thanks,</p>\r\n<p>Andy</p>\r\n<p>&nbsp;</p>\r\n",
+    "PostedDate": "2013-01-07T15:06:18.053-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

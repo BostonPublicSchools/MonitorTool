@@ -1,0 +1,10 @@
+<div class="wikidoc"><h1>Url Ping </h1>This check will ping a url to test it responds and can optionally publish its result based on the response time. You can setup this check to either always publish a result or only if it fails. As a successful ping includes the response time you can use this to monitor variations over time on a dashboard.   
+<h2>Features</h2><ul><li>Publish only failures or successful pings to track response times.</li>
+<li>Monitor multiple urls, just add a new item to the list.</li>
+<li>Set an optional response time threshold - if the response is slower than this (milliseconds) then publish this as a result failure.</li></ul>
+<h2>Pre-requisites</h2><ul><li>Outbound http access from the Wolfpack server to the urls</li></ul>
+<h2>Configuration</h2><ul><li>Add a new &lt;item&gt; to the &quot;Urls&quot; property for each url you wish to monitor.</li>
+<li>Set the &quot;FailIfResponseMillisecondsOver&quot; property to the maximum number of milliseconds you expect the url to respond by. If the url takes longer than this the check will publish a failed result.
+<ul><li>Leave this property blank, set to 0 (zero) to disable this feature.</li></ul></li>
+<li>If you are only interested in tracking whether the url is available or not then set the &quot;PublishOnlyIfFailure&quot; property to true (default). If you want to track the response time then set this to false and every ping result will be published; successful pings include the response time in the result &quot;ResultCount&quot; property so you publish these to a database and then mine this information later or connect it up to a dashboard.</li></ul>
+</div><div class="ClearBoth"></div>

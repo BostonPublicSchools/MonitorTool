@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Wolfpack.WebServices</id>
+    <version>1.0.0.0</version>
+    <title>Wolfpack.WebServices</title>
+    <authors>jimbobdog</authors>
+    <owners>James Simmonds</owners>
+    <licenseUrl>http://wolfpack.codeplex.com/license</licenseUrl>
+    <projectUrl>http://wolfpack.codeplex.com</projectUrl>
+    <iconUrl>http://download.codeplex.com/Project/Download/FileDownload.aspx?ProjectName=Wolfpack&amp;DownloadId=140622&amp;Build=17672</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Provides the necessary infrastructure to create custom plugins and extensions to the Wolfpack WebService feature</description>
+    <summary>Provides the necessary infrastructure to create custom plugins and extensions to the Wolfpack WebService feature</summary>
+    <language>en-GB</language>
+    <tags>Wolfpack Monitoring NancyFx</tags>
+    <dependencies>
+      <dependency id="Nancy" version="[0.22.2]" />
+    </dependencies>
+  </metadata>
+</package>

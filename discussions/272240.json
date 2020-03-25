@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "670399",
+    "ThreadId": "272240",
+    "Html": "\r\n<p>I downloaded wolfpack, opened a command line, and gave it a try. &nbsp;It crashed. &nbsp;Is configuration required before running it the first time?</p>\r\n<p>2011-09-11 20:45:21,909 [5] INFO &nbsp;Topshelf.Model.ServiceCoordinator [(null)] - (Wolfpack) Fault</p>\r\n<p>2011-09-11 20:45:21,912 [5] ERROR Topshelf.Model.ServiceCoordinator [(null)] - Fault on Wolfpack: Topshelf.Exceptions.ServiceControlException</p>\r\n",
+    "PostedDate": "2011-09-11T18:55:30.57-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "670414",
+    "ThreadId": "272240",
+    "Html": "<p>Hi,</p>\r\n<p>Yeah - there are a few issues with the default config that causes it&nbsp;to crash. Please this thread in full to get you up and running...<br /><br /><a href=\"http://wolfpack.codeplex.com/workitem/5\" target=\"_blank\">http://wolfpack.codeplex.com/workitem/5</a><br /><br />I'm just about to release v2.3 - this has these problems fixed. If you&nbsp;download the latest source code (binaries not uploaded yet) &amp;&nbsp;compile/run from visual studio you should be able to run Wolfpack ok.<br />As mentioned on that thread I'd also install \"Growl\" - this is a&nbsp;system tray notifier and is probably the best way to \"see\" Wolfpack&nbsp;alerts (you can also forward alerts to your smart phone).<br /><br />Please drop me a message if you run into any more problems or need&nbsp;help configuring it to monitor your system. I'd also like to get any&nbsp;suggestions you have for new health checks or any idea in general to&nbsp;improve the system (apart from the obvious \"fix the config so it works&nbsp;first time\"!)<br /><br />Cheers,<br /><br />James</p>",
+    "PostedDate": "2011-09-11T19:21:25.147-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

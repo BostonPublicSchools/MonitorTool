@@ -1,0 +1,34 @@
+[
+  {
+    "Id": "920576",
+    "ThreadId": "397700",
+    "Html": "\r\n<p>In your professional use of Wolfpack, how do you deal with ScalarCheck results? I understand limiting the check to a Count(*) is important for performance, but you only have binary details. There is an error or not.</p>\r\n<p>Do you manually follow up anytime the result is an error or do you keep the check criteria so specific that you understand the impact of any failed check without further details? Have you ever explored returning record details?</p>\r\n<p>For example: I'd like to check a dozen IIS sites on a cluster of servers for any 500 errors. I could do that with a single LogParser Select, but then I don't know what site on what server the errors is on. I could create 50&#43;&nbsp;conditions&nbsp;to cover\r\n all possible combination of sources, but that seems inefficient.</p>\r\n<p>Thanks.</p>\r\n",
+    "PostedDate": "2012-10-02T06:48:23.427-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "920620",
+    "ThreadId": "397700",
+    "Html": "<p>There was a similar question posted earlier in the year here:&nbsp;<a href=\"http://wolfpack.codeplex.com/discussions/389588\">http://wolfpack.codeplex.com/discussions/389588</a>&nbsp;...have a read...</p>\r\n<p>The problem is that the logparser query can generate a lot of rows of data and there is no real way of transporting that around in memory really.&nbsp;I quite like the idea of dumping the actual report data that tripped the alert to disk then have the email publisher automagically&nbsp;attach it to the email containing the alert - the other publishers could also take the appropriate action too....eg,</p>\r\n<p>Growl publisher, include a fileshare link to the report file.</p>\r\n<p>Sql publisher could actually hoover the report into a TEXT blob etc</p>\r\n<p>The alternative solution given to the other user was to use the beta Powershell check to give you ultimate flexibility in what you do and how you package the results but I think the auto-attachment of the results is a great solution too and I'd be keen to implement this if it met your requirements?</p>\r\n<p>Cheers,</p>\r\n<p>James</p>",
+    "PostedDate": "2012-10-02T07:49:37.507-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "920682",
+    "ThreadId": "397700",
+    "Html": "<p>I'm actually looking at Wolfpack to replace several custom Powershell scripts I have running now. So, I might be able to rewrite them to work with the framework. I've actually already configured my Powershell instance to target .Net 4 and it's a requirement for some of my scripts.</p>\r\n<p>But, I also think the auto-attachment option would be a very useful feature that would probably reduce the amount of custom code anyone has to write.&nbsp;</p>\r\n<p>What about making the text blob available via the WCF <span>ServiceHost instead of making a&nbsp;dependency&nbsp;on a fileshare</span>?</p>",
+    "PostedDate": "2012-10-02T09:25:42.43-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "920865",
+    "ThreadId": "397700",
+    "Html": "<p>Ok, so saving the report data looks like the best way to do this and exposing it via WCF is a very good idea too. I am on the verge of rewriting a new web api to replace the WCF one as this has robustness and security issues...this new version will include a method to return/stream the report data associated with an alert.</p>\r\n<p>Thanks for your input shaping this!</p>\r\n<p>J</p>",
+    "PostedDate": "2012-10-02T14:01:15.193-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

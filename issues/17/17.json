@@ -1,0 +1,45 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": "2014-07-24T01:27:39.243-07:00",
+    "CommentCount": 1,
+    "Custom": null,
+    "Description": "The title says it. I guess it's a dependency issues in the [Wolfpack.Contrib.Publishers.Email nuspec](https://www.nuget.org/packages/Wolfpack.Contrib.Publishers.Email/#dependencySets). Wolfpack.Contrib.Publishers.Email is compiled against 2.3.3, the nuspec says 2.3.0.",
+    "LastUpdatedDate": "2014-07-24T01:27:39.243-07:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "wolfpack",
+    "ReportedDate": "2014-07-02T15:49:55.927-07:00",
+    "Status": {
+      "Name": "Closed",
+      "Id": 4
+    },
+    "ReasonClosed": {
+      "Name": "Fixed"
+    },
+    "Summary": "Wolfpack.Contrib.Publishers.Email installs Omu.ValueInjecter 2.3.0, needs 2.3.3",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 1,
+    "Id": 17
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "Fixed in v3.0.20",
+      "PostedDate": "2014-07-02T16:36:20.327-07:00",
+      "Id": 151433
+    }
+  ]
+}

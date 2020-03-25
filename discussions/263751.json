@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "636715",
+    "ThreadId": "263751",
+    "Html": "<p>If you have agents distributed around the country/world then it would be good to tag their location to any result they produce or allow AppStats to manually set this location.</p>\n<p>With the Geckoboard map widget it would be easy to then visualise this geolocation information about your results/AppStats.</p>\n<p>For example with AppStats: Suppose you geotag every order you get - you could then map these to show your customer geographical base. Filters would be available to the Geckoboard Data Service method that would support this to allow you to isolate data too...eg:  Map only high value orders (&gt; &pound;x).</p>\n<p>More info on the Geckboard Map Widget: <a href=\"http://blog.geckoboard.com/introducing-the-custom-map-widget-16041\" target=\"_blank\">http://blog.geckoboard.com/introducing-the-custom-map-widget-16041</a></p>",
+    "PostedDate": "2011-07-03T13:13:55.187-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "640695",
+    "ThreadId": "263751",
+    "Html": "<p>Ok, Geotags feature released in v2.2 (http://bit.ly/nczLQQ).</p>\r\n<p>Allows you to tag your results&nbsp;(and AppStats)&nbsp;with a Longitude &amp; Latitude then visualise these on a Geckoboard Map!</p>",
+    "PostedDate": "2011-07-11T15:16:46.897-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

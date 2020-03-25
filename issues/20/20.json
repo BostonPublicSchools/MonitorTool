@@ -1,0 +1,55 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 3,
+    "Custom": null,
+    "Description": "The sample check for Notepad sends emails with a subject of `Wolfpack Notification - IsNotepadRunning`. \r\n\r\nFor SSL, despite having configured a \"Name\" and an \"RequiredProperties.Name\" (what's the difference between those anyways?), the email has a subject of `Wolfpack Notification - SslCertificateCheck`. It would be great if the name could be used in the subject.",
+    "LastUpdatedDate": "2014-07-03T02:35:48.037-07:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "wolfpack",
+    "ReportedDate": "2014-07-03T01:13:02.903-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "SSL certificates check does not honor config name in e-mails",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 1,
+    "Id": 20
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "one name is used for identification within the config repository and the other as a logical identifier for the check  - it's a bit confusing and not sure it's required - could be simplified to one.\n\nwill update the check (and take a look through the others) the ensure the subject is specific to an instance of the check.\n\nThanks for raising it - will update the package this evening (UK time)",
+      "PostedDate": "2014-07-03T01:49:22.357-07:00",
+      "Id": 151474
+    },
+    {
+      "Message": "ok, the subject name issue is because this check can monitor multiple hosts within one check instance. So the logical name of the check is whatever you call it \"SSLCheck123\" and the email publisher will just append this to the subject - but this doesn't provide any information about *which* hostname the alert is related to.\n\nI will amend the email publisher to include the notification \"info\" property in the subject line - this usually provide a short description of the exact alert condition. In the case of SSL expiry it says...\"SSL Certificate for HOSTNAME expires in N days\".\n\nThat should provide suitable context\n\n",
+      "PostedDate": "2014-07-03T02:09:59.51-07:00",
+      "Id": 151476
+    },
+    {
+      "Message": "> one name is used for identification within the config repository and the other as a logical identifier for the check - it's a bit confusing and not sure it's required - could be simplified to one.\n\nJust use the file name as the ID and be done with it. BTW, my config files get truncated: ID/name/whatever=\"example.com\" -> File=\"example.config\".",
+      "PostedDate": "2014-07-03T02:35:48.037-07:00",
+      "Id": 151480
+    }
+  ]
+}

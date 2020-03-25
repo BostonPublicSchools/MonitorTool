@@ -1,0 +1,51 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "HealthChecks",
+      "DisplayName": "HealthChecks"
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 1,
+    "Custom": null,
+    "Description": "Here is the code update for adding UserAgent string to the header of the URLping check. Also includes updated config. But you can leave the new setting out. ",
+    "LastUpdatedDate": "2017-12-08T09:48:17.57-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "wolfpack",
+    "ReportedDate": "2011-12-13T09:06:23.713-08:00",
+    "Status": {
+      "Name": "Resolved",
+      "Id": 7
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "userAgent String needed in URLping",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 7
+  },
+  "FileAttachments": [
+    {
+      "FileId": 314226,
+      "FileName": "urlPing_userAgentString.zip",
+      "DownloadUrl": ".\\314226"
+    }
+  ],
+  "Comments": [
+    {
+      "Message": "Thanks for submitting the patch - great addition to the check! I've rolled it into the core source and it will release with the next build.\n\nCheers,\n\nJames",
+      "PostedDate": "2011-12-14T00:39:23.51-08:00",
+      "Id": 51026
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "1056695",
+    "ThreadId": "447043",
+    "Html": "Have you tried deploying the wolfpack WCF service on Azure to receive notifications from agents? I've been looking at doing that to centralize my notification collecting, but wasn't entirely sure how to go about getting the agent to run the listener on azure.<br />\n",
+    "PostedDate": "2013-06-14T00:00:56.573-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1056743",
+    "ThreadId": "447043",
+    "Html": "Hi Josh,\r<br />\n<br />\nTo be honest Azure is something that has never really come onto the Wolfpack radar....however it is planned as both a) support health checks against your Azure instances and b) to install/run Wolfpack on Azure.\r<br />\n<br />\nFrom what I know about Azure it seems you run an instance as a vanilla VM and can install a windows service on it just fine (see: <a href=\"http://stackoverflow.com/questions/7794572/windows-service-to-azure\" rel=\"nofollow\">http://stackoverflow.com/questions/7794572/windows-service-to-azure</a>)\r<br />\n<br />\nPS: Wolfpack v3 (in beta) has replaced WCF with more robust communications based on ServiceStack - this new mechanism copes with agent/server communication outages and you can inject custom logic at both sender/receiver to deal with things like message staleness, duplication etc plus it's now very easy to secure with it https and you can set an ApiKey (secret) to grant/deny access to clients.\r<br />\n<br />\nHTH\r<br />\n<br />\nJames<br />\n",
+    "PostedDate": "2013-06-14T01:56:54.263-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

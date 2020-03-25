@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "1103375",
+    "ThreadId": "461086",
+    "Html": "I've downloaded the 2.4 binaries and am having trouble with the SqlScalarCheck. No matter what I put in the FromQuery (FROM MyTable), it insists on throwing an error saying that &quot;The FromQuery config property is badly formed; it must start with 'FROM'&quot;. I tried download the source to figure out the problem, but the source doesn't even contain a SqlScalarCheck - just a SqlQueryCheck, which is a bit different.\r<br />\n<br />\nSo I guess, I've got a couple of problems - how do you use the SqlScalarCheck and why does the source not match the released code? Is the source for one of the previous releases?\r<br />\n<br />\nOverall I'm impressed and am considering writing some of my own checks (a SqlThresholdCheck for starters).<br />\n",
+    "PostedDate": "2013-10-03T14:04:35.233-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1103393",
+    "ThreadId": "461086",
+    "Html": "Hi,\r<br />\n<br />\nThe source is the current v3 code base - to get the source that goes with v2.4 you would need to look through the commit history and use the HG exe to rewind back to that version. \r<br />\n<br />\nOn to your issue with the SQL check... Can you post the configuration XML you are using for this check (please sanitise server names etc first)? \r<br />\n<br />\nBasically the check just adds the &quot;SELECT *&quot; to the From configuration value you supply, eg: &quot;FROM SomeTable WHERE Something &gt; 10&quot;\r<br />\n<br />\nHopefully this is just a configuration issue. \r<br />\n<br />\nGlad you like it - and if you need any assistance writing additional checks then let me know.\r<br />\n<br />\nCheers,\r<br />\n<br />\nJames <br />\n",
+    "PostedDate": "2013-10-03T14:56:05.8-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1103708",
+    "ThreadId": "461086",
+    "Html": "Thanks for the quick reply. I'll have to learn about the HG tool.\r<br />\n<br />\nI figured out what I was doing wrong in the FromQuery. My value was &quot;FROM MyTable WHERE some criteria&quot; which I had copied from Sql Management Studio. I didn't realize that I actually had a TAB between FROM and MyTable (it looked just like a space). The source code actually checks for StartsWith(&quot;FROM &quot;) with a space character following the FROM. I didn't realize it until I pasted my XML into this message to respond and the formatting of codeplex's message system showed it as a TAB.\r<br />\n<br />\nMatt<br />\n",
+    "PostedDate": "2013-10-04T09:26:27.947-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

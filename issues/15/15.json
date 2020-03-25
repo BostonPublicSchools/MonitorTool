@@ -1,0 +1,70 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 6,
+    "Custom": null,
+    "Description": "The new UI is very nice, but unfortunately it lacks a bit...\r\n\r\nFirst of all, you need to remember to put strings in quotes. When I tried v3 I didn't know that and I thought it was broken because my unquoted strings would end up as null after leaving the `<input>`.\r\n\r\nFor my MSMQ checks I needed to enter `.\\private$\\foo.errors` (the same works in v2) which the editor also converted into null. Using a text editor I changed that in the config JSON to `.\\\\\\\\private$\\\\\\\\foo.errors` and the check works but now I cannot edit it in the UI.\r\n\r\nThird thing related to MSMQ is that it's not possible to check for dead-letter queues. These queues won't be found if the API is asked if they exist. But you very much want to check them.  [Here's more info about their names](http://andreasohlund.net/2012/10/25/monitoring-your-dead-letter-queues/).",
+    "LastUpdatedDate": "2014-07-03T08:19:24.05-07:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "wolfpack",
+    "ReportedDate": "2014-07-02T13:18:53.527-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Support queue names with backslashes and system queues (v3)",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 1,
+    "Id": 15
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "Yes I should make it clearer that you need to observe the escape sequences when editing configs...strings should be quoted and and backslash escaped with another backslash.\n\nI'll look at providing some instructions on the editor page to provide a hint.\n\nAs for dead-letter queues - I have modified the code to bypass the \"queue exists\" check if the queue name contains \";DEADLETTER\" or \";DEADXACT\"\n\nRelease 3.0.19 contains the fix - will upload very shortly",
+      "PostedDate": "2014-07-02T15:06:57.247-07:00",
+      "Id": 151420
+    },
+    {
+      "Message": "I think the UI should fix itself without us users having to remember the quotes. If the user entered something and it couldn't be converted back into what it's supposed to be (a string), the UI should try again with quotes inserted.",
+      "PostedDate": "2014-07-02T16:01:44.5-07:00",
+      "Id": 151426
+    },
+    {
+      "Message": "> As for dead-letter queues - I have modified the code to bypass the \"queue exists\" check if the queue name contains \";DEADLETTER\" or \";DEADXACT\"\n\nI think your fix has a bug :-)\n\nYou first check if the queue exists and then look weather it's dead-letter related (as per Reflector). The check throws an Exception:\n\n```\n2014-07-03 11:55:47,145 [       11] ERROR                  Wolfpack - Wolfpack Component Failure. IncidentId:=1a761596-3674-4888-8424-2e8e5379d077; Name:=transactional-dead-letter-queue; Details:=System.InvalidOperationException: Cannot determine whether a queue with the specified format name exists.\n   at System.Messaging.MessageQueue.Exists(String path)\n   at Wolfpack.Core.Checks.MsmqQueueInfoCheck.DoTest()\n   at Wolfpack.Core.Checks.MsmqQueueInfoCheck.Execute()\n   at Wolfpack.Core.Schedulers.HealthCheckIntervalScheduler.Execute()\n```\n\nHere's the config:\n```\n{\n  \"Name\": \"transactional-dead-letter-queue\",\n  \"Description\": \"This check will monitor a MSMQ Queue for breaches of too many items. If there are more items than the threshold set it will generate failure notifications.\",\n  \"InterfaceType\": null,\n  \"PluginType\": \"Wolfpack.Core.Checks.MsmqQueueInfoCheck, Wolfpack.Core\",\n  \"ConfigurationType\": \"Wolfpack.Core.Checks.MsmqQueueInfoCheckConfig, Wolfpack.Core\",\n  \"Data\": \"{\\\"QueueName\\\":\\\"formatname:DIRECT=OS:.\\\\\\\\SYSTEM$;DEADXACT\\\",\\\"NotificationMode\\\":\\\"StateChange\\\",\\\"NotificationThreshold\\\":0,\\\"FriendlyId\\\":\\\"transactional-dead-letter-queue\\\",\\\"Enabled\\\":true}\",\n  \"Tags\": [\n    \"HealthCheck\",\n    \"MSMQ\",\n    \"Threshold\"\n  ],\n  \"Link\": null,\n  \"RequiredProperties\": {\n    \"Name\": \"transactional-dead-letter-queue\",\n    \"Scheduler\": \"everyminute\"\n  }\n}\n```",
+      "PostedDate": "2014-07-03T03:02:14.357-07:00",
+      "Id": 151483
+    },
+    {
+      "Message": "ok, cool - didn't realise the check actually throws - will reorder the DLQ check ahead of the call.\n\nNew release later today",
+      "PostedDate": "2014-07-03T03:45:30.5-07:00",
+      "Id": 151491
+    },
+    {
+      "Message": "This json editor provides a better UI/UX,\n\nhttps://github.com/josdejong/jsoneditor\n\nWill investigate updating the config page to use this.",
+      "PostedDate": "2014-07-03T07:40:51.157-07:00",
+      "Id": 151511
+    },
+    {
+      "Message": "Doesn't solve it entirely... I entered `.\\private$\\foo` in the right area, which got converted to `\".\\\\private$\\foo\"`. Apparently `\\f` is an escape code (form feed). Same was true for a quick test with `\\n`.",
+      "PostedDate": "2014-07-03T08:19:24.05-07:00",
+      "Id": 151513
+    }
+  ]
+}

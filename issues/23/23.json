@@ -1,0 +1,70 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 6,
+    "Custom": null,
+    "Description": "I configured a WindowsServiceStateCheck on the local agent to test if Wolfpack Agent is Running on a server. If I run the local agent as a console app, everything works fine. If I install it as a service, I get the following error:\r\n```\r\n2014-07-16 15:56:52,043 [11] ERROR Wolfpack [(null)] - Wolfpack Component Failure. IncidentId:=67b0337a-2bc4-4f0d-8b83-8933ed5deace; Name:=WolfpackService_MyServer; Details:=System.InvalidOperationException: These services do not exist: Wolfpack Agent\r\n   at Wolfpack.Core.Checks.WindowsServiceStateCheck.Execute() in c:\\Chocolatey\\lib\\wolfpack_f1d4443bf105\\Solutions\\Wolfpack.Core\\Checks\\WindowsServiceStateCheck.cs:line 133\r\n   at Wolfpack.Core.Schedulers.HealthCheckIntervalScheduler.Execute() in c:\\Chocolatey\\lib\\wolfpack_f1d4443bf105\\Solutions\\Wolfpack.Core\\Schedulers\\HealthCheckIntervalScheduler.cs:line 55\r\n\r\n```\r\nI use the following config:\r\n```\r\n{\r\n  \"Name\": \"WolfpackService_MyServer\",\r\n  \"Description\": \"This check monitors the state of a set of Windows Services. Use it to ensure your mission critical services are up and running (it also supports monitoring that service(s) should be stopped.\",\r\n  \"InterfaceType\": null,\r\n  \"PluginType\": \"Wolfpack.Core.Checks.WindowsServiceStateCheck, Wolfpack.Core\",\r\n  \"ConfigurationType\": \"Wolfpack.Core.Checks.WindowsServiceStateCheckConfig, Wolfpack.Core\",\r\n  \"Data\": \"{\\\"Services\\\":[\\\"Wolfpack Agent\\\"],\\\"Server\\\":\\\"MyServer\\\",\\\"ExpectedState\\\":\\\"Running\\\",\\\"NotificationMode\\\":\\\"StateChange\\\",\\\"FriendlyId\\\":\\\"WolfpackService_MyServer\\\",\\\"Enabled\\\":true}\",\r\n  \"Tags\": [\r\n    \"HealthCheck\",\r\n    \"Services\"\r\n  ],\r\n  \"Link\": null,\r\n  \"RequiredProperties\": {\r\n    \"Name\": \"WolfpackService_MyServer\",\r\n    \"Scheduler\": \"Every30Minutes\"\r\n  }\r\n}\r\n```\r\nAny idea what might go wrong?",
+    "LastUpdatedDate": "2014-09-12T06:14:19.577-07:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "wolfpack",
+    "ReportedDate": "2014-07-16T07:08:18.853-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "ServiceStateCheck fails when agent runs as a service",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 1,
+    "Id": 23
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "The Wolfpack service name is actually just \"Wolfpack\", not \"Wolfpack Agent\" - if you change the config to look for this it should be fine. (you can also check the service name in the SCM)",
+      "PostedDate": "2014-07-16T07:51:49.573-07:00",
+      "Id": 152593
+    },
+    {
+      "Message": "Actually the name of the service is \"Wolfpack Agent\" and the check works fine when ran as a console app but fails when installed as a service. Could you please check? Thanks in advance!",
+      "PostedDate": "2014-09-03T08:24:22.173-07:00",
+      "Id": 158701
+    },
+    {
+      "Message": "\n\r\n\r** Closed by jimbobdog 07/24/2014 1:24AM",
+      "PostedDate": "2014-07-24T01:24:26.113-07:00",
+      "Id": 158702
+    },
+    {
+      "Message": "Ok, I'll take a look into it and post back here.\n\nThanks,\nJames",
+      "PostedDate": "2014-09-03T08:59:22.983-07:00",
+      "Id": 158706
+    },
+    {
+      "Message": "Ok, Thanks!",
+      "PostedDate": "2014-09-04T03:29:48.083-07:00",
+      "Id": 158788
+    },
+    {
+      "Message": "Any news on this? Thanks!",
+      "PostedDate": "2014-09-12T06:14:19.577-07:00",
+      "Id": 159571
+    }
+  ]
+}

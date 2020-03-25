@@ -1,0 +1,35 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" 
+         DefaultTargets="Merge;Zip">
+
+  <PropertyGroup>    
+	<pProjectFolder></pProjectFolder>
+	<pReleaseNumber></pReleaseNumber>	
+	<pTargetProject></pTargetProject>
+
+    <ILMergePath>C:\Program Files\Microsoft\ILMerge\ILMerge.exe</ILMergePath>
+    <TargetFolder>$(pProjectFolder)\Releases\v$(pReleaseNumber)\Source\$(pTargetProject)\bin\debug</TargetFolder>
+    <BinZipFile>$(pProjectFolder)\Releases\v$(pReleaseNumber)\Binaries_v$(pReleaseNumber).zip</BinZipFile>
+    <TasksPath>$(MSBuildExtensionsPath)\ExtensionPack\4.0\MSBuild.ExtensionPack.tasks</TasksPath>
+  </PropertyGroup>
+
+  <Import Project="$(TasksPath)" />
+
+  <Target Name="ValidateParams">
+    <Error Text="Please set parameter pProjectFolder!" Condition="$(pProjectFolder) == ''"/>
+    <Error Text="Please set parameter pReleaseNumber!" Condition="$(pReleaseNumber) == ''"/>
+    <Error Text="Please set parameter pTargetProject!" Condition="$(pTargetProject) == ''"/>
+  </Target>
+  
+  <Target Name="Merge" DependsOnTargets="ValidateParams">
+    <!--
+    <Exec Command="%22$(ILMergePath)%22 /t:library /out:[the main output].dll [input dlls].dll /v2" 
+          WorkingDirectory="$(TargetFolder)"/>
+    -->
+  </Target>
+
+  <Target Name="Zip" DependsOnTargets="ValidateParams">
+    <MSBuild.ExtensionPack.Compression.DNZip TaskAction="Create"
+                                             CompressPath="$(TargetFolder)"
+                                             ZipFileName="$(BinZipFile)"/>
+  </Target>
+</Project>

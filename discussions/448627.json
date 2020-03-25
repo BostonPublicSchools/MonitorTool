@@ -1,0 +1,34 @@
+[
+  {
+    "Id": "1062838",
+    "ThreadId": "448627",
+    "Html": "Hello-\r<br />\nis it possible to configure a Wolfpack instance to listen on both a http and https port? I have an instance listening on port 80 now but would like to listen on 443 as well for some of my clients that only allow https outbound.<br />\n",
+    "PostedDate": "2013-06-29T13:39:31.42-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1064018",
+    "ThreadId": "448627",
+    "Html": "Sorry for the slow reply!\r<br />\n<br />\nTechnically it's possible as its just WCF so all that is required is an additional binding - however in order to reduce configuration complexity I set up the bindings in code. You would need to find that code in the WCF publisher and add the new binding there. I don't have access to the codebase right now but if need a hand rebuilding the source I'll be able to help next week. \r<br />\n<br />\nCheers,\r<br />\n<br />\nJames<br />\n",
+    "PostedDate": "2013-07-03T03:20:42.44-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1065403",
+    "ThreadId": "448627",
+    "Html": "Thanks for the reply, as always. Sorry for my delay!\r<br />\nLooks like the source I have must be for the v3 beta. Can you point me at the version I would need to get to modify the WCF publisher? Thanks!<br />\n",
+    "PostedDate": "2013-07-07T20:53:31.583-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1065524",
+    "ThreadId": "448627",
+    "Html": "ok so from a command prompt you should be able to pull the v2.4 source with,\r<br />\n<br />\nhg update 0187cc7cb839\r<br />\n<br />\n... this should wind you back to the source that accompanies the binaries you are running.\r<br />\n<br />\nIn Wolfpack.Core/Wcf/WcfServiceActivity.cs there is a Start() method where you will find the first .AddServiceEndpoint() call (this adds basic http support) - you should be able to add another but listening on https. This SO post might provide some help with programmatic binding if you are new to it: <a href=\"http://stackoverflow.com/questions/54579/wcf-configuration-without-a-config-file\" rel=\"nofollow\">http://stackoverflow.com/questions/54579/wcf-configuration-without-a-config-file</a>.\r<br />\n<br />\nGimme a shout if you have any problems getting it to work.\r<br />\n<br />\nJ<br />\n",
+    "PostedDate": "2013-07-08T04:53:10.413-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

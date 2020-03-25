@@ -1,0 +1,54 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="UpdateAssemblyInfo;LinkProjectToCommonAssemblyInfo">
+
+  <PropertyGroup>
+    <pProjectFolder></pProjectFolder>
+    <pProjectName></pProjectName>
+    <pAssemblyDescription></pAssemblyDescription>
+		<TasksPath>$(MSBuildExtensionsPath)\ExtensionPack\MSBuild.ExtensionPack.tasks</TasksPath>
+    <TargetPropertiesFolder>$(pProjectFolder)\Solutions\$(pProjectName)\Properties</TargetPropertiesFolder>
+	</PropertyGroup>
+
+  <ItemGroup>
+    <TemplateAssemblyInfoFiles Include="$(MSBuildProjectDirectory)\..\Solutions\Build\Common\AssemblyInfo.cs" />
+    <TargetAssemblyInfoFile Include="$(TargetPropertiesFolder)\AssemblyInfo.cs" />
+    <AssemblyInfoToken Include="AssemblyTitle">
+      <Replacement>$(pProjectName)</Replacement>
+    </AssemblyInfoToken>
+    <AssemblyInfoToken Include="AssemblyDescription">
+      <Replacement>$(pAssemblyDescription)</Replacement>
+    </AssemblyInfoToken>
+    <AssemblyInfoToken Include="AssemblyProduct">
+      <Replacement>$(pProjectName)</Replacement>
+    </AssemblyInfoToken>
+  </ItemGroup>
+
+  <Import Project="$(TasksPath)" />
+
+  <Target Name="UpdateAssemblyInfo">
+    <MSBuild.ExtensionPack.Framework.Guid TaskAction="Create">
+      <Output TaskParameter="FormattedGuidString" PropertyName="pProjectGuid" />
+    </MSBuild.ExtensionPack.Framework.Guid>
+    
+    <CreateItem Include="AssemblyTitle" AdditionalMetadata="Replacement=$(pProjectName)">
+      <Output ItemName="AssemblyInfoToken" TaskParameter="Include"/>
+    </CreateItem>
+    <CreateItem Include="AssemblyDescription" AdditionalMetadata="Replacement=$(pAssemblyDescription)">
+      <Output ItemName="AssemblyInfoToken" TaskParameter="Include"/>
+    </CreateItem>
+    <CreateItem Include="AssemblyProduct" AdditionalMetadata="Replacement=$(pProjectName)">
+      <Output ItemName="AssemblyInfoToken" TaskParameter="Include"/>
+    </CreateItem>
+    <CreateItem Include="Guid" AdditionalMetadata="Replacement=$(pProjectGuid)">
+      <Output ItemName="AssemblyInfoToken" TaskParameter="Include"/>
+    </CreateItem>
+    
+    <Copy DestinationFolder="$(TargetPropertiesFolder)" SourceFiles="@(TemplateAssemblyInfoFiles)" />
+    <MSBuild.ExtensionPack.FileSystem.Detokenise TaskAction="Detokenise" 
+                                                 TargetFiles="@(TargetAssemblyInfoFile)" 
+                                                 ReplacementValues="@(AssemblyInfoToken)" />
+  </Target>
+
+  <Target Name="LinkProjectToCommonAssemblyInfo">
+    
+  </Target>
+</Project>

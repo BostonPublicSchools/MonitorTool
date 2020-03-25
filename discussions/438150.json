@@ -1,0 +1,42 @@
+[
+  {
+    "Id": "1021704",
+    "ThreadId": "438150",
+    "Html": "So, I just started using Wolfpack yesterday and I am a big fan, now.  However, there is something that I wanted, that I am thinking that I am missing, because I doubt that I am the first.\r<br />\n<br />\nI wanted to be able to look for the existence of particular string indicated in a urlping.castle.config parameter returned from the URL I was checking.  I see that this would be relatively easy to do in the UrlPingCheck.cs by just looking to see if my requested test string was in the downloaded response.\r<br />\n<br />\nThis way if the website was responding, but not with valid content I could get a failure.\r<br />\n<br />\nIs this a new feature request? \r<br />\n<br />\nLooking forward to v3!<br />\n",
+    "PostedDate": "2013-03-27T04:34:32.517-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1021715",
+    "ThreadId": "438150",
+    "Html": "Welcome!\r<br />\n<br />\nOk - I understand your requirement - it's a pretty obvious one but surprisingly you are the first to ask for it! \r<br />\n<br />\nShould be a simple feature to add to the check - I will add support for this in v3. Would a RegEx string be more useful that just a plain search string?\r<br />\n<br />\nIf you are using the v2.x source then we can do a quick code fix in there too if you can't wait for v3 but would rather concentrate on v3 at the moment. The v3 UrlPing is much more powerful than before - it supports calling Data API web methods (pretending to be an AJAX client) and you can pass custom headers and credentials too.\r<br />\n<br />\nCheers - let me know about the regex/search string and I can add this in ASAP, I'll also create an item in the Issue Tracker to capture the change.\r<br />\n<br />\nJames<br />\n",
+    "PostedDate": "2013-03-27T05:02:51.047-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1021725",
+    "ThreadId": "438150",
+    "Html": "A RegEx would be perfect.  Go ahead and concentrate on getting it into 3.\r<br />\n<br />\nThanks so much!<br />\n",
+    "PostedDate": "2013-03-27T05:30:34.007-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1021964",
+    "ThreadId": "438150",
+    "Html": "A RegEx would be perfect.  Go ahead and concentrate on getting it into 3.\r<br />\n<br />\nThanks so much!<br />\n",
+    "PostedDate": "2013-03-27T11:44:24.623-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1022098",
+    "ThreadId": "438150",
+    "Html": "Ok just added the Regex content check - its in the latest check-in for the v3 source. \r<br />\n<br />\nV3 isn't far off, I'm just porting all the contrib plugins to v3 - only a few to go!<br />\n",
+    "PostedDate": "2013-03-27T15:39:21.79-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Wolfpack.WebServices.Client</id>
+    <version>1.0.0.0</version>
+    <title>Wolfpack.WebServices.Client</title>
+    <authors>jimbobdog</authors>
+    <owners>James Simmonds</owners>
+    <licenseUrl>http://wolfpack.codeplex.com/license</licenseUrl>
+    <projectUrl>http://wolfpack.codeplex.com</projectUrl>
+    <iconUrl>http://download.codeplex.com/Project/Download/FileDownload.aspx?ProjectName=Wolfpack&amp;DownloadId=140622&amp;Build=17672</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Provides a REST client (currently based aruond RestSharp) to interact with the Wolfpack WebService API. If you want to quickly connect to the API then this is the best way however any standard web client could be used.</description>
+    <summary>Provides a REST client (currently based aruond RestSharp) to interact with the Wolfpack WebService API.</summary>
+    <language>en-GB</language>
+    <tags>Wolfpack Monitoring</tags>
+    <dependencies>
+      <dependency id="RestSharp" version="[104.4]" />
+    </dependencies>
+  </metadata>
+</package>

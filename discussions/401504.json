@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "935083",
+    "ThreadId": "401504",
+    "Html": "\r\n<p>Hi,</p>\r\n<p>In making a custom healthcheck rule, there is the rule&nbsp;HealthCheckConfigBase. However, I can't find this (rather, vs2010 intellisense does not detect it with the references added to my project).</p>\r\n<p>&nbsp;</p>\r\n<p>Can anyone assist?</p>\r\n",
+    "PostedDate": "2012-10-31T18:14:27.673-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "935144",
+    "ThreadId": "401504",
+    "Html": "<p>Hi, sorry for the delay in replying - I'm in the UK so probably a different timezone to you!</p>\r\n<p>Ah, the docs are wrong - HealthCheckConfigBase doesn't exist so that is why you can't find it!</p>\r\n<p>The best base classes to use are:</p>\r\n<ul>\r\n<li>For a configuration class: PluginConfigBase,&nbsp;namespace Wolfpack.Core.Interfaces.Entities</li>\r\n<li>For a HealthCheck:&nbsp;HealthCheckBase&lt;T&gt; (where T is your Config class),&nbsp;namespace Wolfpack.Core.Checks</li>\r\n</ul>\r\n<p><span></span></p>\r\n<p><span>I will update the docs ASAP - any more questions or help then just drop a message here.</span></p>\r\n<p><span>Cheers,</span></p>\r\n<p><span>James</span></p>",
+    "PostedDate": "2012-10-31T23:07:50.557-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

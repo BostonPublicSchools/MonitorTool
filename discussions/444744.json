@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "1047692",
+    "ThreadId": "444744",
+    "Html": "I am hoping this is possible and I have just not figured it out yet....\r<br />\n<br />\nIs there a way to map a particular Health Check (in the config file) to a Particular Publisher?\r<br />\n<br />\nOr perhaps there is another way to accomplish what I am trying to do....\r<br />\n<br />\nI want certain Health Check failures (e.g. very critical errors) to go to one publisher (perhaps a particular email address) and other Heath Check failures (e.g. Fake Fail for heart beat) to go to one or more other publishers (Growl or a different email address).<br />\n",
+    "PostedDate": "2013-05-23T05:51:18.967-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1047707",
+    "ThreadId": "444744",
+    "Html": "Hi, yep, you can achieve this level of filtering/mapping with &quot;Publisher&quot; filters, see: <a href=\"https://wolfpack.codeplex.com/wikipage?title=Result%20Publisher%20Filters\" rel=\"nofollow\">https://wolfpack.codeplex.com/wikipage?title=Result%20Publisher%20Filters</a>\r<br />\n<br />\nEssentially these are plugins that sit in front of a publisher. Which publisher and healthcheck they &quot;intercept&quot; is configurable..they accept a wildcard &quot;*&quot; for both publisher and healthcheck name, or you can target a specific check/publish combo, just enter the specific publisher or healthcheck name.\r<br />\n<br />\nThere are a few built-in ones that should solve your problem. The &quot;SuccessFilter&quot; could be used to filter out the fake fail from your critical publisher(s). Hope this helps, if you need more help setting it up drop another message here.\r<br />\n<br />\nBTW, which version of Wolfpack are you running?<br />\n",
+    "PostedDate": "2013-05-23T06:13:39.38-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1047760",
+    "ThreadId": "444744",
+    "Html": "Thanks, I will give that a try.  I assumed there must be a way, but I was looking in the wrong area.\r<br />\n<br />\nI am using 2.4.<br />\n",
+    "PostedDate": "2013-05-23T07:41:02.277-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

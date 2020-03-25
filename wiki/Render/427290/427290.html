@@ -1,0 +1,76 @@
+<div class="wikidoc"><h1>Owl Energy Monitor</h1>The <a href="http://www.theowl.com/index.php?page=about-owl">Owl Energy Monitor</a> is a wireless household/domestic energy monitor - a battery powered sensor unit is clamped around the live mains cable at the distribution box and this broadcasts the cable amp rate. The head unit is a battery powered display that shows all the live readings and stores last week/month/quarter/year data you can scroll through to see if you are using more or less energy.<br /><br />An additional bit of kit is the <a href="http://www.theowl.com/index.php?page=usb-connect">USB Connect</a> - this acts as a receiver and plugs into your PC (via USB obviously) to allow you to capture the readings. Each USB Connect can receive data from up to 10 sensors but in a domestic environment I don&#39;t know why you would have more than one sensor. <br /><br /><b>Note</b> in order to continuously receive energy data your PC must be <b>always switched on</b> - now, if you are energy conscious then having a PC on 24/7 possibly defeats the objective - however most PC&#39;s that are always on (home theatre setups, home automation etc) are pretty low powered (usually &lt; 20/30w) and are obviously there to do another primary job.<br />
+<h2>Where to buy</h2>My Owl unit (CM119) was given to me by my parents but I bought the USB Connect (CM120) from Amazon. Here are the Amazon links (<b>note</b> these include my affiliate code so I get a 5% cut from Amazon - you don&#39;t pay more, Amazon gives me a share of their profit for driving some business their way)
+<ul><li><a href="http://www.amazon.co.uk/gp/product/B002C76WTW?ie=UTF8&amp;tag=gadbabdad-21&amp;linkCode=as2&amp;camp=1634&amp;creative=19450&amp;creativeASIN=B002C76WTW">Owl CM119 Saving Wireless Power Electricity Smart Monitor</a></li>
+<li><a href="http://www.amazon.co.uk/gp/product/B002H3VUJS?ie=UTF8&amp;tag=gadbabdad-21&amp;linkCode=as2&amp;camp=1634&amp;creative=19450&amp;creativeASIN=B002H3VUJS">USB Connect</a> (ignore the bad ratings - it&#39;s people moaning about the software that comes with it)</li></ul>
+or alternatively there are some good deals on <a href="http://shop.ebay.co.uk/?_nkw=owl+energy+monitor&amp;_sacat=See-All-Categories">eBay</a><br />
+<h2>Wolfpack, Owl &amp; Geckoboard</h2>Wolfpack now includes a HealthCheck to stream the energy data from a PC that has a USB Connect device attached. The data, the min/average/max kw/amps used per minute is captured to a SQLite database by the software that comes with the USB Connect device (The Owl USB Connect windows service). The Wolfpack HealthCheck creates a read-only connection to this database and reads new data rows as the Owl service adds them - Wolfpack only copies the Average kW per minute reading; you then configure the Publishers you wish to send the reading to. Wolfpack provides visualisation of your energy data readings in <a href="http://geckoboard.com">Geckoboard</a> as it provides several good graphing widgets that fit very well with the data available. A major benefit of using Geckoboard is that you can view your energy readings from any web-browser anywhere in the world as opposed to the standard Owl software that only runs on the PC the USB Connect is attached to.<br /><br />Where things get interesting is if you have multiple properties to monitor - these could be businesses, properties, offices etc - Wolfpack was designed primarily as a distributed monitoring system so you can run a Wolfpack Agent at each location and publish this data via the WCF Publisher to a central &quot;server&quot; instance of Wolfpack - then view this data on your Geckoboard to view side-by-side charts and graphs of your energy usage from all locations.<br /><br /><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=wolfpack&DownloadId=242346" alt="owl-distributed-resized.png" title="owl-distributed-resized.png" /><br /><br />Here are some examples of displaying Owl Energy data in Geckoboard...<br /><br />This shows the min, average and max readings across all readings for a sensor. In Geckoboard add a new &quot;Geck-O-Meter&quot; widget and set the properties thus,
+<ul><li>URL Data Feed: http://<i>your internet ip address</i>/geckoboard/geckometer/sites/<i>siteid</i>/owlenergymonitor?dp=2</li>
+<li>Custom type</li>
+<li>Feed Format = JSON</li>
+<li>Reload Time = 3 mins</li></ul>
+<br /><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=wolfpack&DownloadId=242348" alt="owl-geckoboard-meter.png" title="owl-geckoboard-meter.png" /> <br /><br />This shows the last reading received from the sensor and the comparison to the previous sensor reading (not the previously displayed reading). In Geckoboard add a new &quot;Number Comparison&quot; widget and set the properties thus,
+<ul><li>URL Data Feed: http://<i>your internet ip address</i>/geckoboard/comparison/sites/<i>siteid</i>/owlenergymonitor?dp=2</li>
+<li>Custom type</li>
+<li>Feed Format = JSON</li>
+<li>Reload Time = 3 mins</li></ul>
+<br /><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=wolfpack&DownloadId=242349" alt="owl-geckoboard-spot.png" title="owl-geckoboard-spot.png" /> <br /><br />This shows the energy reading (kW) as a linegraph...(the &quot;kettle&quot; annotation was added by me - Wolfpack/Geckoboard isn&#39;t clever enough to add this yet!). As you can see energy spikes occur at the obvious times during a 24 hour period, morning and evening. In Geckoboard add a new &quot;Line chart&quot; widget and set the properties thus,
+<ul><li>URL Data Feed: http://<i>your internet ip address</i>/geckoboard/linechart/sites/<i>siteid</i>/owlenergymonitor?<b>limit</b>=1440&amp;<b>scaleup</b>=1000&amp;<b>scaleydp</b>=2&amp;<b>scaley</b>=false</li>
+<li>Custom type</li>
+<li>Feed Format = JSON</li>
+<li>Reload Time = 3 mins</li></ul>
+<br /><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=wolfpack&DownloadId=242347" alt="owl-geckoboard-chart-annotated.png" title="owl-geckoboard-chart-annotated.png" /> <br />
+<h3>Typical Scenarios...</h3>Here are a set of scenarios where I see this device and Wolfpack working together...along with a mini guide on configuring Wolfpack. <br />
+<h4>Scenario: Home</h4><ul><li>You have a single Owl Energy Monitor sensor for your entire house</li>
+<li>You want to understand what your household energy usage is and be able to see this anytime</li></ul>
+You will need...
+<ul><li>A <a href="http://geckoboard.com/">Geckoboard</a> account</li>
+<li>A PC running 24/7</li>
+<li>An Owl CM119 unit and CM120 USB Connect device
+<ul><li>Install the Owl software and sensor - use the Owl software to check that readings are being received by the USB Connect device.</li></ul></li>
+<li>A single Wolfpack Agent installed
+<ul><li>See <a href="https://wolfpack.codeplex.com/wikipage?title=getting%20started&referringTitle=Owl%20Energy%20Monitor">this guide</a> for more details on installing and running Wolfpack.</li>
+<li>Enable the Owl Energy Monitor check
+<ul><li>In config\owl.check.castle.config, &quot;OwlEnergyMonitorCheckConfig&quot; component set the &quot;Enabled&quot; property to &quot;true&quot;</li>
+<li>Ensure the Owl database (be.db) is in the correct location; check the &quot;ConnectionString&quot; property and adjust the &quot;Data Source&quot; to the correct location (it is set to the default installation location so shouldn&#39;t need to be adjusted).</li></ul></li>
+<li>Enable the SQLite (or SqlServer) publisher - this allows Wolfpack to capture the data and store a copy of it
+<ul><li>In config\publisher.castle.config, &quot;SQLiteConfiguration&quot; component set the &quot;Enabled&quot; property to &quot;true&quot;</li>
+<li>The database location is held in the config\data.connection.config file - currently set to the same folder as the application binaries. You can set a fully qualified path eg: d:\Wolfpack\Wolfpack.db3.</li></ul></li>
+<li>Enable the Geckoboard Data Services Activity - this allows your Geckoboard to connect to your Owl Energy data
+<ul><li>In config\activity.castle.config, &quot;GeckoboardDataServiceActivityConfig&quot; component set the &quot;Enabled&quot; property to &quot;true&quot;</li>
+<li>The Uri property is where Wolfpack will listen for requests from Geckoboard; remember that this must be on port 80 so </li></ul></li></ul></li></ul>
+don&#39;t set a custom port number here. Again setup port forwarding on your router to ensure that port 80 traffic will be directed to the PC running this instance of Wolfpack.
+<ul><li>Make sure you have set the DataProvider for the Geckoboard Data Service. As there are multiple database storage options to publish to now you need to make sure that this Activity queries the correct data source.
+<ul><li> In config\activity.castle.config, &quot;GeckoboardDataServiceConfig&quot; component, set the &quot;DataProvider&quot; property to the correct data provider id - valid values are quoted in the comment above this setting</li></ul>
+</li></ul><ul><li>Ensure that the Wolfpack Geckoboard Data Service is accessible from the internet
+<ul><li>Setup port forwarding for port 80 to the PC running Wolfpack
+</li></ul><ul><li>Create a Geckoboard linechart widget
+<ul><li>The url will be http://<i>your internet ip address</i>/geckoboard/linechart/sites/<i>siteid</i>/owlenergymonitor?<b>limit</b>=1440&amp;<b>scaleup</b>=1000&amp;<b>scaleydp</b>=2&amp;<b>scaley</b>=false</li>
+<li>Here is an explanation of the querystring parameters (after ?) on the url
+<ul><li><b>limit</b> = the number of minutes back you want to go. Owl Windows Service records data per minute and Wolfpack copies this across into the Wolfpack database (via WCF/NServiceBus if setup that way). One day is 1440 minutes, two days is 2880 and so on. The number of points plotted on the graph though depends on the sample frequency - you can only plot a maximum of 300 points so the a sample of the data is taken every limit/300 (1440/300) = 3 data rows. Wolfpack will calculate this sample frequency for you or you can set it using the <b>sample</b> parameter.</li>
+<li><b>sample</b> = the row number multiple that the data value will be returned for. Eg: sample=1 means every row will be returned, sample=5 means every fifth row data value will be returned. The rule here is that <b>limit</b>/<b>sample</b> cannot exceed 300 - if it does Wolfpack will automatically correct it to the best sample frequency possible.</li>
+<li><b>scaleup</b> &amp; <b>scaledown</b> = a factor to multiply (scale up) or divide (scale down) the data (ResultCount) value by. Eg: if the data value is 0.555 and represents kilowatts then <b>scaleup</b>=1000 would turn this into 555 watts.</li>
+<li><b>scaleydp</b> = the number of decimal places to display on the y-axis labels</li>
+<li><b>scaley</b> = apply the <b>scaleup</b> or <b>scaledown</b> factor to the y-axis labels so they are also scaled. Default is to scale the y-axis labels. </li>
+<li><b>tag</b> = the name of the sensor (as configured in the Owl software). This is stored in the &quot;Tag&quot; field of the Health Check result and by specifing this parameter we can ensure that we only get data for that sensor. If you only have one sensor there is no benefit in providing this parameter and it can be left off the url.</li></ul>
+</li></ul><ul><li>Start Wolfpack</li></ul>
+
+<h4>Scenario: Multiple Properties/Businesses</h4>In this scenario there are multiple instances of Wolfpack running - one at each property that has an Owl sensor and one instance will also act as the &quot;server&quot; agent - this instance will collect the sensor data from the other agents; this is done via Http over WCF. The server instance will also expose all your Owl energy data via the Geckoboard Data Service Activity.
+<ul><li>You have a single Owl Energy Monitor sensor in multiple properties/business and you want a dashboard view across then all.
+<ul><li>Install the Owl software and sensor - use the Owl software to check that readings are being received by the USB Connect device.</li></ul></li>
+<li>Setting up the &quot;server&quot; instance
+<ul><li>See <a href="https://wolfpack.codeplex.com/wikipage?title=getting%20started&referringTitle=Owl%20Energy%20Monitor">this guide</a> for more details on installing and running Wolfpack.</li>
+<li>On the &quot;WcfServiceHostConfig&quot; component in config\activity.castle.config set the &quot;Enabled&quot; property to &quot;true&quot;
+<ul><li>Set the Uri property to the address you want Wolfpack to listen on. Usually localhost will be fine - just adjust the port number as required and remember that if behind a router you will need to set up port forwarding to ensure that remote Wolfpack instances can communicate to this instance.</li></ul></li>
+<li>On the &quot;GeckoboardDataServiceActivityConfig&quot; component in config\activity.castle.config set the &quot;Enabled&quot; property to &quot;true&quot;
+<ul><li>The Uri property is where Wolfpack will listen for requests from Geckoboard - remember that this must be on port 80 so don&#39;t set a custom port number here - again setup port forwarding on your router to ensure that port 80 traffic will be directed to the PC running this instance of Wolfpack.</li></ul></li></ul></li>
+<li>Setting up the Remote Agents. When you set up Wolfpack on the PC&#39;s that have an Owl USB Connect device attached it is important to provide a unique reference to each sensor - this can be done in several ways,
+<ul><li>Each Agent has a different SiteId (config\role.castle.config)</li>
+<li>or the Owl Health Check has a different (and unique) FriendlyId (config\owl.check.castle.config)</li>
+<li>or the sensor name when registered with the Owl software is unique</li></ul></li>
+<li>Enable the WCF Publisher (&quot;WcfPublisherConfiguration&quot; component in config\publisher.castle.config) and set the Uri property to point to your &quot;server&quot; instance internet address. Eg: If you set the Uri property of the &quot;WcfServiceHostConfig&quot; component on the &quot;server&quot; instance to &quot;http://localhost:802/Wolfpack&quot; then you would need to replace &quot;localhost&quot; with the internet address of the connection running the &quot;server&quot;.
+<ul><li>&quot;Server&quot; instance &quot;WcfServiceHostConfig&quot; Uri property: http://localhost:802/Wolfpack</li>
+<li>&quot;Remote&quot; instance &quot;WcfPublisherConfiguration&quot; Uri property: http://<i>internet address of server</i>:802/Wolfpack</li></ul></li>
+<li>Start the Wolfpack server instance</li>
+<li>Start each Wolfpack remote instance</li></ul></li></ul></li></ul>
+
+<h3>Running</h3>Once you have configured Wolfpack and started all the instances (server/remote) then you should see data start to acculumate in the Wolfpack database. You should see a new row appear for the &quot;OwlEnergyMonitor&quot; result every minute. If you are using SqlServer to hold the AgentData table then just use SQL Studio to view the data - if you are using SQLite then I recommend <a href="http://www.yunqa.de/delphi/doku.php/products/sqlitespy/index">SQLiteSpy</a> as a good data viewer/query tool.<br /><br />The best way to see the data is by visualising it in Geckoboard. Instructions for setting up the widgets can be found above.</div><div class="ClearBoth"></div>

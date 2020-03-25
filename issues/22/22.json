@@ -1,0 +1,60 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": "2014-07-16T07:55:14.78-07:00",
+    "CommentCount": 4,
+    "Custom": null,
+    "Description": "I created a SQL Server Publisher. I noticed that it throws a NotImplementedException so I tweaked the commented code under it. Now it looks like this:\r\n\r\n```\r\n       public void Publish(NotificationEvent message)\r\n        {\r\n            //throw new NotImplementedException();\r\n            //var data = Serialiser<NotificationEventHealthCheck>.ToXml(message);\r\n\r\n            var statement = SqlServerStatement.Create(\"INSERT INTO {0}.AgentData (\", _config.SchemaName)\r\n                .Append(\"TypeId,EventType,SiteId,AgentId,CheckId,\")\r\n                .AppendIf(() => message.Result.HasValue, \"Result,\")\r\n                .AppendIf(() => message.ResultCount.HasValue, \"ResultCount,\")\r\n                .AppendIf(() => (message.Tags != null && message.Tags.Count != 0), \"Tags,\")\r\n                .Append(\"GeneratedOnUtc,ReceivedOnUtc,Data,\")\r\n                .AppendIf(() => message.MinuteBucket.HasValue, \"MinuteBucket,\")\r\n                .AppendIf(() => message.HourBucket.HasValue, \"HourBucket,\")\r\n                .AppendIf(() => message.DayBucket.HasValue, \"DayBucket,\")\r\n                .Append(\"Version\")\r\n                .AppendIf(() => (message.Longitude != null && message.Latitude != null), \",Longitude,Latitude\")\r\n                .Append(\") VALUES (\")\r\n                .InsertParameter(\"@pTypeId\", message.Id).Append(\",\")\r\n                .InsertParameter(\"@pEventType\", message.EventType).Append(\",\")\r\n                .InsertParameter(\"@pSiteId\", message.SiteId).Append(\",\")\r\n                .InsertParameter(\"@pAgentId\", message.AgentId).Append(\",\")\r\n                .InsertParameter(\"@pCheckId\", message.CheckId).Append(\",\")\r\n                .InsertParameterIf(() => message.Result.HasValue, \"@pResult\", message.Result)\r\n                .AppendIf(() => message.Result.HasValue, \",\")\r\n                .InsertParameterIf(() => message.ResultCount.HasValue, \"@pResultCount\", message.ResultCount)\r\n                .AppendIf(() => message.ResultCount.HasValue, \",\")\r\n                .InsertParameterIf(() => (message.Tags != null && message.Tags.Count != 0), \"@pTags\", message.Tags)\r\n                .AppendIf(() => (message.Tags != null && message.Tags.Count != 0), \",\")\r\n                .InsertParameter(\"@pGeneratedOnUtc\", message.GeneratedOnUtc).Append(\",\")\r\n                .InsertParameter(\"@pReceivedOnUtc\", DateTime.UtcNow).Append(\",\")\r\n                .InsertParameter(\"@pData\", message.ToString()).Append(\",\")                                    // replaced \"data\" with \"message.ToString()\" for now\r\n                .InsertParameterIf(() => message.MinuteBucket.HasValue, \"@pMinuteBucket\", message.MinuteBucket)\r\n                .AppendIf(() => message.MinuteBucket.HasValue, \",\")\r\n                .InsertParameterIf(() => message.HourBucket.HasValue, \"@pHourBucket\", message.HourBucket)\r\n                .AppendIf(() => message.HourBucket.HasValue, \",\")\r\n                .InsertParameterIf(() => message.DayBucket.HasValue, \"@pDayBucket\", message.DayBucket)\r\n                .AppendIf(() => message.DayBucket.HasValue, \",\")\r\n                .InsertParameter(\"@pVersion\", message.Id);\r\n\r\n            if (message.Longitude != null && message.Latitude != null)\r\n            {\r\n                statement.Append(\",\")\r\n                    .InsertParameter(\"@pLongitude\", message.Longitude).Append(\",\")\r\n                    .InsertParameter(\"@pLatitude\", message.Latitude);\r\n            }\r\n            statement.Append(\")\");\r\n\r\n            using (var cmd = SqlServerAdhocCommand.UsingSmartConnection(_config.ConnectionString)\r\n                .WithSql(statement))\r\n            {\r\n                cmd.ExecuteNonQuery();\r\n            }\r\n        }\r\n```\r\n\r\nAfter this, publishing WMI Process Running Checks into DB works fine. However, when I add a Disk Space Check, I get the following error:\r\n\r\n```\r\n2014-07-08 17:42:38,518 [14] ERROR Wolfpack [(null)] - Wolfpack Component Failure. IncidentId:=e39fec4a-2f1f-4b25-88a5-29b1f0b6865e; Name:=DiskSpace_DriveC; Details:=System.ArgumentException: No mapping exists from object type System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]] to a known managed provider native type.\r\n   at System.Data.SqlClient.MetaType.GetMetaTypeFromValue(Type dataType, Object value, Boolean inferLen, Boolean streamAllowed)\r\n   at System.Data.SqlClient.SqlParameter.GetMetaTypeOnly()\r\n   at System.Data.SqlClient.SqlParameter.Validate(Int32 index, Boolean isCommandProc)\r\n   at System.Data.SqlClient.SqlCommand.BuildParamList(TdsParser parser, SqlParameterCollection parameters)\r\n   at System.Data.SqlClient.SqlCommand.BuildExecuteSql(CommandBehavior behavior, String commandText, SqlParameterCollection parameters, _SqlRPC& rpc)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)\r\n   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()\r\n   at Wolfpack.Core.Database.AdhocCommandBase.ExecuteNonQuery() in c:\\Chocolatey\\lib\\wolfpack_f1d4443bf105\\Solutions\\Wolfpack.Core\\Database\\AdhocCommandBase.cs:line 128\r\n   at Wolfpack.Core.Database.SqlServer.SqlNotificationEventPublisher.Publish(NotificationEvent message) in c:\\Chocolatey\\lib\\wolfpack_f1d4443bf105\\Solutions\\Wolfpack.Core\\Database\\SqlServer\\SqlServerPublishers.cs:line 195\r\n   at Wolfpack.Core.Database.SqlServer.SqlNotificationEventPublisher.Consume(NotificationEvent message) in c:\\Chocolatey\\lib\\wolfpack_f1d4443bf105\\Solutions\\Wolfpack.Core\\Database\\SqlServer\\SqlServerPublishers.cs:line 201\r\n   at Magnum.Pipeline.Segments.MessageConsumerSegment`1.<>c__DisplayClassd`1.<Accept>b__c(T x)\r\n   at Magnum.Pipeline.Segments.PipeSegment.<>c__DisplayClass1`1.<Send>b__0(MessageConsumer`1 consumer)\r\n   at Magnum.Extensions.ExtensionsToEnumerable.Each[T](IEnumerable`1 collection, Action`1 callback)\r\n   at Magnum.Pipeline.Segments.PipeSegment.Send[T](T message)\r\n   at Wolfpack.Core.MagnumMessenger.Wolfpack.Core.Interfaces.IMessenger.Publish(NotificationEvent message) in c:\\Chocolatey\\lib\\wolfpack_f1d4443bf105\\Solutions\\Wolfpack.Core\\Messenger.cs:line 88\r\n   at Wolfpack.Core.Messenger.Publish(NotificationEvent message) in c:\\Chocolatey\\lib\\wolfpack_f1d4443bf105\\Solutions\\Wolfpack.Core\\Messenger.cs:line 45\r\n   at Wolfpack.Core.Notification.DefaultNotificationHub.PublishEvent(NotificationEvent notification) in c:\\Chocolatey\\lib\\wolfpack_f1d4443bf105\\Solutions\\Wolfpack.Core\\Notification\\DefaultNotificationHub.cs:line 116\r\n   at Wolfpack.Core.Notification.DefaultNotificationHub.Consume(NotificationRequest request) in c:\\Chocolatey\\lib\\wolfpack_f1d4443bf105\\Solutions\\Wolfpack.Core\\Notification\\DefaultNotificationHub.cs:line 67\r\n   at Magnum.Pipeline.Segments.MessageConsumerSegment`1.<>c__DisplayClassd`1.<Accept>b__c(T x)\r\n   at Magnum.Pipeline.Segments.PipeSegment.<>c__DisplayClass1`1.<Send>b__0(MessageConsumer`1 consumer)\r\n   at Magnum.Extensions.ExtensionsToEnumerable.Each[T](IEnumerable`1 collection, Action`1 callback)\r\n   at Magnum.Pipeline.Segments.PipeSegment.Send[T](T message)\r\n   at Wolfpack.Core.MagnumMessenger.Wolfpack.Core.Interfaces.IMessenger.Publish(NotificationRequest message) in c:\\Chocolatey\\lib\\wolfpack_f1d4443bf105\\Solutions\\Wolfpack.Core\\Messenger.cs:line 82\r\n   at Wolfpack.Core.Messenger.Publish(NotificationRequest request) in c:\\Chocolatey\\lib\\wolfpack_f1d4443bf105\\Solutions\\Wolfpack.Core\\Messenger.cs:line 40\r\n   at Wolfpack.Core.Checks.HealthCheckBase`1.Publish(NotificationRequest request) in c:\\Chocolatey\\lib\\wolfpack_f1d4443bf105\\Solutions\\Wolfpack.Core\\Checks\\HealthCheckBase.cs:line 40\r\n   at Wolfpack.Core.Checks.ThresholdCheckBase`1.Publish(NotificationRequest request) in c:\\Chocolatey\\lib\\wolfpack_f1d4443bf105\\Solutions\\Wolfpack.Core\\Checks\\ThresholdCheckBase.cs:line 32\r\n   at Wolfpack.Core.Checks.DiskSpaceCheck.Execute() in c:\\Chocolatey\\lib\\wolfpack_f1d4443bf105\\Solutions\\Wolfpack.Core\\Checks\\DiskSpaceCheck.cs:line 77\r\n   at Wolfpack.Core.Schedulers.HealthCheckIntervalScheduler.Execute() in c:\\Chocolatey\\lib\\wolfpack_f1d4443bf105\\Solutions\\Wolfpack.Core\\Schedulers\\HealthCheckIntervalScheduler.cs:line 55\r\n\r\n```\r\n\r\nDo you have already any implementation of the SQL Server Publisher that works for all the checks? Otherwise how should I tweak this to make it work?",
+    "LastUpdatedDate": "2014-07-16T07:55:14.78-07:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "wolfpack",
+    "ReportedDate": "2014-07-08T09:08:19.38-07:00",
+    "Status": {
+      "Name": "Closed",
+      "Id": 4
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Publish DiskSpaceCheck to SQL Server",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 1,
+    "Id": 22
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "Wolfpack now has a repository layer and this is used to read/write Notification events. \n\nThe SQL \"publisher\" has been replaced with a SQL repository implemented in entity framework and this component exists in the current release (Wolfpack.core\\repositories\\sql) but I don't think there is a way of selecting it as the default repository - I am about to do another release and will add this in so you can configure Wolfpack to use it to store your notifications. The quick fix is to implement an IStartup component and register the SQL repository implementation against INotificationRepsitory interface in the container - Wolfpack scans for any IStartup components and automatically executes them. \n\nHTH!",
+      "PostedDate": "2014-07-08T23:46:53.06-07:00",
+      "Id": 151888
+    },
+    {
+      "Message": "Ok, thanks! Any estimation of the release date already? ",
+      "PostedDate": "2014-07-09T06:02:01.75-07:00",
+      "Id": 151902
+    },
+    {
+      "Message": "Ok, I got it working! Thanks!",
+      "PostedDate": "2014-07-10T07:45:33.697-07:00",
+      "Id": 152018
+    },
+    {
+      "Message": "Yeah, release will be in the next day or so - some MSMQ check fixes and some low level (publisher & activity) configuration loader changes to allow multiple instances of the same type to be registered.\n\nGlad you got it working ok!",
+      "PostedDate": "2014-07-10T09:04:52.287-07:00",
+      "Id": 152023
+    }
+  ]
+}

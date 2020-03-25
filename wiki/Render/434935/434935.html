@@ -1,0 +1,51 @@
+<div class="wikidoc"><h1>LogParser Health Check</h1><a href="http://www.microsoft.com/downloads/details.aspx?FamilyID=890cd06b-abf8-4c25-91b2-f8d975cf8c07&amp;displaylang=en">Microsoft LogParser</a> is a fantastic utility for interrogating logging information. &quot;<i>The world is your database with Log Parser</i>&quot;...I kid you not - this is taken from the <a href="http://www.microsoft.com/downloads/details.aspx?FamilyID=890cd06b-abf8-4c25-91b2-f8d975cf8c07&amp;displaylang=en">official docs</a>. Basically it allows you to write SQL-esque style statements against lots of textual log data sources (listed below) - it&#39;s pretty cool, like an old-school LINQ to &quot;Log Data&quot; type thing.<br /><br />Stuff you can do with it!....
+<ul><li>Search the Eventlog for entries from specific applications</li>
+<li>Search IIS logs for any status code (eg: 404&#39;s)</li>
+<li>Search rss/atom feeds for a specific term</li>
+<li>Search the file system for files that are larger/smaller than a specific size</li>
+<li>Search firewall logs</li>
+<li>Loads more things!!</li></ul>
+Check out the LogParser documentation that is installed with LogParser (see Pre-requisites below) for more excellent examples of what you can do with it.<br /><br />More LogParser resources (links pinched from <a href="http://www.lizard-labs.net/PageHtml.aspx?lng=2&amp;PageId=18&amp;PageListItemId=17">Lizard Labs</a>)...
+<ul><li><a href="http://forums.iis.net/default.aspx?GroupID=51">LogParser forums</a></li>
+<li><a href="http://linuxlore.blogspot.com/2006/11/howto-use-microsofts-logparser-to.html">Examples (SQL) queries for IIS Analysis</a></li>
+<li><a href="http://support.microsoft.com/kb/910447">LogParser and Asp.NET</a></li>
+<li><a href="http://www.msexchange.org/tutorials/Using-Logparser-Utility-Analyze-ExchangeIIS-Logs.html">Using the Logparser Utility to Analyze Exchange/IIS Logs</a></li></ul>
+
+<h2>Supported Input Formats</h2><ul><li>CSV</li>
+<li>EVT (Event Log)</li>
+<li>FS (File System)</li>
+<li>IIS</li>
+<li>IIS (W3C)</li>
+<li>REG (Registry)</li>
+<li>TEXTLINE</li>
+<li>TSV</li>
+<li>URLSCAN</li>
+<li>W3C - Examples of log files in this format include,
+<ul><li>Personal Firewall log files </li>
+<li>Microsoft Internet Security and Acceleration Server (ISA Server) log files </li>
+<li>Windows Media Services log files </li>
+<li>Exchange Tracking log files </li>
+<li>Simple Mail Transfer Protocol (SMTP) log files </li></ul></li>
+<li>XML</li></ul>
+<h2>Unsupported Input Formats</h2>I took a wild stab in the dark at what wouldn&#39;t be widely used/required and have not implemented Health Checks based on the following formats. If you&#39;re desperate for one of these and can&#39;t roll it yourself then drop me a request via the discussion pages and I&#39;ll see what can be done - to be honest though they are pretty simple to implement, just look at any of the checks in the Contrib.Checks.LogParser project source to see how simple!
+<ul><li>ADS (Active Directory)</li>
+<li>BIN</li>
+<li>COM</li>
+<li>ETW</li>
+<li>HTTPERR</li>
+<li>IISODBC</li>
+<li>NCSA</li>
+<li>NETMON</li>
+<li>TEXTWORD</li></ul>
+<h2>Pre-requisites</h2>In order to use <b>any</b> LogParser based Health Check you first need to download and install LogParser onto the machine that will run these checks; LogParser <b>cannot</b> be redistributed so you must download and install it yourself - this is the <a href="http://www.microsoft.com/downloads/details.aspx?FamilyID=890cd06b-abf8-4c25-91b2-f8d975cf8c07&amp;displaylang=en">link</a> to download it from Microsoft. LogParser can query logs from other machines (remotely) but you do not need to install it on the remote machine being queried.<br /><br />If you are new to LogParser then I recommend using one of the cool GUI&#39;s to help you get started with it; I use <a href="http://en.serialcoder.net/logiciels/visual-logparser.aspx">Visual LogParser</a> but have become aware of <a href="http://www.lizard-labs.net/PageHtml.aspx?lng=2&amp;PageId=18&amp;PageListItemId=17">Log Parser Lizard</a> which also looks pretty good. Both free/donation-ware.
+<h2>Configuration</h2><ul><li>From the source code, build the Wolfpack.Contrib.Checks.LogParser project
+<ul><li>This is my first attempt at a &quot;Contrib&quot; style drop-in configuration for an external dll containing checks</li></ul></li>
+<li>Copy Wolfpack.Contrib.Checks.LogParser.dll &amp; Interop.MSUtil.dll to the Wolfpack Agent folder. Also copy the files from the &quot;Config&quot; folder, logparser.binding.castle.config &amp; logparser.check.castle.config.
+<ul><li>The binaries zip will have these files already installed in the correct location.</li></ul></li>
+<li>Update the logparser.binding.castle.config &amp; logparser.check.castle.config as appropriate.</li>
+<li>In the &quot;check&quot; file &quot;enable&quot; the checks you wish to run. Please consult the LogParser &quot;Documentation&quot; for help with writing the queries.
+<ul><li><b>Remember</b> when writing your FROM query - you must encode any xml entities such as &lt;&gt;&quot; etc. These are commonly used when writing queries.</li>
+<li>The parameters to each check are named (almost) the same as the original LogParser parameter - use the LogParser documentation to help explain each one.</li></ul></li>
+<li>The &quot;binding&quot; file contains bindings for ALL LogParser based checks - just find the ones that contains the checks you have enabled and make sure they bind to the correct &quot;schedule&quot; configuration; the default is &quot;EveryMinute&quot;.</li>
+<li>The ResultCount property will contain the number of rows returned by the query.</li></ul>
+</div><div class="ClearBoth"></div>

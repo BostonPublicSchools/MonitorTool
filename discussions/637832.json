@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "1424987",
+    "ThreadId": "637832",
+    "Html": "Hi,\r<br />\n<br />\nFor background, I am still using 2.4.<br />\n\r<br />\nI have a custom object called Products and would like to see the information for this object added to the XML of the Data column in AgentData.  This would only need to be done for one plugin.<br />\n\r<br />\nDo you have a recommendation on the cleanest way to do this?\r<br />\n<br />\nThank you for the great product!<br />\n",
+    "PostedDate": "2015-05-12T08:46:31.547-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1425156",
+    "ThreadId": "637832",
+    "Html": "Hey...so this custom object &quot;Products&quot; - is this data/object generated from a health check plugin? If so a quick win would be to add a json (or other serialisation format) of it to the &quot;Properties&quot; collection of the notification that the check creates - this should then be saved down into &quot;Data&quot;.\r<br />\n<br />\nLet me know if that fixes it!\r<br />\n<br />\nJames<br />\n",
+    "PostedDate": "2015-05-13T04:45:52.883-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1425230",
+    "ThreadId": "637832",
+    "Html": "Yes. The Products object and data is generated from the plugin. However, I’m not sure I understand.  The Add function of Properties doesn’t take a serialized object as it’s second argument.  So, I must be missing something.\r<br />\n<br />\nSee below my attempt.\r<br />\n<br />\nHealthCheckData healthCheckData = new HealthCheckData\r<br />\n{\r<br />\n   Identity = this.Identity,\r<br />\n   Info = &quot;Reports Product Details&quot;,\r<br />\n   Result = productDetailsList.Count &lt; 1,\r<br />\n   ResultCount = productDetailsList.Count,\r<br />\n   Properties = new ResultProperties()\r<br />\n};\r<br />\n<br />\nhealthCheckData.Properties.Add(&quot;Product&quot;, mySerializedProduct);<br />\n",
+    "PostedDate": "2015-05-13T09:10:09.933-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

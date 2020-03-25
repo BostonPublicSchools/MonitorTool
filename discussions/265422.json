@@ -1,0 +1,42 @@
+[
+  {
+    "Id": "643342",
+    "ThreadId": "265422",
+    "Html": "<p>I not found SMTP publisher in wolfpack roadmap. I think the send failures by e-mail will be very useful thing.</p>\n<p>What you think about it?</p>",
+    "PostedDate": "2011-07-16T15:14:19.01-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "643377",
+    "ThreadId": "265422",
+    "Html": "<p>E-mail publisher is available here: <a title=\"http://wolfpackcontrib.codeplex.com/\" href=\"http://wolfpackcontrib.codeplex.com/\" target=\"_blank\">http://wolfpackcontrib.codeplex.com/</a></p>",
+    "PostedDate": "2011-07-16T23:01:13.237-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "643387",
+    "ThreadId": "265422",
+    "Html": "<p>Hi, great....you found the email publisher (&amp; thanks for taking the time to update this thread)</p>\r\n<p>I've improved the docs to provide a link to the contrib project from the home, healthcheck and publisher pages so hopefully this is more prominent and helps people discover these cool contributions.</p>\r\n<p>Feedback and suggestions for Wolfpack are always welcome...if Wolfpack is missing that magic plugin/feature then please drop me a suggestion via these discussion pages and let's kick the tyres on it and get it on the roadmap....depending upon the size/complexity of the request I can usually just do it and get a build out pretty quick.</p>\r\n<p>Cheers,</p>\r\n<p>James</p>",
+    "PostedDate": "2011-07-17T00:56:58.717-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "643398",
+    "ThreadId": "265422",
+    "Html": "<p>Thank for your response.</p>\n<p>I tested e-mail publisher and now have some suggestions:</p>\n<p>1) In my opinion e-mail publisher should be part of the core functionality of Wolfpack.</p>\n<p>2) It will be useful to add example of e-mail publisher configuration. And installation instruction with simple templates and images (embedded to e-mail message).</p>\n<p>3) E-mail publisher does not have error logging. In order to find the e-mail problem I had to modify the publisher sources:<br /> <br /> public class EmailHealthCheckResultPublisher<br /> ...<br /> public void Publish(HealthCheckResult message)<br /> {<br /> try<br /> {<br /> ...<br /> }<br /> catch (Exception e)<br /> &nbsp; {<br /> &nbsp; &nbsp; &nbsp;Logger.Error(e.ToString()); // added logging<br /> &nbsp; &nbsp;}<br /> }</p>\n<p>&nbsp;</p>",
+    "PostedDate": "2011-07-17T02:22:21.763-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "643568",
+    "ThreadId": "265422",
+    "Html": "<p>Alex - thanks for the feedback about the email publisher.</p>\r\n<p>As it's contrib project code I'll have a chat with Rob and see if he's happy it gets shifted into the core.&nbsp;</p>\r\n<p>More importantly (irrespective of location) is better examples and some docs for it. I can add these (with Rob's help) to the Publishers page....I'll post back here with an update once we've got something.</p>\r\n<p>Re: exception handling - there are some base classes kicking about (PublisherBase) that could be modified to include some sort of sandbox try/catch for a publisher if it were to inherit from it. Whilst not bulletproof (you don't <span style=\"text-decoration: underline;\">have</span> to inherit from it) it would do the job.</p>\r\n<p>Cheers,</p>\r\n<p>James</p>",
+    "PostedDate": "2011-07-17T23:36:45.137-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

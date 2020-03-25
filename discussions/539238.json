@@ -1,0 +1,90 @@
+[
+  {
+    "Id": "1223502",
+    "ThreadId": "539238",
+    "Html": "I would like to add a plugin to the contrib project.  How do I go about doing this?<br />\n",
+    "PostedDate": "2014-03-17T06:48:32.79-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1223510",
+    "ThreadId": "539238",
+    "Html": "Hi,\r<br />\n<br />\nSo far contributions have just been zips that people send and I package them up into the nuget package and create the docs on the codeplex site.\r<br />\n<br />\nAlternatively you could submit a pull request and I can merge it into the codebase.\r<br />\n<br />\nFinally I can add you as a direct contributor to the codeplex site so you can commit direct to the repo and create the docs yourself.\r<br />\n<br />\nWhichever you feel more comfortable really!\r<br />\n<br />\nAnd thanks for wanting to contribute to the project! \r<br />\n<br />\nRegards,\r<br />\nJames\r<br />\n<br />\nPS: What sort of add-in is it?<br />\n",
+    "PostedDate": "2014-03-17T07:12:18.16-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1223542",
+    "ThreadId": "539238",
+    "Html": "It is a super simple registry reader that returns a key value via your tag data if the registry key value has changed or if an agent has never reported a value.  We use the registry to see the version of software installed. I know it is a bit of an unconventional use of your tag data.  Let me know if you have a different idea.\r<br />\n<br />\nThe project works with your current released version.  Does this matter on how you want it to be merged?\r<br />\n<br />\nI’ll zip everything after I clean up the doc tags in the code.  \r<br />\n",
+    "PostedDate": "2014-03-17T08:14:39.59-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1223633",
+    "ThreadId": "539238",
+    "Html": "James,\r<br />\n<br />\nI have the files zipped up.  How do I send the zip to you?<br />\n",
+    "PostedDate": "2014-03-17T11:52:24.703-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1223638",
+    "ThreadId": "539238",
+    "Html": "Hi,\r<br />\n<br />\nDo you have a dropbox/skydrive account- something like that you can dump it too with public share rights?\r<br />\n<br />\nIf not I'll DM an email address.\r<br />\n<br />\nCheers,\r<br />\n<br />\nJames<br />\n",
+    "PostedDate": "2014-03-17T12:06:17.397-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1223645",
+    "ThreadId": "539238",
+    "Html": "I just created a temporary account. Try the link below.\r<br />\n<br />\n<a href=\"http://public.justcloud.com/dqiksyx1y2.47883803\" rel=\"nofollow\">http://public.justcloud.com/dqiksyx1y2.47883803</a><br />\n",
+    "PostedDate": "2014-03-17T12:24:47.417-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1223676",
+    "ThreadId": "539238",
+    "Html": "Great! Got it - looks good!\r<br />\n<br />\nInteresting to see you saving state to disk...I did have a feature to allow a check to support saving/restoring state but never took it past an interface - I think I might add this in for v3, provide simple state infrastructure so a check can just call Get/SaveState.\r<br />\n<br />\nIt'll take a few days to get it packaged - will let you know once ready to post to NuGet/go live - might need some details for the NuGet package metadata. \r<br />\n<br />\nI'll also port it to v3 and make sure it's automatically included in the latest version.\r<br />\n<br />\nThanks for the taking the time to help improve Wolfpack!\r<br />\n<br />\nRegards,\r<br />\nJames<br />\n",
+    "PostedDate": "2014-03-17T13:57:10.137-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1226286",
+    "ThreadId": "539238",
+    "Html": "Just done a major drop on v3 so will roll this out as a v3 contrib. v3 is also ready to go!\r<br />\n<br />\nJ<br />\n",
+    "PostedDate": "2014-03-24T19:32:06.62-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1228791",
+    "ThreadId": "539238",
+    "Html": "James,\r<br />\n<br />\nI'm not finding the contrib in the latest version.  Did you have a problem with it?  I can modify it if necessary.\r<br />\n<br />\nF<br />\n",
+    "PostedDate": "2014-03-31T15:01:49.24-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1228797",
+    "ThreadId": "539238",
+    "Html": "Hi,\r<br />\n<br />\nI'm pretty busy reorganising the core/contrib at the moment and ironing out issues with the UI extension hooks right now prior to v3 release.\r<br />\n<br />\nI'll try to get it in sometime this week...if I hit any problems I'll drop you a message here.\r<br />\n<br />\nCheers,\r<br />\n<br />\nJames<br />\n",
+    "PostedDate": "2014-03-31T15:09:08.8-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1228812",
+    "ThreadId": "539238",
+    "Html": "Ok...I've ported it to v3 and it's in the contrib repo now...also created the nuget package definition ready for pushing all the contrib packages up to nuget.\r<br />\n<br />\nCheers,\r<br />\nJames<br />\n",
+    "PostedDate": "2014-03-31T15:52:18.54-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

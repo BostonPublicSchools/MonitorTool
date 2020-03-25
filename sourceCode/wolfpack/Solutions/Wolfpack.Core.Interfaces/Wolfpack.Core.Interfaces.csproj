@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{21083526-1E2F-468C-A08B-D2CAC99EC4FC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Wolfpack.Core.Interfaces</RootNamespace>
+    <AssemblyName>Wolfpack.Core.Interfaces</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Periscope|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Periscope\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Build\Common\AssemblyVersion.cs">
+      <Link>Properties\AssemblyVersion.cs</Link>
+    </Compile>
+    <Compile Include="..\Build\Common\CommonAssemblyInfo.cs">
+      <Link>Properties\CommonAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Entities\AlertHistory.cs" />
+    <Compile Include="Entities\ConfigurationActions.cs" />
+    <Compile Include="Entities\ConfigurationChangeRequest.cs" />
+    <Compile Include="Entities\MessageStateTypes.cs" />
+    <Compile Include="Entities\RestartConsoleInstruction.cs" />
+    <Compile Include="Entities\RestartServiceInstruction.cs" />
+    <Compile Include="Entities\SystemCommand.cs" />
+    <Compile Include="Entities\NameValuePair.cs" />
+    <Compile Include="Entities\SpecialTags.cs" />
+    <Compile Include="Entities\TagCloudEntry.cs" />
+    <Compile Include="IConfigurationManager.cs" />
+    <Compile Include="INotificationRepositoryQuery.cs" />
+    <Compile Include="ISupportArtifactGeneration.cs" />
+    <Compile Include="ISupportBootStrapping.cs" />
+    <Compile Include="ISupportConfigurationDiscovery.cs" />
+    <Compile Include="Entities\AgentConfiguration.cs" />
+    <Compile Include="Entities\AnalyticsBaseline.cs" />
+    <Compile Include="Entities\ArtifactDescriptor.cs" />
+    <Compile Include="Entities\Binding.cs" />
+    <Compile Include="Entities\BindingConfiguration.cs" />
+    <Compile Include="Entities\ConfigBase.cs" />
+    <Compile Include="Entities\ConfigurationCatalogue.cs" />
+    <Compile Include="Entities\ConfigurationEntry.cs" />
+    <Compile Include="Entities\GeoData.cs" />
+    <Compile Include="Entities\CriticalFailureDetails.cs" />
+    <Compile Include="Entities\NotificationEventAgentStart.cs" />
+    <Compile Include="Entities\HealthCheckData.cs" />
+    <Compile Include="Entities\NotificationEventHealthCheck.cs" />
+    <Compile Include="Entities\NotificationEvent.cs" />
+    <Compile Include="Entities\NotificationRequest.cs" />
+    <Compile Include="Entities\PipelineResult.cs" />
+    <Compile Include="Entities\PluginConfigBase.cs" />
+    <Compile Include="Entities\PluginDescriptor.cs" />
+    <Compile Include="Entities\Properties.cs" />
+    <Compile Include="Entities\Status.cs" />
+    <Compile Include="Entities\StepBase.cs" />
+    <Compile Include="Entities\StepError.cs" />
+    <Compile Include="Entities\StepResult.cs" />
+    <Compile Include="Entities\TypeDiscoveryConfig.cs" />
+    <Compile Include="IActivityPlugin.cs" />
+    <Compile Include="IArtifactFormatter.cs" />
+    <Compile Include="IArtifactManager.cs" />
+    <Compile Include="ICanBeSwitchedOff.cs" />
+    <Compile Include="IConfigurationRepository.cs" />
+    <Compile Include="IDataProviderPlugin.cs" />
+    <Compile Include="INotificationEventCore.cs" />
+    <Compile Include="INotificationRepository.cs" />
+    <Compile Include="IGeoLocator.cs" />
+    <Compile Include="IHealthCheckPlugin.cs" />
+    <Compile Include="IHealthCheckPluginEx.cs" />
+    <Compile Include="IHealthCheckSchedulerPlugin.cs" />
+    <Compile Include="IHealthCheckStateManager.cs" />
+    <Compile Include="ILoader.cs" />
+    <Compile Include="IMessenger.cs" />
+    <Compile Include="INotificationRequestFilter.cs" />
+    <Compile Include="INotificationHub.cs" />
+    <Compile Include="INow.cs" />
+    <Compile Include="IPipeline.cs" />
+    <Compile Include="IPipelineStep.cs" />
+    <Compile Include="IPlugin.cs" />
+    <Compile Include="IProfileLoader.cs" />
+    <Compile Include="IRolePlugin.cs" />
+    <Compile Include="IRoleProfile.cs" />
+    <Compile Include="IServicePlugin.cs" />
+    <Compile Include="IStartupPlugin.cs" />
+    <Compile Include="ISupportNotificationMode.cs" />
+    <Compile Include="ISupportNotificationThreshold.cs" />
+    <Compile Include="ISupportResultInversion.cs" />
+    <Compile Include="ISystemCommand.cs" />
+    <Compile Include="ITypeDiscovery.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

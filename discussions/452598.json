@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "1077388",
+    "ThreadId": "452598",
+    "Html": "Hi,\r<br />\n<br />\nI just started using Wolfpack. Excellent work, it seems to be very well architected. It's much appreciated to have something like Wolfpack available!\r<br />\n<br />\nI was wondering if Wolfpack offers a configurable way to notify just once when an error occurs:<br />\n<ul>\n<li>I have set up a check for a MSMQ queue that should be empty (NServiceBus error queue), checked every minute</li>\n<li>Whenever message is put in the queue, Wolfpack will notice that and send me an e-mail</li>\n<li>\nI have set up the filter such that only &quot;failures&quot; get through to my email<br />\n</li>\n</ul>\nNow guess what happens when an error is put in the queue at night, There are several minutes between when the error happened and when I wake up to check my e-mail ;)\r<br />\n<br />\nIs there a way to tell Wolfpack something along the lines of &quot;Only notify me again after the message count dropped?&quot;\r<br />\n<br />\nThank you,\r<br />\n<br />\nAlex<br />\n",
+    "PostedDate": "2013-08-06T11:58:01.293-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1077462",
+    "ThreadId": "452598",
+    "Html": "Hi Alex - first thanks for the kind words about Wolfpack - glad you like it!\r<br />\n<br />\nI completely understand the frustration with how it works at the moment - <a href=\"https://wolfpack.codeplex.com/discussions/360513\" rel=\"nofollow\">and you're not alone</a>. I have implemented a solution, a feature called &quot;NotificationHub&quot;. Basically all messages are routed via the hub and it hosts extensible plugins that contain logic to control message delivery to the publishers. I've built a few plugins and the one that fits your requirements is the &quot;StateChange&quot; NotificationMode (plugin) - it sends an alert only when the state changes - so if your error queue is empty then receives some messages it will send an alert in the next check, subsequent checks although still in a failed state will not generate an alert. \r<br />\n<br />\nThis code is not in the 2.4 release - it was committed a while after this release and since then I've been working on v3. If you don't mind building the source then this commit contains all the NotificationHub code, <a href=\"https://wolfpack.codeplex.com/SourceControl/changeset/9914347e0425\" rel=\"nofollow\">https://wolfpack.codeplex.com/SourceControl/changeset/9914347e0425</a> - you might need to alter the code of the check that you are using (Msmq empty check) to add the NotificationMode property so that you can hook into the NotificationHub.\r<br />\n<br />\nAlternatively v3 in the source repository (latest) has all the checks updated to use the NotificationHub (plus some other features like a web UI to configure the checks and a signalr live alert page) - the downside to v3 at the moment is that it only supports MongoDb storage.\r<br />\n<br />\nLet me know how you get on - I'm working on a .Net dashboard (Project 'Periscope') to allow Wolfpack to display it's alert data but I'm trying to get v3 stable and released ASAP so if you can wait that might be easier.\r<br />\n<br />\nCheers,\r<br />\n<br />\nJames<br />\n",
+    "PostedDate": "2013-08-06T15:08:02.023-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1077701",
+    "ThreadId": "452598",
+    "Html": "Hi James,\r<br />\n<br />\nthank you very much for your detailed instructions! I went with a custom build of version 2.4 because as far as I could tell the current default branch doesn't contain e-mail notification support. For version 2.4 I needed to change the code of the MSMQ check to publish the NotificationMode along with the result, and I somehow also needed to Container.Register the INotificationHub. Now everything is working as expected.\r<br />\n<br />\nThank you very much for your support!\r<br />\n<br />\nAlex<br />\n",
+    "PostedDate": "2013-08-07T05:31:17.14-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

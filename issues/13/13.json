@@ -1,0 +1,96 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "Core",
+      "DisplayName": "Core"
+    },
+    "ClosedComment": "",
+    "ClosedDate": "2014-07-03T03:43:21.66-07:00",
+    "CommentCount": 9,
+    "Custom": null,
+    "Description": "After I create a certain test, fill in the config and save, the agent asks for a restart. I accept the restart but the interface doesn't get updated (activity tab remains the same, number of running plugins remains the same). If I manually close the agent and re-open it, then it gets updated. This happens for CPU test, DiskSpace, HostPing, Notepad-Running. Same thing happens when I try to delete a test: it doesn't disappear until I manually close and re-open the agent.",
+    "LastUpdatedDate": "2017-12-08T09:48:17.57-08:00",
+    "PlannedForRelease": "Wolfpack v3",
+    "ReleaseVisibleToPublic": true,
+    "Priority": {
+      "Name": "High",
+      "Severity": 150,
+      "Id": 3
+    },
+    "ProjectName": "wolfpack",
+    "ReportedDate": "2014-04-25T09:23:30.32-07:00",
+    "Status": {
+      "Name": "Closed",
+      "Id": 4
+    },
+    "ReasonClosed": {
+      "Name": "Fixed"
+    },
+    "Summary": "Restart function not working (v3)",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 2,
+    "Id": 13
+  },
+  "FileAttachments": [
+    {
+      "FileId": 831517,
+      "FileName": "1.PNG",
+      "DownloadUrl": ".\\831517"
+    },
+    {
+      "FileId": 833424,
+      "FileName": "CounterUpdate.PNG",
+      "DownloadUrl": ".\\833424"
+    }
+  ],
+  "Comments": [
+    {
+      "Message": "Hi - can you confirm if you were running as a service or console app?\n\nThere is a known issue in the current code base when running as a console app - this doesn't work correctly (yet). Should work ok if running as a service. \n\nI'm also working on the config page at the moment and will fix this very soon. \n\nJ",
+      "PostedDate": "2014-04-25T10:36:41.96-07:00",
+      "Id": 143079
+    },
+    {
+      "Message": "ok, cool - just checked your screenshot - obviously running as console app!\n\nI'm fixing this and tidying up the configuration page - it has a number of minor issues...watch the repo for check-ins!\n\nJ",
+      "PostedDate": "2014-04-25T12:01:05.517-07:00",
+      "Id": 143092
+    },
+    {
+      "Message": "Ok, build v3.0.12 on the myget feed should fix this.\r\n\r\nI would also consider build a release candidate...nearly there!",
+      "PostedDate": "2014-04-28T14:28:16.87-07:00",
+      "Id": 145001
+    },
+    {
+      "Message": "Upgraded to v3.0.14. Restart works fine now, thanks! However, counters get updated only after refreshing page or going to a different tab first. Please check attached screenshot.",
+      "PostedDate": "2014-04-30T03:51:16.63-07:00",
+      "Id": 145181
+    },
+    {
+      "Message": "ok, I'll take a look....it should load the config again once the restart has brought Wolfpack back....it's possible the tag cloud is not being refreshed as part of this.\n\n\n",
+      "PostedDate": "2014-04-30T06:25:49.163-07:00",
+      "Id": 145197
+    },
+    {
+      "Message": "ok, fixed in the next build (> 3.0.14 or grab the source)\n\nJ",
+      "PostedDate": "2014-04-30T14:20:31.917-07:00",
+      "Id": 145273
+    },
+    {
+      "Message": "This is still an issue. The Manager wants to restart WolfpackAgent, whereas the Agent installs itself as Wolfpack.\n\nA note: I wasn't able to get Wolfpack up and running under a different service name. The service would not start in time, whereas it does with the default service name.\n\nI used this script to install:\n\n```\n@rem Wolfpack.Agent.exe /install\n@rem Wolfpack.Agent.exe /install would be the way to go, but this installs a service named \"Wolfpack\" whereas the Wolfpack.Manager.exe wants to restart \"WolfpackAgent\"\n\nset NAME=WolfpackAgent\nset DISPLAY_NAME=Wolfpack Agent\n\nsc create \"%NAME%\" displayName= \"%DISPLAY_NAME%\" binPath= \"\\\"%~dp0Wolfpack.Agent.exe\\\" /profile:FastStartAgentProfile -displayname \\\"%DISPLAY_NAME%\\\" -servicename \\\"%NAME%\\\"\" depend= MSMQ start= auto\nsc start \"%NAME%\"\n```",
+      "PostedDate": "2014-07-02T13:10:23.093-07:00",
+      "Id": 151388
+    },
+    {
+      "Message": "Fixed in v3.0.19 (released as official download)",
+      "PostedDate": "2014-07-02T22:51:55.49-07:00",
+      "Id": 151461
+    },
+    {
+      "Message": "Confirmed, it's working now.",
+      "PostedDate": "2014-07-03T03:20:56.33-07:00",
+      "Id": 151486
+    }
+  ]
+}

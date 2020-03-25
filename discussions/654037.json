@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "1471422",
+    "ThreadId": "654037",
+    "Html": "Hi,\r<br />\n<br />\nI am able to install Chocolatey and Cinst wolfpack through cmd. But i am unable to install wolfpack.agent.bat, when i am trying to install through cmd, it is giving error stating &quot;it is not recognized as internal or external command&quot;.\r<br />\n<br />\nCan anyone help on how to run wolfpack.agent.bat file?<br />\n",
+    "PostedDate": "2016-04-26T23:46:18.587-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "Id": "1265616",
+    "ThreadId": "551531",
+    "Html": "First of all &quot;really awesome application&quot; and many thanks to you to share such a wonderful project.\r<br />\n<br />\nI have recently downloaded the application source code and checking it out. Apart from the defaults,  I managed to check out new schedules, new checks , new publisher (to sql server).\r<br />\n<br />\nI am not able to figure out to configure one instance as a local agent &amp; the other instance agent(server) which does the publishing to the database..  Thought I could mail you for some advice. Appreciate your help.<br />\n",
+    "PostedDate": "2014-07-14T11:46:09.273-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1265806",
+    "ThreadId": "551531",
+    "Html": "Thanks for compliment about Wolfpack - appreciated!\r<br />\n<br />\nWell this gives me an opportunity to create the &quot;how to&quot; guide for creating an agent to agent connection. I have stubbed out the page here and will update over the next few days. The link for the stub doc is, <a href=\"https://wolfpack.codeplex.com/wikipage?title=v3HowToInterAgentMessaging\" rel=\"nofollow\">https://wolfpack.codeplex.com/wikipage?title=v3HowToInterAgentMessaging</a>\r<br />\n<br />\nThe quick answer is to enable to the WolfackWebServicePublisher (on the client instance) and configure it to use the url of the server instance. By default it should be enable as part of the WebServiceActivity (WebService NotificationModule /notify handler receives and processes the incoming notification from the client).\r<br />\n<br />\nHTH!<br />\n",
+    "PostedDate": "2014-07-15T02:39:03.29-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1266125",
+    "ThreadId": "551531",
+    "Html": "Thanks , works like a charm.\r<br />\nAppreciate your help for putting up the stub doc too. Just followed it and got it working in a few mins..<br />\n",
+    "PostedDate": "2014-07-15T23:29:28.163-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1266167",
+    "ThreadId": "551531",
+    "Html": "The HowTo looks really good! \r<br />\n<br />\nI have configured a server instance that publishes notifications in a SQL DB and multiple client instances. The DB entries are ok, but when I watch the Activity tab of the server I cannot distinguish between the notifications of different machines. I like how the WMI Process check is displaying the machine name but I checked the code and I noticed that it uses the name of the machine from the config. How can I add the SiteId in the description of other checks like DiskSpace, CPU, etc.?<br />\n",
+    "PostedDate": "2014-07-16T02:26:39.58-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1266195",
+    "ThreadId": "551531",
+    "Html": "Thanks! The challenge for me now is documentation! It's great writing the code but if there are no instructions/docs then it can become too difficult for someone to use it!\r<br />\n<br />\nI am putting a new release together and will take a look at fixing the local/remote notification in the Activity screen - thanks for pointing that out!\r<br />\n<br />\nJames<br />\n",
+    "PostedDate": "2014-07-16T03:40:25.247-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

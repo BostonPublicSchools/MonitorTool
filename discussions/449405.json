@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "1065988",
+    "ThreadId": "449405",
+    "Html": "Wolfpack user Brian Rumschlag has suggested a neat feature - primarily concerning the CPU check.\r<br />\n<br />\nCurrently if this check detects a CPU level above the threshold set in the configuration it will immediately trigger an alert. If this breach of the threshold is temporary - eg: a &quot;spike&quot; then this results in a &quot;false&quot; alert as by the time you investigate this condition it has probably resumed normal activity.\r<br />\n<br />\nThe proposal is to build a health check base class that wraps up a new generic behaviour - if the check has its threshold breached it will enter a tracking period where it will test again after a suitable delay (and repeat this a number of times) and if still in breach only then raise an alert. \r<br />\n<br />\nA simpler variation of this is to introduce a new parameter to the check that is a count of number of contiguous failures (breaches) before sending the alert. eg: if this value was set to say 3 - the CPU check would need to fail 3 times in a row before sending a failure alert. If after say 2 failures it succeeded then we reset the count and start tracking again.\r<br />\n<br />\nI think this is a useful and simple addition to Wolfpack - any one have thoughts on this feature and have any suggestions about how to improve/implement it? I like the simple option above - a new config parameter that allows you to specify the number of failures before trigger an alert - what do you guys think?\r<br />\n<br />\nCheers,\r<br />\n<br />\nJames<br />\n",
+    "PostedDate": "2013-07-09T01:58:52.763-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

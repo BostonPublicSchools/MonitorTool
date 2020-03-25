@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Wolfpack</id>
+    <version>1.0.0.0</version>
+    <title>Wolfpack</title>
+    <authors>jimbobdog</authors>
+    <owners>James Simmonds</owners>
+    <licenseUrl>http://wolfpack.codeplex.com/license</licenseUrl>
+    <projectUrl>http://wolfpack.codeplex.com/</projectUrl>
+    <iconUrl>http://download.codeplex.com/Project/Download/FileDownload.aspx?ProjectName=Wolfpack&amp;DownloadId=140622&amp;Build=17672</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>*** Install with Chocolatey! (cinst wolfpack) *** Wolfpack is an extensible .Net windows service based framework for running jobs to monitor your software and system. The data collected can be sent directly to Databases like SqlServer and MongoDb and also to dashboards. It comes preloaded with some tasks but it's simple to implement your own!</description>
+    <releaseNotes>Bug fix to the UrlPing check</releaseNotes>
+    <summary>This package contains the entire Wolfpack runtime and should ideally be installed with chocolatey (cinst wolfpack)</summary>
+    <language>en-GB</language>
+    <tags>Wolfpack Monitoring</tags>
+  </metadata>
+</package>

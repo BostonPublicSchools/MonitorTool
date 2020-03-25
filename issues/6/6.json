@@ -1,0 +1,76 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "Publishers",
+      "DisplayName": "Publishers"
+    },
+    "ClosedComment": "",
+    "ClosedDate": "2014-04-30T23:59:49.733-07:00",
+    "CommentCount": 6,
+    "Custom": null,
+    "Description": "When you configure a WCF forwarding infrastructure Publisher sending messages to a WCF Service Host - and then stop WCF Service Host - the publishing agent crashes - should it not log a unavailable endpoint and then retry - this could or would be common when forwarding across a WAN.  It appears as if the Bus forwarding option may allow for this behavior.  The logic for using WCF over the Bus was based on port requriements.\r\nMore testing shows that the same behavior occurs if the Service Host is not present when the publisher starts - ",
+    "LastUpdatedDate": "2017-12-08T09:48:17.57-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "High",
+      "Severity": 150,
+      "Id": 3
+    },
+    "ProjectName": "wolfpack",
+    "ReportedDate": "2011-09-15T23:37:18.097-07:00",
+    "Status": {
+      "Name": "Closed",
+      "Id": 4
+    },
+    "ReasonClosed": {
+      "Name": "Won't fix"
+    },
+    "Summary": "Publisher Agent Crash when WCF Service Host is not present",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 2,
+    "Id": 6
+  },
+  "FileAttachments": [
+    {
+      "FileId": 281941,
+      "FileName": "Wolfpack Publisher Error.log",
+      "DownloadUrl": ".\\281941"
+    }
+  ],
+  "Comments": [
+    {
+      "Message": "I would rank impact as High, Release Wolfpack 2.2(Geo)",
+      "PostedDate": "2011-09-20T19:31:56.113-07:00",
+      "Id": 45179
+    },
+    {
+      "Message": "I'll start looking at this - some help may be required to define the behaviour when the publisher cannot transfer the messages to the host and there are some issues with sequencing/out or order stuff to look at too.\r\n\r\nI'll keep you updated via this issue page\r\n\r\nCheers,\r\n\r\nJames",
+      "PostedDate": "2011-09-20T22:17:44.727-07:00",
+      "Id": 45190
+    },
+    {
+      "Message": "I'll start looking at this - some help may be required to define the behaviour when the publisher cannot transfer the messages to the host and there are some issues with sequencing/out or order stuff to look at too.\r\n\r\nI'll keep you updated via this issue page\r\n\r\nCheers,\r\n\r\nJames",
+      "PostedDate": "2011-09-20T22:17:45.337-07:00",
+      "Id": 45191
+    },
+    {
+      "Message": "I will work on a reproduction scenario - and pass on the configuration - any thing you need let me know.",
+      "PostedDate": "2011-09-21T15:23:22.627-07:00",
+      "Id": 45283
+    },
+    {
+      "Message": "Next v3 release replaces the WCF publisher/messaging system with a new ServiceStack/REST component that deals with this scenario (and security, SSL, retries, stale messages and more).",
+      "PostedDate": "2013-01-04T09:27:47.283-08:00",
+      "Id": 85372
+    },
+    {
+      "Message": "V3 due for release very shortly fixes this so closing the issue. \n\nIn v3 there is a built in mechanism on the client side to store and forward the messages from a remote agent. ",
+      "PostedDate": "2014-04-30T23:59:10-07:00",
+      "Id": 145306
+    }
+  ]
+}

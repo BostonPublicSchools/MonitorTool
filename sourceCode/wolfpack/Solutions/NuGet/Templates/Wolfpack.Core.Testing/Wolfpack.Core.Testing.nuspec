@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Wolfpack.Core.Testing</id>
+    <version>1.0.0.0</version>
+    <title>Wolfpack.Core.Testing</title>
+    <authors>jimbobdog</authors>
+    <owners>James Simmonds</owners>
+    <licenseUrl>http://wolfpack.codeplex.com/license</licenseUrl>
+    <projectUrl>http://wolfpack.codeplex.com/</projectUrl>
+    <iconUrl>http://download.codeplex.com/Project/Download/FileDownload.aspx?ProjectName=Wolfpack&amp;DownloadId=140622&amp;Build=17672</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Wolfpack.Core.Testing provides a set of helpers and mocks to help test Wolfpack plug-ins. Wolfpack uses StoryQ to provide a BDD framework for plugin development.</description>
+    <summary>Wolfpack.Core.Testing provides a set of helpers and mocks to help test Wolfpack plug-ins</summary>
+    <language>en-GB</language>
+    <tags>Wolfpack Monitoring Testing BDD</tags>
+    <dependencies>
+      <dependency id="Castle.Core" version="[3.2.2]" />
+      <dependency id="Castle.Windsor" version="[3.2.1]" />
+      <dependency id="EntityFramework" version="[6.1.0]" />
+      <dependency id="FluentAssertions" version="[2.2.0.0]" />
+      <dependency id="FluentPath" version="[1.0.0]" />
+      <dependency id="Magnum" version="[2.1.2]" />
+      <dependency id="StoryQ" version="[2.0.5]" />
+      <dependency id="ServiceStack.Text" version="[4.0.8]" />
+      <dependency id="log4net" version="[2.0.3]" />
+      <dependency id="Newtonsoft.Json" version="[5.0.8]" />
+      <dependency id="Sidewinder.Core" version="[1.5.5]" />      
+    </dependencies>
+  </metadata>
+</package>

@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "635532",
+    "ThreadId": "263444",
+    "Html": "\r\n<p>Problem: Configuring Wolfpack is cumbersome - a point and click GUI would make administration much simpler.</p>\r\n<p>Thoughts...</p>\r\n<p>Use the NuGet core to pull down updates to installed packages and grab new ones</p>\r\n<p>Extensible for remote agent config</p>\r\n",
+    "PostedDate": "2011-06-30T10:57:03.113-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

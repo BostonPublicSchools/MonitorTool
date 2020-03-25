@@ -1,0 +1,45 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "Agent",
+      "DisplayName": "Agent"
+    },
+    "ClosedComment": "",
+    "ClosedDate": "2015-02-17T04:54:37.783-08:00",
+    "CommentCount": 1,
+    "Custom": null,
+    "Description": "If client sends a notification that is stale, the server detects that using its \"MessageStalenessCheck\"\r\nIt then throws a \"StaleMessageException\" which causes the execution of the steps to stop.\r\nUnfortunately it does not just swallow these messages but throw an \"ApplicationException\" that is received by the client as a completely uninterpretable \"CommunicationException\".\r\nFor this reason it keeps the notification in its queue and retries sending that stale message.\r\n\r\nsee:\r\n\r\n2015-01-28 13:42:09,985 [8] INFO  Wolfpack [(null)] - Received Notification (HealthCheck) 083c55cc-f5f8-4eac-8886-7797ac026133\r\n\r\n2015-01-28 13:42:09,992 [8] INFO  Wolfpack [(null)] - Message '083c55cc-f5f8-4eac-8886-7797ac026133' is stale (668.481770856667 minutes old), discarding it!\r\n\r\n2015-01-28 13:42:09,992 [8] ERROR Wolfpack [(null)] - IncidentId:e3872945-88c9-43c1-a7f3-6f91e0d5824e; Encountered 'ApplicationException' during 'WebService Call: http://web02.intercom.at:802/api/notification/notify'; Message:=System.ApplicationException: Step failure ---> Wolfpack.Core.WebServices.Interfaces.Exceptions.StaleMessageException: Message '083c55cc-f5f8-4eac-8886-7797ac026133' is stale\r\n\r\n   bei Wolfpack.Core.WebServices.Strategies.Steps.MessageStalenessCheckStep.Execute(WebServiceReceiverContext context) in d:\\Code\\Wolfpack_debug\\Solutions\\Wolfpack.Core.WebServices\\Strategies\\Steps\\MessageStalenessCheckStep.cs:Zeile 23.\r\n\r\n   bei Wolfpack.Core.Pipeline.DefaultPipeline`1.Execute(T context) in d:\\Code\\Wolfpack_debug\\Solutions\\Wolfpack.Core\\Pipeline\\DefaultPipeline.cs:Zeile 38.\r\n\r\n   --- Ende der internen Ausnahmestapelüberwachung ---\r\n\r\n   bei Wolfpack.Core.WebServices.Strategies.WebServiceReceiverStrategy.Execute(NotificationEvent notification) in d:\\Code\\Wolfpack_debug\\Solutions\\Wolfpack.Core.WebServices\\Strategies\\WebServiceReceiverStrategy.cs:Zeile 35.\r\n\r\n   bei Wolfpack.Core.WebServices.Modules.NotificationModule.<.ctor>b__1(Object request) in d:\\Code\\Wolfpack_debug\\Solutions\\Wolfpack.Core.WebServices\\Modules\\NotificationModule.cs:Zeile 33.\r\n\r\n   bei CallSite.Target(Closure , CallSite , Func`2 , Object )\r\n\r\n   bei Nancy.Routing.Route.<>c__DisplayClass4.<Wrap>b__3(Object parameters, CancellationToken context)\r\n\r\n",
+    "LastUpdatedDate": "2017-12-08T09:48:17.33-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "High",
+      "Severity": 150,
+      "Id": 3
+    },
+    "ProjectName": "wolfpack",
+    "ReportedDate": "2015-02-17T02:46:49.68-08:00",
+    "Status": {
+      "Name": "Closed",
+      "Id": 4
+    },
+    "ReasonClosed": {
+      "Name": "Fixed"
+    },
+    "Summary": "Stale messages lead to endless retry-loop",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 28
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "Resolved withmerging of branch \"ContinuationOptions\"",
+      "PostedDate": "2015-02-17T04:53:22.763-08:00",
+      "Id": 174722
+    }
+  ]
+}

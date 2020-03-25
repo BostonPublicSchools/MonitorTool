@@ -1,0 +1,102 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" 
+         DefaultTargets="ExecuteCopyAndBuild">
+	<UsingTask TaskName="BuildTask"              
+             AssemblyFile="bin\IAgile.Automation.MSBuildTasks.dll"/>
+
+	<PropertyGroup>
+		<pSolutionFile/>
+		<pReleaseNumber/>
+		<pProjectFolder/>
+
+		<SolutionPath>$(pProjectFolder)\Solutions\$(pSolutionFile)</SolutionPath>
+		<ReleaseFolder>$(pProjectFolder)\Releases\v$(pReleaseNumber)</ReleaseFolder>
+		<TargetFolder>$(ReleaseFolder)\Source</TargetFolder>
+		<SourceZipFile>$(TargetFolder)\..\Source_v$(pReleaseNumber).zip</SourceZipFile>
+		<TasksPath>$(MSBuildExtensionsPath)\ExtensionPack\4.0\MSBuild.ExtensionPack.tasks</TasksPath>
+	</PropertyGroup>
+
+	<Import Project="$(TasksPath)" />
+
+	<Target Name="ValidateParams">
+		<Error Text="Please set parameter pSolutionFile!" Condition="$(pSolutionFile) == ''"/>
+		<Error Text="Please set parameter pReleaseNumber!" Condition="$(pReleaseNumber) == ''"/>
+		<Error Text="Please set parameter pProjectFolder!" Condition="$(pProjectFolder) == ''"/>
+	</Target>
+
+	<Target Name="ExecuteCopyAndBuild">
+		<CallTarget Targets="ValidateParams;PrepareFolderStructureForBuild;CopySourceFiles;SetAssemblyVersion" />
+		<CallTarget Targets="BuildIt" />
+	</Target>
+
+	<Target Name="ExecuteCopyAndZip">
+		<CallTarget Targets="ValidateParams;PrepareFolderStructureForSource;CopySourceFiles;SetAssemblyVersion;Zip" />
+	</Target>
+
+	<Target Name="PrepareFolderStructureForBuild">
+		<RemoveDir Directories="$(ReleaseFolder)" />
+		<MakeDir Directories="$(ReleaseFolder)" />
+	</Target>
+
+	<Target Name="PrepareFolderStructureForSource">
+		<RemoveDir Directories="$(TargetFolder)" />
+		<MakeDir Directories="$(TargetFolder)" />
+		<Delete Files="$(SourceZipFile)" />
+	</Target>
+
+	<Target Name="CopySourceFiles">
+		<!-- Solution files -->
+		<BuildTask Action ="ParseSolutionItems"
+               SolutionFile="$(SolutionPath)"
+               TargetFolder="$(TargetFolder)">
+			<Output TaskParameter="OutputItems" ItemName="SolutionItems"/>
+		</BuildTask>
+		<Copy SourceFiles="@(SolutionItems)" DestinationFiles="@(SolutionItems->'%(Destination)')" />
+
+		<!-- Project files -->
+		<BuildTask Action ="ParseSolutionProjects"
+               SolutionFile="$(SolutionPath)"
+               TargetFolder="$(TargetFolder)">
+			<Output TaskParameter="OutputItems" ItemName="ProjectFiles"/>
+		</BuildTask>
+		<Copy SourceFiles="@(ProjectFiles)" DestinationFiles="@(ProjectFiles->'%(Destination)')" />
+
+		<!-- Reference files -->
+		<BuildTask Action ="GetSolutionFiles"
+               SourceFolder="$(pProjectFolder)\Solutions\References"
+               TargetFolder="$(TargetFolder)">
+			<Output TaskParameter="OutputItems" ItemName="ReferenceFiles"/>
+		</BuildTask>
+		<Copy SourceFiles="@(ReferenceFiles)" DestinationFiles="@(ReferenceFiles->'%(Destination)')" />
+
+		<!-- NuGet Package files -->
+		<BuildTask Action ="GetSolutionFiles"
+               SourceFolder="$(pProjectFolder)\Solutions\packages"
+               TargetFolder="$(TargetFolder)">
+			<Output TaskParameter="OutputItems" ItemName="NuGetPackageFiles"/>
+		</BuildTask>
+		<Copy SourceFiles="@(NuGetPackageFiles)" DestinationFiles="@(NuGetPackageFiles->'%(Destination)')" />
+
+		<!-- Solution file -->
+		<Copy SourceFiles="$(SolutionPath)" DestinationFolder="$(TargetFolder)" />       
+	</Target>
+
+	<Target Name="SetAssemblyVersion">
+		<MSBuild.ExtensionPack.FileSystem.File TaskAction="Replace"
+                                           RegexPattern="1.0.0.0"
+                                           Replacement="$(pReleaseNumber)"
+                                           Files="$(TargetFolder)\Build\Common\AssemblyVersion.cs"/>
+	</Target>
+
+	<Target Name="Zip">
+		<MSBuild.ExtensionPack.Compression.DNZip TaskAction="Create"
+                                             CompressPath="$(TargetFolder)"
+                                             ZipFileName="$(SourceZipFile)"/>
+	</Target>
+
+	<Target Name="BuildIt">
+		<ItemGroup>
+			<SolutionToBuild Include="$(TargetFolder)\*.sln" />
+		</ItemGroup>
+		<MSBuild Projects="@(SolutionToBuild)" />
+	</Target>
+</Project>

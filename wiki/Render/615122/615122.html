@@ -1,0 +1,72 @@
+<div class="wikidoc"><h1>Publishers</h1>Wolfpack &quot;publishes&quot; two types of messages,<br /><br /><b>Startup Message</b> - when the &quot;agent&quot; starts it publishes this message which contains,
+<ul><li>The name of the Agent (SiteId from role.castle.config)</li>
+<li>How long it took to initialise</li>
+<li>A list of plug-ins (HealthCheck, Publisher, Activity) that failed to initialise and are now disabled.</li></ul>
+<br /><b>HealthCheck Result Message</b> - this is published by a HealthCheck when it has something to report and contains,
+<ul><li>Agent information (SiteId, machine name)</li>
+<li>HealthCheck identity
+<ul><li>FriendlyId from component config in check.castle.config</li>
+<li>Description (eg: <i>Checks for the existance of process &quot;notepad.exe&quot; on localhost</i>)</li></ul></li>
+<li>When it was generated</li>
+<li>The result (true/false/null)</li>
+<li>A result count (double datatype) - a value relevant to the check (eg: <i>the number of &quot;notepad.exe&quot; processes running</i>)
+<ul><li>Info - more details on the result (eg: <i>There are 0 instances of process &quot;notepad.exe&quot; on localhost</i>)</li></ul></li>
+<li>A property bag (name/value collection) - this can be used to store other useful data gathered during the HealthCheck</li></ul>
+<br /><b><a href="https://wolfpack.codeplex.com/wikipage?title=Result%20Publisher%20Filters&referringTitle=Configuring%20Publishers">Result Publisher Filters</a></b> can fine tune HealthCheck Result publication - please take a look at that documention page for more on this cool feature.<br />
+<h2>Contrib</h2>That&#39;s not the end of the story as far as plug-ins go... a separate <a href="http://wolfpackcontrib.codeplex.com/">Wolfpack Contrib</a> project established by @RobGibbens provides additional publishers including a MongoDb publisher - check it out for more plug-in goodness!<br />
+<hr />
+<h2>Growl</h2><div style="clear:both;height:0;">&nbsp;</div><img style="float:left;padding-right:.5em;" src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=wolfpack&DownloadId=242354" alt="growl.png" title="growl.png" /><br /><a name="Growl"></a><br />Growl is a fantastic system tray notification app - better explained <a href="http://www.growlforwindows.com/gfw/about.aspx">here</a>. Wolfpack can &quot;publish&quot; to a local instance of Growl - that is Growl running on the same machine as Wolfpack. It can also send messages to Growl running on a remote machine.<br /><br />Please take some time to investigate Growl if you have not used it before - it&#39;s very powerful and really rocks if you have a SmartPhone! There are various applications that let you forward notifications to your SmartPhone (on my iPhone I use <a href="http://prowl.weks.net/">Prowl</a> iTunes: <a href="http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=320876271">iTunes App</a>).<br />
+<h3>Growl Notification Finalisers</h3>These allow you to fine tune exactly how the notification appears in Growl. Using Castle Interception your code can receive both the HealthCheck result being published to Growl and the default Growl notification already built by the Growl Publisher - your component can execute your custom logic to determine the priority or alter the message text in anyway you want. I have also included two built-in Finalisers to allow you to quickly alter the notification priority based on the success/failure or &quot;count&quot; of a HealthCheck - they also serve as a great base line to learn how to implement your own ones; the <a href="https://wolfpack.codeplex.com/wikipage?title=How%20To&referringTitle=Configuring%20Publishers">How To</a> page (publishers section) also contains more information on this new feature.<br /><br /><b>NOTE!</b> Growl is not an unattended service - it only runs for the logged in user. If someone isn&#39;t logged in to a machine Growl will not be running!<br />
+<ul><li>Install Growl (download available <a href="http://www.growlforwindows.com/gfw/default.aspx">here</a>)</li>
+<li>Configure Wolfpack to publish to Growl.
+<ul><li>Open the publisher.castle.config and find the component &quot;GrowlConfiguration&quot;.</li>
+<li>Set the &quot;&lt;Enabled&gt;&quot; property to &quot;true&quot;, save the change </li>
+<li>If you want to run Growl on a <b>different machine to Wolfpack</b> then you must also,
+<ul><li>Enable &quot;Allow network notifications&quot; in Growl</li>
+<li>Add a password to Growl</li>
+<li>On the &quot;GrowlConfiguration&quot; component in publisher.castle.config set the &quot;&lt;Password&gt;&quot; property to the same password</li>
+<li>Set the &quot;&lt;Hostname&gt;&quot; property to the name/ip of the Growl/remote machine</li>
+<li>Set the &quot;&lt;Port&gt;&quot; property to &quot;23053&quot;</li></ul></li>
+<li>Restart Wolfpack to pick the change up</li></ul></li></ul>
+<hr />
+<h2>SQLite</h2><div style="clear:both;height:0;">&nbsp;</div><img style="float:left;padding-right:.5em;" src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=wolfpack&DownloadId=242355" alt="db.png" title="db.png" /><br /><a name="SQLite"></a><br />It would be useful to record Wolfpack data right? Well you can using the SQLite publisher. SQLite is a free, open source database format.<br /><br />The data is stored in a single table (AgentData) and uses a &quot;blob&quot; column to store the DataContract serialised messages. Some of the message properties are extracted (like Result) so you can query these directly.<br />
+<ul><li>The AgentData table (and any future database objects) is automatically created for you when Wolfpack starts if you have Enabled the SQLite publisher.</li>
+<li>Open the publisher.castle.config and find the component &quot;SQLiteConfiguration&quot;.
+<ul><li>Set the &quot;&lt;Enabled&gt;&quot; property to &quot;true&quot;</li>
+<li>Set the &quot;&lt;ConnectionString&gt;&quot; property to the right connection values (Data Source &amp; Initial Catalog). This can also be a reference to a named connection in config\data.connections.config file - Wolfpack is smart enough to work out if its an actual connection string or a reference to one!</li>
+<li>Save the changes and restart Wolfpack</li></ul></li></ul>
+<hr />
+<h2>SqlServer</h2><div style="clear:both;height:0;">&nbsp;</div><img style="float:left;padding-right:.5em;" src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=wolfpack&DownloadId=242355" alt="db.png" title="db.png" /><br /><a name="SqlServer"></a><br />It would be useful to record Wolfpack data right? Well you can using the SqlServer publisher.<br /><br />The data is stored in a single table (AgentData) and uses a xml &quot;blob&quot; column to store the DataContract serialised messages. Some of the message properties are extracted (like Result) so you can query these directly without having to bust out your XQuery chops.<br />
+<ul><li>The AgentData table (and any future database objects) is automatically created for you when Wolfpack starts if you have Enabled the SqlServer publisher.</li>
+<li>Ensure the <b>database/table has the right permissions</b> for the user you are running Wolfpack under. You will need INSERT, UPDATE, SELECT, DELETE permissions on table &quot;AgentData&quot;</li>
+<li>Open the publisher.castle.config and find the component &quot;SqlSeverConfiguration&quot;.
+<ul><li>Set the &quot;&lt;Enabled&gt;&quot; property to &quot;true&quot;</li>
+<li>Set the &quot;&lt;ConnectionString&gt;&quot; property to the right connection values (Data Source &amp; Initial Catalog). This can also be a reference to a named connection in config\data.connections.config file - Wolfpack is smart enough to work out if its an actual connection string or a reference to one!</li>
+<li>Save the changes and restart Wolfpack</li></ul></li></ul>
+<hr />
+<h2>WCF</h2><div style="clear:both;height:0;">&nbsp;</div><img style="float:left;padding-right:.5em;" src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=wolfpack&DownloadId=242356" alt="wcf.png" title="wcf.png" /><br /><a name="WCF"></a><br /><br />For situations where you need to &quot;send&quot; the monitoring information to another machine (Wolfpack instance) over Http, this is the publisher for you. This publisher is specifically designed for the scenario where you are running multiple Wolfpack agents collecting data on remote servers but want to &quot;administer&quot; this data at a central location.<br /><br />Obviously this publisher (client/proxy) needs to have a complimentary WCF service running somewhere to receive the data messages. Well, that&#39;s the job of the &quot;WcfServiceHost&quot; Activity; this plugin creates a self-hosted WCF ServiceHost within Wolfpack and this acts as a relay - it receives the monitoring data and forwards it on to the enabled publishers. So you would run one instance of Wolfpack with the WCF &quot;Publisher&quot; enabled (lets call this the Agent) and another instance (on another machine) with the WCF Service &quot;Activity&quot; enabled to receive the data (lets call this the Server). <br />
+<ul><li>On the &quot;Server/Activity&quot; instance open the activity.castle.config and find the component &quot;WcfServiceHostConfig&quot;.
+<ul><li>Set the &quot;&lt;Enabled&gt;&quot; property to &quot;true&quot;</li>
+<li>Set the &quot;&lt;Uri&gt;&quot; property to the Http address desired. Beware that port 80 could be off-limits if IIS is installed on the machine.</li>
+<li>Open the publisher.castle.config file and &quot;Enable&quot; any publisher you want the message republished to (eg: Sql, Growl).</li>
+<li>Save the changes and restart Wolfpack</li></ul></li>
+<li>On the &quot;Agent/Publisher&quot; instance open the publisher.castle.config and find the component &quot;WcfPublisherConfiguration&quot;.
+<ul><li>Set the &quot;&lt;Enabled&gt;&quot; property to &quot;true&quot;</li>
+<li>Set the &quot;&lt;Uri&gt;&quot; property to the same Http address of the WCF Service Activity instance</li>
+<li>Save the changes and restart Wolfpack</li></ul></li>
+<li>Remember that you might need to open a port on any firewall that exists between the two machines.</li></ul>
+<hr />
+<h2>NServiceBus</h2><div style="clear:both;height:0;">&nbsp;</div><img style="float:left;padding-right:.5em;" src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=wolfpack&DownloadId=242357" alt="nsb.png" title="nsb.png" /><br /><a name="NSB"></a><br /><a href="http://nservicebus.com/">NServiceBus (NSB)</a> is another way of &quot;sending&quot; monitoring data to another machine, this time via MSMQ. If the correct <a href="http://support.microsoft.com/default.aspx?scid=kb;EN-US;178517">firewall ports</a> are open you can have one Wolfpack (Agent) &quot;publish&quot; data direct to another Wolfpack (running the appropriate NSB message handlers). NSB also ships with a &quot;Gateway&quot; that allows you to send NSB/MSMQ messages via Http; whilst not as robust as direct MSMQ connections this does offer some deployment flexibility as only a single port is required. <br /><br />Like WCF, this publisher requires an &quot;Activity&quot; to be enabled on the receiving Wolfpack instance (Server); this activity will set up NSB to listen for Wolfpack messages on MSMQ and then republish any that are received to the list of &quot;Enabled&quot; publishers.<br />
+<ul><li>On the &quot;Server/Activity&quot; instance open the activity.castle.config and find the component &quot;BusBridgeConfig&quot;.
+<ul><li>Set the &quot;&lt;Enabled&gt;&quot; property to &quot;true&quot;</li>
+<li>Set the &quot;&lt;InputQueue&gt;&quot; property to the name of the MSMQ that will <i>receive</i> the messages from the &quot;Agent&quot; instance (eg: this should be the same value as used to set <i>OutputQueue</i> below).</li>
+<li>Open the publisher.castle.config file and &quot;Enable&quot; any publisher you want the message republished to (eg: Sql, Growl).</li>
+<li>Save the changes and restart Wolfpack</li></ul></li>
+<li>On the &quot;Agent/Publisher&quot; instance open the publisher.castle.config and find the component &quot;BusPublisherConfig&quot;.
+<ul><li>Set the &quot;&lt;Enabled&gt;&quot; property to &quot;true&quot;</li>
+<li>Set the &quot;&lt;OutputQueue&gt;&quot; property to the same as that set in the &quot;Agent&quot; BusBridgeConfig.InputQueue config property.</li>
+<li>Save the changes and restart Wolfpack</li></ul></li>
+<li>Remember that the correct MSMQ ports must be open on any firewall that exists between the two machines.</li>
+<li>The format for the queue name when it is running on a remote machine is...
+<ul><li>queue@machine</li>
+<li>eg: WolfPackOutput@yourservername</li></ul></li></ul></div><div class="ClearBoth"></div>

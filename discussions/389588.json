@@ -1,0 +1,34 @@
+[
+  {
+    "Id": "893198",
+    "ThreadId": "389588",
+    "Html": "\r\n<p>I'm new to the Wolfpack, but the development looks very encouraging from what I have read so far. &nbsp; What I need to know is if I wanted to write a custom selects for LogParser health checks is there a generic health check I can use just plug in the entire\r\n select clause into? &nbsp;From what I am seeing so far (like IISLogParserChecks), the &quot;selct count(*)&quot; is baked into a base-clase.</p>\r\n<p>I just need to be able to configure a LogParser healthcheck and proivde the entire SQL statement in the configuration file.s&nbsp;</p>\r\n<p>Thanks,</p>\r\n<p>Scott</p>\r\n",
+    "PostedDate": "2012-07-30T11:20:21.063-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "893313",
+    "ThreadId": "389588",
+    "Html": "<p>Hi Scott, welcome aboard!</p>\r\n<p>So the original theory behind how the LogParser checks work was for it to simply provide a \"trigger\" for an alert rather then the full query output because 1) How do you transport all that data (lets say your query returned 5000 rows - is each one an alert?) and 2) once you know there is a problem from the alert you can come investigate -&gt; hence the reason you can't nominate the \"select * from\" portion of the query because what it really wants is the rowcount.</p>\r\n<p>Now, there are a couple of possible solutions...</p>\r\n<ol>\r\n<li>If the number of rows is small and the data returned (columns) is small then with some slight restructuring of the base class code I would make it possible to 100% do whatever you wanted, change the select eg and then you just add the data to the alerts \"Properties\".&nbsp;</li>\r\n<li>An alternative is again to restructure the base classes but this time allow you to configure the full query statement and then write the entire report to disk as an attachment - the email publisher would be modified to detect and automatically attach any attachment it found for the same \"alert id\". This would only really work if you used the email publisher - but remember you can set/enable any number of publishers.</li>\r\n<li>Finally you could roll a custom healthcheck and use some of the methods in the base classes right now - depends on how urgent you need this.</li>\r\n</ol>\r\n<p>I was thinking of doing the email attachment thing anyway - let me know if an email with an attachment containing the entire query output would be any good, if so I'll expedite progress on it.</p>\r\n<p>Cheers,</p>\r\n<p>James</p>\r\n<p>&nbsp;</p>",
+    "PostedDate": "2012-07-30T15:07:19.01-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "893818",
+    "ThreadId": "389588",
+    "Html": "<p>James,</p>\r\n<p>My thinking is even if a certain count from my&nbsp;Log Parser&nbsp;query \"triggered\" an event, I would still want the ability to do something with the queried data from&nbsp;Log Parser and not just have a reactive trigger.</p>\r\n<p>Ideally, I would want to be able to run a LogParser query and then write that data to either a database or a txt/csv file of some sorts for further processing by another part of the system.</p>\r\n<p>So:</p>\r\n<p>1. Each event row would not be an alert, but data I could put someplace (database) to later query by another system to drive a dashboard. &nbsp;Ideally I would be able to take LogParser queries every \"x minutes\" to get all new events since my last query.</p>\r\n<p>2. My LogParser query's would not directly trigger an event to do research on, but would feed a database that would drive another system (monitoring dashboard) that would \"aid\" in potentially driving a trigger to an event.</p>\r\n<p>I appreciate the email piece, but I don't think that would really be helpful in my situation right now.</p>\r\n<p>Does that make sense at all?</p>\r\n<p>Scott</p>",
+    "PostedDate": "2012-07-31T10:51:25.52-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "893873",
+    "ThreadId": "389588",
+    "Html": "<p>Ok sure that all makes sense - really all you want is a way to periodically grab the log parser data and store it for later analysis/power some other downstream systems.&nbsp;</p>\r\n<p>So my thoughts are that the beta build of the next Wolfpack release might help you out - it provides the ability to execute powershell scripts...which when you combine it with the ps script this guy cooked up in the link below, allows you to execute a logparser query and insert the results into a sql table - pretty much exactly what you were looking for! You could even configure a SQL HealthCheck to peek at the data you are capturing and it will raise alerts if required which is your feature 2 above covered.</p>\r\n<p>Logparser powershell script to insert results into a sql table...</p>\r\n<p><a href=\"http://www.technologytoolbox.com/blog/jjameson/archive/2012/02/29/import-website-iis-logs-into-sql-server-using-log-parser.aspx\">http://www.technologytoolbox.com/blog/jjameson/archive/2012/02/29/import-website-iis-logs-into-sql-server-using-log-parser.aspx</a></p>\r\n<p>&nbsp;</p>\r\n<p>The beta zip is here...You might need to \"Unblock\" the zip once you get it (or the content once unzipped).</p>\r\n<p><a href=\"https://dl.dropbox.com/u/31496111/wolfpack-powershell-beta-20120712.zip\" target=\"_blank\">https://dl.dropbox.com/u/31496111/wolfpack-powershell-beta-20120712.zip</a></p>\r\n<p>Just unzip it and run wolfpack.agent.exe - it already has the powershell plugin installed and the check enabled.&nbsp;</p>\r\n<p>It runs a script in the \\powershell folder - it's a simple script to return an alert to Wolfpack. If you have Growl installed you should see an alert popup from \"MyFirstPowershellAlert\". Either rename the script to the one in the \\powershell folder or just update the script that is there with the content from the link above.</p>\r\n<p>You will also need to set-executionpolicy to remotesigned to allow PS to execute the script.</p>\r\n<p>The beta docs for the plugin are here...</p>\r\n<p><a href=\"http://wolfpackcontrib.codeplex.com/wikipage?title=Wolfpack.Contrib.Checks.Powershell\">http://wolfpackcontrib.codeplex.com/wikipage?title=Wolfpack.Contrib.Checks.Powershell</a></p>\r\n<p>Let me know if there are any suggestions/feedback on the docs etc - any holes in it, missing or confusing stuff. I am keen for this to be tested in a \"real\" scenario with credible/typical security/permissions in operation - as I say its works fine on my machine but that is admin and unrestricted scripts etc.</p>\r\n<p>Cheers,</p>\r\n<p>James</p>",
+    "PostedDate": "2012-07-31T13:35:16.9-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

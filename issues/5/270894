@@ -1,0 +1,55 @@
+2011-08-17 09:23:35,413 [5] ERROR Topshelf.Model.ServiceCoordinator [(null)] - Fault on Wolfpack: Topshelf.Exceptions.ServiceControlException
+Service Start Exception: Wolfpack (IRolePlugin)
+   at Topshelf.Builders.LocalServiceBuilder`1.StartService(T service) in d:\BuildAgent-01\work\799c08e77fef999d\src\Topshelf\Config\Builders\LocalServiceBuilder.cs:line 69
+   at Topshelf.Model.LocalServiceController`1.CallAction[TBefore,TComplete](String text, Action`1 callback, Func`1 before, Func`1 complete) in d:\BuildAgent-01\work\799c08e77fef999d\src\Topshelf\Model\LocalServiceController.cs:line 153
+HelpLink: 
+
+System.UnauthorizedAccessException
+Access to the path '\\tsclient\v\wolfpackdata' is denied.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.Directory.InternalCreateDirectory(String fullPath, String path, Object dirSecurityObj)
+   at System.IO.Directory.CreateDirectory(String path)
+   at Wolfpack.Core.Bridge.FileSystem.FileSystemBridgePublisherBase`1.Publish(T message, String id) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Bridge\FileSystem\FileSystemBridgePublishers.cs:line 31
+   at Wolfpack.Core.Bridge.FileSystem.FileSystemBridgeSessionPublisher.Consume(HealthCheckAgentStart message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Bridge\FileSystem\FileSystemBridgePublishers.cs:line 54
+   at Magnum.Pipeline.Segments.MessageConsumerSegment`1.<>c__DisplayClassd`1.<Accept>b__c(T x) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\MessageConsumerSegment.cs:line 61
+   at Magnum.Pipeline.Segments.PipeSegment.<>c__DisplayClass1`1.<Send>b__0(MessageConsumer`1 consumer) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\PipeSegment.cs:line 31
+   at Magnum.Extensions.ExtensionsToEnumerable.Each[T](IEnumerable`1 collection, Action`1 callback) in d:\Home\Magnum\src\Magnum\Extensions\ExtensionsToEnumerable.cs:line 32
+   at Magnum.Pipeline.Segments.PipeSegment.Send[T](T message) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\PipeSegment.cs:line 31
+   at Wolfpack.Core.MagnumMessenger.Wolfpack.Core.Interfaces.IMessenger.Publish(HealthCheckAgentStart message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Messenger.cs:line 70
+   at Wolfpack.Core.Messenger.Publish(HealthCheckAgentStart message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Messenger.cs:line 28
+   at Wolfpack.Agent.Roles.Agent.Start() in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Agent\Roles\Agent.cs:line 144
+   at Wolfpack.Agent.Startup.<>c__DisplayClass5.<Main>b__3(IRolePlugin s) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Agent\Startup.cs:line 43
+   at Topshelf.Builders.LocalServiceBuilder`1.StartService(T service) in d:\BuildAgent-01\work\799c08e77fef999d\src\Topshelf\Config\Builders\LocalServiceBuilder.cs:line 65
+HelpLink: 
+
+
+2011-08-17 09:23:35,438 [4] ERROR Topshelf.Model.ServiceWorkflow [(null)] - [Wolfpack] Fault: Topshelf.Exceptions.ServiceControlException
+Service Start Exception: Wolfpack (IRolePlugin)
+   at Topshelf.Builders.LocalServiceBuilder`1.StartService(T service) in d:\BuildAgent-01\work\799c08e77fef999d\src\Topshelf\Config\Builders\LocalServiceBuilder.cs:line 69
+   at Topshelf.Model.LocalServiceController`1.CallAction[TBefore,TComplete](String text, Action`1 callback, Func`1 before, Func`1 complete) in d:\BuildAgent-01\work\799c08e77fef999d\src\Topshelf\Model\LocalServiceController.cs:line 153
+HelpLink: 
+
+System.UnauthorizedAccessException
+Access to the path '\\tsclient\v\wolfpackdata' is denied.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.Directory.InternalCreateDirectory(String fullPath, String path, Object dirSecurityObj)
+   at System.IO.Directory.CreateDirectory(String path)
+   at Wolfpack.Core.Bridge.FileSystem.FileSystemBridgePublisherBase`1.Publish(T message, String id) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Bridge\FileSystem\FileSystemBridgePublishers.cs:line 31
+   at Wolfpack.Core.Bridge.FileSystem.FileSystemBridgeSessionPublisher.Consume(HealthCheckAgentStart message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Bridge\FileSystem\FileSystemBridgePublishers.cs:line 54
+   at Magnum.Pipeline.Segments.MessageConsumerSegment`1.<>c__DisplayClassd`1.<Accept>b__c(T x) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\MessageConsumerSegment.cs:line 61
+   at Magnum.Pipeline.Segments.PipeSegment.<>c__DisplayClass1`1.<Send>b__0(MessageConsumer`1 consumer) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\PipeSegment.cs:line 31
+   at Magnum.Extensions.ExtensionsToEnumerable.Each[T](IEnumerable`1 collection, Action`1 callback) in d:\Home\Magnum\src\Magnum\Extensions\ExtensionsToEnumerable.cs:line 32
+   at Magnum.Pipeline.Segments.PipeSegment.Send[T](T message) in d:\Home\Magnum\src\Magnum\Pipeline\Segments\PipeSegment.cs:line 31
+   at Wolfpack.Core.MagnumMessenger.Wolfpack.Core.Interfaces.IMessenger.Publish(HealthCheckAgentStart message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Messenger.cs:line 70
+   at Wolfpack.Core.Messenger.Publish(HealthCheckAgentStart message) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Core\Messenger.cs:line 28
+   at Wolfpack.Agent.Roles.Agent.Start() in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Agent\Roles\Agent.cs:line 144
+   at Wolfpack.Agent.Startup.<>c__DisplayClass5.<Main>b__3(IRolePlugin s) in c:\Projects\Wolfpack\Trunk\Releases\v2.2.0.0\Source\Wolfpack.Agent\Startup.cs:line 43
+   at Topshelf.Builders.LocalServiceBuilder`1.StartService(T service) in d:\BuildAgent-01\work\799c08e77fef999d\src\Topshelf\Config\Builders\LocalServiceBuilder.cs:line 65
+HelpLink: 
+
+
+2011-08-17 09:23:36,404 [1] ERROR Topshelf.Hosts.ConsoleRunHost [(null)] - An exception occurred
+Topshelf.Exceptions.TopshelfException: At least one configured service failed to start
+   at Topshelf.Model.ServiceCoordinator.WaitUntilServicesAreRunning(IEnumerable`1 services, TimeSpan timeout) in d:\BuildAgent-01\work\799c08e77fef999d\src\Topshelf\Model\ServiceCoordinator.cs:line 223
+   at Topshelf.Model.ServiceCoordinator.Start() in d:\BuildAgent-01\work\799c08e77fef999d\src\Topshelf\Model\ServiceCoordinator.cs:line 116
+   at Topshelf.Hosts.ConsoleRunHost.Run() in d:\BuildAgent-01\work\799c08e77fef999d\src\Topshelf\Hosts\ConsoleRunHost.cs:line 65

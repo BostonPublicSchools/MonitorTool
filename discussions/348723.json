@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "810800",
+    "ThreadId": "348723",
+    "Html": "\r\n<p>I have a system that is doing the HostPingCheck on another system in a different domain. it seems that if that ping fails, the local domain user that is running the process is locked out and that causes the Wolfpack service to basically stop functioning.\r\n<br>\r\n<br>\r\nDoes anyone have an idea as to why this would happen?</p>\r\n<p>Something to note is that the user name running the wolfpack service does exist in both domains. Although they are not technically the same user. I don't see how or why that would have anything to do with the issue since it is locking out the user that is\r\n doing the ping and not the one on the system that is being pinged. Thought I would include this info just in case there is something to it.</p>\r\n<p>&nbsp;</p>\r\n<p>Any help would be appreciated.</p>\r\n",
+    "PostedDate": "2012-03-15T05:28:50.24-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "810839",
+    "ThreadId": "348723",
+    "Html": "<p>So the reason for the ping failure is invalid credentials...or something else?</p>\r\n<p>Does the account on the target (pinged) domain also get locked out?</p>\r\n<p>Are the domains trusted or using a forest? If independent then this is surely a red herring - this failing test causes the source account lock out but it is not this particular test - for instance I could think that any failing test makes another component/publisher run that then locks out the source domain user - some resource on the source (wolkfpack side) must be accessed (and failing) to lock out the account.</p>\r\n<p>If the domains are two way trusted then I guess (not being an AD expert) that this could cause a bidirectional lock-out (hence the question about the target domain account lock out state).</p>\r\n<p>Are there any entries in the security&nbsp;event log (on either side)?</p>",
+    "PostedDate": "2012-03-15T07:04:31.687-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "814592",
+    "ThreadId": "348723",
+    "Html": "<p>Update... to answer the questions you pose, the 2 different networks/domains have no trust relationship but since there should be no need, I am not sure how that would have any bearing on the issue. The lock out only happens on the domain that is doing the pinging. Which to me is even odder. if any authentication was happening I would have expected the remote system being pinged to be the one to get a user locked out.&nbsp; I did not find any logs on either system that suggest that they are related to the host ping. <br /><br />All that said. I have since abandoned the use of the host ping monitoring of this specific setup. I lose network connection far to often for it to be effective in alerting me to a real issue. I constantly get false positives and that is not something helpful. Once you get too many alerts that you know are not issues you start to ignore them all.</p>\r\n<p>I may go back to this at a later date just to close the question on what was causing the lockout.</p>\r\n<p>&nbsp;</p>\r\n<p>thank you for your help.</p>",
+    "PostedDate": "2012-03-23T05:12:47.297-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "Id": "1305326",
+    "ThreadId": "567607",
+    "Html": "Hey, loving v3 so far.  I think it's going to be very helpful in my systems monitoring.\r<br />\n<br />\nI'm trying to setup a web service publish to build a hierarchy of agents. However, I'm getting an odd error from deep in CastleWindsor when I add my new publisher config. Adding a custom publisher, and a sql publisher went great, perfect textbook examples. But this publisher has thrown me for a loop....\r<br />\n<br />\nIt looks like:\r<br />\n<br />\nTopshelf.Hosts.ConsoleRunHost Error: 0 : An exception occurred, System.InvalidCastException: At least one element in the\r<br />\n source array could not be cast down to the destination array type.\r<br />\n<br />\nThe entire publisher config looks like this:\r<br />\n<br />\n{\r<br />\n  &quot;Name&quot;: &quot;KKDEVWolfpackPublisher&quot;,\r<br />\n  &quot;Description&quot;: &quot;This activity is used to publish notifications to another Wolfpack instance via the Web REST Api.&quot;,\r<br />\n  &quot;InterfaceType&quot;: null,\r<br />\n  &quot;PluginType&quot;: &quot;Wolfpack.Core.WebServices.Publisher.WebServicePublisher, Wolfpack.Core.WebServices&quot;,\r<br />\n  &quot;ConfigurationType&quot;: &quot;Wolfpack.Core.WebServices.Interfaces.Entities.WebServicePublisherConfig, Wolfpack.Core.WebServices.Interfaces&quot;,\r<br />\n  &quot;Data&quot;: &quot;{\\&quot;BaseFolder\\&quot;:\\&quot;_outbox\\&quot;,\\&quot;SendIntervalInSeconds\\&quot;:10,\\&quot;UserAgent\\&quot;:\\&quot;\\&quot;,\\&quot;BaseUrl\\&quot;:\\&quot;http://kkdeveloper:802/\\&quot;,\\&quot;ApiKey\\&quot;:\\&quot;\\&quot;,\\&quot;FriendlyId\\&quot;:\\&quot;KKDEVWolfpackPublisher\\&quot;,\\&quot;Enabled\\&quot;:true}&quot;,\r<br />\n  &quot;Tags&quot;: [<br />\n<pre><code>&quot;Activity&quot;,\n&quot;WebService&quot;,\n&quot;Publisher&quot;</code></pre>\n\n],\r<br />\n  &quot;Link&quot;: null,\r<br />\n  &quot;RequiredProperties&quot;: {<br />\n<pre><code>&quot;Name&quot;: &quot;KKDEVWolfpackPublisher&quot;</code></pre>\n\n}\r<br />\n}<br />\n",
+    "PostedDate": "2014-09-16T13:07:46.273-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1305347",
+    "ThreadId": "567607",
+    "Html": "Oh jeez, how confused I am. My problem was this this needs to be in the Config\\Activities folder, not Config\\Publishers folder!<br />\n",
+    "PostedDate": "2014-09-16T13:47:38.423-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1305369",
+    "ThreadId": "567607",
+    "Html": "Hi - welcome on board!\r<br />\n<br />\nHow are you configuring the web components? If you go through the UI it should work ok - if you are going through the UI and it's not working then l'll take a look. Each type of component has a dedicated loader so 'crossing the streams' will definitely cause problems!\r<br />\n<br />\nV3.1 has a mini overhaul of the config in order to simplify things - I'll also be adding to the docs about the config discovery features too. \r<br />\n<br />\nAppreciate any and all feedback and welcome contributions to custom plugins that might benefit the community - if you write anything and want to release it I'd be happy to help package it/assist. \r<br />\n<br />\nCheers,\r<br />\nJames<br />\n",
+    "PostedDate": "2014-09-16T14:37:47.337-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1305376",
+    "ThreadId": "567607",
+    "Html": "Thanks James!\r<br />\n<br />\nI used the UI after the fact, which is why I found I chose the wrong location. I am trying to build deployable solutions for my company, \r<br />\nSo, I can use the UI but after will want to copy the file to a project that will be deployed by Octopus.\r<br />\n<br />\nIf I make any plugins that are pretty generic I will consider releasing them. \r<br />\n<br />\nI have the agent-agent working now. I'm done for the day, but 2 issues arise. There is a bug somewhere when the notification is serialized,\r<br />\nThe GeneratedOnUtc field was sent as utc, but gets set to local time. I'll find it tomorrow.\r<br />\n<br />\nThe other thing I'd that the stale message exception causes the notification to not be consumed since the web service leaks the exception to the client. The client then keeps retrying, but the notification never gets &quot;less stale&quot;. \r<br />\n<br />\n-jerry<br />\n",
+    "PostedDate": "2014-09-16T15:04:21.287-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1305549",
+    "ThreadId": "567607",
+    "Html": "What I found is that the MessageStalenessCheckStep.Execute is not accounting for GeneratedOnUtc being local time. The string format of the serialized time is localtime+timezone. For example:\r<br />\n<br />\n2014-09-16 17:15:03,208 [6] INFO  Wolfpack [(null)] - Received Notification (HealthCheck) 3ee44382-de4e-4904-b1ce-1a45c4180eec\r<br />\n{\r<br />\n  &quot;Id&quot;: &quot;3ee44382-de4e-4904-b1ce-1a45c4180eec&quot;,\r<br />\n  &quot;EventType&quot;: &quot;HealthCheck&quot;,\r<br />\n  &quot;SiteId&quot;: &quot;JALBRO&quot;,\r<br />\n  &quot;AgentId&quot;: &quot;Agent1&quot;,\r<br />\n  &quot;CheckId&quot;: &quot;IsNotepadRunning&quot;,\r<br />\n  &quot;Message&quot;: &quot;There are 0 instances of process 'notepad.exe' on localhost&quot;,\r<br />\n  &quot;CriticalFailure&quot;: false,\r<br />\n  &quot;CriticalFailureDetails&quot;: null,\r<br />\n  &quot;Result&quot;: false,\r<br />\n  &quot;ResultCount&quot;: 0.0,\r<br />\n  &quot;DisplayUnit&quot;: null,\r<br />\n  &quot;GeneratedOnUtc&quot;: &quot;2014-09-16T17:14:58.7417862-04:00&quot;,\r<br />\n  &quot;ReceivedOnUtc&quot;: &quot;2014-09-16T21:15:03.2085245Z&quot;,\r<br />\n<br />\n...\r<br />\nIt may be arguable that DateTime.UtcNow.Subtract should check the DateTimeKind of the operands, but it appears to not do so. GeneratedOnUtc is effectively correct, but it has a Kind of DateTimeKind.Local.\r<br />\n<br />\nI recommend the fix is simply to change MessageStalenessCheckStep.Execute to use GeneratedOnUtc.ToUniversalTime() in the subtraction. This then yields the correct delta T.  \r<br />\n<pre><code>    public override void Execute(WebServiceReceiverContext context)\n    {\n        if (DateTime.UtcNow.Subtract(context.Notification.GeneratedOnUtc.ToUniversalTime()).TotalMinutes &gt; _config.MaxAgeInMinutes)\n        {\n</code></pre>\n\nAnother way to correct this is to update NotificationModule.cs to change the Kind on GeneratedOnUtc to a UTC time...<br />\n<pre><code>        Post[&quot;/notify&quot;] = request =&gt;\n        {\n            var message = this.Bind&lt;NotificationEvent&gt;();\n            message.GeneratedOnUtc = message.GeneratedOnUtc.ToUniversalTime();\n            message.State = MessageStateTypes.Delivered;\n            message.ReceivedOnUtc = DateTime.UtcNow;\n</code></pre>\n\nIn fact, doing both works since once GeneratedOnUtc has the Kind property set to Utc the ToUniversalTime() conversion is moot.\r<br />\n<br />\n<br />\n-jerry<br />\n",
+    "PostedDate": "2014-09-17T05:50:20.25-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1305557",
+    "ThreadId": "567607",
+    "Html": "Cool - thanks for the feedback on the agent-agent mechanism.\r<br />\n<br />\nI'll add the utc fix into the next build.\r<br />\n<br />\nAs for the stale message &quot;workflow&quot; - I'll take a look and revise - like you say it will never get less stale and will continue to fail and retry ad-infinitum. I'll probably change it to consume the message but park it somewhere, &quot;dead-letter&quot; style - something like that (suggestions welcome).\r<br />\n<br />\nI'd be keen to hear any suggestions for improving the configuration/helpers/plugins for managing deployment of a large scale of agents - I confess I've never had to deploy/manage large numbers of agents but its something I'm aware that could be a pain and would be looking to add backlog items/features to smooth this over.\r<br />\n<br />\nThanks,\r<br />\nJames<br />\n",
+    "PostedDate": "2014-09-17T06:19:31.587-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1305577",
+    "ThreadId": "567607",
+    "Html": "I'll provide info and feedback as I go. My planned scenario is about 50 physical sites, each site has a main server and about 15 to 20 other machines. So, each machine will run wolfpack, no publishers, just feeds up to the site server. site server has its own set of health checks, a sql publisher, and feeds up to a central corporate server running wolfpack. That will publish to sql and (filtered) to a Alert Manager server. The Alert Manager server provides a REST service to accept alerts and generates email and text message alerts.\r<br />\n<br />\nBy the way, believe it or not I worked in Microsoft Office365 on the monitoring team. I was quite busy developing certain aspects of the Active Monitoring (or Managed Availability) systems.<br />\n\r<br />\nOne concept a wee bit different than Wolfpack has is the Responders (instead of publishers). You could attach a chain of responders to an health check. The basic pattern would be the first responder (if error less than say 1/2 hour old) might restart a service to attempt to correct a failure. The second responder would only run if the error was still present after say 1 hour, and reboot the server. Then the 3rd level responder would only run if the error was there for 1.5 hours and would page the On Call Engineer.<br />\n\r<br />\nThe other change that evolved from Exchange 2010 to Exchange 2013 was that the monitor shifted from looking for a vast array of failure indicators (eg, event log entries) to a more black box &quot;is the service working for the customer&quot; point of view. For example send an email and see if it ends up in target test mailbox.\r<br />\n<br />\nThere is a LOT more to it though.  See <a href=\"http://technet.microsoft.com/en-us/library/dn482056.aspx\" rel=\"nofollow\">http://technet.microsoft.com/en-us/library/dn482056.aspx</a><br />\n",
+    "PostedDate": "2014-09-17T07:13:55.81-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1305600",
+    "ThreadId": "567607",
+    "Html": "Awesome stuff!!...and the responders component makes a lot of sense - I've had a feeling that &quot;publisher/publishing&quot; was a restricted view point of handling a notification as I've created several components (in the build analytics plugins) that are publishers but don't actually act as a publisher...so I've been aware that I'm bending things a little but now you mention &quot;responders&quot; it fits much better - particularly as it also provides a solution to the escalation problem too.\r<br />\n<br />\nI'll certainly look at the notification hub/internals to accommodate something like &quot;chaining responders&quot; once I get the next release out. I quite like the idea of making the configuration more notification centric rather than setting things up globally.\r<br />\n<br />\nThanks for the info/feedback - much appreciated!<br />\n",
+    "PostedDate": "2014-09-17T07:51:45.55-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1305999",
+    "ThreadId": "567607",
+    "Html": "Maybe we should start a new thread to expand on this topic. Anyway, this may clarify what Exchange is doing. <a href=\"http://blogs.technet.com/b/exchange/archive/2013/07/16/managed-availability-monitors.aspx\" rel=\"nofollow\">http://blogs.technet.com/b/exchange/archive/2013/07/16/managed-availability-monitors.aspx</a>\r<br />\n<br />\nBasically, <br />\n<ol>\n<li>\nProbes does some test, and write ProbeResults.<br />\n</li>\n<li>\nMonitors check ProbeResults, then write MonitorResults. A monitorresult reports not merely healthy/unhealthy, but there are different levels of unhealthy, depending upon how low the monitor has been in an unhealthy state.<br />\n</li>\n<li>\nResponders check MonitorResults, and if the monitorresult unhealthy state matches the target state of the responder (and the responder is not throttled) the responder executes.<br />\n</li>\n</ol>\nIn someways Exchange Managed Availability is overly complex, and I don't think using the Crimson event log channels as pseudo databases was a great decision, but overall it's a well thought out and effective system.<br />\n",
+    "PostedDate": "2014-09-18T09:47:54.69-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

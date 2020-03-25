@@ -1,0 +1,19 @@
+<div class="wikidoc"><h1>Wolfpack v3</h1><i>...monitor all the things....</i><br /><br />Version 3 of Wolfpack represents a <i>major</i> update - it has been largely rebuilt from the ground up and fixes some of the weaknesses and pain-points from the original design. Wolfpack has been stripped back to a &quot;core&quot; and lost a lot of features in the process...some of these features have been removed for good, some of them will be rebuilt and come back as optional plugin installs (via the contrib project). <br />
+<ul><li><a href="https://wolfpack.codeplex.com/wikipage?title=Installationv3&referringTitle=Wolfpackv3Docs">Installation and getting started</a>
+<ul><li><a href="https://wolfpack.codeplex.com/wikipage?title=AddingPluginsv3&referringTitle=Wolfpackv3Docs">Adding plugins</a></li></ul></li>
+<li><a href="https://wolfpack.codeplex.com/wikipage?title=Architecturev3&referringTitle=Wolfpackv3Docs">Features &#38; Architecture</a></li>
+<li><a href="https://wolfpack.codeplex.com/wikipage?title=Periscope&referringTitle=Wolfpackv3Docs">Dashboard Support</a> <i>...see all the things!...</i></li>
+<li><a href="https://wolfpack.codeplex.com/wikipage?title=HowTov3&referringTitle=Wolfpackv3Docs">How To&#47;Tutorials</a></li></ul>
+
+<h3>News</h3><i>9th Aug 2014</i> - working on an overhaul of the config system. 
+<ul><li>Simplifying and unifying the plugin interfaces/base classes - ultimate goal is to have only a single &quot;PluginId&quot; property rather than the confusing two names/ids at the moment. </li>
+<li>Also will be adding a proper status page</li>
+<li>Changing the JSON config editor to one that is easier to use. </li>
+<li>&quot;mute&quot; notifications - useful when you are setting up a new notification and need to de-clutter notifications temporarily.</li>
+<li>Enhancements to the activity page - can now pause the screen to allow you to inspect notifications (also will add click for details).</li></ul>
+<i>25th May 2014</i> - v3 is released!<br />
+<h3>Changes from v2.x</h3><ul><li>Growl publisher exchanged for the Console (json) contrib publisher - growl publisher is now a contrib add-on and console publisher add-on is now part of core and no longer a separate add-on; it is also the default publisher (rather than growl).</li></ul>
+
+<h3>Gone Forever</h3><ul><li>NServiceBus as a <i>notification mechanism</i>...in fact all traces of NServiceBus from the core. Notification transmission between Wolfpack instances is now rest/json/www based. 
+<ul><li>Support for NServiceBus healthchecks will remain - the contrib project has a few checks and these will be upgraded to v3 shortly.</li></ul></li>
+<li>AppStats - Wolfpack now supports an Api method to push a Notification into it so replicating what AppStats effectively provided.</li></ul></div><div class="ClearBoth"></div>

@@ -1,0 +1,30 @@
+<HealthCheckResult xmlns="http://schemas.datacontract.org/2004/07/Wolfpack.Core.Interfaces.Entities" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Agent>
+		<AgentId>SiteA</AgentId>
+		<SiteId>IAGILE-2008</SiteId>
+	</Agent>
+	<Check>
+		<CriticalFailure>false</CriticalFailure>
+		<CriticalFailureDetails i:nil="true" />
+		<Duration>PT0S</Duration>
+		<GeneratedOnUtc>2012-06-27T06:53:17.7939568Z</GeneratedOnUtc>
+		<Geo i:nil="true" />
+		<Identity>
+			<Description>Checks for the existance of process 'notepad.exe' on localhost</Description>
+			<Name>IsNotepadRunning</Name>
+			<ScheduleDescription i:nil="true" />
+			<TypeId>46d4374c-c65d-442e-9b93-af50bb8c045c</TypeId>
+		</Identity>
+		<Info>There are 0 instances of process 'notepad.exe' on localhost</Info>
+		<NextCheckExpected i:nil="true" />
+		<Properties xmlns:a="http://schemas.microsoft.com/2003/10/Serialization/Arrays" i:nil="true" />
+		<Result>false</Result>
+		<ResultCount>0</ResultCount>
+		<Tags i:nil="true" />
+	</Check>
+	<DayBucket>543</DayBucket>
+	<EventType>Result</EventType>
+	<HourBucket>13038</HourBucket>
+	<Id>492ed708-0d1f-4e6b-a6dc-86fb32cefb2f</Id>
+	<MinuteBucket>782333</MinuteBucket>
+</HealthCheckResult>

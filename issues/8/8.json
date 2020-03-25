@@ -1,0 +1,55 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "HealthChecks",
+      "DisplayName": "HealthChecks"
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 3,
+    "Custom": null,
+    "Description": "The MinDateMod parameter takes an absolute date which isn't functionally useful in a static configuration. I don't want to parse all 30 days worth of logs on disk. I need some way to dynamically set MinDateMod to a relative time.",
+    "LastUpdatedDate": "2017-12-08T09:48:17.57-08:00",
+    "PlannedForRelease": "Wolfpack v3",
+    "ReleaseVisibleToPublic": true,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "wolfpack",
+    "ReportedDate": "2012-10-01T12:15:27.1-07:00",
+    "Status": {
+      "Name": "Resolved",
+      "Id": 7
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Support for calculated value in MinDateMod of IISLogParserCheckConfig",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 8
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "Hi - yup, agreed a static date is next to useless really!\n\nI will change the check to replace MinModDate with a MinModDays (int). This will be used (if set) to calculate the min mod date from today.\n\nTrack progress on trello! https://trello.com/b/8gto1kYr",
+      "PostedDate": "2012-10-02T05:48:40.31-07:00",
+      "Id": 78269
+    },
+    {
+      "Message": "May I suggest using a Double? That's what AddDays expects and allow for fractions of a day.",
+      "PostedDate": "2012-10-02T06:15:36.83-07:00",
+      "Id": 78273
+    },
+    {
+      "Message": "Fixed in v3 release",
+      "PostedDate": "2013-01-04T09:25:07.073-08:00",
+      "Id": 85371
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "Agent",
+      "DisplayName": "Agent"
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 5,
+    "Custom": null,
+    "Description": "Not sure if this is a real issue or not but I tried to run the binaries_v2.2.0.0 \"out of the box\". So the only thing that is really configured (Enabled) is the is IsNotepadRunning check. I get an  exception(Title) and the agent shuts down. Attached is the contents of the log. ",
+    "LastUpdatedDate": "2017-12-08T09:48:17.57-08:00",
+    "PlannedForRelease": "Wolfpack v2.3 (Sidewinder)",
+    "ReleaseVisibleToPublic": true,
+    "Priority": {
+      "Name": "High",
+      "Severity": 150,
+      "Id": 3
+    },
+    "ProjectName": "wolfpack",
+    "ReportedDate": "2011-08-17T06:34:33.587-07:00",
+    "Status": {
+      "Name": "Resolved",
+      "Id": 7
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Access to the path '\\\\tsclient\\v\\wolfpackdata' is denied.",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 2,
+    "Id": 5
+  },
+  "FileAttachments": [
+    {
+      "FileId": 270894,
+      "FileName": "Wolfpack.log",
+      "DownloadUrl": ".\\270894"
+    }
+  ],
+  "Comments": [
+    {
+      "Message": "Wanted to include my systems info as well in case it matters. Windows 7 Enterprise (n) 64x  ",
+      "PostedDate": "2011-08-17T06:39:16.863-07:00",
+      "Id": 42898
+    },
+    {
+      "Message": "In the config\\publisher.castle.config file find the \"FileSystemBridgePublisherConfig\" component and set the Enabled property to \"false\".\n\nThis is a screw-up in the config for v2.2 - it should have been disabled, apologies.\n\nI've fixed it in the next build v2.3 - releasing shortly",
+      "PostedDate": "2011-08-17T07:24:34.503-07:00",
+      "Id": 42904
+    },
+    {
+      "Message": "Also make sure that all files are \"unblocked\" once they have been extracted....see this: http://wolfpack.codeplex.com/workitem/4\n\nCheers,\n\nJames",
+      "PostedDate": "2011-08-17T07:30:11.18-07:00",
+      "Id": 42905
+    },
+    {
+      "Message": "Thanks... that got me a little further. It seems that the GeckoboardDataServiceActivityConfig is also enabled and should not be. I disabled that by setting enabled to false in the activity.castle.config and it seem to stay running now.  I will be honest, I don't see it doing a lot of anything I would expect. I had notepad open when it started and then closed it. After 5 min I still see no change in the console output message. \n\nI was hoping for something that would let me know it actually works.\n\nTopshelf] After starting services complete\n2011-08-17 11:10:32,835 [1] INFO  Topshelf.Hosts.ConsoleRunHost [(null)] - [Topshelf] Running, press Control+C to exit.\n2011-08-17 11:11:31,891 [7] DEBUG Wolfpack [(null)] - Querying wmi namespace \\\\localhost\\root\\cimv2...\n2011-08-17 11:12:31,864 [7] DEBUG Wolfpack [(null)] - Querying wmi namespace \\\\localhost\\root\\cimv2...\n2011-08-17 11:13:31,832 [7] DEBUG Wolfpack [(null)] - Querying wmi namespace \\\\localhost\\root\\cimv2...\n2011-08-17 11:14:31,815 [7] DEBUG Wolfpack [(null)] - Querying wmi namespace \\\\localhost\\root\\cimv2...\n2011-08-17 11:15:31,836 [7] DEBUG Wolfpack [(null)] - Querying wmi namespace \\\\localhost\\root\\cimv2...\n2011-08-17 11:16:36,054 [7] DEBUG Wolfpack [(null)] - Querying wmi namespace \\\\localhost\\root\\cimv2...\n2011-08-17 11:17:35,285 [7] DEBUG Wolfpack [(null)] - Querying wmi namespace \\\\localhost\\root\\cimv2...\n",
+      "PostedDate": "2011-08-17T08:17:20.25-07:00",
+      "Id": 42909
+    },
+    {
+      "Message": "Ok, great - I'll fix the Geckoboard Data Service enabled state in the next drop too.\n\nIn terms of your experience - I totally agree it is a little disappointing \"out-of-the-box\". The best way to receive alerts is with Growl (http://www.growlforwindows.com/gfw/about.aspx) but agree that as it ships it could do better than the DEBUG output you see. There is a contrib project that has a console publisher. \n\nThe next release of Wolfpack includes Sidewinder (sidewinder.codeplex.com - my new app updater based on NuGet) - with this I can bundle the console publisher contrib package with Wolfpack - this will provide a better OOTB experience.\n\nThanks for the feedback - keep it coming!\n\nJames",
+      "PostedDate": "2011-08-17T10:56:47.467-07:00",
+      "Id": 42921
+    }
+  ]
+}

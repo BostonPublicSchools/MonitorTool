@@ -1,0 +1,328 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wolfpack.Agent", "Wolfpack.Agent\Wolfpack.Agent.csproj", "{5A1F7719-5EC2-46C3-9E4A-1BAD421EE291}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{39FDEDC1-5F1C-4FE3-A72B-950AD11F1FC5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{C1821668-5C01-4C53-8172-1432BE518DC1}"
+	ProjectSection(SolutionItems) = preProject
+		Build\Common\AssemblyVersion.cs = Build\Common\AssemblyVersion.cs
+		Build\Common\CommonAssemblyInfo.cs = Build\Common\CommonAssemblyInfo.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Licences", "Licences", "{C37194E6-93F6-4615-B075-3301C6B64720}"
+	ProjectSection(SolutionItems) = preProject
+		Licences\log4net.license.txt = Licences\log4net.license.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{2C5A9A06-5C0F-4960-9C49-44C5003D9669}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{79059805-20B4-4156-A8B2-6272FBA706A7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestData", "TestData", "{4E8D80E2-937C-4666-852D-9794E95A06F2}"
+	ProjectSection(SolutionItems) = preProject
+		TestData\LogParserTest.csv = TestData\LogParserTest.csv
+		TestData\LogParserTest.txt = TestData\LogParserTest.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wolfpack.HealthCheck", "Wolfpack.HealthCheck", "{961557EA-82A1-4AFD-9729-94FD65A71F7A}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet\Templates\Wolfpack.HealthCheck\Wolfpack.HealthCheck.nuspec = NuGet\Templates\Wolfpack.HealthCheck\Wolfpack.HealthCheck.nuspec
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wolfpack.Publisher", "Wolfpack.Publisher", "{6327AA77-AE98-4E04-9B48-C07173016303}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet\Templates\Wolfpack.Publisher\Wolfpack.Publisher.nuspec = NuGet\Templates\Wolfpack.Publisher\Wolfpack.Publisher.nuspec
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{DFC24647-C872-4F36-B89F-214B364A6A6C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net45", "net45", "{03516572-0E35-4685-9478-0D349F6C9472}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet\Templates\Wolfpack.HealthCheck\lib\net45\delete.me = NuGet\Templates\Wolfpack.HealthCheck\lib\net45\delete.me
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{B83DFC58-5AEC-4E1F-B367-5B12713C123C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net45", "net45", "{97C91E7C-A5CF-4D01-AE58-71A82FA46DA4}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet\Templates\Wolfpack.Publisher\lib\net45\delete.me = NuGet\Templates\Wolfpack.Publisher\lib\net45\delete.me
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorldHealthCheck", "HelloWorldHealthCheck\HelloWorldHealthCheck.csproj", "{79C0B713-6040-4E36-9607-0364F9AADB39}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wolfpack.Core", "Wolfpack.Core\Wolfpack.Core.csproj", "{EEFB2D36-3C15-4420-8A07-2D3CB381741D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wolfpack.Core.Interfaces", "Wolfpack.Core.Interfaces\Wolfpack.Core.Interfaces.csproj", "{21083526-1E2F-468C-A08B-D2CAC99EC4FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wolfpack.Core.Interfaces.Castle", "Wolfpack.Core.Interfaces.Castle\Wolfpack.Core.Interfaces.Castle.csproj", "{98CD5D7E-5A81-4F65-9E56-F589311899C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wolfpack.Core.Interfaces.Magnum", "Wolfpack.Core.Interfaces.Magnum\Wolfpack.Core.Interfaces.Magnum.csproj", "{2CFB5B81-6F29-43C7-A539-CF185A5AFD0E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wolfpack.Tests", "Wolfpack.Tests\Wolfpack.Tests.csproj", "{4409B842-D0FE-4DBC-ADA8-B7CA52689E6E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wolfpack", "Wolfpack", "{68C3AA09-D386-4015-8991-F2CAA8C50CD4}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet\Templates\Wolfpack\Wolfpack.nuspec = NuGet\Templates\Wolfpack\Wolfpack.nuspec
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{2959CC02-9D7E-4B01-AEE3-F4C6E477BCED}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Net45", "Net45", "{4F7C8A51-6676-42BA-A376-037241E47E8A}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet\Templates\Wolfpack\lib\net45\delete.me = NuGet\Templates\Wolfpack\lib\net45\delete.me
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{741A7329-0919-4109-A086-9EBBD33A4084}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Config", "Config", "{DA773E49-2C40-4601-8662-896ABB32951F}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet\Templates\Wolfpack\content\Config\delete.me = NuGet\Templates\Wolfpack\content\Config\delete.me
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wolfpack.Core.Testing", "Wolfpack.Core.Testing\Wolfpack.Core.Testing.csproj", "{CBAADBCA-E16F-4D88-80DB-7CFB455B98F6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wolfpack.Core.Testing", "Wolfpack.Core.Testing", "{CE4229D8-6176-4BF2-94E6-E18A34218BB0}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet\Templates\Wolfpack.Core.Testing\Wolfpack.Core.Testing.nuspec = NuGet\Templates\Wolfpack.Core.Testing\Wolfpack.Core.Testing.nuspec
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{8FD61883-869C-4D62-9C55-C498F095F5C2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net45", "net45", "{AAA182C2-8B5E-46D6-93DE-31D718E59415}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet\Templates\Wolfpack.Core.Testing\lib\net45\delete.me = NuGet\Templates\Wolfpack.Core.Testing\lib\net45\delete.me
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{1B65B8C2-B408-412B-8A64-CA976AA7209C}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet\Templates\Wolfpack\tools\chocolateyInstall.ps1 = NuGet\Templates\Wolfpack\tools\chocolateyInstall.ps1
+		NuGet\Templates\Wolfpack\tools\delete.me = NuGet\Templates\Wolfpack\tools\delete.me
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wolfpack.Core.WebServices", "Wolfpack.Core.WebServices\Wolfpack.Core.WebServices.csproj", "{BAA3F1D4-196E-4683-A302-557FEC4465F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wolfpack.Core.WebServices.Interfaces", "Wolfpack.Core.WebServices.Interfaces\Wolfpack.Core.WebServices.Interfaces.csproj", "{DDC40CE0-D9A2-4847-893C-AF7ECBCF0FE6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wolfpack.WebServices", "Wolfpack.WebServices", "{F767A53C-845F-421B-BFEA-E6B6CAA31061}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet\Templates\Wolfpack.WebServices\Wolfpack.WebServices.nuspec = NuGet\Templates\Wolfpack.WebServices\Wolfpack.WebServices.nuspec
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{FD1684B9-4987-446C-B2D6-8BF32A3C1C8F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net45", "net45", "{9847DE2C-436E-4256-A115-86DCB1660D98}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet\Templates\Wolfpack.WebServices\lib\net45\delete.me = NuGet\Templates\Wolfpack.WebServices\lib\net45\delete.me
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wolfpack.Core.WebServices.Client", "Wolfpack.Core.WebServices.Client\Wolfpack.Core.WebServices.Client.csproj", "{BA5F9564-B6B1-4146-9F1E-0B3C9CD2996F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wolfpack.Manager", "Wolfpack.Manager\Wolfpack.Manager.csproj", "{7CA51FEB-BDA9-454E-9959-A6C23A971E10}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wolfpack.WebServices.Client", "Wolfpack.WebServices.Client", "{01753445-2836-4BA5-8018-4D1555A42322}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet\Templates\Wolfpack.WebServices.Client\Wolfpack.WebServices.Client.nuspec = NuGet\Templates\Wolfpack.WebServices.Client\Wolfpack.WebServices.Client.nuspec
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{F5C0B11F-2349-4CEC-B24F-0FBBE8784275}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net45", "net45", "{68CB6FFE-A6DB-4667-9A0B-C0127F3704CD}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet\Templates\Wolfpack.WebServices.Client\lib\net45\delete.me = NuGet\Templates\Wolfpack.WebServices.Client\lib\net45\delete.me
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{86E052FA-4B01-4AE1-8B54-86E6B0B8AE9C}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet\Templates\Wolfpack.Core.Testing\content\app.config.transform = NuGet\Templates\Wolfpack.Core.Testing\content\app.config.transform
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wolfpack.Core.WebUI", "Wolfpack.Core.WebUI\Wolfpack.Core.WebUI.csproj", "{0AF6E243-2F65-4B55-B75B-B0347C26E8E9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6C7444BA-AD9D-4D15-A33D-96187365A0B7}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{CE7775E5-8CBB-45E6-9170-09D3EB5355D1}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet\Templates\Wolfpack\content\Scripts\delete.me = NuGet\Templates\Wolfpack\content\Scripts\delete.me
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5A1F7719-5EC2-46C3-9E4A-1BAD421EE291}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{5A1F7719-5EC2-46C3-9E4A-1BAD421EE291}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{5A1F7719-5EC2-46C3-9E4A-1BAD421EE291}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{5A1F7719-5EC2-46C3-9E4A-1BAD421EE291}.Debug|x86.ActiveCfg = Debug|x86
+		{5A1F7719-5EC2-46C3-9E4A-1BAD421EE291}.Debug|x86.Build.0 = Debug|x86
+		{5A1F7719-5EC2-46C3-9E4A-1BAD421EE291}.Release|Any CPU.ActiveCfg = Release|x86
+		{5A1F7719-5EC2-46C3-9E4A-1BAD421EE291}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{5A1F7719-5EC2-46C3-9E4A-1BAD421EE291}.Release|Mixed Platforms.Build.0 = Release|x86
+		{5A1F7719-5EC2-46C3-9E4A-1BAD421EE291}.Release|x86.ActiveCfg = Release|x86
+		{5A1F7719-5EC2-46C3-9E4A-1BAD421EE291}.Release|x86.Build.0 = Release|x86
+		{79C0B713-6040-4E36-9607-0364F9AADB39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79C0B713-6040-4E36-9607-0364F9AADB39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79C0B713-6040-4E36-9607-0364F9AADB39}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{79C0B713-6040-4E36-9607-0364F9AADB39}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{79C0B713-6040-4E36-9607-0364F9AADB39}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{79C0B713-6040-4E36-9607-0364F9AADB39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79C0B713-6040-4E36-9607-0364F9AADB39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79C0B713-6040-4E36-9607-0364F9AADB39}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{79C0B713-6040-4E36-9607-0364F9AADB39}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{79C0B713-6040-4E36-9607-0364F9AADB39}.Release|x86.ActiveCfg = Release|Any CPU
+		{EEFB2D36-3C15-4420-8A07-2D3CB381741D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEFB2D36-3C15-4420-8A07-2D3CB381741D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEFB2D36-3C15-4420-8A07-2D3CB381741D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{EEFB2D36-3C15-4420-8A07-2D3CB381741D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{EEFB2D36-3C15-4420-8A07-2D3CB381741D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EEFB2D36-3C15-4420-8A07-2D3CB381741D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEFB2D36-3C15-4420-8A07-2D3CB381741D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEFB2D36-3C15-4420-8A07-2D3CB381741D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{EEFB2D36-3C15-4420-8A07-2D3CB381741D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{EEFB2D36-3C15-4420-8A07-2D3CB381741D}.Release|x86.ActiveCfg = Release|Any CPU
+		{21083526-1E2F-468C-A08B-D2CAC99EC4FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21083526-1E2F-468C-A08B-D2CAC99EC4FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21083526-1E2F-468C-A08B-D2CAC99EC4FC}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{21083526-1E2F-468C-A08B-D2CAC99EC4FC}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{21083526-1E2F-468C-A08B-D2CAC99EC4FC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{21083526-1E2F-468C-A08B-D2CAC99EC4FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21083526-1E2F-468C-A08B-D2CAC99EC4FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21083526-1E2F-468C-A08B-D2CAC99EC4FC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{21083526-1E2F-468C-A08B-D2CAC99EC4FC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{21083526-1E2F-468C-A08B-D2CAC99EC4FC}.Release|x86.ActiveCfg = Release|Any CPU
+		{98CD5D7E-5A81-4F65-9E56-F589311899C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98CD5D7E-5A81-4F65-9E56-F589311899C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98CD5D7E-5A81-4F65-9E56-F589311899C3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{98CD5D7E-5A81-4F65-9E56-F589311899C3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{98CD5D7E-5A81-4F65-9E56-F589311899C3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{98CD5D7E-5A81-4F65-9E56-F589311899C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98CD5D7E-5A81-4F65-9E56-F589311899C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98CD5D7E-5A81-4F65-9E56-F589311899C3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{98CD5D7E-5A81-4F65-9E56-F589311899C3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{98CD5D7E-5A81-4F65-9E56-F589311899C3}.Release|x86.ActiveCfg = Release|Any CPU
+		{2CFB5B81-6F29-43C7-A539-CF185A5AFD0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CFB5B81-6F29-43C7-A539-CF185A5AFD0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CFB5B81-6F29-43C7-A539-CF185A5AFD0E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{2CFB5B81-6F29-43C7-A539-CF185A5AFD0E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{2CFB5B81-6F29-43C7-A539-CF185A5AFD0E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2CFB5B81-6F29-43C7-A539-CF185A5AFD0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CFB5B81-6F29-43C7-A539-CF185A5AFD0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CFB5B81-6F29-43C7-A539-CF185A5AFD0E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{2CFB5B81-6F29-43C7-A539-CF185A5AFD0E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{2CFB5B81-6F29-43C7-A539-CF185A5AFD0E}.Release|x86.ActiveCfg = Release|Any CPU
+		{4409B842-D0FE-4DBC-ADA8-B7CA52689E6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4409B842-D0FE-4DBC-ADA8-B7CA52689E6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4409B842-D0FE-4DBC-ADA8-B7CA52689E6E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{4409B842-D0FE-4DBC-ADA8-B7CA52689E6E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{4409B842-D0FE-4DBC-ADA8-B7CA52689E6E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4409B842-D0FE-4DBC-ADA8-B7CA52689E6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4409B842-D0FE-4DBC-ADA8-B7CA52689E6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4409B842-D0FE-4DBC-ADA8-B7CA52689E6E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{4409B842-D0FE-4DBC-ADA8-B7CA52689E6E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{4409B842-D0FE-4DBC-ADA8-B7CA52689E6E}.Release|x86.ActiveCfg = Release|Any CPU
+		{CBAADBCA-E16F-4D88-80DB-7CFB455B98F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBAADBCA-E16F-4D88-80DB-7CFB455B98F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBAADBCA-E16F-4D88-80DB-7CFB455B98F6}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{CBAADBCA-E16F-4D88-80DB-7CFB455B98F6}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{CBAADBCA-E16F-4D88-80DB-7CFB455B98F6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CBAADBCA-E16F-4D88-80DB-7CFB455B98F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBAADBCA-E16F-4D88-80DB-7CFB455B98F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBAADBCA-E16F-4D88-80DB-7CFB455B98F6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{CBAADBCA-E16F-4D88-80DB-7CFB455B98F6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{CBAADBCA-E16F-4D88-80DB-7CFB455B98F6}.Release|x86.ActiveCfg = Release|Any CPU
+		{BAA3F1D4-196E-4683-A302-557FEC4465F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAA3F1D4-196E-4683-A302-557FEC4465F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAA3F1D4-196E-4683-A302-557FEC4465F9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{BAA3F1D4-196E-4683-A302-557FEC4465F9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{BAA3F1D4-196E-4683-A302-557FEC4465F9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BAA3F1D4-196E-4683-A302-557FEC4465F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAA3F1D4-196E-4683-A302-557FEC4465F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAA3F1D4-196E-4683-A302-557FEC4465F9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{BAA3F1D4-196E-4683-A302-557FEC4465F9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{BAA3F1D4-196E-4683-A302-557FEC4465F9}.Release|x86.ActiveCfg = Release|Any CPU
+		{DDC40CE0-D9A2-4847-893C-AF7ECBCF0FE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDC40CE0-D9A2-4847-893C-AF7ECBCF0FE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDC40CE0-D9A2-4847-893C-AF7ECBCF0FE6}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{DDC40CE0-D9A2-4847-893C-AF7ECBCF0FE6}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{DDC40CE0-D9A2-4847-893C-AF7ECBCF0FE6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DDC40CE0-D9A2-4847-893C-AF7ECBCF0FE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDC40CE0-D9A2-4847-893C-AF7ECBCF0FE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDC40CE0-D9A2-4847-893C-AF7ECBCF0FE6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{DDC40CE0-D9A2-4847-893C-AF7ECBCF0FE6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{DDC40CE0-D9A2-4847-893C-AF7ECBCF0FE6}.Release|x86.ActiveCfg = Release|Any CPU
+		{BA5F9564-B6B1-4146-9F1E-0B3C9CD2996F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA5F9564-B6B1-4146-9F1E-0B3C9CD2996F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA5F9564-B6B1-4146-9F1E-0B3C9CD2996F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{BA5F9564-B6B1-4146-9F1E-0B3C9CD2996F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{BA5F9564-B6B1-4146-9F1E-0B3C9CD2996F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BA5F9564-B6B1-4146-9F1E-0B3C9CD2996F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA5F9564-B6B1-4146-9F1E-0B3C9CD2996F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA5F9564-B6B1-4146-9F1E-0B3C9CD2996F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{BA5F9564-B6B1-4146-9F1E-0B3C9CD2996F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{BA5F9564-B6B1-4146-9F1E-0B3C9CD2996F}.Release|x86.ActiveCfg = Release|Any CPU
+		{7CA51FEB-BDA9-454E-9959-A6C23A971E10}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{7CA51FEB-BDA9-454E-9959-A6C23A971E10}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{7CA51FEB-BDA9-454E-9959-A6C23A971E10}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{7CA51FEB-BDA9-454E-9959-A6C23A971E10}.Debug|x86.ActiveCfg = Debug|x86
+		{7CA51FEB-BDA9-454E-9959-A6C23A971E10}.Debug|x86.Build.0 = Debug|x86
+		{7CA51FEB-BDA9-454E-9959-A6C23A971E10}.Release|Any CPU.ActiveCfg = Release|x86
+		{7CA51FEB-BDA9-454E-9959-A6C23A971E10}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{7CA51FEB-BDA9-454E-9959-A6C23A971E10}.Release|Mixed Platforms.Build.0 = Release|x86
+		{7CA51FEB-BDA9-454E-9959-A6C23A971E10}.Release|x86.ActiveCfg = Release|x86
+		{7CA51FEB-BDA9-454E-9959-A6C23A971E10}.Release|x86.Build.0 = Release|x86
+		{0AF6E243-2F65-4B55-B75B-B0347C26E8E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AF6E243-2F65-4B55-B75B-B0347C26E8E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AF6E243-2F65-4B55-B75B-B0347C26E8E9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{0AF6E243-2F65-4B55-B75B-B0347C26E8E9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{0AF6E243-2F65-4B55-B75B-B0347C26E8E9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0AF6E243-2F65-4B55-B75B-B0347C26E8E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AF6E243-2F65-4B55-B75B-B0347C26E8E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AF6E243-2F65-4B55-B75B-B0347C26E8E9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{0AF6E243-2F65-4B55-B75B-B0347C26E8E9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{0AF6E243-2F65-4B55-B75B-B0347C26E8E9}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C1821668-5C01-4C53-8172-1432BE518DC1} = {39FDEDC1-5F1C-4FE3-A72B-950AD11F1FC5}
+		{79059805-20B4-4156-A8B2-6272FBA706A7} = {2C5A9A06-5C0F-4960-9C49-44C5003D9669}
+		{961557EA-82A1-4AFD-9729-94FD65A71F7A} = {79059805-20B4-4156-A8B2-6272FBA706A7}
+		{6327AA77-AE98-4E04-9B48-C07173016303} = {79059805-20B4-4156-A8B2-6272FBA706A7}
+		{68C3AA09-D386-4015-8991-F2CAA8C50CD4} = {79059805-20B4-4156-A8B2-6272FBA706A7}
+		{CE4229D8-6176-4BF2-94E6-E18A34218BB0} = {79059805-20B4-4156-A8B2-6272FBA706A7}
+		{F767A53C-845F-421B-BFEA-E6B6CAA31061} = {79059805-20B4-4156-A8B2-6272FBA706A7}
+		{01753445-2836-4BA5-8018-4D1555A42322} = {79059805-20B4-4156-A8B2-6272FBA706A7}
+		{DFC24647-C872-4F36-B89F-214B364A6A6C} = {961557EA-82A1-4AFD-9729-94FD65A71F7A}
+		{B83DFC58-5AEC-4E1F-B367-5B12713C123C} = {6327AA77-AE98-4E04-9B48-C07173016303}
+		{03516572-0E35-4685-9478-0D349F6C9472} = {DFC24647-C872-4F36-B89F-214B364A6A6C}
+		{97C91E7C-A5CF-4D01-AE58-71A82FA46DA4} = {B83DFC58-5AEC-4E1F-B367-5B12713C123C}
+		{2959CC02-9D7E-4B01-AEE3-F4C6E477BCED} = {68C3AA09-D386-4015-8991-F2CAA8C50CD4}
+		{741A7329-0919-4109-A086-9EBBD33A4084} = {68C3AA09-D386-4015-8991-F2CAA8C50CD4}
+		{1B65B8C2-B408-412B-8A64-CA976AA7209C} = {68C3AA09-D386-4015-8991-F2CAA8C50CD4}
+		{4F7C8A51-6676-42BA-A376-037241E47E8A} = {2959CC02-9D7E-4B01-AEE3-F4C6E477BCED}
+		{DA773E49-2C40-4601-8662-896ABB32951F} = {741A7329-0919-4109-A086-9EBBD33A4084}
+		{CE7775E5-8CBB-45E6-9170-09D3EB5355D1} = {741A7329-0919-4109-A086-9EBBD33A4084}
+		{8FD61883-869C-4D62-9C55-C498F095F5C2} = {CE4229D8-6176-4BF2-94E6-E18A34218BB0}
+		{86E052FA-4B01-4AE1-8B54-86E6B0B8AE9C} = {CE4229D8-6176-4BF2-94E6-E18A34218BB0}
+		{AAA182C2-8B5E-46D6-93DE-31D718E59415} = {8FD61883-869C-4D62-9C55-C498F095F5C2}
+		{FD1684B9-4987-446C-B2D6-8BF32A3C1C8F} = {F767A53C-845F-421B-BFEA-E6B6CAA31061}
+		{9847DE2C-436E-4256-A115-86DCB1660D98} = {FD1684B9-4987-446C-B2D6-8BF32A3C1C8F}
+		{F5C0B11F-2349-4CEC-B24F-0FBBE8784275} = {01753445-2836-4BA5-8018-4D1555A42322}
+		{68CB6FFE-A6DB-4667-9A0B-C0127F3704CD} = {F5C0B11F-2349-4CEC-B24F-0FBBE8784275}
+	EndGlobalSection
+EndGlobal

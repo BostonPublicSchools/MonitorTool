@@ -1,0 +1,9 @@
+<div class="wikidoc"><h1>Windows Service State </h1>This check will compare the state of a windows service to the state you expect the service to be in. If you have mission critical services that must be running then you can use this check to ensure that they are always &quot;Running&quot;. 
+<h2>Features</h2><ul><li>Support for two states, &quot;Running&quot; and &quot;Stopped&quot; (you might also want to ensure a particular service is NOT running).</li>
+<li>Local and Remote - check for services on the same server as Wolfpack or a remote server.</li>
+<li>Multiple services - create a list of services that should be in the same state, this cuts down on configuration.</li></ul>
+<h2>Pre-requisites</h2><ul><li>Permissions to query/use the Service Control Manager information on the target server</li></ul>
+<h2>Configuration</h2><ul><li>Set the &quot;ExpectedState&quot; property; valid values are &quot;Running&quot; and &quot;Stopped&quot;</li>
+<li>Set the &quot;Server&quot; property if you need to check services on machine different to the one running the Wolfpack Agent. Leave blank or remove the element to check against the localhost.</li>
+<li>Add a new &lt;item&gt; to the &quot;Services&quot; property for each windows service you wish to monitor. You can use the service display or short name here.</li></ul>
+</div><div class="ClearBoth"></div>

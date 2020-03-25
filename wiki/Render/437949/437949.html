@@ -1,0 +1,22 @@
+<div class="wikidoc"><h1>CPU Utilisation</h1>Monitors the CPU utilisation as a percentage on the local or a remote machine. This check is a &quot;stream/threshold&quot; based check - it can stream a value and an optional threshold can be set to trigger an alert (represented as a failed check result) should that be breached.
+<ul><li>ResultCount = CPU utilisation %</li>
+<li>Result = false (if threshold set and breached)</li></ul>
+<h2>Pre-requisites</h2><ul><li>?</li></ul>
+<h2>Configuration</h2>check.castle.config contains the example for this check.<br /><div style="color:Black;background-color:White;"><pre>
+    <span style="color:Blue;">&lt;</span><span style="color:#A31515;">component</span> <span style="color:Red;">id</span><span style="color:Blue;">=</span><span style="color:Black;">&quot;</span><span style="color:Blue;">LocalCpuMonitor</span><span style="color:Black;">&quot;</span>
+				   <span style="color:Red;">lifestyle</span><span style="color:Blue;">=</span><span style="color:Black;">&quot;</span><span style="color:Blue;">singleton</span><span style="color:Black;">&quot;</span>
+				   <span style="color:Red;">type</span><span style="color:Blue;">=</span><span style="color:Black;">&quot;</span><span style="color:Blue;">Wolfpack.Core.Checks.CpuCheckConfig, Wolfpack.Core</span><span style="color:Black;">&quot;</span><span style="color:Blue;">&gt;</span>
+      <span style="color:Blue;">&lt;</span><span style="color:#A31515;">parameters</span><span style="color:Blue;">&gt;</span>
+        <span style="color:Blue;">&lt;</span><span style="color:#A31515;">FriendlyId</span><span style="color:Blue;">&gt;</span>LocalCpuMonitor<span style="color:Blue;">&lt;/</span><span style="color:#A31515;">FriendlyId</span><span style="color:Blue;">&gt;</span>
+        <span style="color:Blue;">&lt;</span><span style="color:#A31515;">Enabled</span><span style="color:Blue;">&gt;</span>true<span style="color:Blue;">&lt;/</span><span style="color:#A31515;">Enabled</span><span style="color:Blue;">&gt;</span>
+        <span style="color:Blue;">&lt;</span><span style="color:#A31515;">StreamData</span><span style="color:Blue;">&gt;</span>true<span style="color:Blue;">&lt;/</span><span style="color:#A31515;">StreamData</span><span style="color:Blue;">&gt;</span>
+        <span style="color:Blue;">&lt;</span><span style="color:#A31515;">Threshold</span><span style="color:Blue;">&gt;</span><span style="color:Blue;">&lt;/</span><span style="color:#A31515;">Threshold</span><span style="color:Blue;">&gt;</span>
+        <span style="color:Green;">&lt;!-- leave blank for local or set to remote machine name --&gt;</span>
+        <span style="color:Blue;">&lt;</span><span style="color:#A31515;">MachineName</span><span style="color:Blue;">&gt;</span><span style="color:Blue;">&lt;/</span><span style="color:#A31515;">MachineName</span><span style="color:Blue;">&gt;</span>
+      <span style="color:Blue;">&lt;/</span><span style="color:#A31515;">parameters</span><span style="color:Blue;">&gt;</span>
+    <span style="color:Blue;">&lt;/</span><span style="color:#A31515;">component</span><span style="color:Blue;">&gt;</span>
+</pre></div><ul><li><b>Enabled</b> set to true to enable the check or false to not run it</li>
+<li><b>StreamData</b> property should be set to &quot;true&quot; to always return the current value - this should be used if you want to constantly monitor (or graph) the processor % utilisation.</li>
+<li><b>Threshold</b> is the % value that will cause a failure result to be generated. This is an optional setting and should be left blank if you do not want to generate alerts if the % goes too high.</li>
+<li><b>MachineName</b> is the name of the machine to execute this check against. Leave blank to check the local machine.</li></ul>
+<br /></div><div class="ClearBoth"></div>

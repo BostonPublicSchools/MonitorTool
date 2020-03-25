@@ -1,0 +1,70 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": "2014-07-24T01:27:02.447-07:00",
+    "CommentCount": 6,
+    "Custom": null,
+    "Description": "Referring to #18, please use Castle's IEmailSender and let the library do the work of talking SSL when it needs to. Right now I have to jump through hoops with stunnel to have Wolfpack talk to Gmail. Thanks!",
+    "LastUpdatedDate": "2014-07-24T01:27:02.447-07:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "wolfpack",
+    "ReportedDate": "2014-07-02T15:56:02.467-07:00",
+    "Status": {
+      "Name": "Closed",
+      "Id": 4
+    },
+    "ReasonClosed": {
+      "Name": "Fixed"
+    },
+    "Summary": "Support SSL/TLS email hosts",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 1,
+    "Id": 19
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "Updated to use Castle IEmailSender in v3.0.21 (uploaded to NuGet)\n\nCan you try it out please?\n\nPlease delete your existing email plugin config and add it again - you should get 2 new config properties - \"Domain\" and \"UseSsl\" - these map directly to the params in the Sender.\n\nLet me know if this solves the issue.\n\nWill also look at the gmail html/text issue ",
+      "PostedDate": "2014-07-02T16:43:22.353-07:00",
+      "Id": 151435
+    },
+    {
+      "Message": "Thanks!\n\nThis update now has a broken dependency between Email and RazorEngine. Email is compiled against RazorEngine 3.2.0.0, `Wolfpack.Agent.exe /update` installed RazorEngine 3.4.0.0. Strong naming FTW!\n\nIs this because `Wolfpack.Agent.exe /update` updates each package separately and does not honor transitive dependency requirements?",
+      "PostedDate": "2014-07-03T00:59:20.947-07:00",
+      "Id": 151468
+    },
+    {
+      "Message": "ok, wasn't sure about those dependencies - whether to bundle the assemblies in the email package or pull them as actual dependencies. I'll take a look at the code that manages the dependencies - interesting it is taking the latest and not the pinned version in the nuspec though.\n\nI will deploy the email package with dependencies embedded to fix it now (this evening UK) and look at the dependency resolution later.",
+      "PostedDate": "2014-07-03T01:42:49.177-07:00",
+      "Id": 151473
+    },
+    {
+      "Message": "Gmail/TLS works. Many thanks! Here's the config snippet:\n\n```\n{\n  \"Name\": \"Gmail\",\n  \"Description\": \"This publisher will send an email when Wolfpack generates a notification.\",\n  \"InterfaceType\": null,\n  \"PluginType\": \"Wolfpack.Contrib.Publishers.Email.EmailPublisher, Wolfpack.Contrib.Publishers.Email\",\n  \"ConfigurationType\": \"Wolfpack.Contrib.Publishers.Email.EmailConfiguration, Wolfpack.Contrib.Publishers.Email\",\n  \"Data\": \"{\\\"Enabled\\\":true,\\\"FriendlyId\\\":\\\"Gmail\\\",\\\"Environment\\\":\\\"\\\",\\\"SmtpHost\\\":\\\"smtp.gmail.com\\\",\\\"Port\\\":587,\\\"Domain\\\":\\\"\\\",\\\"UserName\\\":\\\"no-reply@example.com\\\",\\\"Password\\\":\\\"secret\\\",\\\"UseSsl\\\":true,\\\"TemplatePath\\\":\\\"EmailPublisherTemplates\\\",\\\"MailSubject\\\":\\\"Wolfpack Notification\\\",\\\"FromAddress\\\":\\\"no-reply@example.com\\\",\\\"FromName\\\":\\\"Wolfpack Agent\\\",\\\"ToAddress\\\":\\\"you@example.com\\\"}\",\n  \"Tags\": [\n    \"Publisher\",\n    \"Email\"\n  ],\n  \"Link\": null,\n  \"RequiredProperties\": {\n    \"Name\": \"Gmail\"\n  }\n}\n```",
+      "PostedDate": "2014-07-03T03:29:33.673-07:00",
+      "Id": 151488
+    },
+    {
+      "Message": "The package dependency issue I think is related to the resolution code ignoring the versionspec embedded in the dependency declaration - it just picks the latest.\n\nI will rebuild the nuget code (sidewinder) to resolve the exact version package dependency and update with a new build of Sidewinder/Wolfpack tonight.\n\nThanks for discovering/reporting this issue - glad the Gmail stuff is working better for you!",
+      "PostedDate": "2014-07-03T04:48:33.967-07:00",
+      "Id": 151496
+    },
+    {
+      "Message": "I have updated Sidewinder, release v1.5.6 to fix the underlying issue with it pulling down the wrong dependent packages.\n\nYou will need to update to Wolfpack v3.0.25 in order to get this fix.",
+      "PostedDate": "2014-07-24T01:26:40.1-07:00",
+      "Id": 153356
+    }
+  ]
+}

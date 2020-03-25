@@ -1,0 +1,56 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 2,
+    "Custom": null,
+    "Description": "Hey,\r\n\r\nI'm having some trouble setting up the URL Ping Health Check.  It gives me a message \"This property cannot be set after writing has started.\" Warning on the activity page.  I created it off the 3.0.26 Wolfpack with the create button under Configuration.  If you know what might be causing this let me know! \r\n\r\nThe Config File Is Attached.\r\n\r\nThanks!\r\n\r\n\r\n",
+    "LastUpdatedDate": "2014-10-10T02:51:39.633-07:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "wolfpack",
+    "ReportedDate": "2014-10-09T09:27:16.307-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Property Can't Be Set After Writing - URL Ping",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 1,
+    "Id": 26
+  },
+  "FileAttachments": [
+    {
+      "FileId": 919511,
+      "FileName": "HeartbeatSender.config",
+      "DownloadUrl": ".\\919511"
+    }
+  ],
+  "Comments": [
+    {
+      "Message": "Can you attach any stack trace or the error log. \n\nThe config you have might have some issues though. The 'ContentRegex' property should be blank (for now) and so should the 'UserAgentString' - try blanking these fields in the config UI and see what happens. It's possibly an issue with setting the useragent on the request but I thought I had fixed all of these as this issues has come up before. \n\nLet me know how you get on \n\nCheers,\nJames\n\n",
+      "PostedDate": "2014-10-09T23:27:48.133-07:00",
+      "Id": 161931
+    },
+    {
+      "Message": "Also I see you have configured the \"PostData\" field to contain a value. For now can you make that blank too so we can isolate the issue?\n\nWhen you POST data it must be form-url encoded (eg: name=value) format so the value you have (HeartBeat: NumMachine) might be invalid (I think should be HeartBeat=NumMachine).\n\nI'll try and update the docs with this info too",
+      "PostedDate": "2014-10-10T02:51:39.633-07:00",
+      "Id": 161937
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "1233906",
+    "ThreadId": "542204",
+    "Html": "I'm looking switching my existing systems to V3.   If I make the jump will I also need to update my configuration files?<br />\n",
+    "PostedDate": "2014-04-14T07:40:43.92-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1233933",
+    "ThreadId": "542204",
+    "Html": "Hi,\r<br />\n<br />\nYes - v3 introduces a different configuration system for plugins - the default repository is JSON/file system based and not backwards compatible with v2.x.\r<br />\n<br />\nI would recommend a parallel run with v3 and your existing Wolfpack system - there are some features not ported across to v3 so it would be a good idea to install v3 and configure it up with all the plug-ins you need and give it a test drive - there could still be the odd bug in v3 (and I'd appreciate any feedback on bugs/problems).\r<br />\n<br />\nI am looking to release v3 this week so the more people that &quot;kick the tyres&quot; the better really - I'll provide support to anyone upgrading/testing v3. I will be doing a full refresh of the packages on the myget site tonight to pick up some last minute core updates - this drop should be pretty close to release for the core system.\r<br />\n<br />\nCheers,\r<br />\nJames<br />\n",
+    "PostedDate": "2014-04-14T08:45:58-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

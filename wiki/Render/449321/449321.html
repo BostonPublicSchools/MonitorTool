@@ -1,0 +1,20 @@
+<div class="wikidoc"><h1>Pie Charts</h1>Display HealthCheck result or AppStats data as a pie chart.<br /><br /><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=wolfpack&DownloadId=258146" alt="geckoboard_sample-pie.png" title="geckoboard_sample-pie.png" /><br />
+<h2>Widget Url</h2><h3>All Results</h3>This will provide a count of HealthCheck result failures grouped by SiteId.
+<ul><li>http://<i>hostname</i>/geckoboard/piechart/sites</li></ul>
+
+<h3>Failure types for a specific Site</h3>This provides a count of failures by HealthCheck type for the specific site.
+<ul><li>http://<i>hostname</i>/geckoboard/piechart/sites/<i>siteid</i></li>
+<li>where...
+<ul><li><i>siteid</i> is the name of the site to analyse (this is set in the role.castle.config file)</li></ul></li></ul>
+
+<h3>Check details</h3>This provides a detailed breakdown of a check or AppStat broken down by Tag.
+<ul><li>http://<i>hostname</i>/geckoboard/piechart/<i>check</i>/<i>outcome</i>/<i>operation</i></li>
+<li>where...
+<ul><li><i>check</i> is the check id to target</li>
+<li><i>outcome</i> is the result, values are &quot;success&quot;, &quot;failure&quot;, &quot;any&quot; (for AppStats always use &quot;any&quot;)</li>
+<li><i>operation</i> controls how the pie chart segment number is generated. Values are...
+<ul><li>&quot;Count&quot; - this will count the number of results that match</li>
+<li>&quot;Sum&quot; - this will sum up the ResultCount property of each Tag group</li>
+<li>&quot;Average&quot; - provides the average ResultCount across each Tag group</li>
+<li>&quot;Min&quot; &amp; &quot;Max&quot; - provides minimum and maximum respectively across each Tag group</li></ul></li></ul></li></ul>
+</div><div class="ClearBoth"></div>

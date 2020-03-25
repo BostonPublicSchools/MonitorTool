@@ -1,0 +1,45 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "Publishers",
+      "DisplayName": "Publishers"
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 1,
+    "Custom": null,
+    "Description": "\r\nNeed to document the SQL database schema!",
+    "LastUpdatedDate": "2017-12-08T09:48:17.57-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "wolfpack",
+    "ReportedDate": "2014-03-19T09:02:25.353-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Sql schema for notification database",
+    "Type": {
+      "Name": "Task",
+      "Id": 2
+    },
+    "VoteCount": 1,
+    "Id": 12
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "Once you fire up Wolfpack with the SQL publisher enabled it will automatically create the database for you - so you can snick the schema then.\n\nI can add the schema to the [publisher docs page](https://wolfpack.codeplex.com/wikipage?title=Configuring%20Publishers) if it would help? Looking at that page I would be inclined to break it into individual pages too whilst I'm there editing so you can link straight to an individual publisher.\n\nLemme know what works best for you\n\nCheers,\nJames",
+      "PostedDate": "2014-03-19T09:07:53.653-07:00",
+      "Id": 137341
+    }
+  ]
+}

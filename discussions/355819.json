@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "836557",
+    "ThreadId": "355819",
+    "Html": "\r\n<p>Whilst you can install Wolfpack via&nbsp;Sidewinder like this...</p>\r\n<p>sidewinder.exe /p wolfpack /i <em>installation_folder</em></p>\r\n<p>..it would be good to make Wolfpack available via Chocolatey too. Any interest in packaging Wolfpack with some Chocolatey goodness?</p>\r\n<p><em>&nbsp;</em></p>\r\n",
+    "PostedDate": "2012-05-15T03:17:32.72-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "852245",
+    "ThreadId": "355819",
+    "Html": "<p>Yes, excellent idea</p>",
+    "PostedDate": "2012-06-21T10:49:47.657-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "852455",
+    "ThreadId": "355819",
+    "Html": "<p>Ok, so just tried to \"cinst wolfpack\", the existing wolfpack nuget package. All I have to do is include a chocolateyInstall.ps1 script to build a folder that contains both binaries and the config folder. I'll put a script together and will certainly include it in the next release.</p>\r\n<p>BTW - Sidewinder does all of this right now, OOTB.</p>",
+    "PostedDate": "2012-06-21T23:57:03.66-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

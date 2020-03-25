@@ -1,0 +1,128 @@
+<div class="wikidoc"><h1>Walkthru - Creating a HealthCheck component</h1>
+<br /><div style="clear:both;height:0;">&nbsp;</div><img style="float:left;padding-right:.5em;" src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=wolfpack&DownloadId=242362" alt="abc.png" title="abc.png" /> This is a step-by-step guide to creating a new custom HealthCheck component and includes instructions on getting this running in Wolfpack and reporting its data.<br /><br /><b>UPDATE</b> Wolfpack is now on <a href="http://nuget.org">NuGet!</a> Rob Gibbens has created the NuGet packages to support &amp; streamline custom HealthCheck, Publisher &amp; BuildAnalytics development. These contain just the binaries required to develop these plugins for Wolfpack...just search in the NuGet Gallery explorer within Visual Studio for &quot;Wolfpack&quot;......Thanks Rob, great job!<br /><br /><br /><b>UPDATE 13th Jul 2011</b> There are several base classes that can be used to simplify plugin development.
+<ul><li>Wolfpack.Core.Interfaces.Entities.PluginConfigBase provides a base class for your Configuration component.</li>
+<li>Wolfpack.Core.Checks.HealthCheckBase&lt;T&gt; (Wolfpack.Core assembly, where &lt;T&gt; is the HealthCheck config class type). Use this for any normal HealthCheck.</li>
+<li>Wolfpack.Core.Checks.StreamThresholdCheckBase&lt;T&gt; (Wolfpack.Core assembly, where &lt;T&gt; is the HealthCheck config object type). This provides some common code if your HealthCheck provides a &quot;stream&quot; of readings eg: you want to capture the value of something and provide an alert (failure) if the HealthCheck value breaches a user specified threshold. As an example pinging a Url HealthCheck could return the response time (the stream) and if that breached some value (say 5 seconds) then raise an alert (the site at the end of the Url is unresponsive).</li></ul>
+<br /><b>NOTE</b> Wolfpack is written with VS2010 &amp; C# targeting the v4.0 .Net framework.<br /><br />All of the following can be found in the &quot;HelloWorldHealthCheck&quot; project in the Source code zip. The binding and check configuration file updates are also included but commented out. The fast start version is this,<br />1. Get the source and unzip<br />2. Move the Config\Checks\helloworld.castle.config file to the Config\Checks\EveryMinute folder<br />3. Build the solution<br />4. Copy the HelloWorldHealthCheck.dll from HelloWorldHealthCheck\bin\debug into Wolfpack.Agent\bin\debug<br />6. Start Wolfpack from the command line with &quot;Wolfpack.Agent.exe&quot;<br /><br />
+<h2>Creating a new HealthCheck</h2>1. Create a new class library project called &quot;HelloWorldHealthCheck&quot;<br />2. Install the &quot;Wolfpack.HealthCheck&quot; NuGet package, this will provide the necessary interfaces and base classes.<br />3. Rename &quot;Class1&quot; to &quot;HelloWorldCheck&quot; and make it implement IHealthCheckPlugin (Wolfpack.Core.Interfaces namespace)<br />4. Add a new class called &quot;<b>HelloWorldCheck</b>Config&quot;. The name is important as a convention is used to match HealthCheck configuration with HealthChecks - THE CONFIGURATION CLASSNAME MUST BE <i>HealthCheckClassName</i><b>Config</b><br />5. Make &quot;HelloWorldCheckConfig&quot; inherit from &quot;PluginConfigBase&quot;<br />6. Add a property to &quot;HelloWorldCheckConfig&quot;, the config class should look like...<br /><div style="color:Black;background-color:White;"><pre>
+<span style="color:Blue;">public</span> <span style="color:Blue;">class</span> HelloWorldCheckConfig : PluginConfigBase
+{
+    <span style="color:Blue;">public</span> <span style="color:Blue;">string</span> MyCustomSetting { <span style="color:Blue;">get</span>; <span style="color:Blue;">set</span>; }
+}
+</pre></div>7. Add a private readonly member variable of type &quot;HelloWorldCheckConfig&quot; called &quot;myConfig&quot; to &quot;HelloWorldCheck&quot;<br /><div style="color:Black;background-color:White;"><pre>
+<span style="color:Blue;">private</span> <span style="color:Blue;">readonly</span> HelloWorldCheckConfig myConfig;
+</pre></div>8. Add a constructor to &quot;HelloWorldCheck&quot; - this should take our config class as the only parameter.<br /><div style="color:Black;background-color:White;"><pre>
+<span style="color:Blue;">public</span> HelloWorldCheck(HelloWorldCheckConfig config)
+{
+    myConfig = config;
+}
+</pre></div>9. Implement the &quot;Status&quot; property as an &quot;Auto-Property&quot;. This is used by Wolfpack to track the state of a component during startup. Wolfpack will report any components that fail to initialise properly and disable them.<br /><div style="color:Black;background-color:White;"><pre>
+<span style="color:Blue;">public</span> Status Status { <span style="color:Blue;">get</span>; <span style="color:Blue;">set</span>; }
+</pre></div>10. Implement the &quot;Identity&quot; property on &quot;HelloWorldCheck&quot;<br /><div style="color:Black;background-color:White;"><pre>
+<span style="color:Blue;">public</span> PluginDescriptor Identity
+{
+    <span style="color:Blue;">get</span> { <span style="color:Blue;">return</span> <span style="color:Blue;">new</span> PluginDescriptor
+    {
+        Description = <span style="color:#A31515;">&quot;My first custom HealthCheck!&quot;</span>,
+        Name = myConfig.FriendlyId,
+        <span style="color:Green;">// The TypeId is important - it needs to be different for</span>
+        <span style="color:Green;">// each health check as this allows us to positively identify</span>
+        <span style="color:Green;">// every health check. Use the VS Tools/Create GUID tool to</span>
+        <span style="color:Green;">// generate a new one.</span>
+        TypeId = <span style="color:Blue;">new</span> Guid(<span style="color:#A31515;">&quot;218087BB-3605-4fa5-9157-0C133674F51F&quot;</span>)
+    }; }
+}
+</pre></div>11. Implement the &quot;Execute()&quot; method on &quot;HelloWorldCheck&quot;<br /><div style="color:Black;background-color:White;"><pre>
+<span style="color:Blue;">public</span> <span style="color:Blue;">void</span> Execute()
+{
+    Messenger.Publish(<span style="color:Blue;">new</span> HealthCheckData
+    {
+        Identity = Identity,
+        Result = <span style="color:Blue;">true</span>,
+        Info = <span style="color:Blue;">string</span>.Format(<span style="color:#A31515;">&quot;MyCustomSetting:={0}&quot;</span>, myConfig.MyCustomSetting)
+    });
+}
+</pre></div>12. The &quot;Initialise()&quot; method on &quot;HelloWorldCheck&quot; should do nothing<br /><div style="color:Black;background-color:White;"><pre>
+<span style="color:Blue;">public</span> <span style="color:Blue;">void</span> Initialise()
+{
+    <span style="color:Green;">// This can be used to do any &quot;one-time&quot; initialisation</span>
+    <span style="color:Green;">// of this check - this method is called when the plugin</span>
+    <span style="color:Green;">// is loaded (must also be &quot;enabled&quot; in its configuration)</span>
+}
+</pre></div><br />The finished health check should look like this,<br /><div style="color:Black;background-color:White;"><pre>
+<span style="color:Blue;">using</span> System;
+<span style="color:Blue;">using</span> Wolfpack.Core.Interfaces;
+<span style="color:Blue;">using</span> Wolfpack.Core.Interfaces.Entities;
+
+<span style="color:Blue;">namespace</span> HelloWorldHealthCheck
+{
+    <span style="color:Blue;">public</span> <span style="color:Blue;">class</span> HelloWorldCheckConfig : PluginConfigBase
+    {
+        <span style="color:Blue;">public</span> <span style="color:Blue;">string</span> MyCustomSetting { <span style="color:Blue;">get</span>; <span style="color:Blue;">set</span>; }
+    }
+
+    <span style="color:Blue;">public</span> <span style="color:Blue;">class</span> HelloWorldCheck : IHealthCheckPlugin
+    {
+        <span style="color:Blue;">private</span> <span style="color:Blue;">readonly</span> HelloWorldCheckConfig myConfig;
+
+        <span style="color:Blue;">public</span> HelloWorldCheck(HelloWorldCheckConfig config)
+        {
+            myConfig = config;
+        }
+
+        <span style="color:Blue;">public</span> <span style="color:Blue;">void</span> Initialise()
+        {
+            <span style="color:Green;">// This can be used to do any &quot;one-time&quot; initialisation</span>
+            <span style="color:Green;">// of this check - this method is called when the plugin</span>
+            <span style="color:Green;">// is loaded (must also be &quot;enabled&quot; in its configuration)</span>
+        }
+
+        <span style="color:Blue;">public</span> Status Status { <span style="color:Blue;">get</span>; <span style="color:Blue;">set</span>; }
+
+        <span style="color:Blue;">public</span> PluginDescriptor Identity
+        {
+            <span style="color:Blue;">get</span> { <span style="color:Blue;">return</span> <span style="color:Blue;">new</span> PluginDescriptor
+                             {
+                                 Description = <span style="color:#A31515;">&quot;My first custom HealthCheck!&quot;</span>,
+                                 Name = myConfig.FriendlyId,
+                                 <span style="color:Green;">// The TypeId is important - it needs to be different for</span>
+                                 <span style="color:Green;">// each health check as this allows us to positively identify</span>
+                                 <span style="color:Green;">// every health check. Use the VS Tools/Create GUID tool to</span>
+                                 <span style="color:Green;">// generate a new one.</span>
+                                 TypeId = <span style="color:Blue;">new</span> Guid(<span style="color:#A31515;">&quot;218087BB-3605-4fa5-9157-0C133674F51F&quot;</span>)
+                             }; }
+        }
+
+        <span style="color:Blue;">public</span> <span style="color:Blue;">void</span> Execute()
+        {
+            Messenger.Publish(<span style="color:Blue;">new</span> HealthCheckData
+                        {
+                            Identity = Identity,
+                            Result = <span style="color:Blue;">true</span>,
+                            Info = <span style="color:Blue;">string</span>.Format(<span style="color:#A31515;">&quot;MyCustomSetting:={0}&quot;</span>, myConfig.MyCustomSetting)
+                        });
+        }
+
+        <span style="color:Blue;">public</span> <span style="color:Blue;">event</span> PublishHandler Publish;
+    }
+}
+</pre></div>12. Compile the &quot;HelloWorldHealthCheck&quot; project and copy the &quot;HelloWorldHealthCheck.dll&quot; (and .pdb) to the Wolfpack binaries folder.<br />
+<h2>Configuring the HealthCheck</h2>1. In the Wolfpack binaries folder is a sub-folder called &quot;Config\Checks\EveryMinute&quot;. Create a new file called &quot;helloworld.castle.config&quot; in this folder.<br /><br />2. Copy this into the new config file...<br /><div style="color:Black;background-color:White;"><pre>
+<span style="color:Blue;">&lt;?</span><span style="color:#A31515;">xml</span> <span style="color:Red;">version</span><span style="color:Blue;">=</span><span style="color:Black;">&quot;</span><span style="color:Blue;">1.0</span><span style="color:Black;">&quot;</span> <span style="color:Red;">encoding</span><span style="color:Blue;">=</span><span style="color:Black;">&quot;</span><span style="color:Blue;">utf-8</span><span style="color:Black;">&quot;</span> <span style="color:Blue;">?&gt;</span>
+<span style="color:Blue;">&lt;</span><span style="color:#A31515;">configuration</span><span style="color:Blue;">&gt;</span>
+  <span style="color:Blue;">&lt;</span><span style="color:#A31515;">components</span><span style="color:Blue;">&gt;</span>
+    <span style="color:Blue;">&lt;</span><span style="color:#A31515;">component</span> <span style="color:Red;">id</span><span style="color:Blue;">=</span><span style="color:Black;">&quot;</span><span style="color:Blue;">MyHelloWorldCheckConfig</span><span style="color:Black;">&quot;</span>
+	   <span style="color:Red;">lifestyle</span><span style="color:Blue;">=</span><span style="color:Black;">&quot;</span><span style="color:Blue;">singleton</span><span style="color:Black;">&quot;</span>
+	   <span style="color:Red;">type</span><span style="color:Blue;">=</span><span style="color:Black;">&quot;</span><span style="color:Blue;">HelloWorldHealthCheck.HelloWorldCheckConfig, HelloWorldHealthCheck</span><span style="color:Black;">&quot;</span><span style="color:Blue;">&gt;</span>
+      <span style="color:Blue;">&lt;</span><span style="color:#A31515;">parameters</span><span style="color:Blue;">&gt;</span>
+        <span style="color:Blue;">&lt;</span><span style="color:#A31515;">MyCustomSetting</span><span style="color:Blue;">&gt;</span>Hello World!!<span style="color:Blue;">&lt;/</span><span style="color:#A31515;">MyCustomSetting</span><span style="color:Blue;">&gt;</span>
+        <span style="color:Blue;">&lt;</span><span style="color:#A31515;">FriendlyId</span><span style="color:Blue;">&gt;</span>HelloWorldCheck<span style="color:Blue;">&lt;/</span><span style="color:#A31515;">FriendlyId</span><span style="color:Blue;">&gt;</span>
+        <span style="color:Blue;">&lt;</span><span style="color:#A31515;">Enabled</span><span style="color:Blue;">&gt;</span>true<span style="color:Blue;">&lt;/</span><span style="color:#A31515;">Enabled</span><span style="color:Blue;">&gt;</span>
+      <span style="color:Blue;">&lt;/</span><span style="color:#A31515;">parameters</span><span style="color:Blue;">&gt;</span>
+    <span style="color:Blue;">&lt;/</span><span style="color:#A31515;">component</span><span style="color:Blue;">&gt;</span>
+  <span style="color:Blue;">&lt;/</span><span style="color:#A31515;">components</span><span style="color:Blue;">&gt;</span>
+<span style="color:Blue;">&lt;/</span><span style="color:#A31515;">configuration</span><span style="color:Blue;">&gt;</span>
+</pre></div>3. Start Wolfpack - your check &quot;HelloWorldCheck&quot; should now be running &amp; publishing new results every 60 seconds.<br /><br />4. To add another instance of your health check, just copy the helloworld.castle.config file and ensure you update the FriendlyId value...restart Wolfpack and you should now have two instances of your check running!<br /><div style="color:Black;background-color:White;"><pre>
+        <span style="color:Blue;">&lt;</span><span style="color:#A31515;">MyCustomSetting</span><span style="color:Blue;">&gt;</span>Hello Again!!<span style="color:Blue;">&lt;/</span><span style="color:#A31515;">MyCustomSetting</span><span style="color:Blue;">&gt;</span>
+        <span style="color:Blue;">&lt;</span><span style="color:#A31515;">FriendlyId</span><span style="color:Blue;">&gt;</span>AnotherHelloWorldCheck<span style="color:Blue;">&lt;/</span><span style="color:#A31515;">FriendlyId</span><span style="color:Blue;">&gt;</span>
+</pre></div><br />5. The health check is automagically bound to the scheduler based on the folder you place the health check config file in. The folder &quot;EveryMinute&quot; corresponds to a component named the same in the Config\scheduler.castle.config file. This means you can create a new schedule for checks simply by adding a new schedule component to scheduler.castle.config, give it a unique, meaningful name and create a folder in Config\checks named the same then just move/add health check config files to this new folder as required!</div><div class="ClearBoth"></div>

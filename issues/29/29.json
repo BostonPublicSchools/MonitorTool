@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "Agent",
+      "DisplayName": "Agent"
+    },
+    "ClosedComment": "",
+    "ClosedDate": "2015-02-17T07:39:54.777-08:00",
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "If SqlPublisher is configured, after some time the log is flodded with error messages like the following.\r\nThis is due to an invalid usage of entityframework: the DbContext is kept as singleton which is not supported.\r\nExpect a fix soon ;-)\r\n\r\n2015-02-17 14:52:19,298 [9] DEBUG Wolfpack [(null)] - Received call to WebService: http://web02.somehost.at:802/api/notification/notify\r\n2015-02-17 14:52:19,300 [14] DEBUG Wolfpack [(null)] - Received call to WebService: http://web02.somehost.at:802/api/notification/notify\r\n2015-02-17 14:52:19,306 [9] INFO  Wolfpack [(null)] - Received Notification (HealthCheck) d44d8945-52ef-45f9-bfd2-0864a7b41d73\r\n2015-02-17 14:52:19,306 [14] INFO  Wolfpack [(null)] - Received Notification (HealthCheck) 11a8b8ae-d32e-4121-a157-474550fc6d1d\r\n2015-02-17 14:52:19,310 [9] ERROR Wolfpack [(null)] - IncidentId:f249d5e5-b29c-44f2-8a96-dcebf73e550c; Encountered 'ApplicationException' during 'WebService Call: http://web02.somehost.at:802/api/notification/notify'; Message:=System.ApplicationException: Step failure ---> System.Data.Entity.Core.EntityException: The underlying provider failed on Open. ---> System.InvalidOperationException: Die Verbindung wurde nicht geschlossen. Der aktuelle Status der Verbindung ist 'Verbindung wird hergestellt'.\r\n   bei System.Data.ProviderBase.DbConnectionClosedConnecting.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)\r\n   bei System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)\r\n   bei System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)\r\n   bei System.Data.SqlClient.SqlConnection.Open()\r\n   bei System.Data.Entity.Infrastructure.Interception.InternalDispatcher`1.Dispatch[TTarget,TInterceptionContext](TTarget target, Action`2 operation, TInterceptionContext interceptionContext, Action`3 executing, Action`3 executed)\r\n   bei System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.Open(DbConnection connection, DbInterceptionContext interceptionContext)\r\n   bei System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.<>c__DisplayClass1.<Execute>b__0()\r\n   bei System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)\r\n   bei System.Data.Entity.Core.EntityClient.EntityConnection.Open()\r\n   --- Ende der internen Ausnahmestapelüberwachung ---\r\n   bei System.Data.Entity.Core.EntityClient.EntityConnection.Open()\r\n   bei System.Data.Entity.Core.Objects.ObjectContext.EnsureConnection(Boolean shouldMonitorTransactions)\r\n   bei System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)\r\n   bei System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass7.<GetResults>b__5()\r\n   bei System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)\r\n   bei System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)\r\n   bei System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()\r\n   bei System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()\r\n   bei System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)\r\n   bei System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source, Expression`1 predicate)\r\n   bei Wolfpack.Core.Repositories.Sql.SqlRepository.GetById(Guid id, NotificationEvent& notification) in d:\\Code\\Wolfpack_main\\Solutions\\Wolfpack.Core\\Repositories\\Sql\\SqlRepository.cs:Zeile 37.\r\n   bei Wolfpack.Core.Publishers.Sql.SqlPublisher.Consume(NotificationEvent message) in d:\\Code\\Wolfpack_main\\Solutions\\Wolfpack.Core\\Publishers\\Sql\\SqlPublisher.cs:Zeile 29.\r\n   bei Magnum.Extensions.ExtensionsToEnumerable.Each[T](IEnumerable`1 collection, Action`1 callback)\r\n   bei Wolfpack.Core.MagnumMessenger.Wolfpack.Core.Interfaces.IMessenger.Publish(NotificationEvent message) in d:\\Code\\Wolfpack_main\\Solutions\\Wolfpack.Core\\Messenger.cs:Zeile 89.\r\n   bei Wolfpack.Core.WebServices.Strategies.Steps.RepublishMessageStep.Execute(WebServiceReceiverContext context) in d:\\Code\\Wolfpack_main\\Solutions\\Wolfpack.Core.WebServices\\Strategies\\Steps\\RepublishMessageStep.cs:Zeile 12.\r\n   bei Wolfpack.Core.Pipeline.DefaultPipeline`1.Execute(T context) in d:\\Code\\Wolfpack_main\\Solutions\\Wolfpack.Core\\Pipeline\\DefaultPipeline.cs:Zeile 37.\r\n   --- Ende der internen Ausnahmestapelüberwachung ---\r\n   bei Wolfpack.Core.WebServices.Strategies.WebServiceReceiverStrategy.Execute(NotificationEvent notification) in d:\\Code\\Wolfpack_main\\Solutions\\Wolfpack.Core.WebServices\\Strategies\\WebServiceReceiverStrategy.cs:Zeile 40.\r\n   bei Wolfpack.Core.WebServices.Modules.NotificationModule.<.ctor>b__1(Object request) in d:\\Code\\Wolfpack_main\\Solutions\\Wolfpack.Core.WebServices\\Modules\\NotificationModule.cs:Zeile 33.\r\n   bei CallSite.Target(Closure , CallSite , Func`2 , Object )\r\n   bei Nancy.Routing.Route.<>c__DisplayClass4.<Wrap>b__3(Object parameters, CancellationToken context)",
+    "LastUpdatedDate": "2017-12-08T09:48:17.33-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "High",
+      "Severity": 150,
+      "Id": 3
+    },
+    "ProjectName": "wolfpack",
+    "ReportedDate": "2015-02-17T07:35:45.17-08:00",
+    "Status": {
+      "Name": "Closed",
+      "Id": 4
+    },
+    "ReasonClosed": {
+      "Name": "Fixed"
+    },
+    "Summary": "SqlPublisher unstable",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 29
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

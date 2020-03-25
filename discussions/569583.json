@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "1312499",
+    "ThreadId": "569583",
+    "Html": "I am looking forward to using this new version, but I am not seeing a SQL Query Check like was in the previous version.  Has that been removed?<br />\n",
+    "PostedDate": "2014-10-11T15:04:55.203-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1312680",
+    "ThreadId": "569583",
+    "Html": "Hi, ah yes, good spot!\r<br />\n<br />\nIt is <a href=\"https://wolfpack.codeplex.com/SourceControl/latest#Solutions/Wolfpack.Core/Checks/SqlQueryCheck.cs\" rel=\"nofollow\">there</a> but I haven't fixed it up to v3 yet - it is missing some &quot;Configuration Discovery&quot; metadata to allow it to appear in the Configuration UI - will add to the list of bugs to fix in the next version.\r<br />\n<br />\nCheers,\r<br />\nJames<br />\n",
+    "PostedDate": "2014-10-13T02:20:49.853-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

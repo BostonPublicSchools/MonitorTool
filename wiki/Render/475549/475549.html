@@ -1,0 +1,16 @@
+<div class="wikidoc"><h1>Host Ping (v2.3)</h1>This check will ping a server with an ICMP message to test it responds and can optionally publish its result based on the round-trip response time, eg: only alert if its too slow. You can also setup this check to either always publish a result (if you wanted to capture the response times) or only if it fails. As a successful ping includes the response time you can use this to monitor variations over time (perfect in Geckoboard as a Linechart or Geck-o-meter via the Wolfpack Geckoboard Data Service Activity plugin!)  
+<h2>Features</h2><ul><li>Publish only failures or successful pings to track response times.</li>
+<li>Set an optional response time threshold - if the response is slower than this (milliseconds) then publish this as a result failure.</li>
+<li>Multiple servers can be pinged.</li></ul>
+<h2>Pre-requisites</h2><ul><li>ICMP firewall ports open and target server configured to respond.</li></ul>
+<h2>Configuration</h2><ul><li>Add servers to the list to be checked...just add a new &quot;item&quot;...</li></ul>
+<div style="color:Black;background-color:White;"><pre>
+				<span style="color:Blue;">&lt;</span><span style="color:#A31515;">hosts</span><span style="color:Blue;">&gt;</span>
+					<span style="color:Blue;">&lt;</span><span style="color:#A31515;">list</span><span style="color:Blue;">&gt;</span>
+						<span style="color:Blue;">&lt;</span><span style="color:#A31515;">item</span><span style="color:Blue;">&gt;</span>localhost<span style="color:Blue;">&lt;/</span><span style="color:#A31515;">item</span><span style="color:Blue;">&gt;</span>
+					<span style="color:Blue;">&lt;/</span><span style="color:#A31515;">list</span><span style="color:Blue;">&gt;</span>
+				<span style="color:Blue;">&lt;/</span><span style="color:#A31515;">hosts</span><span style="color:Blue;">&gt;</span>
+</pre></div><ul><li>Set the &quot;timeout&quot; property to the maximum number of milliseconds you expect the response by. If the response takes longer than this the check will publish a failed result.
+<ul><li>Leave this property blank, set to 0 (zero) or omit from the xml config to disable this feature.</li></ul></li>
+<li>If you are only interested in tracking whether the server is available or not then set the &quot;publishOnlyIfFailure&quot; property to true (default). If you want to track the response time then set this to false and every ping result will be published; successful pings include the round-trip response time in the result &quot;ResultCount&quot; property so you publish these to a database and then visualise them with the Wolfpack Geckoboard Data Service Activity as a linegraph or Geck-o-meter.</li></ul>
+</div><div class="ClearBoth"></div>

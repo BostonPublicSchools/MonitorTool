@@ -1,0 +1,190 @@
+[
+  {
+    "Id": "0",
+    "Name": "Wolfpack v3.0.25",
+    "DevelopmentStatus": "Beta",
+    "Description": "! DOWNLOADING THE ZIP? READ THIS!\nWhen you download the zip file, please right click it and on the Properties tab if you see an \"Unblock\" button make sure you click it otherwise it will not unzip correctly and you will got some odd runtime issues.\n\n! v3.0.25\n# Updated to Sidewinder 1.5.6 to fix bug downloading the wrong dependent packages\n# minor bug fixes\n# Check out the [v3 documentation|Wolfpackv3Docs] for more details.\n# Wolfpack is available on [url:Chocolatey|http://chocolatey.org/packages/wolfpack]!...just type \"cinst wolfpack\"\n\n!! v2.x compatibility\nNone really! This is a pretty big rewrite of Wolfpack and some core concepts have changed including the configuration so unfortunately you will need to recreate any configuration you have with existing installations.\n\n!! Running Wolfpack\nYou can run Wolfpack as a console application whilst you are evaluating it. Simple unzip and run... \n{code:powershell}\nwolfpack.agent.exe\n{code:powershell}\n\n*Add a URL Reservation* in order to run Wolfpack...follow the notes [here|Installationv3] on creating a URL reservation to allow Wolfpack to create a self-hosted API (about 2/3 down the page - section called \"Url Reservation\").\n\nThe default installation has a single check running called \"IsNotepadRunning\". This check is looking for running instances of notepad.exe and demonstrates an active HealthCheck. The console publisher is also active - it will output the \"IsNotepadRunning\" notification to the console window.\n\nThe User Interface is available at *http://localhost:802/ui* ...from here you can configure the checks/publishers etc that are running.\n\n!!! Installing as a Service\nTo install as a service follow the instructions [here|Installationv3]",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2014-07-23T12:58:50.453-07:00",
+    "Files": [
+      {
+        "Id": "41b624fe-f172-4183-8b01-49ea4810a27e",
+        "FileName": "Wolfpack_Binaries_v3.0.25.zip",
+        "Url": "./0/41b624fe-f172-4183-8b01-49ea4810a27e",
+        "Type": "Application",
+        "UploadDate": "2014-07-23T12:54:17.483-07:00"
+      }
+    ]
+  },
+  {
+    "Id": "1",
+    "Name": "Wolfpack v3.0.19",
+    "DevelopmentStatus": "Beta",
+    "Description": "! DOWNLOADING THE ZIP? READ THIS!\nWhen you download the zip file, please right click it and on the Properties tab if you see an \"Unblock\" button make sure you click it otherwise it will not unzip correctly and you will got some odd runtime issues.\n\n! v3.0.19\n# Fixed issue with StateChangeNagFilter\n# Added MSMQ DEADLETTER queue check support (bypass queue exists check)\n# Check out the [v3 documentation|Wolfpackv3Docs] for more details.\n# Wolfpack is available on [url:Chocolatey|http://chocolatey.org/packages/wolfpack]!...just type \"cinst wolfpack\"\n\n!! v2.x compatibility\nNone really! This is a pretty big rewrite of Wolfpack and some core concepts have changed including the configuration so unfortunately you will need to recreate any configuration you have with existing installations.\n\n!! Running Wolfpack\nYou can run Wolfpack as a console application whilst you are evaluating it. Simple unzip and run... \n{code:powershell}\nwolfpack.agent.exe\n{code:powershell}\n\n*Add a URL Reservation* in order to run Wolfpack...follow the notes [here|Installationv3] on creating a URL reservation to allow Wolfpack to create a self-hosted API (about 2/3 down the page - section called \"Url Reservation\").\n\nThe default installation has a single check running called \"IsNotepadRunning\". This check is looking for running instances of notepad.exe and demonstrates an active HealthCheck. The console publisher is also active - it will output the \"IsNotepadRunning\" notification to the console window.\n\nThe User Interface is available at *http://localhost:802/ui* ...from here you can configure the checks/publishers etc that are running.\n\n!!! Installing as a Service\nTo install as a service follow the instructions [here|Installationv3]",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2014-07-02T15:53:37.817-07:00",
+    "Files": [
+      {
+        "Id": "7be5f073-d201-4a51-bf0a-22e7a29ff561",
+        "FileName": "Wolfpack_Binaries_v3.0.19.zip",
+        "Url": "./1/7be5f073-d201-4a51-bf0a-22e7a29ff561",
+        "Type": "Application",
+        "UploadDate": "2014-07-02T15:53:37.02-07:00"
+      }
+    ]
+  },
+  {
+    "Id": "2",
+    "Name": "Wolfpack v3",
+    "DevelopmentStatus": "Beta",
+    "Description": "! DOWNLOADING THE ZIP? READ THIS!\nWhen you download the zip file, please right click it and on the Properties tab if you see an \"Unblock\" button make sure you click it otherwise it will not unzip correctly and you will got some odd runtime issues.\n\n! v3\nThis release is a major rewrite of Wolfpack...\n# Wolfpack now has a [UI|Wolfpackv3WebUI]! This provides a real-time of the notifications generated and importantly the ability to configure Wolfpack without  having to edit xml files any more!\n# Check out the [v3 documentation|Wolfpackv3Docs] for more details on the new features.\n# Wolfpack is available on [url:Chocolatey|http://chocolatey.org/packages/wolfpack]!...just type \"cinst wolfpack\"\n\n!! v2.x compatibility\nNone really! This is a pretty big rewrite of Wolfpack and some core concepts have changed including the configuration so unfortunately you will need to recreate any configuration you have with existing installations.\n\n!! Running Wolfpack\nYou can run Wolfpack as a console application whilst you are evaluating it. Simple unzip and run... \n{code:powershell}\nwolfpack.agent.exe\n{code:powershell}\n\n*Add a URL Reservation* in order to run Wolfpack...follow the notes [here|Installationv3] on creating a URL reservation to allow Wolfpack to create a self-hosted API (about 2/3 down the page - section called \"Url Reservation\").\n\nThe default installation has a single check running called \"IsNotepadRunning\". This check is looking for running instances of notepad.exe and demonstrates an active HealthCheck. The console publisher is also active - it will output the \"IsNotepadRunning\" notification to the console window.\n\nThe User Interface is available at *http://localhost:802/ui* ...from here you can configure the checks/publishers etc that are running.\n\n!!! Installing as a Service\nTo install as a service follow the instructions [here|Installationv3]",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2014-05-10T13:17:58.713-07:00",
+    "Files": [
+      {
+        "Id": "4e770d61-c6b9-4213-aeb4-75549dd795a8",
+        "FileName": "Wolfpack_Binaries_v3.0.17.zip",
+        "Url": "./2/4e770d61-c6b9-4213-aeb4-75549dd795a8",
+        "Type": "Application",
+        "UploadDate": "2014-05-10T12:46:18.837-07:00"
+      }
+    ]
+  },
+  {
+    "Id": "3",
+    "Name": "Wolfpack v2.4.0 (NuPut)",
+    "DevelopmentStatus": "Stable",
+    "Description": "! DOWNLOADING THE ZIP? READ THIS!\nWhen you download the zip file, please right click it and on the Properties tab if you see an \"Unblock\" button make sure you click it otherwise it will not unzip correctly and you will got some odd runtime issues.\n\n! v2.4..a.k.a \"NuPut\"\nThis release is all about \"NuPut\" - my name for using NuGet packages for deployment of runtime updates & tests. This release has few changes to Wolfpack itself but focuses on a new contrib project \"[url:Wolfpack.Contrib.Deployment|http://bit.ly/HPOrD0]\" that allows Wolfpack to provide NuGet based deployment services.\n\nWolfpack can now detect a new version of a NuGet package, download and unpack it to your filesystem. It can also execute a commandline once this has occurred (eg: run dropkick to perform a full fat deployment)...plus...you can even package your NUnit test assemblies into a NuGet package and have Wolfpack detect a new version of them (on any feed), download and unpack it, pull down the NUnit runner NuGet package, execute the nunit console application against your test assemblies then finally parse the results xml file and create Wolfpack notification messages based on the test results.\n\nThis means that you can create your system/integration tests as NuGet packages as part of your CI process, simply publish them to your NuGet feed as part of your deployment and then Wolfpack will automatically take care of executing these tests for you and send notifications with the results! \n\nRead more about Wolfpack's Deployment plugins [url:here|http://bit.ly/HPOrD0]\n\n!! Auto Update\nFor all existing v2.3 installations of Wolfpack you can simply update your *entire* installation, including any installed plug-ins with the following command...\n{code:powershell}\nwolfpack.agent.exe /update\n{code:powershell}\nThis is the inaugural \"live\" update of Wolfpack via the auto update feature. Where there are existing configuration files installed that would be updated you will be asked to overwrite - if you want to manually compare and update the files yourself to avoid any loss of configuration just answer \"n\" - the files will remain in the {\"\"_updates\"\"} folder...and remember as part of the update process your entire Wolfpack installation is *automatically backed up* prior to the update running so if it goes wrong you can easily recover - just look in the {\"\"_backups\"\"} folder for the latest zip file.\n\n! What's New?\n* Updated to NuGet 1.6.2\n* Updated to Sidewinder 1.4.0\n** Provides improved support when updating files that already exist. You are now prompted to overwrite any NuGet package _content_ file that already exists - these can be manually compared later.\n** Auto launches a \"readme.txt\" file if stored in the NuGet package root\n* Made the Container an instance, was previously a static class member. This was for testability reasons.\n! Breaking Changes\n* None\n! Bug Fixes\n* None\n! Known Issues\n* If you download the source code and run it from Visual Studio you cannot debug it if you use the /update command line switch. There is a framework bug that effects nuget.core.dll - a security demand is made that cannot be honoured in debug mode. See: http://nuget.codeplex.com/discussions/246086\n! Notes\n* NuGet packages refreshed - just search for \"wolfpack\" in the gallery\n** New package available - \"Wolfpack.Contrib.Deployment\" (see above)\n** New package available - \"Wolfpack.Contrib.Demo\" (see above)",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2012-04-25T15:52:04.453-07:00",
+    "Files": [
+      {
+        "Id": "00313d7a-6db7-482e-85af-bddeeb2b75a1",
+        "FileName": "Wolfpack_Binaries_v2.4.0.zip",
+        "Url": "./3/00313d7a-6db7-482e-85af-bddeeb2b75a1",
+        "Type": "Application",
+        "UploadDate": "2012-04-19T00:51:19.643-07:00"
+      },
+      {
+        "Id": "7153ad4a-e476-437e-8710-e56da7a6d1e9",
+        "FileName": "AppStatsDemoClient_Binaries_v2.4.0.zip",
+        "Url": "./3/7153ad4a-e476-437e-8710-e56da7a6d1e9",
+        "Type": "Example",
+        "UploadDate": "2012-04-19T00:51:20.22-07:00"
+      }
+    ]
+  },
+  {
+    "Id": "4",
+    "Name": "Wolfpack v2.3 (Sidewinder)",
+    "DevelopmentStatus": "Stable",
+    "Description": "This release is all about application and plugin auto-update using my new project [url:Sidewinder|sidewinder.codeplex.com] and a new health check schedule binding convention that removes the need to manually add bindings.\n\n! What's New?\n* Auto-update - Wolfpack can now update itself! I wanted to make it easier to update your Wolfpack installations so created a new project called [url:Sidewinder|sidewinder.codeplex.com] to do this - Wolfpack is the first application to use this. Each release of Wolfpack will now be available as a full NuGet package and starting with this version it is now possible for Wolfpack to check for updates to its NuGet package and if there is one it will back itself up to a zip file, pull down the updated package, extract the files and deploy them to its installation folder - cool eh?\n** More information is available from the [Updating Wolfpack] page.\n** Also includes the ability to install new plugins (eg: contrib projects) into your Wolfpack installation. I have updated all the HealthChecks & Publishers in the wolfpackcontrib.codeplex.com project so that they can be installed this way.\n** The backups are stored under your Wolfpack installation folder in *_backups*. Restore from this if you need to rollback.\n** To enable the update check run \"wolfpack.agent.exe /update\" - by default Wolfpack will not perform the check.\n** To install a new plugin package run \"wolfpack.agent.exe /update:_name of nuget package_\". This will download and install _any_ NuGet package into the Wolfpack installation folder.\n*** A good test is to install the contrib console publisher, run \"wolfpack.agent.exe /update:wolfpack.contrib.publishers.console\". This will download the publisher dll and associated config file into the correct Wolfpack folders. The Config\\Publishers folder should now have a new file called \"console.contrib.castle.config\" - edit this file to set the \"Enabled\" property to true then restart Wolfpack (without the /update switch this time) and you should see json output for each alert published.\n* Binding HealthChecks to Schedules - to simplify & reduce the amount of configuration required Wolfpack now supports a binding by convention mechanism - see the [Getting Started] page for more details but essentially it uses the name of the folder the health check config file is stored in as the schedule component id; eg: Config\\Checks\\*EveryMinute* links any Health Check config file to the \"EveryMinute\" component registered in the schedule.castle.config file.\n* HealthChecks can now be registered and loaded directly from the IoC container (rather than the existing method of registering a \"config\" component in the container). This means that HealthChecks can now resolve any dependencies via the container. *Note* that both methods are supported - the original way using a \"config\" component still works.\n* HostPing HealthCheck - ICMP ping a machine. Can provide HealthCheck results for failure only conditions or for the result of every ping (it also records the ping roundtrip time so you can monitor network performance/load).\n! Updates\n* Improved the logging/code that TypeDiscovery uses to scan assemblies for components - this should make it much clearer to understand which assembly is at fault when this goes wrong.\n** Added more assemblies to the ignore list in role.castle.config\n* Re-organised the Config folder - health check configs now split out into a subfolder and one per check.\n! Breaking Changes\n* None\n! Bug Fixes\n* None\n! Known Issues\n* If you download the source code and run it from Visual Studio you cannot debug it if you use the /update command line switch. There is a framework bug that effects nuget.core.dll - a security demand is made that cannot be honoured in debug mode. See: http://nuget.codeplex.com/discussions/246086\n! Notes\n* NuGet packages refreshed - just search for \"wolfpack\" in the gallery\n** New package available - \"Wolfpack\", this is the entire Wolfpack distributable.",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2011-09-21T01:55:42.27-07:00",
+    "Files": [
+      {
+        "Id": "7ee60842-d875-4dbd-af1e-52cca4251c6b",
+        "FileName": "Wolfpack_Binaries_v2.3.0.3.zip",
+        "Url": "./4/7ee60842-d875-4dbd-af1e-52cca4251c6b",
+        "Type": "Application",
+        "UploadDate": "2011-09-20T13:19:58.61-07:00"
+      },
+      {
+        "Id": "ba0dbf82-12a9-4c74-8c68-1620b40a81bc",
+        "FileName": "AppStatsDemoClient_Binaries_v2.3.0.3.zip",
+        "Url": "./4/ba0dbf82-12a9-4c74-8c68-1620b40a81bc",
+        "Type": "Example",
+        "UploadDate": "2011-09-20T13:19:59.5-07:00"
+      }
+    ]
+  },
+  {
+    "Id": "5",
+    "Name": "Wolfpack v2.2 (Geo Tag)",
+    "DevelopmentStatus": "Stable",
+    "Description": "This release is all about Geo Tagging - this new feature provides the ability to set a Longitude & Latitude on a HealthCheck result so you can then visualise this on a map. I've also updated the [Geckoboard Data Service] to provide a native feed for their map widget meaning you can plug your geo tagged HealthCheck results straight into Geckoboard - check out the [Geckoboard Map] for more details.\n\n! Known Issues\nThis release has a few problems with the configuration files - the default settings mean it will probably crash when you run it. These have been fixed in the forthcoming 2.3 release and in the meantime read this [url:thread|http://wolfpack.codeplex.com/workitem/5] to get you up and running.\n\n! What's New?\n* Geo properties on HealthCheck result.\n** Schema change for SqlServer & SQLite databases. Two new columns added to AgentData table (Longitude & Latitude). \n** *Please backup your AgentData table before running this release as it will automatically update your Db Schema*.\n** There are two new properties on the (see below)\n* Support for the [Geckoboard Map] widget in the [Geckoboard Data Service]. To provide the perfect accompaniment to the HealthCheck geo tag is this new map widget support - visualise your HealthCheck data directly with a Geckoboard Map.\n! Breaking Changes\n* *There is a new role.castle.config file*. If you have existing Wolfpack installations then you can update just the binaries but you also need to update the config\\role.castle.config file too (just reapply any changes you have made to this from the default like the *SiteId* and *TypeDiscoveryConfig* list).\n{code:xml}\n    <!-- START: COMPONENTS FOR THE DEFAULT AGENT ROLE/PROFILE -->\n    <component id=\"AgentConfiguration\"\n\t\t\t\t   lifestyle=\"singleton\"\n\t\t\t\t   type=\"Wolfpack.Core.Interfaces.Entities.AgentConfiguration, Wolfpack.Core.Interfaces\">\n      <parameters>\n        <SiteId>SiteA</SiteId>\n        <!-- THESE ARE NEW FOR v2.2 -->\n        <Longitude></Longitude>\n        <Latitude></Latitude>\n      </parameters>\n    </component>\n\n    <!-- THIS IS NEW FOR v2.2 -->        \n    <component id=\"StaticGeoLocator\"\n\t\t\t\t   lifestyle=\"singleton\"\n           service=\"Wolfpack.Core.Interfaces.IGeoLocator, Wolfpack.Core.Interfaces\"\n\t\t\t\t   type=\"Wolfpack.Core.Geo.StaticGeoLocator, Wolfpack.Core\">\n    </component>\n    <!-- END: COMPONENTS FOR THE DEFAULT AGENT ROLE/PROFILE -->\n\n    ...continues....\n{code:xml}\n! Bug Fixes\n* None\n! Notes\n* NuGet packages refreshed - just search for \"wolfpack\" in the gallery\n** New package available - Wolfpack.Contrib.BuildAnalytics, contains everything you need to write your own build notifiers & parsers.",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2011-09-11T21:57:21.47-07:00",
+    "Files": [
+      {
+        "Id": "3df3392a-9e67-40b8-b46b-23439f912800",
+        "FileName": "Wolfpack_Binaries_v2.2.0.0.zip",
+        "Url": "./5/3df3392a-9e67-40b8-b46b-23439f912800",
+        "Type": "Application",
+        "UploadDate": "2011-07-11T14:30:19.073-07:00"
+      },
+      {
+        "Id": "fe57529c-dbc7-4e73-a92b-ecf9e804dd36",
+        "FileName": "AppStatsDemoClient_Binaries_v2.2.0.0.zip",
+        "Url": "./5/fe57529c-dbc7-4e73-a92b-ecf9e804dd36",
+        "Type": "Example",
+        "UploadDate": "2011-07-11T14:30:22.387-07:00"
+      }
+    ]
+  },
+  {
+    "Id": "6",
+    "Name": "Wolfpack v2.1 (Build Analytics)",
+    "DevelopmentStatus": "Stable",
+    "Description": "This release is all about [Build Analytics] - this new feature allows you to monitor your TeamCity Build/CI and extract stats from common build tools such as NCover, SpecFlow, StoryQ. These stats can be visualised in Geckoboard with a variety of widgets. As per usual with Wolfpack it is easy to create new plugins for other build systems such as TFS, CruiseControl and tools like NDepends, FxCop.\n\n! What's New?\n* [Build Analytics] - instructions on how to monitor your build and visualise your build stats in Geckoboard.\n! Bug Fixes\n* Fixed Geckoboard Data Service comparison & geckometer widget methods - broken tags column reference.\n! Notes\nNuGet packages refreshed - just search for \"wolfpack\" in the gallery",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2011-06-27T23:27:34.223-07:00",
+    "Files": [
+      {
+        "Id": "ac91fbd2-b32e-40b2-88ba-682c2b98360e",
+        "FileName": "Wolfpack_Binaries_v2.1.0.0.zip",
+        "Url": "./6/ac91fbd2-b32e-40b2-88ba-682c2b98360e",
+        "Type": "Application",
+        "UploadDate": "2011-06-27T23:25:51.01-07:00"
+      },
+      {
+        "Id": "b7f0c605-48b8-4b1b-bae6-2387b19bede1",
+        "FileName": "AppStatsDemoClient_Binaries_v2.1.0.0.zip",
+        "Url": "./6/b7f0c605-48b8-4b1b-bae6-2387b19bede1",
+        "Type": "Example",
+        "UploadDate": "2011-06-27T23:27:32.77-07:00"
+      }
+    ]
+  },
+  {
+    "Id": "7",
+    "Name": "Wolfpack v2.0",
+    "DevelopmentStatus": "Stable",
+    "Description": "This is the first release of Wolfpack (originally called [url:MonitorWang|http://monitorwang.codeplex.com/]). It's a pretty big release as it's a full solution upgrade and swap over to HG. It's been delightfully plain sailing though - no problems with either! I've decided to version this first release as v2.0 to ensure there is no clash with a previous MonitorWang version.\n\n*Note* to clarify - this project replaces MonitorWang. Based on feedback from users/contributors the project name \"MonitorWang\", whilst fun (if you are Mitchell & Webb fan) was actually causing some \"problems\" with uptake - I'd love everyone to use this and so renaming and also giving it a bit of upgrade love at the same time was a great idea.\n* [url:MonitorWang|http://monitorwang.codeplex.com/] project will remain hosting the last .Net 3.5 build (v1.0.8)\n** No new development or release of \"MonitorWang\" will occur\n* All new development and releases will appear in this Wolfpack project \n\nAny/all comments and feedback very welcome - in fact I'd love a new \"wolfpack\" logo if anyone is up for a challenge?? ;-)\n\nJames\n\nPS: I'll only be including binaries in releases from now on, the source is always available from the [url:Source Code|http://wolfpack.codeplex.com/SourceControl/list/changesets] tab.\n\n!! What's New?\n!!! Solution\n* Solution has been upgraded to .Net 4.0 and Visual Studio 2010.\n* All 3rd party references, where possible have been upgraded to use their NuGet package.\n* Source code is now loaded into codeplex Mercurial repository (was previously in a private Unfuddle repository and only available as a zip) - go forking crazy with it!\n!!! Health Checks\n* [CPU|HealthCheckCPULoad] utilisation % Health Check\n* [Disk Space|HealthCheckDiskSpace] used % Health Check\n* Several new HealthCheck base classes to simplify building new checks\n** General *HealthCheckBase* for any sort of Health Check\n** For checks that need to stream results and also raise alerts (result failures) then *StreamThresholdCheckBase* can be used\n!! Bug Fixes\nNone\n!! Known Issues\n* I forgot to include the LogParser & Owl contrib projects - these have now been ported from MonitorWang and will be included in the next release.\n** *Update 20/6* the missing projects are now checked into the source control - if you need either Owl or LogParser stuff then grab the latest source.\n!! Notes\nAccompanying NuGet packages have been uploaded to the [url:NuGet Gallery|http://bit.ly/lQH7Gw], just search for \"wolfpack\"",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2011-06-20T10:14:45.057-07:00",
+    "Files": [
+      {
+        "Id": "5751cf5e-aa0b-41d0-af7c-b5297cc01377",
+        "FileName": "Wolfpack_Binaries_v2.0.0.0.zip",
+        "Url": "./7/5751cf5e-aa0b-41d0-af7c-b5297cc01377",
+        "Type": "Application",
+        "UploadDate": "2011-06-10T23:20:29.473-07:00"
+      },
+      {
+        "Id": "e7fc7c19-72cf-4db1-8b82-766cd689fad3",
+        "FileName": "AppStatsDemoClient_Binaries_v2.0.0.0.zip",
+        "Url": "./7/e7fc7c19-72cf-4db1-8b82-766cd689fad3",
+        "Type": "Example",
+        "UploadDate": "2011-06-10T23:20:30.113-07:00"
+      }
+    ]
+  },
+  {
+    "Id": "8",
+    "Name": "Wolfpack  v3.0.26",
+    "DevelopmentStatus": "Beta",
+    "Description": "! DOWNLOADING THE ZIP? READ THIS!\nWhen you download the zip file, please right click it and on the Properties tab if you see an \"Unblock\" button make sure you click it otherwise it will not unzip correctly and you will got some odd runtime issues.\n\n! v3.0.26\n# Bug fix to the UrlPing check\n# Check out the [v3 documentation|Wolfpackv3Docs] for more details.\n# Wolfpack is available on [url:Chocolatey|http://chocolatey.org/packages/wolfpack]!...just type \"cinst wolfpack\"\n\n!! v2.x compatibility\nNone really! This is a pretty big rewrite of Wolfpack and some core concepts have changed including the configuration so unfortunately you will need to recreate any configuration you have with existing installations.\n\n!! Running Wolfpack\nYou can run Wolfpack as a console application whilst you are evaluating it. Simple unzip and run... \n{code:powershell}\nwolfpack.agent.exe\n{code:powershell}\n\n*Add a URL Reservation* in order to run Wolfpack...follow the notes [here|Installationv3] on creating a URL reservation to allow Wolfpack to create a self-hosted API (about 2/3 down the page - section called \"Url Reservation\").\n\nThe default installation has a single check running called \"IsNotepadRunning\". This check is looking for running instances of notepad.exe and demonstrates an active HealthCheck. The console publisher is also active - it will output the \"IsNotepadRunning\" notification to the console window.\n\nThe User Interface is available at *http://localhost:802/ui* ...from here you can configure the checks/publishers etc that are running.\n\n!!! Installing as a Service\nTo install as a service follow the instructions [here|Installationv3]",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2014-07-24T13:20:19.027-07:00",
+    "Files": [
+      {
+        "Id": "7eb0e5c4-72fb-4242-a96a-2b12481e9600",
+        "FileName": "Wolfpack_Binaries_v3.0.26.zip",
+        "Url": "./8/7eb0e5c4-72fb-4242-a96a-2b12481e9600",
+        "Type": "Application",
+        "UploadDate": "2014-07-24T13:20:18.167-07:00"
+      }
+    ]
+  }
+]

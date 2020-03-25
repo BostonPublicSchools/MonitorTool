@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "1312334",
+    "ThreadId": "569530",
+    "Html": "Please can you let me know if i could configure publishing to 2 sql instances.(SqlPublisher)\r<br />\nFor this i created 2 publisher files. Both have the same plugintype and configurationType. The only change is in the connection name.<br />\nSince when we try to register INotificationEventPublisher,IPluginType , it will throw the exception as the name already exists. Even if we mofify by having a named instance registration, it fails to pick up the right configuration information. \r<br />\nPlease advice. Thanks.<br />\n",
+    "PostedDate": "2014-10-10T15:46:50.563-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1312674",
+    "ThreadId": "569530",
+    "Html": "Hi,\r<br />\n<br />\nIt should work in v3.0.26 (the change was made in July: <a href=\"https://wolfpack.codeplex.com/SourceControl/changeset/1dded564a956\" rel=\"nofollow\">changeset here</a>).\r<br />\n<br />\nThe plugin name is now used to create a named instance (rather than just the type name) in the container - the fix was applied to both activity &amp; publisher plugins. I made this change as part of the periscope dashboard plug-in as it requires multiple publishers of the same type to be active to push notifications to the dashboard so I'm pretty sure it works.\r<br />\n<br />\nIf you still have trouble can you post the json config file for each sql publisher you have set up?\r<br />\n<br />\nCheers,\r<br />\nJames<br />\n",
+    "PostedDate": "2014-10-13T02:13:53.43-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

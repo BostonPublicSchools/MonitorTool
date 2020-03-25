@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "711151",
+    "ThreadId": "282704",
+    "Html": "\r\n<p>Due to the multiple platforms today, cell phones tablets and the like it is sometimes important to tell the web site what your device type is and or the capabilities you are trying to test. To do this you you need to supply the site with your UserAgent string\r\n as part of the header. I noted there was no way to set the UserAgent for the check URLPing. I also noted that it was not being set with any value.</p>\r\n<p>I update the code locally to have a default value as well as a way to set the value to what ever you may want. Simple really. I have been using it for a few sites&nbsp; I need to monitor. Works like a charm.</p>\r\n<p>I was going to post it as a patch but there is no option for that. Let me know how you would like the code submitted.</p>\r\n",
+    "PostedDate": "2011-12-12T15:27:11.167-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "711290",
+    "ThreadId": "282704",
+    "Html": "<p>Hi - If you can open an issue in the \"Issue Tracker\" and attach a zip with the changed files that would be great - I'll roll it into the source.</p>\r\n<p>Thanks for taking the time to submit the fix back into the codebase - much appreciated!</p>\r\n<p>Cheers,</p>\r\n<p>James</p>",
+    "PostedDate": "2011-12-13T00:34:46.657-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "660215",
+    "ThreadId": "269611",
+    "Html": "\r\n<p>Seems to me that adding a second config block in the check.castle.config file for a second disk does not actually add the second check. Is there a way to add multiple checks of the same type? Specifically for having multiple disk drives to monitor. Also\r\n more in general is there a standard way to do multiple checks of the same type.</p>\r\n",
+    "PostedDate": "2011-08-18T12:33:40.673-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "660264",
+    "ThreadId": "269611",
+    "Html": "<p>Ok, so to create a second check you need to clone the disk space component (in check.castle.config) and change the id attribute, friendlyid and drive values. This defines a new health check but in order to get it running you need to add a new entry to the binding.castle.config file.</p>\r\n<p>In binding.castle.config clone the&nbsp;<span style=\"font-family: Consolas, 'Courier New', Courier, monospace; white-space: pre;\">SystemDriveFreeSpaceBindingConfig component, change the id property and make sure the \"</span><span style=\"font-family: Consolas, 'Courier New', Courier, monospace; white-space: pre;\">HealthCheckConfigurationName</span><span style=\"font-family: Consolas, 'Courier New', Courier, monospace; white-space: pre;\">\" value matches the id you set in the new check component.</span></p>\r\n<pre>    <span>&lt;</span><span>component</span> <span>id</span><span>=</span><span>\"</span><span>SystemDriveFreeSpaceBindingConfig</span><span>\"</span>\r\n\t\t\t\t   <span>lifestyle</span><span>=</span><span>\"</span><span>singleton</span><span>\"</span>\r\n\t\t\t\t   <span>type</span><span>=</span><span>\"</span><span>Wolfpack.Core.Interfaces.Entities.BindingConfiguration, Wolfpack.Core.Interfaces</span><span>\"</span><span>&gt;</span>\r\n      <span>&lt;</span><span>parameters</span><span>&gt;</span>\r\n        <span>&lt;</span><span>HealthCheckConfigurationName</span><span>&gt;</span>SystemDriveFreeSpace<span>&lt;/</span><span>HealthCheckConfigurationName</span><span>&gt;</span>\r\n        <span>&lt;</span><span>ScheduleConfigurationName</span><span>&gt;</span>EveryMinute<span>&lt;/</span><span>ScheduleConfigurationName</span><span>&gt;</span>\r\n      <span>&lt;/</span><span>parameters</span><span>&gt;</span>\r\n    <span>&lt;/</span><span>component</span><span>&gt;</span></pre>\r\n<p>I am working on making configuration much easier - watch this space! Some checks allow multiple things to be monitored in a single check (eg: this disk space check could be modified to take a list of drive letters rather than a single drive letter. As it stands you need to define a new health check and binding for each drive you want monitored. It would be an easy mod to make the check take a list of drives...I can put that on the Issues list of you wish?</p>",
+    "PostedDate": "2011-08-18T14:55:46.893-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "660502",
+    "ThreadId": "269611",
+    "Html": "<p>That is logical. I should have been able to figure that out. Thank you.</p>",
+    "PostedDate": "2011-08-19T04:01:24.783-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

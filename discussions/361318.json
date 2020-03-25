@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "855121",
+    "ThreadId": "361318",
+    "Html": "\r\n<p>Any interest in providing health checks to monitor Azure - there seems to be a pretty rich data set available from the Azure diagnostics....ideas on what to monitor would be welcome...!</p>\r\n",
+    "PostedDate": "2012-06-28T11:26:32.73-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "855216",
+    "ThreadId": "361318",
+    "Html": "<p>Some role information perhaps, i think this would be what your looking for&nbsp;<a href=\"http://msdn.microsoft.com/en-us/library/windowsazure/microsoft.windowsazure.serviceruntime.roleenvironment.aspx\">http://msdn.microsoft.com/en-us/library/windowsazure/microsoft.windowsazure.serviceruntime.roleenvironment.aspx</a></p>\r\n<p>And status check&nbsp;<a href=\"http://msdn.microsoft.com/en-us/library/windowsazure/microsoft.windowsazure.serviceruntime.roleenvironment.statuscheck.aspx\">http://msdn.microsoft.com/en-us/library/windowsazure/microsoft.windowsazure.serviceruntime.roleenvironment.statuscheck.aspx</a></p>\r\n<p>If I deploy wolfpack in a server/agent config it will actually run on a azure vm so this would be interesting.</p>",
+    "PostedDate": "2012-06-28T16:52:34.763-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "855312",
+    "ThreadId": "361318",
+    "Html": "<p>Another link that might help,</p>\r\n<p><a href=\"http://channel9.msdn.com/learn/courses/Azure/Deployment/DeployingApplicationsinWindowsAzure/Exercise-3-Monitoring-Applications-in-Windows-Azure\">http://channel9.msdn.com/learn/courses/Azure/Deployment/DeployingApplicationsinWindowsAzure/Exercise-3-Monitoring-Applications-in-Windows-Azure</a></p>",
+    "PostedDate": "2012-06-29T00:23:55.04-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

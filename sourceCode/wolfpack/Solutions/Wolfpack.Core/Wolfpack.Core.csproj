@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{EEFB2D36-3C15-4420-8A07-2D3CB381741D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Wolfpack.Core</RootNamespace>
+    <AssemblyName>Wolfpack.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Periscope|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Periscope\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Castle.Core.3.2.2\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor, Version=3.2.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Castle.Windsor.3.2.1\lib\net45\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Magnum, Version=2.1.2.0, Culture=neutral, PublicKeyToken=b800c4cfcdeea87b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Magnum.2.1.2\lib\NET40\Magnum.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Omu.ValueInjecter">
+      <HintPath>..\packages\valueinjecter.2.3.3\lib\net35\Omu.ValueInjecter.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text, Version=4.0.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ServiceStack.Text.4.0.8\lib\net40\ServiceStack.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Messaging" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Build\Common\AssemblyVersion.cs">
+      <Link>Properties\AssemblyVersion.cs</Link>
+    </Compile>
+    <Compile Include="..\Build\Common\CommonAssemblyInfo.cs">
+      <Link>Properties\CommonAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="ArtifactManager.cs" />
+    <Compile Include="Artifacts\ArtifactExtensions.cs" />
+    <Compile Include="Artifacts\ArtifactManagerBootstrapper.cs" />
+    <Compile Include="Artifacts\FileSystemArtifactManager.cs" />
+    <Compile Include="Artifacts\Formats\JsonFormatter.cs" />
+    <Compile Include="Artifacts\Formats\TabSeparatedFormat.cs" />
+    <Compile Include="Checks\DiskSpaceCheck.cs" />
+    <Compile Include="Checks\CpuCheck.cs" />
+    <Compile Include="Checks\FileInfoCheck.cs" />
+    <Compile Include="Checks\FolderInfoCheck.cs" />
+    <Compile Include="Checks\HealthCheckBase.cs" />
+    <Compile Include="Checks\HealthCheckBaseEx.cs" />
+    <Compile Include="Checks\HostPingCheck.cs" />
+    <Compile Include="Checks\MsmqQueueInfoCheck.cs" />
+    <Compile Include="Checks\OracleQueryCheck.cs" />
+    <Compile Include="Checks\QueryCheckBase.cs" />
+    <Compile Include="Checks\QueryCheckConfigBase.cs" />
+    <Compile Include="Checks\SqlQueryCheck.cs" />
+    <Compile Include="Checks\ThresholdCheckBase.cs" />
+    <Compile Include="Checks\UrlPingCheck.cs" />
+    <Compile Include="Checks\WindowsServiceStartupCheck.cs" />
+    <Compile Include="Checks\WindowsServiceStateCheck.cs" />
+    <Compile Include="Checks\WmiProcessRunningCheck.cs" />
+    <Compile Include="Configuration\ConfigurationManager.cs" />
+    <Compile Include="Configuration\DefaultConfigurationManager.cs" />
+    <Compile Include="Configuration\FileSystem\FileSystemBootstrapLoader.cs" />
+    <Compile Include="Configuration\FileSystem\FileSystemPublisherLoader.cs" />
+    <Compile Include="Configuration\FileSystem\FileSystemActivityLoader.cs" />
+    <Compile Include="Configuration\FileSystem\FileSystemHealthChecksLoader.cs" />
+    <Compile Include="Configuration\FileSystem\FileSystemConfigurationEntry.cs" />
+    <Compile Include="Configuration\FileSystem\FileSystemConfigurationRepository.cs" />
+    <Compile Include="Configuration\FileSystem\FileSystemScheduleConfigurationRepository.cs" />
+    <Compile Include="Configuration\HealthCheckDiscoveryBase.cs" />
+    <Compile Include="Configuration\PluginDiscoveryBase.cs" />
+    <Compile Include="Container.cs" />
+    <Compile Include="Containers\ContainerPredicates.cs" />
+    <Compile Include="Containers\IContainer.cs" />
+    <Compile Include="Containers\InterceptorBase.cs" />
+    <Compile Include="Containers\WindsorContainer.cs" />
+    <Compile Include="Containers\ZeroAppConfigXmlInterpreter.cs" />
+    <Compile Include="Database\AdhocCommandBase.cs" />
+    <Compile Include="Database\Oracle\OracleAdhocCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Oracle\OracleStatement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\SmartConnectionString.cs" />
+    <Compile Include="Database\SqlServer\SqlServerAdhocCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\SqlServer\SqlServerConfiguration.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\SqlServer\SqlServerPublisherConfigurationDiscovery.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\SqlServer\SqlServerPublishers.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\SqlServer\SqlServerStatement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\SqlStatementBase.cs" />
+    <Compile Include="Database\TableSchema.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Filters\EventTypeFilter.cs" />
+    <Compile Include="Filters\ResultFilterBase.cs" />
+    <Compile Include="Filters\SuccessFilter.cs" />
+    <Compile Include="Geo\StaticGeoLocator.cs" />
+    <Compile Include="Hosts\PluginHostBase.cs" />
+    <Compile Include="InterceptorSelector.cs" />
+    <Compile Include="Loaders\ContainerLoaders.cs" />
+    <Compile Include="Loaders\DefaultBindingConfigurationLoader.cs" />
+    <Compile Include="Loaders\HealthCheckBindingLoader.cs" />
+    <Compile Include="Loaders\HealthCheckLoader.cs" />
+    <Compile Include="Loaders\PluginExtensions.cs" />
+    <Compile Include="Loaders\ProfileLoader.cs" />
+    <Compile Include="Loaders\ScanningLoaders.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="Messenger.cs" />
+    <Compile Include="Notification\Filters\Request\AlwaysPublishNotificationFilter.cs" />
+    <Compile Include="Notification\Filters\Request\ResultCountChangeNotificationFilter.cs" />
+    <Compile Include="Notification\Filters\Request\FailureOnlyNotificationFilter.cs" />
+    <Compile Include="Notification\Filters\Request\NotificationRequestFilterBase.cs" />
+    <Compile Include="Notification\Filters\Request\StateChangeNagFailNotificationFilter.cs" />
+    <Compile Include="Notification\Filters\Request\StateChangeNotificationFilter.cs" />
+    <Compile Include="Notification\Filters\Request\SuccessOnlyNotificationFilter.cs" />
+    <Compile Include="Notification\NotificationHub.cs" />
+    <Compile Include="Notification\NotificationRequestBuilder.cs" />
+    <Compile Include="Notification\DefaultNotificationHub.cs" />
+    <Compile Include="Pipeline\DefaultPipeline.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Publishers\Console\ConsolePublisherConfiguration.cs" />
+    <Compile Include="Publishers\Console\ConsolePublisher.cs" />
+    <Compile Include="Publishers\Console\ConsolePublisherConfigurationDiscovery.cs" />
+    <Compile Include="Publishers\FilteredResultPublisherBase.cs" />
+    <Compile Include="Publishers\PublisherBase.cs" />
+    <Compile Include="Publishers\Sql\SqlPublisher.cs" />
+    <Compile Include="Publishers\Sql\SqlPublisherBootstrapper.cs" />
+    <Compile Include="Publishers\Sql\SqlPublisherConfiguration.cs" />
+    <Compile Include="Publishers\Sql\SqlPublisherConfigurationDiscovery.cs" />
+    <Compile Include="Repositories\Sql\ISqlDbContextProvider.cs" />
+    <Compile Include="Repositories\Sql\SqlDbContext.cs" />
+    <Compile Include="Repositories\Sql\SqlDbContextProvider.cs" />
+    <Compile Include="Repositories\Sql\SqlRepository.cs" />
+    <Compile Include="Repositories\Sql\ISqlDbContext.cs" />
+    <Compile Include="Repositories\FileSystem\FileSystemNotificationRepositoryConfig.cs" />
+    <Compile Include="Repositories\FileSystem\FileSystemNotificationRepository.cs" />
+    <Compile Include="Repositories\Plugins\NotificationStateFilter.cs" />
+    <Compile Include="Repositories\Plugins\NotificationIdFilter.cs" />
+    <Compile Include="Repositories\Plugins\NotificationTagsFilter.cs" />
+    <Compile Include="Schedulers\DateTimeExtensions.cs" />
+    <Compile Include="Schedulers\FakeNow.cs" />
+    <Compile Include="Schedulers\HealthCheckIntervalScheduler.cs" />
+    <Compile Include="Schedulers\HealthCheckTwentyFourSevenScheduler.cs" />
+    <Compile Include="Schedulers\IntervalSchedulerBase.cs" />
+    <Compile Include="Schedulers\IntervalSchedulerConfig.cs" />
+    <Compile Include="Schedulers\TwentyFourSevenTimer.cs" />
+    <Compile Include="Serialiser.cs" />
+    <Compile Include="SmartLocation.cs" />
+    <Compile Include="TypeDiscovery.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Wolfpack.Core.Interfaces.Castle\Wolfpack.Core.Interfaces.Castle.csproj">
+      <Project>{98CD5D7E-5A81-4F65-9E56-F589311899C3}</Project>
+      <Name>Wolfpack.Core.Interfaces.Castle</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Wolfpack.Core.Interfaces.Magnum\Wolfpack.Core.Interfaces.Magnum.csproj">
+      <Project>{2CFB5B81-6F29-43C7-A539-CF185A5AFD0E}</Project>
+      <Name>Wolfpack.Core.Interfaces.Magnum</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Wolfpack.Core.Interfaces\Wolfpack.Core.Interfaces.csproj">
+      <Project>{21083526-1E2F-468C-A08B-D2CAC99EC4FC}</Project>
+      <Name>Wolfpack.Core.Interfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

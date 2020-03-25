@@ -1,0 +1,42 @@
+[
+  {
+    "Id": "1235088",
+    "ThreadId": "542533",
+    "Html": "We using Wolfpack for a few different monitors but have to install it on machines that block access to chocolatey.  What's our installation alternative to run it as a win service on our machines?\r<br />\n<br />\nThanks, \r<br />\n<br />\nRon<br />\n",
+    "PostedDate": "2014-04-17T08:43:24.79-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1235092",
+    "ThreadId": "542533",
+    "Html": "Hi Ron,\r<br />\n<br />\nI guess you are talking about v3 specifically? When I release v3 (should be this weekend) I'll include a source and binaries zip to download.\r<br />\n<br />\nIn the meantime if you can chocolatey install to a machine you can grab the install from where chocolatey puts it; default location is something like...C:\\Chocolatey\\lib\\Wolfpack.3.0.x\r<br />\n<br />\n...this folder is the equivalent of what will be in the binaries zip file. Grab the content of this folder and xcopy deploy to your non-chocolatey machines.\r<br />\n<br />\nHTH,\r<br />\nJames<br />\n",
+    "PostedDate": "2014-04-17T08:55:21.077-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1235112",
+    "ThreadId": "542533",
+    "Html": "So is there anything special to run the agent as a service, just a standard installutil command?<br />\n",
+    "PostedDate": "2014-04-17T09:46:36.547-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1235186",
+    "ThreadId": "542533",
+    "Html": "No - all the chocolatey stuff does is pull down the package - it doesn't install it or set it up as a service. \r<br />\n<br />\nThe docs here are still valid for v3: <a href=\"https://wolfpack.codeplex.com/wikipage?title=Getting%20Started&amp;referringTitle=Documentation\" rel=\"nofollow\">https://wolfpack.codeplex.com/wikipage?title=Getting%20Started&referringTitle=Documentation</a>\r<br />\n<br />\nInstallation is still the same as v2.x ... You can run as console app or service once you run the /install command line\r<br />\n<br />\nJ<br />\n",
+    "PostedDate": "2014-04-17T12:33:18.5-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1235269",
+    "ThreadId": "542533",
+    "Html": "Thank you!  It appears there was some incompatibility between versions with my own health check component, so I went back to 2.4... but 3 looks promising!<br />\n",
+    "PostedDate": "2014-04-17T18:16:14.517-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

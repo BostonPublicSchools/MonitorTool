@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "1203249",
+    "ThreadId": "529086",
+    "Html": "I've tried to go through the hello world tutorial but I'm having problems.  Then nuget package does not seem to have Core.notification.  This is the fifth using in the downloaded source file.  However this dependency is not in the online tutorial.<br />\n\r<br />\nWhen I tried to download the source everything built ok but my hello world dolls caused a top shelf exception.   I didn't make any changes to the dlls as I was trying to narrow down the problem.  Is it possible that I'm using different versions between the nuget, the downloaded source and the downloaded binaries?\r<br />\n<br />\nThank you!<br />\n",
+    "PostedDate": "2014-02-05T16:01:58.633-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1203825",
+    "ThreadId": "529086",
+    "Html": "Hi - welcome to Wolfpack!<br />\n<br />\nFirst let me explain what versions exist and where...<br />\n<ul>\n<li>The latest source code in the repository (HEAD) is for v3.</li>\n<li>The current official release is v2.4</li>\n<li>All the &quot;release&quot; nuget packages are v2.4 compatible.</li>\n<li>\nThere is a &quot;pre-release&quot; set of v3 compatible packages and these only work against the v3 source code.<br />\n</li>\n</ul>\nThe tutorial/first healthcheck targets v2.4. If you want the source code for v2.4 then you will need to get a specific version from the repository out. This is the version/changeset that v2.4 was released from: <a href=\"https://wolfpack.codeplex.com/SourceControl/changeset/0187cc7cb839\" rel=\"nofollow\">https://wolfpack.codeplex.com/SourceControl/changeset/0187cc7cb839</a><br />\n<br />\nTo get this version of the source from HG, see this post (<a href=\"http://stackoverflow.com/questions/4148234/how-can-you-clone-a-mercurial-repository-as-of-a-specific-changeset\" rel=\"nofollow\">http://stackoverflow.com/questions/4148234/how-can-you-clone-a-mercurial-repository-as-of-a-specific-changeset</a>) to help but you just need to clone with the version number 0187cc7cb839<br />\n<br />\nThere is also this thread with some advice/tips on debugging plugins...might be of use...<br />\n<a href=\"https://wolfpack.codeplex.com/discussions/493323\" rel=\"nofollow\">https://wolfpack.codeplex.com/discussions/493323</a><br />\n<br />\nIf you stick with everything v2.4 then it should all work (and the tutorial be correct). Once I have v3 released I will update the docs to reflect the changes this version brings.<br />\n<br />\nCheers,<br />\nJames<br />\n",
+    "PostedDate": "2014-02-06T15:22:32.89-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1203864",
+    "ThreadId": "529086",
+    "Html": "<span id=\"mailbox-conversation\">Thank you for the thorough reply. Getting the correct source cleared up a lot. :)\r\n<div><br>\r\n</div>\r\n<div><br>\r\n</div>\r\n</span><br>\r\n<br>\r\n<div>\r\n<p></p>\r\n</div>\r\n",
+    "PostedDate": "2014-02-06T16:33:25.787-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

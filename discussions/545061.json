@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "1244252",
+    "ThreadId": "545061",
+    "Html": "Marvellous project, I think.\r<br />\n<br />\nAny good Getting Started - Step by step in 15 minutes: Installing, configure and working Wolfpack?\r<br />\n<br />\nThe project will be continues development or dead with latests version v3? Any roadmap about it?\r<br />\n<br />\nAnyways, why not working together?\r<br />\n<a href=\"https://wolfpack.codeplex.com/\" rel=\"nofollow\">https://wolfpack.codeplex.com/</a>\r<br />\n<a href=\"https://github.com/asimov-deploy/asimov-deploy-winagent\" rel=\"nofollow\">https://github.com/asimov-deploy/asimov-deploy-winagent</a>\r<br />\n<a href=\"https://github.com/chucknorris/dropkick\" rel=\"nofollow\">https://github.com/chucknorris/dropkick</a>\r<br />\n<a href=\"https://github.com/mmooney/Sriracha.Deploy\" rel=\"nofollow\">https://github.com/mmooney/Sriracha.Deploy</a>\r<br />\n<br />\nThanks a lot.<br />\n",
+    "PostedDate": "2014-05-12T01:50:41.26-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1244262",
+    "ThreadId": "545061",
+    "Html": "Hi,\r<br />\n<br />\nYes the focus is on creating more documentation and walk-thru's - the actual software is one part of the package and loses value without good docs/guides/how-to's. I will be adding to the [url:How-To section|<a href=\"https://wolfpack.codeplex.com/wikipage?title=HowTov3]\" rel=\"nofollow\">https://wolfpack.codeplex.com/wikipage?title=HowTov3]</a> over the next few weeks.\r<br />\n<br />\nThe immediate goal for Wolfpack right now is to integrate into dashboards and I am working on a) an adapter plugin that will transform and push a notification to a dashboard such as Geckoboard, Kibana etc and b) my own .net dashboard framework called [url:Periscope|<a href=\"https://periscope.codeplex.com/]\" rel=\"nofollow\">https://periscope.codeplex.com/]</a>\r<br />\n<br />\nThe roadmap is [url:here|<a href=\"https://wolfpack.codeplex.com/wikipage?title=Roadmap]\" rel=\"nofollow\">https://wolfpack.codeplex.com/wikipage?title=Roadmap]</a> (a bit empty ATM) and the [url:WIP is on trello|<a href=\"https://trello.com/b/8gto1kYr]\" rel=\"nofollow\">https://trello.com/b/8gto1kYr]</a>\r<br />\n<br />\nOnce dashboard integration is complete I may start to look at how Wolfpack can orchestrate/control/participate in deployment scenarios - however the focus will be on making it the best .net <em>monitoring</em> system!\r<br />\n<br />\nCheers and thanks for your support!\r<br />\n<br />\nJames<br />\n",
+    "PostedDate": "2014-05-12T02:12:50.273-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1361444",
+    "ThreadId": "545061",
+    "Html": "Great idea DAshboard .NET simple.\r<br />\n<br />\nIMHO, The ideal world is working together Paramore (<a href=\"https://github.com/iancooper/Paramore/\" rel=\"nofollow\">https://github.com/iancooper/Paramore/</a>) and Wolfpack (<a href=\"https://wolfpack.codeplex.com/\" rel=\"nofollow\">https://wolfpack.codeplex.com/</a>) and another like:\r<br />\n<br />\nAsimov Deploy <a href=\"https://github.com/asimov-deploy\" rel=\"nofollow\">https://github.com/asimov-deploy</a> by Torkel Ödegaard <a href=\"mailto:(@torkelo)\" rel=\"nofollow\">(@torkelo)</a>. \r<br />\n<br />\n<a href=\"https://periscope.codeplex.com/Wikipage?ProjectName=periscope\" rel=\"nofollow\">https://periscope.codeplex.com/Wikipage?ProjectName=periscope</a>\r<br />\n<br />\n<a href=\"https://github.com/chucknorris/dropkick\" rel=\"nofollow\">https://github.com/chucknorris/dropkick</a>\r<br />\n<a href=\"https://github.com/mmooney/Sriracha.Deploy\" rel=\"nofollow\">https://github.com/mmooney/Sriracha.Deploy</a>\r<br />\n<a href=\"https://github.com/asimov-deploy/asimov-deploy-winagent\" rel=\"nofollow\">https://github.com/asimov-deploy/asimov-deploy-winagent</a>\r<br />\n<a href=\"http://presto.codeplex.com/\" rel=\"nofollow\">http://presto.codeplex.com/</a>\r<br />\n<br />\n<a href=\"https://wolfpack.codeplex.com/\" rel=\"nofollow\">https://wolfpack.codeplex.com/</a>\r<br />\n<br />\nFrom all the good answers provided by everyone here I am now getting a better understanding of appropriate use of this topic and IMHO other programmers will definitely benifit from the \r<br />\n<br />\nknowledge sharing here. Some of the implementations that I had worked in the past could have been better implemented using this knowledge. \r<br />\nIMHO, better samples for minimize learning curve are real applications with full source code and good patterns\r<br />\n<br />\nNow this is the kind of invetigative reporting, that I am interested in. Real world problems, with real world solutions. Most real world solutions start with kick ass debugging.<br />\n",
+    "PostedDate": "2015-03-09T08:39:17.943-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

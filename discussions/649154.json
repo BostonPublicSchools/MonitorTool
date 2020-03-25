@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "1456827",
+    "ThreadId": "649154",
+    "Html": "This looks like a great piece of work. My own plans are somewhat less ambitious ... I don't want to have to leave another relatively high power consumption device on 24x7 just so that I can collect the usage data. I'd like to build a simple buffer for the data received by the CM120 while my desktop PC is turned off. Ideally I'd like to use an Arduino board or something similar.\r<br />\n<br />\nHave you been able to track down any low level protocol details for the CM120, i.e. sufficient details to write your own device driver and decoder?\r<br />\n<br />\nThanks, Dave<br />\n",
+    "PostedDate": "2015-12-22T02:32:22.177-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1456944",
+    "ThreadId": "649154",
+    "Html": "Hi Dave,\r<br />\n<br />\nI didn't find a great deal of information about the CM120 at all...so the simple integration point I could see was the database that the CM120 app logs the data to - I just opened that and read the data out as required. Understand your idea though and I'd start with process monitoring the CM120 software (wireshark, MS netmon) to see what ports it has open then seeing if the traffic is decipherable...if so you should be able to replicate the CM120 software and dump the data stream down to whatever storage you like....however I guess the key point will be the format of that stream...I certainly didn't find any docs covering this detail.\r<br />\n<br />\nHTH &amp; Good luck!\r<br />\nJames<br />\n",
+    "PostedDate": "2015-12-23T03:59:55.103-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

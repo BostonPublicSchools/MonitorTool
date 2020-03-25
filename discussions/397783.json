@@ -1,0 +1,98 @@
+[
+  {
+    "Id": "920861",
+    "ThreadId": "397783",
+    "Html": "\r\n<p>I tried to port a console app to a new HealthCheck based on the HelloWorld example and it just blows up my instance. It looks like the new Type can't be found.</p>\r\n<p>https://dl.dropbox.com/u/1539/SmtpPingCheck/output.txt<br>\r\nhttps://dl.dropbox.com/u/1539/SmtpPingCheck/SmtpPingCheck.cs<br>\r\nhttps://dl.dropbox.com/u/1539/SmtpPingCheck/smtpcheck.castle.config<br>\r\nhttps://dl.dropbox.com/u/1539/SmtpPingCheck/binding.castle.config</p>\r\n<p>I would&nbsp;appreciate&nbsp;any assistance.</p>\r\n<p>Thanks,</p>\r\n<p>-- Chris</p>\r\n",
+    "PostedDate": "2012-10-02T13:52:56.81-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "920866",
+    "ThreadId": "397783",
+    "Html": "<p>taking a look now...</p>",
+    "PostedDate": "2012-10-02T14:02:23.82-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "920878",
+    "ThreadId": "397783",
+    "Html": "<p>Ok, the issue is component id in smtpcheck.castle.config does not match the one in binding.castle.config</p>\r\n<pre>smtpcheck.castle.config...</pre>\r\n<pre><pre>&lt;component id=\"<strong>SmtpPingCheck</strong>\"</pre>\r\nbinding.castle.config...</pre>\r\n<pre>&lt;HealthCheckConfigurationName&gt;<strong>SmtpPingCheckConfig</strong>&lt;/HealthCheckConfigurationName&gt;</pre>\r\n<p>BTW: using bindings is the old way of linking a check to it's scheduler...the easiest way to do it is just put your smtpcheck.castle.config file in the checks\\everyminute folder and it will be automagically bound to the everyminute check....(and remember to remove the \"SmtpPingCheckBindingConfig\" binding, not required now!)</p>\r\n<p>Hope that gets you up an running!</p>",
+    "PostedDate": "2012-10-02T14:12:39.54-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "920899",
+    "ThreadId": "397783",
+    "Html": "<p>I've also just updated the docs on creating a new health check to (hopefully) make it clearer and to reflect to preferred \"binding by convention\" approach rather than the old explicit binding component config required in binding.castle.config.</p>",
+    "PostedDate": "2012-10-02T14:50:25.807-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "920940",
+    "ThreadId": "397783",
+    "Html": "<p>I did as suggested. smtpcheck.castle.config moved to EveryMinute folder and removed the&nbsp;component&nbsp;section from the binding.castle.config.</p>\r\n<p>Same group of stack traces.</p>\r\n<p>\r\n<pre>2012-10-02 19:40:21,982 [4] ERROR Topshelf.Model.ServiceCoordinator [(null)] - Fault on Wolfpack: Topshelf.Exceptions.ServiceControlException\r\nService Start Exception: Wolfpack (IRolePlugin)\r\n   at Topshelf.Builders.LocalServiceBuilder`1.StartService(T service) in d:\\BuildAgent-01\\work\\799c08e77fef999d\\src\\Topshelf\\Config\\Builders\\LocalServiceBuilder.cs:line 69\r\n   at Topshelf.Model.LocalServiceController`1.CallAction[TBefore,TComplete](String text, Action`1 callback, Func`1 before, Func`1 complete) in d:\\BuildAgent-01\\work\\799c08e77fef999d\\src\\Topshelf\\Model\\LocalServiceController.cs:line 153\r\nHelpLink:\r\n\r\nSystem.InvalidOperationException\r\nFailed processing binding[SmtpPingCheck-&gt;EveryMinute]\r\n   at Wolfpack.Core.Loaders.HealthCheckBindingLoader.&lt;&gt;c__DisplayClass2.b__1(BindingConfiguration bc) in c:\\Projects\\Wolfpack\\Trunk\\Releases\\v2.4.0\\Source\\Wolfpack.Core\\Loaders\\HealthCheckBindingLoader.cs:line 119\r\n   at System.Collections.Generic.List`1.ForEach(Action`1 action)\r\n   at Wolfpack.Core.Loaders.HealthCheckBindingLoader.Load(Binding[]&amp; components) in c:\\Projects\\Wolfpack\\Trunk\\Releases\\v2.4.0\\Source\\Wolfpack.Core\\Loaders\\HealthCheckBindingLoader.cs:line 46\r\n   at Wolfpack.Core.Loaders.HealthCheckLoader.Load(IHealthCheckSchedulerPlugin[]&amp; components) in c:\\Projects\\Wolfpack\\Trunk\\Releases\\v2.4.0\\Source\\Wolfpack.Core\\Loaders\\HealthCheckLoader.cs:line 26\r\n   at Wolfpack.Agent.Roles.Agent.Start() in c:\\Projects\\Wolfpack\\Trunk\\Releases\\v2.4.0\\Source\\Wolfpack.Agent\\Roles\\Agent.cs:line 116\r\n   at Wolfpack.Agent.Startup.&lt;&gt;c__DisplayClass8.b__6(IRolePlugin s) in c:\\Projects\\Wolfpack\\Trunk\\Releases\\v2.4.0\\Source\\Wolfpack.Agent\\Startup.cs:line 84\r\n   at Topshelf.Builders.LocalServiceBuilder`1.StartService(T service) in d:\\BuildAgent-01\\work\\799c08e77fef999d\\src\\Topshelf\\Config\\Builders\\LocalServiceBuilder.cs:line 65\r\nHelpLink:\r\n\r\nSystem.InvalidOperationException\r\nSearching for type name 'SmtpPingCheck'; found no matches. Check the HealthCheckConfigurationName property of your BindingConfigurations are valid\r\n   at Wolfpack.Core.Loaders.HealthCheckBindingLoader.&lt;&gt;c__DisplayClass2.b__1(BindingConfiguration bc) in c:\\Projects\\Wolfpack\\Trunk\\Releases\\v2.4.0\\Source\\Wolfpack.Core\\Loaders\\HealthCheckBindingLoader.cs:line 85\r\nHelpLink:\r\n\r\n\r\n2012-10-02 19:40:21,982 [3] ERROR Topshelf.Model.ServiceWorkflow [(null)] - [Wolfpack] Fault: Topshelf.Exceptions.ServiceControlException\r\nService Start Exception: Wolfpack (IRolePlugin)\r\n   at Topshelf.Builders.LocalServiceBuilder`1.StartService(T service) in d:\\BuildAgent-01\\work\\799c08e77fef999d\\src\\Topshelf\\Config\\Builders\\LocalServiceBuilder.cs:line 69\r\n   at Topshelf.Model.LocalServiceController`1.CallAction[TBefore,TComplete](String text, Action`1 callback, Func`1 before, Func`1 complete) in d:\\BuildAgent-01\\work\\799c08e77fef999d\\src\\Topshelf\\Model\\LocalServiceController.cs:line 153\r\nHelpLink:\r\n\r\nSystem.InvalidOperationException\r\nFailed processing binding[SmtpPingCheck-&gt;EveryMinute]\r\n   at Wolfpack.Core.Loaders.HealthCheckBindingLoader.&lt;&gt;c__DisplayClass2.b__1(BindingConfiguration bc) in c:\\Projects\\Wolfpack\\Trunk\\Releases\\v2.4.0\\Source\\Wolfpack.Core\\Loaders\\HealthCheckBindingLoader.cs:line 119\r\n   at System.Collections.Generic.List`1.ForEach(Action`1 action)\r\n   at Wolfpack.Core.Loaders.HealthCheckBindingLoader.Load(Binding[]&amp; components) in c:\\Projects\\Wolfpack\\Trunk\\Releases\\v2.4.0\\Source\\Wolfpack.Core\\Loaders\\HealthCheckBindingLoader.cs:line 46\r\n   at Wolfpack.Core.Loaders.HealthCheckLoader.Load(IHealthCheckSchedulerPlugin[]&amp; components) in c:\\Projects\\Wolfpack\\Trunk\\Releases\\v2.4.0\\Source\\Wolfpack.Core\\Loaders\\HealthCheckLoader.cs:line 26\r\n   at Wolfpack.Agent.Roles.Agent.Start() in c:\\Projects\\Wolfpack\\Trunk\\Releases\\v2.4.0\\Source\\Wolfpack.Agent\\Roles\\Agent.cs:line 116\r\n   at Wolfpack.Agent.Startup.&lt;&gt;c__DisplayClass8.b__6(IRolePlugin s) in c:\\Projects\\Wolfpack\\Trunk\\Releases\\v2.4.0\\Source\\Wolfpack.Agent\\Startup.cs:line 84\r\n   at Topshelf.Builders.LocalServiceBuilder`1.StartService(T service) in d:\\BuildAgent-01\\work\\799c08e77fef999d\\src\\Topshelf\\Config\\Builders\\LocalServiceBuilder.cs:line 65\r\nHelpLink:\r\n\r\nSystem.InvalidOperationException\r\nSearching for type name 'SmtpPingCheck'; found no matches. Check the HealthCheckConfigurationName property of your BindingConfigurations are valid\r\n   at Wolfpack.Core.Loaders.HealthCheckBindingLoader.&lt;&gt;c__DisplayClass2.b__1(BindingConfiguration bc) in c:\\Projects\\Wolfpack\\Trunk\\Releases\\v2.4.0\\Source\\Wolfpack.Core\\Loaders\\HealthCheckBindingLoader.cs:line 85\r\nHelpLink:\r\n\r\n\r\n2012-10-02 19:40:22,918 [1] ERROR Topshelf.Hosts.ConsoleRunHost [(null)] - An exception occurred\r\nTopshelf.Exceptions.TopshelfException: At least one configured service failed to start\r\n   at Topshelf.Model.ServiceCoordinator.WaitUntilServicesAreRunning(IEnumerable`1 services, TimeSpan timeout) in d:\\BuildAgent-01\\work\\799c08e77fef999d\\src\\Topshelf\\Model\\ServiceCoordinator.cs:line 223\r\n   at Topshelf.Model.ServiceCoordinator.Start() in d:\\BuildAgent-01\\work\\799c08e77fef999d\\src\\Topshelf\\Model\\ServiceCoordinator.cs:line 116\r\n   at Topshelf.Hosts.ConsoleRunHost.Run() in d:\\BuildAgent-01\\work\\799c08e77fef999d\\src\\Topshelf\\Hosts\\ConsoleRunHost.cs:line 65\r\n2012-10-02 19:40:23,183 [1] INFO  Topshelf.Hosts.ConsoleRunHost [(null)] - [Topshelf] Stopping\r\n2012-10-02 19:40:24,291 [1] DEBUG Topshelf.Model.ServiceCoordinator [(null)] - [Topshelf] After stopping services\r\n2012-10-02 19:40:24,291 [1] INFO  Topshelf.Model.ServiceCoordinator [(null)] - [Topshelf] After stopping services complete\r\n2012-10-02 19:40:24,291 [1] DEBUG Topshelf.Model.ServiceCoordinator [(null)] - [Topshelf] Closing coordinator channel\r\n2012-10-02 19:40:24,369 [1] INFO  Topshelf.Hosts.ConsoleRunHost [(null)] - [Topshelf] Stopped</pre>\r\n</p>",
+    "PostedDate": "2012-10-02T16:46:59.007-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "920975",
+    "ThreadId": "397783",
+    "Html": "<p>Ok I think the issue is that your SmtpPingCheck class is private, needs to be public</p>",
+    "PostedDate": "2012-10-02T17:59:25.49-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "920981",
+    "ThreadId": "397783",
+    "Html": "<p>Bingo, I was concentrating on the names. Should I make this a Contrib project?</p>",
+    "PostedDate": "2012-10-02T18:19:59.883-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "921020",
+    "ThreadId": "397783",
+    "Html": "<p>Great ... sure, this would make a very nice additional check.</p>\r\n<p>What level of contribution do you want to make? You can dropbox me the source zip and I can take it from there or I can add you to the contrib project and you can commit directly to the repository - up to you?</p>\r\n<p>I usually take care of setting up the NuGet package for it (no docs on how to do this yet) and set up the docs wiki page for your check but you will either have to help me document it (eg what do the config params do) or you can edit the page yourself....and obviously your name all over it to ensure you get the props due!</p>\r\n<p>Thanks - it's contributions from the community like this that really help improve the software. Any more contrib components gratefully welcome along with suggestions, new features etc.</p>\r\n<p>Cheers,</p>\r\n<p>James</p>",
+    "PostedDate": "2012-10-02T22:05:37.573-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "921022",
+    "ThreadId": "397783",
+    "Html": "<p>...oh and of course...spread the word - let others know about Wolfpack if you believe it's doing a good job! Complimentary blog posts and tweets always welcome ;-)</p>\r\n<p>J</p>",
+    "PostedDate": "2012-10-02T22:07:30.483-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "921223",
+    "ThreadId": "397783",
+    "Html": "\r\n<p>Ok, here's the project.&nbsp;</p>\r\n<p>https://dl.dropbox.com/u/1539/SmtpPingCheck/Wolfpack.Contrib.SmtpPingCheck.zip</p>\r\n<p>Somehow in testing, I screwed up all publishing for my install. This returns the information through debug statements that I expect, but I actually haven't been able to verify the publish results.</p>\r\n<p>If you set up the Wiki page, I'll document it. There are only two parameters.</p>\r\n<p>Also, I ran into problems running this with the released binaries. It only&nbsp;successfully&nbsp;ran with binaries built from the latest source.&nbsp;HealthCheckPluginConfigBase wasn't in&nbsp;Wolfpack.Core.Interfaces.Entities I originally had.</p>\r\n<p><strong>Update</strong>: Got publishing working and validated results.</p>\r\n",
+    "PostedDate": "2012-10-03T06:12:49.353-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "921275",
+    "ThreadId": "397783",
+    "Html": "<p>Excellent stuff!</p>\r\n<p>I think that&nbsp;<span>HealthCheckPluginConfigBase is a new base class introduced as part of the NotificationModes feature in the next release (v2.5) so that is why it's not in the binaries (yet).</span></p>\r\n<p><span>I'll take a crack at uploading this into the contrib solution tonight and drop you a message when the wiki page is online - I should be able to figure out the params but might need you to give it the once over.</span></p>\r\n<p><span>Many Thanks!</span></p>\r\n<p><span>James</span></p>",
+    "PostedDate": "2012-10-03T07:41:16.593-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "921559",
+    "ThreadId": "397783",
+    "Html": "<p>ok I have packaged your code into the contrib project as a new health check plugin and created the NuGet package for it (private feed for testing). I have also created the docs page here;</p>\r\n<p><a href=\"http://wolfpackcontrib.codeplex.com/wikipage?title=Wolfpack.Contrib.Checks.Smtp&amp;referringTitle=Home\">http://wolfpackcontrib.codeplex.com/wikipage?title=Wolfpack.Contrib.Checks.Smtp&amp;referringTitle=Home</a></p>\r\n<p>Due to the changes I am making in vNext of Wolfpack I'll actually release this new check as part of vNext as it uses some new base classes not released yet.&nbsp;</p>\r\n<p>Cheers,</p>\r\n<p>James</p>",
+    "PostedDate": "2012-10-03T15:29:52.083-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

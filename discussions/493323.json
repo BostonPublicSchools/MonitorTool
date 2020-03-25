@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "1161410",
+    "ThreadId": "493323",
+    "Html": "Hello anyone\r<br />\n<br />\nI'm having a little trouble figuring out how I would debug my new Check component.  I followed the tutorial for the sample helloWorld check component, but can't seem to step through it for debugging.   Anyone care to give me some hints on how to do this?  Thanks!\r<br />\n<br />\nFredericko<br />\n",
+    "PostedDate": "2014-01-13T07:35:37.667-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1162107",
+    "ThreadId": "493323",
+    "Html": "First I would have the full solution loaded in the IDE. This will make is easier. then just add your project to the solution. You likely have already done this but I want to be clear on the low side of the setup.\r<br />\n<br />\nI tend to place a break point at the top of the initialize event in my Check as well as in the Execute event. \r<br />\n<br />\nAlso it is a good Idea to make sure you have every thing working outside your code first. I know I had some db connections and things that were throwing exceptions when I first setup my IDE for running this. If you just tell the IDE to break on all .net code, you will be able to figure out if there are issues and it will stop someplace where you can at least poke around at the local vars and look at the Call stack.\r<br />\n<br />\nHope that helps,\r<br />\nJohn<br />\n",
+    "PostedDate": "2014-01-13T11:35:46.873-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1162294",
+    "ThreadId": "493323",
+    "Html": "Thanks, that indeed helped.  I was able to read between the lines on the documentation and picked up that perhaps I needed to add my new project into the Wolfpack solution.<br />\n\r<br />\nAlso, I found the post build step that was added to the HelloWorld health check example, which copies the relevant dll's to the Wolfpack.Agent's bin folder.  So I added a step like that to my project.  Also, you need to make sure that there is a config file in the Wolfpack.Agent projects config folder.\r<br />\n<br />\nThen it all seemed to work correctly.  Thanks!<br />\n",
+    "PostedDate": "2014-01-13T12:42:16.043-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

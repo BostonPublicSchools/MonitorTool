@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Hello,\r\n\r\nThe documentation on the following page seems to be missing: \r\nhttps://wolfpack.codeplex.com/wikipage?title=v3HowToCreateHealthCheck&referringTitle=Home\r\n\r\nI found the link on this page: \r\nhttps://wolfpack.codeplex.com/\r\n\r\nCan you look into fixing this page?\r\n\r\nThank you.",
+    "LastUpdatedDate": "2016-04-28T02:57:58.983-07:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "wolfpack",
+    "ReportedDate": "2016-04-28T02:57:58.983-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Missing wiki page: v3HowToCreateHealthCheck",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 1,
+    "Id": 30
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

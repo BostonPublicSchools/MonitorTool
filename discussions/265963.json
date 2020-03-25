@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "645281",
+    "ThreadId": "265963",
+    "Html": "\r\n<p></p>\r\n<div>User pbolduc has been doing some work on using powershell scripts as HealthChecks and that's a great idea!</div>\r\n<div></div>\r\n<div>I'm going to use this page to track requirements and progress...thanks for this initial list Phil!</div>\r\n<div></div>\r\n<div>Requirements<br>\r\n------------<br>\r\n- Use PowerShell 2.0<br>\r\n- Scripts should be easily testable outside of WolfPack<br>\r\n-</div>\r\n<div>User Stories<br>\r\n------------<br>\r\n- as a user, I would like to write a health check using PowerShell<br>\r\n- as a user, I would like to be able to test my PowerShell based health checks from the command line or PowerGui<br>\r\n- as a user, I would like to be able to run a PowerShell based health check on the local computer<br>\r\n- as a user, I would like to be able to run a PowerShell based health check on a remote computer using PowerShell remoting<br>\r\n- as a user, I would like to be able to pass parameters to a PowerShell based health check<br>\r\n- as a user, I would like to be able to cancel a long running PowerShell based health check (timeout)<br>\r\n- as a user, I would like to be able to use any installed snap-ins as part of my PowerShell based health check<br>\r\n- as a user, I would like to embed my PowerShell based health check inline with the configuration<br>\r\n- as a user, I would like to store my PowerShell based health check in a directory on the file system<br>\r\n- as a user, I would like to be able to call/load other PowerShell scripts from my PowerShell based health checks</div>\r\n<p></p>\r\n",
+    "PostedDate": "2011-07-20T19:00:54.06-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "675931",
+    "ThreadId": "265963",
+    "Html": "<p>With v2.3 out of the way, I've started work in incorporating the Powershell based health check into the Wolfpack.Contrib project. It will land as a new plugin and will be installable from the Wolfpack command line (/update switch)</p>",
+    "PostedDate": "2011-09-23T10:36:55.98-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "865019",
+    "ThreadId": "265963",
+    "Html": "\r\n<p>Ok, hands up - I haven't done anything about this for a while...until now! Another user raised the question of powershell support and this time I completed the task...</p>\r\n<p>See the discussion here:&nbsp;<a href=\"http://wolfpack.codeplex.com/discussions/361347#post860735\">http://wolfpack.codeplex.com/discussions/361347#post860735</a></p>\r\n<p>The powershell plugin is in beta and will be released shortly in the next version v2.5. If you are interested in running Powershell scripts as Wolfpack HealthChecks then grab the beta binaries mentioned in the above post and let me know your thoughts/feedback.</p>\r\n<p>Cheers,</p>\r\n<p>James</p>\r\n",
+    "PostedDate": "2012-07-13T09:48:08.487-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

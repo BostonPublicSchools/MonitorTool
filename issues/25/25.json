@@ -1,0 +1,50 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 2,
+    "Custom": null,
+    "Description": "In Wolfpack.Core.Checks.CpuCheck.cs,  \r\n```\r\ncounter.NextSample();\r\n```\r\nthrows the exception when there are multiple instances of a process running.\r\n\r\nYou may find these useful when fixing the problem:\r\nhttp://stackoverflow.com/questions/11885832/can-the-performance-counter-instance-name-of-a-process-change-even-if-the-proces\r\nhttp://stackoverflow.com/questions/5832709/exception-instance-name-of-instance-does-not-exist-in-the-specified-category\r\n",
+    "LastUpdatedDate": "2014-09-04T09:00:11.167-07:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "wolfpack",
+    "ReportedDate": "2014-09-04T07:31:23.513-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "CpuCheck occasionally throws an \"Instance does not exist in the specified Category\" exception",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 1,
+    "Id": 25
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "OK thanks for bringing this to my attention - those articles are very useful too!\n\nI'll get a fix in the next release (working on it now).\n\nThanks,\nJames",
+      "PostedDate": "2014-09-04T08:42:27.27-07:00",
+      "Id": 158812
+    },
+    {
+      "Message": "Great, thanks!",
+      "PostedDate": "2014-09-04T09:00:11.167-07:00",
+      "Id": 158815
+    }
+  ]
+}

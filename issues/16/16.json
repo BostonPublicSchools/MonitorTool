@@ -1,0 +1,80 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 8,
+    "Custom": null,
+    "Description": "My SSL certificate expires in 362 days and I have configured a threshold of 30 days. Wolfpack sends notifications regardless of the fact that 362 > 30. I've checked the code with Reflector, `Wolfpack.Contrib.Checks.Ssl.SslCertificateExpiryCheck.Callback` doesn't even read `Wolfpack.Contrib.Checks.Ssl.SslCertificateExpiryCheckConfig.Threshold` (AFAICT nobody does).",
+    "LastUpdatedDate": "2014-07-03T04:36:27.647-07:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "wolfpack",
+    "ReportedDate": "2014-07-02T14:31:37.963-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "SSL check does not take threshold into account",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 1,
+    "Id": 16
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "Looking at this now...will be fixed in v3.0.19",
+      "PostedDate": "2014-07-02T15:15:37.043-07:00",
+      "Id": 151421
+    },
+    {
+      "Message": "Thanks! Please let me know here when the release is published.",
+      "PostedDate": "2014-07-02T15:58:33.99-07:00",
+      "Id": 151424
+    },
+    {
+      "Message": "update published - you need to update both Wolfpack (to pick up fix to the filter and service restart) and the SSL contrib check dll/package.\n\nI tested against the AppHarbor certificate and worked ok - problem was the check was using the above threshold = failure logic, now switch to below threshold = failure.",
+      "PostedDate": "2014-07-02T16:46:31.217-07:00",
+      "Id": 151436
+    },
+    {
+      "Message": "I just installed SSL 3.0.20, but I still receive emails. Reflector shows no usages for `Wolfpack.Contrib.Checks.Ssl.SslCertificateExpiryCheckConfig.NotificationThreshold`.",
+      "PostedDate": "2014-07-03T01:30:47.45-07:00",
+      "Id": 151470
+    },
+    {
+      "Message": "Interesting - worked fine yesterday - I tested with the threshold value set above and below the AppHarbor cert days to expiry and it behaved as expected.\n\nWhat NotificationMode are you using on the check? Default is \"StateChangeNagFail\" - this should only alert (at decreasing intervals) if the check fails...however you will get one email when Wolfpack starts but this should be a success result as Wolfpack is not maintaining alert state across restarts (yet)..so \"success\" is considered a \"State Change\" - maybe this notification mode should be changed to throw away the first notification received if successful?\n\nYou can block this \"success/ok\" email either by setting the NotificationMode to FailureOnly on the check or a ResultPublisherFilter attached to the email publisher to only publish failed alerts for this specific check.",
+      "PostedDate": "2014-07-03T02:23:02.587-07:00",
+      "Id": 151478
+    },
+    {
+      "Message": "Here's my config:\n```\n{\n  \"Name\": \"example.com-ssl\",\n  \"Description\": \"This check will check the SSL certificate for a domain and if it expires within the number of days set in the NotificationThreshold it will generate an alert.\",\n  \"InterfaceType\": null,\n  \"PluginType\": \"Wolfpack.Contrib.Checks.Ssl.SslCertificateExpiryCheck, Wolfpack.Contrib.Checks.Ssl\",\n  \"ConfigurationType\": \"Wolfpack.Contrib.Checks.Ssl.SslCertificateExpiryCheckConfig, Wolfpack.Contrib.Checks.Ssl\",\n  \"Data\": \"{\\\"Hostnames\\\":[\\\"example.com\\\"],\\\"NotificationMode\\\":\\\"StateChangeNagFail\\\",\\\"NotificationThreshold\\\":30,\\\"FriendlyId\\\":\\\"example.com-ssl\\\",\\\"Enabled\\\":true}\",\n  \"Tags\": [\n    \"HealthCheck\",\n    \"SSL\",\n    \"Certificate\"\n  ],\n  \"Link\": null,\n  \"RequiredProperties\": {\n    \"Name\": \"example.com-ssl\",\n    \"Scheduler\": \"everyday\"\n  }\n}\n```\n\nThis is the notification that gets printed in the console:\n```\n{\n  \"Id\": \"f5149522-2c89-48d3-bb7d-7099b60a6d51\",\n  \"EventType\": \"HealthCheck\",\n  \"SiteId\": \"blah\",\n  \"AgentId\": \"Agent1\",\n  \"CheckId\": \"SslCertificateCheck\",\n  \"Message\": \"SSL Certificate for example.com expires in 361 days\",\n  \"CriticalFailure\": false,\n  \"CriticalFailureDetails\": null,\n  \"Result\": true,\n  \"ResultCount\": 361.0,\n  \"DisplayUnit\": null,\n  \"GeneratedOnUtc\": \"2014-07-03T10:04:28.9778856Z\",\n  \"ReceivedOnUtc\": null,\n  \"Tags\": [\n    \"example.com\"\n  ],\n  \"HourBucket\": 30706,\n  \"MinuteBucket\": 1842364,\n  \"DayBucket\": 1279,\n  \"Latitude\": null,\n  \"Longitude\": null,\n  // Data omitted\n```\n\nSo I interpret Result = true as a success.\n\nWhat's more, I've configured a filter to only send failures (config/filter.castle.config):\n```\n<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n<configuration>\n\t<components>\n\t\t<!-- This filter, if uncommented will execute for all publishers\n\t\t\t\t and checks (this is the *). Use it to only publish true or\n\t\t\t\t false results. You can also attach it to a specific publisher\n\t\t\t\t or check by setting the appropriate field below to the \"friendly id\"\n\t\t\t\t of the check or publisher -->\n\t\t<component id=\"ResultFilter\"\n\t\t\t\t\t lifestyle=\"transient\"\n\t\t\t\t\t type=\"Wolfpack.Core.Filters.SuccessFilter, Wolfpack.Core\">\n\t\t\t<parameters>\n\t\t\t\t<Publisher>*</Publisher>\n\t\t\t\t<Check>*</Check>\n\t\t\t\t<PublishSuccess>false</PublishSuccess>\n\t\t\t\t<PublishFailure>true</PublishFailure>\n\t\t\t</parameters>\n\t\t</component>\n\t</components>\n</configuration>\n```\n\nIt would be great if you could elaborate on why exactly is this notification is still coming through via e-mail. :-)",
+      "PostedDate": "2014-07-03T03:08:26.257-07:00",
+      "Id": 151485
+    },
+    {
+      "Message": "So it's behaving as expected up to a point, NotificationMode = StateChangeNagFail generates an initial notification Result = true (success)...however not working it seems is the Result Filter to block the \"successful\" notification to the publishers.\n\nWill try to replicate this evening.\n\nI think the \"StateChange\" type NotificationModes should not consider an initial notification state of \"success\" a \"change\" (and hence broadcast to all publishers) - this would stop the initial \"success\" email and hence the need for a filter.",
+      "PostedDate": "2014-07-03T03:54:28.673-07:00",
+      "Id": 151492
+    },
+    {
+      "Message": "Great, thanks for looking into it!",
+      "PostedDate": "2014-07-03T04:36:27.647-07:00",
+      "Id": 151495
+    }
+  ]
+}

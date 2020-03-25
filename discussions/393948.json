@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "906945",
+    "ThreadId": "393948",
+    "Html": "\r\n<p>Based on my cursory knowledge of Wolfpack's Geckoboard support, it looks like polling is the only method supported. &nbsp;Are there any plans to support the new Geckoboard Push API? &nbsp;Would love to see this so that we don't have to publicly expose our\r\n metrics so that Geckoboard can poll them.</p>\r\n",
+    "PostedDate": "2012-08-31T09:44:32.457-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "907062",
+    "ThreadId": "393948",
+    "Html": "<p>Yup the current implementation is for polling. Having had a quick look at the docs it shouldn't be difficult to build a push plugin at all, it's fairly trivial.&nbsp;</p>\r\n<p>As I see it though the problem comes deciding what data should be pushed - you have all this alert data coming into Wolfpack,...how does it know what data and &nbsp;widget data type to push? Configuration obviously...so we need a way of selecting logic to query the data and build the correct json data.</p>\r\n<p>Which leads to the next question - the trigger for the push? As soon as an alert arrives I guess it should push the relevant data feed. I think that matching an alert to which data feeds it triggers is a significant problem but I'll put some thought into it this weekend. I am toying with the idea that the configuration is done in code as a drop in dll - it might be xml hell otherwise, still thinking...</p>\r\n<p>So - great idea and thanks for suggesting it - a lot of Wolfpack features start life as such.</p>\r\n<p>I'll post updates here and would welcome any discussion on the configuration side of things.</p>\r\n<p>Cheers,</p>\r\n<p>James</p>",
+    "PostedDate": "2012-08-31T12:45:27.347-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

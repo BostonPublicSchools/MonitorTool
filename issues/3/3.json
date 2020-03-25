@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": "2014-05-01T00:00:56.813-07:00",
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "The code contained in Wolfpack.Core.Loaders.ProfileLoader is effectively doing with Managed Extensibility Framework (MEF) does out of the box.  This can be accomplished by following the steps. Note various references to System.ComponentModel.Composition will need to be added.\r\n\r\nCreate interface: Wolfpack.Core.Interfaces.IRoleProfileMetadata\r\n\r\n    public interface IRoleProfileMetadata\r\n    {\r\n        string Name { get; }\r\n    }\r\n\r\nCreate class: Wolfpack.Core.Interfaces.RoleProfileAttribute\r\n\r\n    [MetadataAttribute]\r\n    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]\r\n    public class RoleProfileAttribute : ExportAttribute\r\n    {\r\n        public RoleProfileAttribute(string name)\r\n            : base(typeof(IRoleProfileMetadata))\r\n        {\r\n            Name = name;\r\n        }\r\n\r\n        public string Name { get; set; }\r\n    }\r\n\r\nDecorate the profiles with attributes:\r\n\r\n    [Export(typeof(IRoleProfile))]\r\n    [RoleProfile(\"DefaultAgent\")]\r\n    public class DefaultAgentProfile : ProfileBase { ... }\r\n\r\n    [Export(typeof(IRoleProfile))]\r\n    [RoleProfile(\"FastStartAgent\")]\r\n    public class FastStartAgentProfile : DefaultAgentProfile { ... }\r\n\r\n\r\nModify Wolfpack.Agent.Startup class:\r\n\r\n    internal class Startup\r\n    {\r\n        [ImportMany(typeof(IRoleProfile), AllowRecomposition = true)]\r\n        private IList<Lazy<IRoleProfile, IRoleProfileMetadata>> _profiles = new List<Lazy<IRoleProfile, IRoleProfileMetadata>>();\r\n\r\n        private static void Main(string[] args)\r\n        {\r\n            try\r\n            {\r\n                // select a profile from the cmdline args /profile:[profile] switch\r\n                CmdLine.Init(args);\r\n\r\n                Startup startup = new Startup();\r\n                startup.Start();\r\n             \r\n                Environment.ExitCode = 0;\r\n            }\r\n            catch (Exception ex)\r\n            {\r\n                var msg = string.Format(\"Wolfpack System Failure. IncidentId:={0}; Details:={1}\",\r\n                    Guid.NewGuid(),\r\n                    ex);\r\n\r\n                Logger.Error(msg);\r\n                Environment.ExitCode = 1;\r\n            }\r\n        }\r\n\r\n        private void Start()\r\n        {\r\n            ComposeParts();\r\n\r\n            var profile = LoadProfile();\r\n            var role = profile.Role;\r\n\r\n            HostFactory.Run(\r\n                config =>\r\n                {\r\n                    config.SetDisplayName(\"Wolfpack Agent\");\r\n                    config.SetServiceName(\"WolfpackAgent\");\r\n                    config.SetDescription(\"Wolfpack Agent Service\");\r\n\r\n                    string username;\r\n                    string password;\r\n\r\n                    if (CmdLine.Value(CmdLine.SwitchNames.Username, out username) &&\r\n                        CmdLine.Value(CmdLine.SwitchNames.Password, out password))\r\n                    {\r\n                        Logger.Debug(\"Running As: {0}\", username);\r\n                        config.RunAs(username, password);\r\n                    }\r\n\r\n                    config.Service<IRolePlugin>(service =>\r\n                    {\r\n                        service.SetServiceName(\"Wolfpack\");\r\n                        service.ConstructUsing(factory => role);\r\n                        service.WhenStarted(s => s.Start());\r\n                        service.WhenStopped(s => s.Stop());\r\n                    });\r\n\r\n                    config.ApplyCommandLine(string.Join(\" \", CmdLine.Expanded.ToArray()));\r\n                });\r\n        }\r\n\r\n\r\n        private IRoleProfile LoadProfile()\r\n        {\r\n            string profileName;\r\n\r\n            if (!CmdLine.Value(CmdLine.SwitchNames.Profile, out profileName))\r\n            {\r\n                profileName = DefaultAgentProfile.Name;\r\n                Logger.Debug(\"/profile:[name] not specified, using default profile '{0}'\", profileName);                \r\n            }\r\n\r\n            Logger.Debug(\"Attempting to locate agent profile: {0}\", profileName);\r\n\r\n            Lazy<IRoleProfile, IRoleProfileMetadata> lazyProfile = _profiles.FirstOrDefault(a => a.Metadata.Name == profileName);\r\n            if (lazyProfile == null)\r\n            {\r\n                throw new TypeLoadException(string.Format(\"Unable to find profile: {0}\", profileName));\r\n            }\r\n\r\n            IRoleProfile profile = lazyProfile.Value;\r\n            Logger.Debug(\"Loaded profile: {0}\", profileName);\r\n\r\n            return profile;\r\n        }\r\n\r\n        private void ComposeParts()\r\n        {\r\n            // An aggregate catalog that combines multiple catalogs\r\n            var catalog = new AggregateCatalog();\r\n\r\n            // Adds all the parts found in the same assembly as the Startup class\r\n            catalog.Catalogs.Add(new AssemblyCatalog(typeof(Startup).Assembly));\r\n            // Adds all the parts found in the bin directory\r\n            catalog.Catalogs.Add(new DirectoryCatalog(SmartLocation.GetBinFolder()));\r\n\r\n            var container = new CompositionContainer(catalog);\r\n\r\n            try\r\n            {\r\n                container.ComposeParts(this);\r\n            }\r\n            catch (CompositionException exception)\r\n            {\r\n                Logger.Error(\"Error composing parts: {0}\", exception);\r\n            }\r\n        }\r\n    }\r\n\r\nRemove class Wolfpack.Core.Loaders.ProfileLoader",
+    "LastUpdatedDate": "2014-05-01T00:00:56.813-07:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "wolfpack",
+    "ReportedDate": "2011-08-07T15:47:07.207-07:00",
+    "Status": {
+      "Name": "Closed",
+      "Id": 4
+    },
+    "ReasonClosed": {
+      "Name": "Won't fix"
+    },
+    "Summary": "Loading Agent profiles could be moved to MEF",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 3
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

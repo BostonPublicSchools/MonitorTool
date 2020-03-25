@@ -1,0 +1,20 @@
+<div class="wikidoc"><h1>How To...Agent-to-Agent networking/messaging</h1>This article describes how to get one Wolfpack instance sending notification messages to another instance - eg: a distributed monitoring scenario.<br />
+<h2>Quick Start</h2><ol><li>Install a Wolfpack instance on the &quot;client&quot; pc/server to be monitored (sender). (tip: chocolately install with &quot;cinst wolfpack&quot;). This instance will generate notifications.</li>
+<li>Install a Wolfpack instance on the &quot;server&quot; pc/server (receiver).</li>
+<li>Start both instances</li>
+<li>On the &quot;client&quot; instance go to the configuration UI page (http://localhost:802/ui/configure) and locate the &quot;WebServicePublisher&quot; plugin (under WebService tag) and click &quot;Create&quot;.
+<ol><li>Update the BaseUrl property to the ipaddress/machine name of the server/receiver instance (remember to use double quotes around the value)</li>
+<li>Set ApiKey to blank (security is explained later)</li>
+<li>Change FriendlyId to something like descriptive like &quot;BuildServerWolfpackPublisher&quot;</li>
+<li>Enabled should be true</li></ol></li>
+<li>Restart the client instance to pick up the configuration change</li>
+<li>The server/receiver instance is enabled by default to receive messages via the <a href="https://wolfpack.codeplex.com/wikipage?title=Wolfpackv3ApiNotificationNotify&referringTitle=v3HowToInterAgentMessaging">Notify Api method</a>
+<ol><li>The default filesystem notification repository will be in operation - notifications will be stored as json format files in the <i>wolfpack install folder</i>\_notifications folder. 
+<ol><li>You can change the default repository by configuring the Sql or MongoDb publisher (plus any other publisher that acts as a NotificationRepository).</li></ol></li></ol></li>
+<li>Any notification generated on the client should now be sent to the server instance and rebroadcast to all enabled publishers.</li>
+<li>Add more client instances as required.</li></ol>
+<h2>Details</h2><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=wolfpack&DownloadId=879490" alt="interagent_wolfpackv3.png" title="interagent_wolfpackv3.png" /> <br />The basic communication pattern is based on a &quot;store &amp; forward&quot; principle which makes the client tolerate a dropped/intermittent connection between the two agents. As the connection is http based it can also be secured at the transport layer with SSL and logically with an API Key unique to each client.<br />
+<ol><li>As a notification is generated on the client it is stored in the default notification repository (filesystem/json files). A background process executes every 10 seconds (configurable) to grab these queued notifications and attempt to send them to the receiving instance, this logic is wrapped up in a &quot;strategy&quot; component. If the notification cannot be sent it remains queued and will be resent in the next pass.</li>
+<li>The actual mechanism to send the message is a simple POST api call</li>
+<li>The &quot;strategy&quot; at the server/receiver instance will validate the notification to ensure it is not stale (too old) or a duplicate - if valid it will republish the notification to the internal message bus just as if it was generated locally.</li></ol>
+<br /><br /><br /><br /><br /><br /></div><div class="ClearBoth"></div>

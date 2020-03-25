@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "714255",
+    "ThreadId": "283475",
+    "Html": "\r\n<p>In the Road map you have this statement. <br>\r\nCreate a &quot;heartbeat&quot; message from each Wolfpack instance - I think this could solve the &quot;no news is good news?&quot; problem that a non-running Wolfpack poses. Essentially an Activity that just pumps an &quot;<em>I'm alive</em>&quot; message out.</p>\r\n<p>Before I saw you were looking for a way to do a &quot;heartbeat&quot;, I had already set one up. Not sure if it covers your true want but it seems logical to me. Here is what I did.&nbsp;</p>\r\n<p>I setup a health Check that runs only 3 times a day using the HealthCheckTwentyFourSevenSchedulerConfig schedule type. It would look to see if wolfpack.agent.exe was running. Basicly the same setup as the Notepad.exe sample.\r\n<br>\r\n<br>\r\nThe idea here is that you should expect to the the alerts at the specified times or some where close. if you don't you know that the wolfpack agent is down.</p>\r\n<p>Just thought I would share my setup with you and others on this need.</p>\r\n",
+    "PostedDate": "2011-12-19T07:21:44.647-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1047689",
+    "ThreadId": "283475",
+    "Html": "We use the Fake Fail to accomplish this: WolfPack.Contrib.Checks.Fake: <a href=\"https://wolfpackcontrib.codeplex.com/\" rel=\"nofollow\">https://wolfpackcontrib.codeplex.com/</a><br />\n",
+    "PostedDate": "2013-05-23T05:46:34.533-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

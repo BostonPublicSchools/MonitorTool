@@ -1,0 +1,122 @@
+[
+  {
+    "Id": "855210",
+    "ThreadId": "361347",
+    "Html": "\r\n<p>AS discussed have log parser data for a specific even log health check be sent to growl or as email notification.</p>\r\n<p>Example: have a log parser health check use this command</p>\r\n<p>logparser &quot;SELECT EventID,Sourcename,Computername,TimeGenerated,Message&nbsp;FROM System WHERE EventTypeName='Error event'&quot; -i:EVT<br>\r\n<br>\r\nLets say run every hour and send any errors either to growl or as email.I found this http://www.blat.net/ seems to be open source not sure how easy it&nbsp;would be to implement on the agent side.<br>\r\nI also found this http://mlichtenberg.wordpress.com/2011/02/03/log-parser-rocks-more-than-50-examples/on example 21 it creates a html file with the report, i think that could be adaptedand somehow be sent out using blat.<br>\r\nIm not a coder so just bouncing some ideas.</p>\r\n",
+    "PostedDate": "2012-06-28T16:28:33.47-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "855540",
+    "ThreadId": "361347",
+    "Html": "<p>I think i found the email solution&nbsp;<a href=\"http://gluegood.blogspot.ca/2009/05/freeware-logparseremail.html\">http://gluegood.blogspot.ca/2009/05/freeware-logparseremail.html</a>&nbsp;:D Maybe that would make it easier for you&nbsp;<a href=\"http://www.codeplex.com/site/users/view/jimbobdog\">jimbobdog</a></p>",
+    "PostedDate": "2012-06-29T10:14:50.267-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "857507",
+    "ThreadId": "361347",
+    "Html": "<p>I have been doing some research on how to implement this in a easier way and it looks like powershell is the way, it even has its own built in send information through smtp, as well as the option to output data as a html template and so on, you can also do monitoring of azure, vm, servers and so on in a much easier way,</p>\r\n<p>so ill think ill wait to see how your going to integrate the powershell module plugin for wolfpack, as long as i can tie the scripts into the scheduler in wolfpack and use sidewinder to push updates to them will make things incredibly easy to develop for.</p>",
+    "PostedDate": "2012-07-04T12:13:41.33-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "859167",
+    "ThreadId": "361347",
+    "Html": "<p>I was also about to make a change on the email publisher by creating an \"attachments\" feature. Any HealthCheck can drop additional files relating to a HealthCheck alert into a special folder and the email publisher would scan for these and if any existed add them as attachments to the email. I will put this on feature on hold and dust off the PowerShell plugin - been meaning to do this for ages now.</p>\r\n<p>With respect to updates, I think you are on the right track - if you have multiple sites you want to update at once with the same script then Wolfpack can also act as an automated deployment agent too....you just need to bundle your scripts as a NuGet package and publish the package - Wolfpack will take care of detecting the update, downloading and unpacking it for you - this approach would save you a lot of time as all installations would effectively be pushed the update.</p>\r\n<p>More info here: http://wolfpackcontrib.codeplex.com/wikipage?title=Wolfpack.Contrib.Deployment</p>\r\n<p>I'll update with the status of the PowerShell plugin soon.</p>",
+    "PostedDate": "2012-07-09T06:41:20.47-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "859337",
+    "ThreadId": "361347",
+    "Html": "<p>That sounds great, ya i think a powershell plugin is the best way to go, pretty much everything thats coming out of microsoft can be manipulated with powershell so it would expand wolfpacks toolbox in a huge way, thanks for the status update.</p>",
+    "PostedDate": "2012-07-09T13:06:23.78-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "860530",
+    "ThreadId": "361347",
+    "Html": "<p>Ok, I have a working Powershell plugin - it will execute a PS1 script and also provides some objects to generate an alert back in Wolfpack.</p>\r\n<p>Now, it all \"works on my machine\" (I'm a local admin) but I might need some help fine tuning it to work on a typical setup (security-wise) server - I can make a beta release available if anyone wants to try this out? Alternatively grab the latest Wolfpack and Wolfpack Contrib source code from the codeplex repos</p>",
+    "PostedDate": "2012-07-11T13:51:31.23-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "860605",
+    "ThreadId": "361347",
+    "Html": "<p>Ya drop the beta files somewhere and ill help you out, i can drop into a couple vms to see how it behaves, if you want to pass some general info on how the plugin interacts with wolfpack that would be nice as well.</p>",
+    "PostedDate": "2012-07-11T18:09:30.297-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "860735",
+    "ThreadId": "361347",
+    "Html": "\r\n<p>The beta zip is here...You might need to &quot;Unblock&quot; the zip once you get it (or the content once unzipped).</p>\r\n<p><a href=\"https://dl.dropbox.com/u/31496111/wolfpack-powershell-beta-20120712.zip\" target=\"_blank\">https://dl.dropbox.com/u/31496111/wolfpack-powershell-beta-20120712.zip</a></p>\r\n<p>Just unzip it and run wolfpack.agent.exe - it already has the powershell plugin installed and the check enabled.&nbsp;</p>\r\n<p>It runs a script in the \\powershell folder - it's a simple script to return an alert to Wolfpack. If you have Growl installed you should see an alert popup from &quot;MyFirstPowershellAlert&quot;.</p>\r\n<p>The beta docs for the plugin are here...</p>\r\n<p><a href=\"http://wolfpackcontrib.codeplex.com/wikipage?title=Wolfpack.Contrib.Checks.Powershell\">http://wolfpackcontrib.codeplex.com/wikipage?title=Wolfpack.Contrib.Checks.Powershell</a></p>\r\n<p>Let me know if there are any suggestions/feedback on the docs etc - any holes in it, missing or confusing stuff. I am keen for this to be tested in a &quot;real&quot; scenario with credible/typical security/permissions in operation - as I say its works fine on my\r\n machine but that is admin and unrestricted scripts etc.</p>\r\n",
+    "PostedDate": "2012-07-12T02:59:19.04-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "874768",
+    "ThreadId": "361347",
+    "Html": "\r\n<p>So far its working good, im still playing around with it and wrapping my head around it lol, you do seem to have to set this in powershell or else it wont run unless your admin, I will post some more feedback once im done playing with it but great job so\r\n far, thanks for the hard work.</p>\r\n<p>Enable running unsigned scripts by entering:</p>\r\n<pre><code>set-executionpolicy remotesigned</code></pre>\r\n",
+    "PostedDate": "2012-07-18T15:24:26.6-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "876300",
+    "ThreadId": "361347",
+    "Html": "<p>Excellent - I have also added a note to the docs to remind people about the set-executionpolicy command.</p>\r\n<p>Thanks for helping out with this, next release v2.5 (codename \"PowerTrip\") will land soon!&nbsp;</p>",
+    "PostedDate": "2012-07-19T03:24:29.737-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "921292",
+    "ThreadId": "361347",
+    "Html": "<p>Is there anything I can do to help this feature to release? I was about to start writing a Powershell scheduler when I found Wolfpack.</p>\r\n<p>I've read through the docs and looked at the example. I have a couple comments on what exists so far.</p>\r\n<p>First, since you released the Beta, PowerShell 3 has been officially released which has a couple key differences: native .Net 4 support; Snap-Ins have fallen out of favor and Import-Module is the new standard.</p>\r\n<p>From the MS docs: <em>\"Beginning in Windows PowerShell 3.0, modules are imported into the session automatically the first time you use a cmdlet in the module. As a result, you just find the command you need and use it. Windows PowerShell takes care of the importing. However, if you prefer, you can use the&nbsp;<span class=\"unresolvedLink\">Import-Module</span>&nbsp;cmdlet to import a module at any time.\"</em></p>\r\n<p>I'm getting an exception trying to use use this with the Execution Policy error even through I have it set to RemoteSigned.</p>\r\n<p>\r\n<div style=\"color: black; background-color: white;\">\r\n<pre>PS C:\\temp<span style=\"color: gray;\">&gt;</span> Get<span style=\"color: gray;\">-</span>ExecutionPolicy\r\nRemoteSigned\r\n</pre>\r\n</div>\r\nDoes TopShelf run outside of the current user context when in Console mode? Not sure why else I would be getting a&nbsp;System.Management.Automation.PSSecurityException. The WolfpackDemo1.ps1 script executes fine from the PowerShell console.</p>",
+    "PostedDate": "2012-10-03T08:02:41.937-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "921304",
+    "ThreadId": "361347",
+    "Html": "<p>Topshelf should run in the same context.</p>\r\n<p>Did you grab the beta zip from dropbox? You might need to unblock it before you unzip it - this causes all sorts of odd errors. I will try to replicate this here.</p>\r\n<p>As for releasing it - just need to put some effort in and get v2.5 out the door! It's largely done and I've just got some housekeeping/docs to do on it (plus those tweaks to the healthchecks). I'm not a powershell expert so I might need some help fixing this - I'll update here later today once I've had a chance to replicate the issue.&nbsp;</p>",
+    "PostedDate": "2012-10-03T08:18:47.903-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "921323",
+    "ThreadId": "361347",
+    "Html": "<p>I grabbed&nbsp;wolfpack-powershell-beta-20120712.</p>\r\n<p>The Zip was Blocked so I unblocked it and extracted the files again, but no change. The script doesn't show an option to Unblock.</p>\r\n<p>I have PowerShell 3 installed.</p>\r\n<p>How are you referencing&nbsp;System.Management.Automation? I've never executed a script from C# but I've written a Posh cmdlet. Originally I referenced the&nbsp;System.Management.Automation.dll in the \\ReferenceAssemblies folder, but that seems to be an old version that shipped with the PowerShell 1 SDK.</p>\r\n<p>According to Doug Finke in <em>Windows PowerShell for Developers, </em></p>\r\n<p style=\"padding-left: 30px;\"><em>&nbsp;</em>You&rsquo;ll need to add a reference to PowerShell to follow along with these examples. To do so, open the project file as a text file and add the following line into the&nbsp;<code class=\"epub__literal\">&lt;ItemGroup&gt;</code>&nbsp;section:</p>\r\n<p><a id=\"I_programlisting5_d1e3205\"></a></p>\r\n<pre class=\"epub__programlisting\" style=\"padding-left: 30px;\">&lt;Reference Include=\"System.Management.Automation\" /&gt;</pre>\r\n<p>In my project, that changed the Runtime Version and Version parameters to match PowerShell 3.</p>",
+    "PostedDate": "2012-10-03T08:58:13.777-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "921333",
+    "ThreadId": "361347",
+    "Html": "<p>Same results on a machine with v2 installed.</p>",
+    "PostedDate": "2012-10-03T09:12:23.757-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "921530",
+    "ThreadId": "361347",
+    "Html": "<p>Ok, so my dev machine has v2 installed and the only System.Management.Automation assembly I could find was in the \\ReferenceAssemblies folder - so I copied this to the References\\Binary local solution folder - I guess it is the same one for PS v1 &amp; v2? I'll see what happens with v3 installed.</p>",
+    "PostedDate": "2012-10-03T14:26:11.643-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

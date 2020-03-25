@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "1415561",
+    "ThreadId": "631551",
+    "Html": "Hello. \r<br />\n<br />\nI just discovered this intriguing project.  I downloaded and ran the project and it all seems to work!\r<br />\n<br />\nHowever, I am not entirely sure how to extend it with my own plugins...\r<br />\n<br />\nYour &quot;How-Tos&quot; for the following appear to be blank:<br />\n<ul>\n<li>Create an Activity</li>\n<li>Create a HealthCheck</li>\n<li>Create a Publisher</li>\n<li>Create a Scheduler</li>\n<li>Add pages to the Web UI</li>\n<li>\nExtend the Web Api<br />\n</li>\n</ul>\nAny progress on this?\r<br />\n<br />\n-dennis<br />\n",
+    "PostedDate": "2015-04-18T13:38:09.583-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1415707",
+    "ThreadId": "631551",
+    "Html": "Hi Dennis.\r<br />\n<br />\nThe project (&amp; documentation) certainly alive but best described as &quot;hibernating&quot;! Basically between current work and home commitments there isn't a great deal of time to devote to Wolfpack including the docs. I am planning to start work on it again this summer and have a blast through all the outstanding tasks including the docs but unfortunately not just yet.\r<br />\n<br />\nHowever...I think that you can probably work out how to build health checks, activities and publishers by taking apart a couple of the <a href=\"https://wolfpackcontrib.codeplex.com/\" rel=\"nofollow\">contrib</a> plugins... the Growl publisher and Rabbit check would be a good place to start (source for all on contrib codeplex site). \r<br />\n<br />\nIf there are any specific questions or you hit a problem then let me know and I should be able to help you out.\r<br />\n<br />\nregards,\r<br />\nJames<br />\n",
+    "PostedDate": "2015-04-19T07:45:59.153-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

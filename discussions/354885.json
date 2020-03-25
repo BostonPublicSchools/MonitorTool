@@ -1,0 +1,34 @@
+[
+  {
+    "Id": "833294",
+    "ThreadId": "354885",
+    "Html": "\r\n<p>Ever had your websites SSL certificate expire on you?</p>\r\n<p>http://stackoverflow.com/questions/826175/determine-ssl-certificate-expiration-date-iis</p>\r\n<p>Some code here to grab the cert details including expiry from any web server - this could easily be rolled into a new HealthCheck... things to consider</p>\r\n<p>Support multiple sites to check</p>\r\n<p>What is the trigger - N days ahead of expiry?</p>\r\n<p>Does it keep nagging you? - eg: once inside N days it will keep firing an alert until the cert is updated. So if you run this check once a day it will fire an alert for every day inside the trigger period until it is renewed. Maybe the best thing is to run\r\n this once a week and bypass having to think about managing/muting notifications.</p>\r\n<p>Ideas, thoughts? Any interest in this?</p>\r\n",
+    "PostedDate": "2012-05-08T01:15:42.723-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "835151",
+    "ThreadId": "354885",
+    "Html": "<p>This would be great. Look at what happened to<a href=\"http://blog.servertastic.com/sagepay-fails-to-renew-ssl-certificate/\" target=\"_blank\"> SagePay.</a>&nbsp; My cert Authority/Provider warns me 2 weeks in advance but it is still easy to forget and if your provider is not that proactive, you could find yourself losing a significant customer count or at the very least some revenue. I would love to see this as a health check.<br /><br />N days to expire is perfect. &nbsp;That way you can set the trigger to something that gives you time to get the info in order and wait for the Auth to respond. Sometimes it can take days to get the new cert.&nbsp;<br /><br />It should keep nagging you as well. That way you cant just Ack and for get it again.&nbsp;It will not be that bad if you set it to check once or twice a day.&nbsp;</p>",
+    "PostedDate": "2012-05-11T08:12:53.66-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "835318",
+    "ThreadId": "354885",
+    "Html": "<p>Right, thanks for the \"+1\"! I'll build it this weekend and release it as a \"contrib\" plugin.</p>",
+    "PostedDate": "2012-05-11T15:02:36.903-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "835678",
+    "ThreadId": "354885",
+    "Html": "<p>Ok, it's baked:&nbsp;<a href=\"http://wolfpackcontrib.codeplex.com/wikipage?title=Wolfpack.Contrib.Checks.Ssl\">http://wolfpackcontrib.codeplex.com/wikipage?title=Wolfpack.Contrib.Checks.Ssl</a>&nbsp;- enjoy!</p>\r\n<p>Any suggestion/bugs then drop it back via the Issues page.</p>\r\n<p>Cheers,</p>\r\n<p>James</p>",
+    "PostedDate": "2012-05-13T01:04:39.26-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

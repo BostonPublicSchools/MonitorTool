@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "The current version surrounds a notification's `Data` with HTML. This makes the `Data` unsuable for text-only e-mails or when you need only *some* of the data. Please support the following (text template):\r\n\r\n```\r\n@using Newtonsoft.Json\r\n@{ dynamic data = JsonConvert.DeserializeObject<dynamic>(Model.Data); }\r\n\r\nMessage: @data.Message\r\n\r\n... rest of the template\r\n```",
+    "LastUpdatedDate": "2014-07-03T02:07:22.007-07:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "wolfpack",
+    "ReportedDate": "2014-07-03T02:07:22.007-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Make it possible to access a notification's Data in e-mail templates",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 1,
+    "Id": 21
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

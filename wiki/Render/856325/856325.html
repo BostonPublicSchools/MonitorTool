@@ -1,0 +1,22 @@
+<div class="wikidoc"><h1>Web Services/Api</h1>The Api provides the core REST/Json methods to interact with Wolfpack; this Api is implemented with the NancyFx framework. 
+<h2>Notification Api</h2><h4>http://localhost:802/api/notification/ + <i>method below</i>. </h4>Methods are <b>GET</b> unless specified otherwise.
+<ul><li><b><a href="https://wolfpack.codeplex.com/wikipage?title=Wolfpackv3ApiNotificationStart&referringTitle=Wolfpackv3WebServices">Start</a></b> returns the current Wolfpack status including what plugins are running and unhealthy.</li>
+<li><b><a href="https://wolfpack.codeplex.com/wikipage?title=Wolfpackv3ApiNotificationNotify&referringTitle=Wolfpackv3WebServices">Notify</a></b> allows you to <b>POST</b> a notification to Wolfpack - typically this would be another Wolfpack installation sending notifications to a central Wolfpack instance for storage (see below for more details on agent-to-agent communication).</li>
+<li><b><a href="https://wolfpack.codeplex.com/wikipage?title=Wolfpackv3ApiNotificationList&referringTitle=Wolfpackv3WebServices">List</a></b> returns a list of the recent Notifcations received.</li>
+<li><b><a href="https://wolfpack.codeplex.com/wikipage?title=Wolfpackv3ApiNotificationArtifact&referringTitle=Wolfpackv3WebServices">Artifact</a></b> returns the artifact associated with a Notification.</li></ul>
+
+<h2>Configuration Api</h2><h4>http://localhost:802/api/configuration/ + <i>method below</i>. </h4>Methods are <b>GET</b> unless specified otherwise.
+<ul><li><b><a href="https://wolfpack.codeplex.com/wikipage?title=Wolfpackv3ApiConfigurationTagCloud&referringTitle=Wolfpackv3WebServices">TagCloud</a></b> returns the tag cloud of available plugins.</li>
+<li><b><a href="https://wolfpack.codeplex.com/wikipage?title=Wolfpackv3ApiConfigurationCatalogue&referringTitle=Wolfpackv3WebServices">Catalogue</a></b> returns a detailed list of current configured and discoverable plugins.</li>
+<li><b><a href="https://wolfpack.codeplex.com/wikipage?title=Wolfpackv3ApiConfigurationChangeRequest&referringTitle=Wolfpackv3WebServices">ChangeRequest</a></b> allows you to modify, create or delete plugins.</li>
+<li><b><a href="https://wolfpack.codeplex.com/wikipage?title=Wolfpackv3ApiConfigurationApplyChanges&referringTitle=Wolfpackv3WebServices">ApplyChanges</a></b> allows you to commit the configuration changes and can optionally restart Wolfpack.</li>
+<li><b><a href="https://wolfpack.codeplex.com/wikipage?title=Wolfpackv3ApiConfigurationCancelChanges&referringTitle=Wolfpackv3WebServices">CancelChanges</a></b> allows you to cancel the configuration changes submitted via the <b><a href="https://wolfpack.codeplex.com/wikipage?title=Wolfpackv3ApiConfigurationChangeRequest&referringTitle=Wolfpackv3WebServices">ChangeRequest</a></b> method.</li></ul>
+
+<h2>Agent-to-Agent Communication</h2><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=wolfpack&DownloadId=818219" alt="Wolfpackv3Agent.png" title="Wolfpackv3Agent.png" />
+<ol><li>On the remote agent side a plugin provides a robust message delivery mechanism. The default plugin implementation employs a &quot;store and forward&quot; system to ensure messages are delivered in order and when there is a connection.</li>
+<li> The Wolfpack WebService API is implemented by NancyFx. This provides a tried and tested http platform to build API methods.</li>
+<li>Once the Notification has reached the server another plugin component implements a sequence of checks to ensure that duplicates and out of order messages are dealt with. You can provide a custom plugin implementation to deal with messages should the default behaviour not be right for you.</li></ol>
+
+<h3>Security</h3>Standard mechanisms can now be used to secure the Wolfpack Api &amp; Web UI - a SSL certificate can be used to encrypt the traffic and an Api Key/secret is used to lock down access to trusted clients; you can have multiple Api keys active - grant one per client  to ensure total control over who can access the api.<br />
+<ul><li>A good guide for setting up SSL certificates is this <a href="http://www.hanselman.com/blog/WorkingWithSSLAtDevelopmentTimeIsEasierWithIISExpress.aspx">Scott Hanselman article on IISExpress</a>...covers the basics you will need to follow.</li></ul>
+<br /></div><div class="ClearBoth"></div>

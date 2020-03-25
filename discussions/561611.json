@@ -1,0 +1,42 @@
+[
+  {
+    "Id": "1291441",
+    "ThreadId": "561611",
+    "Html": "I'm currently using Wolfpack 2.4 and would like to make a change so every record has a column containing the MAC address of the agent sending the message.  This is mainly needed as the machine host name is not a unique identifier in our environment and manually maintaining config files has proven to be error prone. It looks like I will need to make a change to the Wolfpack core to accomplish this.  Would this be okay if I published a nuget package with this change?  Or do you have a different way of making changes?\r<br />\n<br />\nThank you!<br />\n",
+    "PostedDate": "2014-08-19T11:10:59.197-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1291488",
+    "ThreadId": "561611",
+    "Html": "Hi Frank,\r<br />\n<br />\nIt may be possible to swap the Agent Configuration plugin type defined in the role.castle.config file for a custom one that automatically sets the agent Id to the MAC address (or whatever format works best) - that is my first thought. I'll validate this tomorrow morning and see if it will work. \r<br />\n<br />\nI'll also make sure that v3 has to ability to swap out AgentConfiguration for a custom implementation if it's not supported. \r<br />\n<br />\nWorst case is grab 2.4 source and tweak AgentConfiguration directly. I'll update on whether a custom AgentConfig is possible though as it would be a neat solution. \r<br />\n<br />\nCheers,\r<br />\nJames<br />\n",
+    "PostedDate": "2014-08-19T14:32:30.49-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1291626",
+    "ThreadId": "561611",
+    "Html": "Ok, a small test shows it's not possible to register a different implementation of the AgentConfiguration (I created a new class that inherited from the existing AgentConfiguration). \r<br />\n<br />\nHowever it should be possible to use a startup plugin to do what you need in the same way the StaticGeoLocator plugin does to set the geo lat/long properties of the AgentConfiguration.\r<br />\n<br />\nSo - create a new IStartupPlugin in a new dll and drop it into the Wolfpack folder (it will be auto discovered and executed when Wolfpack starts). In the constructor it should take the AgentConfiguration parameter (AgentConfiguration is a singleton) - then set the AgentId to the MAC address/whatever identifier you want and that should be it! \r<br />\n<br />\nHTH,\r<br />\nJames<br />\n",
+    "PostedDate": "2014-08-20T03:05:18.153-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1292392",
+    "ThreadId": "561611",
+    "Html": "Thank you.  I will give it a try.  I'm glad to hear you are going to provide the functionality in v3.  <br />\n",
+    "PostedDate": "2014-08-22T03:49:13.9-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1311326",
+    "ThreadId": "561611",
+    "Html": "James,\r<br />\n<br />\n I wanted to let you know that your suggestion to create a new IStartupPlugin  worked.  Thank you very much for your help.<br />\n",
+    "PostedDate": "2014-10-07T13:50:53.347-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

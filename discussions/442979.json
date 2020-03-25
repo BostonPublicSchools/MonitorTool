@@ -1,0 +1,42 @@
+[
+  {
+    "Id": "1040950",
+    "ThreadId": "442979",
+    "Html": "Hi,\r<br />\n<br />\nWhat is the easiest way to test Geckoboard URL. I am getting following error\r<br />\n<br />\nError Description: 'Resource does not exist'\r<br />\n<br />\nThis may be because an invalid URI or HTTP method was specified. Please see the service help page for constructing valid requests to the service.\r<br />\n<br />\nThanks<br />\n",
+    "PostedDate": "2013-05-08T09:58:22.54-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1040990",
+    "ThreadId": "442979",
+    "Html": "Hi,<br />\n<ol>\n<li>What is the URL you are calling?</li>\n<li>\nYou have enabled the wolfpack geckoboard activity?<br />\n</li>\n</ol>\nHope we can get it running for you!\r<br />\n<br />\nRegards,\r<br />\nJames<br />\n",
+    "PostedDate": "2013-05-08T11:14:22.637-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1041079",
+    "ThreadId": "442979",
+    "Html": "Hi James,\r<br />\n<br />\nI am setting this up on my dev pc. Url is localhost...\r<br />\n\t\r<br />\n&lt;component id=&quot;GeckoboardDataServiceActivityConfig&quot;<br />\n<pre><code>                 lifestyle=&quot;singleton&quot;\n                 type=&quot;Wolfpack.Core.Geckoboard.GeckoboardDataServiceActivityConfig, Wolfpack.Core&quot;&gt;\n        &lt;parameters&gt;\n            &lt;Enabled&gt;true&lt;/Enabled&gt;\n            &lt;!-- This must be the service implementation class name including the namespace --&gt;        \n            &lt;ServiceImplementation&gt;Wolfpack.Core.Geckoboard.GeckoboardDataService, Wolfpack.Core&lt;/ServiceImplementation&gt;\n            &lt;!-- The base address that the service is available at\n                     Currently Geckoboard only supports Http at port 80 --&gt;\n            &lt;Uri&gt;http://localhost/Geckoboard&lt;/Uri&gt;\n            &lt;!-- An ApiKey is set up on each Geckoboard widget. Use the same one and \n                     set this value to it to ensure only requests with this ApiKey will be \n                     returned your monitoring data. Omit this property or leave blank to disable \n                     the ApiKey security --&gt;\n            &lt;ApiKey&gt;&lt;/ApiKey&gt;\n        &lt;/parameters&gt;\n    &lt;/component&gt;\n</code></pre>\n\nSQLLite is active and writing to DB.\r<br />\n<br />\nDo I need to setup site on IIS manually?\r<br />\n<br />\nRegards\r<br />\nNishan<br />\n",
+    "PostedDate": "2013-05-08T14:16:02.933-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1041091",
+    "ThreadId": "442979",
+    "Html": "The geckoboard activity is a self hosted rest we service so no need to set anything up in IIS. \r<br />\n<br />\nFor each Geckoboard widget you want to display you will need to call the right URL in wolfpack. What type of widgets are you looking to display on your geckoboard?\r<br />\n<br />\nOnce I know what sort I can help build the urls - the docs page is a bit out of date!<br />\n",
+    "PostedDate": "2013-05-08T14:50:36.61-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1041249",
+    "ThreadId": "442979",
+    "Html": "we want to monitor windows services and msmq. I have already setup them on config. they are working fine Growl\r<br />\n<br />\n&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;\r<br />\n&lt;configuration&gt;\r<br />\n  &lt;components&gt;<br />\n<pre><code>&lt;component id=&quot;WolfpackOutputQueueInfoConfig&quot;\n               lifestyle=&quot;singleton&quot;\n               type=&quot;Wolfpack.Core.Checks.MsmqQueueInfoCheckConfig, Wolfpack.Core&quot;&gt;\n  &lt;parameters&gt;\n    &lt;FriendlyId&gt;WolfpackOutputQueueInfo&lt;/FriendlyId&gt;\n    &lt;Enabled&gt;true&lt;/Enabled&gt;\n    &lt;QueueName&gt;.\\Private$\\processunxxxxxxxxxxey.error&lt;/QueueName&gt;\n  &lt;/parameters&gt;\n&lt;/component&gt;</code></pre>\n\n&lt;/components&gt;\r<br />\n&lt;/configuration&gt;\r<br />\n<br />\n&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;\r<br />\n&lt;configuration&gt;\r<br />\n  &lt;components&gt;<br />\n<pre><code>&lt;component id=&quot;WindowsServicesAreRunning&quot;\n               lifestyle=&quot;singleton&quot;\n               type=&quot;Wolfpack.Core.Checks.WindowsServiceStateCheckConfig, Wolfpack.Core&quot;&gt;\n  &lt;parameters&gt;\n    &lt;FriendlyId&gt;WindowsServicesAreRunning&lt;/FriendlyId&gt;\n    &lt;Enabled&gt;true&lt;/Enabled&gt;\n    &lt;Services&gt;\n      &lt;list&gt;\n        &lt;!-- The display or short windows service name --&gt;\n        &lt;item&gt;DHCP Client&lt;/item&gt;\n        &lt;item&gt;xx xx Downloader Pub-1.0.0&lt;/item&gt;\n      &lt;/list&gt;\n    &lt;/Services&gt;\n    &lt;!-- The name of the server (use . for local or leave blank)\n         This can also be a remote server name --&gt;\n    &lt;Server&gt;&lt;/Server&gt;\n    &lt;!-- Valid states are: Running or Stopped --&gt;\n    &lt;ExpectedState&gt;Running&lt;/ExpectedState&gt;\n  &lt;/parameters&gt;\n&lt;/component&gt;</code></pre>\n\n&lt;/components&gt;\r<br />\n&lt;/configuration&gt;<br />\n",
+    "PostedDate": "2013-05-09T01:28:27.797-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

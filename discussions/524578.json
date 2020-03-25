@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "1195583",
+    "ThreadId": "524578",
+    "Html": "I would like to host Wolfpack in IIS on a server maintained by my IT Department. Please let me know if this is possible and how to go about accomplishing this.<br />\n",
+    "PostedDate": "2014-01-24T07:35:37.577-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1195723",
+    "ThreadId": "524578",
+    "Html": "Hi - unfotunately Wolfpack is a windows service and cannot be installed in IIS. \r<br />\n<br />\nIt's a windows service to ensure that the core monitoring services run reliably - in the future it may be possible to run parts of the UI in IIS (via OWIN) but right now it's not possible. \r<br />\n<br />\nThanks,\r<br />\n<br />\nJames<br />\n",
+    "PostedDate": "2014-01-24T08:51:04.783-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

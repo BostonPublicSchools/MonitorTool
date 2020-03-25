@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "899829",
+    "ThreadId": "391834",
+    "Html": "\r\n<p>Hi, Followed the steps on the <a href=\"http://wolfpack.codeplex.com/wikipage?title=Configuring%20Publishers\">\r\nwiki </a>, if I run 2 instances on 1 PC then it works as expected. As soon as I move it to 2 PCs then the publisher cant find the queue. All firewalls are disabled. For the output queue on the publisher do you need to specify more than just the queue name i.e.\r\n something like PCName\\private$\\WolfPackOutput ? or how does it know what PC the queue is on ?</p>\r\n<p>Thanks</p>\r\n",
+    "PostedDate": "2012-08-16T02:11:10.943-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "899859",
+    "ThreadId": "391834",
+    "Html": "<p>Never mind figured it out &lt;OutputQueue&gt;WolfPackOutput@remotePcName&lt;/OutputQueue&gt;</p>",
+    "PostedDate": "2012-08-16T03:53:28.01-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "900398",
+    "ThreadId": "391834",
+    "Html": "<p>Thanks for posting the answer - I've added a remote queue name format hint to the wiki page. If you need any help or have some suggestions for new features/plugins then please let me know!</p>\r\n<p>Cheers,</p>\r\n<p>James</p>",
+    "PostedDate": "2012-08-16T23:55:22.98-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]
