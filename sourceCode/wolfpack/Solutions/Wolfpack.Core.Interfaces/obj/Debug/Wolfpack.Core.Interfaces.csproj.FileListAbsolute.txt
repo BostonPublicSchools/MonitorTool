@@ -1,6 +1,0 @@
-C:\Developement\wolfpack\sourceCode\wolfpack\Solutions\Wolfpack.Core.Interfaces\bin\Debug\Wolfpack.Core.Interfaces.dll
-C:\Developement\wolfpack\sourceCode\wolfpack\Solutions\Wolfpack.Core.Interfaces\bin\Debug\Wolfpack.Core.Interfaces.pdb
-C:\Developement\wolfpack\sourceCode\wolfpack\Solutions\Wolfpack.Core.Interfaces\obj\Debug\Wolfpack.Core.Interfaces.csproj.CoreCompileInputs.cache
-C:\Developement\wolfpack\sourceCode\wolfpack\Solutions\Wolfpack.Core.Interfaces\obj\Debug\Wolfpack.Core.Interfaces.dll
-C:\Developement\wolfpack\sourceCode\wolfpack\Solutions\Wolfpack.Core.Interfaces\obj\Debug\Wolfpack.Core.Interfaces.pdb
-C:\Developement\wolfpack\sourceCode\wolfpack\Solutions\Wolfpack.Core.Interfaces\obj\Debug\Wolfpack.Core.Interfaces.csprojResolveAssemblyReference.cache
